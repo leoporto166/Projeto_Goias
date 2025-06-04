@@ -1,0 +1,48 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header{
+    width: 100%;
+    height: 70px;
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    box-shadow: -1px 0px 5px #00000000;
+    justify-content: space-between;
+}
+
+.logo-area{
+    width: 100%;
+    height: 70px;
+    display: flex;
+    align-items: center;
+}
+.logo{
+    width: 40px;
+    margin: 0px 8px;
+}
+
+.divider {
+  width: 1px;
+  height: 30px;
+  background-color: #A5C2AF;
+}
+
+.numero{
+    margin: 0px 8px;
+}
+
+.menu{
+    width: 50px;
+    
+}
+
+.divider2{
+    width: 100%;
+    height: 1px;
+     background-color: #A5C2AF;
+}
