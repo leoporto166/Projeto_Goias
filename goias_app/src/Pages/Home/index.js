@@ -66,7 +66,14 @@ function Home() {
         </nav>
       </header>
       <div className="divider2"></div>
+      <main>
+        <div className="noticias">
+            
+        </div>
+      
+      </main>
     </div>
+    
   );
 }
 
