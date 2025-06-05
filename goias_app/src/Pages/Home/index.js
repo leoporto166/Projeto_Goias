@@ -68,7 +68,7 @@ function Home() {
       <div className="divider2"></div>
       <main>
         <div className="noticias">
-            
+            <h1>Goias vence atletico-go em classico emocionante</h1>
         </div>
       
       </main>
