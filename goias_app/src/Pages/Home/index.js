@@ -14,6 +14,8 @@ import card2 from "../../img/benitez.webp"
 import card3 from "../../img/ingressos-goxvolt.png"
 import card4 from "../../img/torcida.png"
 
+import part1 from "../../img/goiasxvolta.png"
+
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 
 function Home() {
@@ -81,10 +83,6 @@ function Home() {
       <div className="divider2"></div>
       <main>
         
-        <div className="title-not">
-          <h1>Noticias</h1>
-        </div>
-        
         <Swiper
         modules={[Navigation, Pagination, Autoplay]}
         slidesPerView={1}
@@ -143,6 +141,43 @@ function Home() {
             </div>
         </SwiperSlide>
      
+       </Swiper>
+
+       <div className="dividir">
+
+       </div>
+
+       <Swiper
+       modules={[Navigation, Pagination, Autoplay]}
+       slidesPerView={1.5}
+        navigation
+        pagination = {{clickable: true}}
+        //autoplay = {{delay: 5000}}
+        breakpoints={{
+          320: {  
+            slidesPerView: 1.5,
+          },
+          640:{
+            slidesPerView: 1.3,
+          },
+          1024:{
+            slidesPerView: 2.5,
+          },
+          1440:{
+            slidesPerView: 3.5,
+          },
+        }} className="part"
+       >
+        <SwiperSlide>
+          <div className="card" id="part">
+            <img src={part1}></img>
+            <div className="info">
+              <h2 id="txt">Campeonato brasileiro serie b</h2>
+              <h3 id="txt">11º rodada</h3>
+              <h4 id="txt">Domingo, 8/06, 16h00</h4>
+            </div>
+          </div>
+        </SwiperSlide>
        </Swiper>
       </main>
     </div>
