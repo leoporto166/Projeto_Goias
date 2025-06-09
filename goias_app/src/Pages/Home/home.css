@@ -174,7 +174,7 @@ nav {
 .noticias{
   background-color:#ffffff ;
   padding: 20px;
-  height: 30vh;
+  height: 33vh;
 }
 
 .card-principal {
@@ -223,9 +223,12 @@ nav {
   z-index: 1000;
   text-align: center;
   position: absolute;
-  color: white;
+  color: #012623;
   margin-bottom: 10vh;
   margin-top: 5%;
+  font-weight: 700;
+  font-size: 17px;
+  text-align: left;
 
 }
 
@@ -243,36 +246,106 @@ nav {
   height: 5vh;
 }
 
-#part{
-  display: flex;
-  flex-direction: column;
-  justify-content: center; 
-}
-
-#part img{
-  border-bottom-left-radius: 0px;
-  border-bottom-right-radius: 0px;
+.title{
+  margin-left: 3%;
+  margin-top: 5%;
 }
 
 .part{
-  height: 35vh;
+  height: 50vh;
   background-color: #ffffff;
-  
+
+
 }
+
+.part-icon{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between; 
+  align-items: start;
+  background-color: #083532;
+  margin-left: 5%;
+  margin-top: 10%;
+  height: 13vh;
+  width: 120%;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+
+}
+
+.part img{
+  width: 70px;
+  height: 70px;
+  margin-top: 10%;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
 
 .info{
   position: absolute;
-  background-color:#012623 ;
+  background-color:#ffffff ;
   z-index: 1000;
-  margin-top: 70%;
-  width: 100%;
+  margin-top: 50%;
+  width: 120%;
   border-radius: 10px;
-  color: white;
-  height: 110px;
+  
+  height: 27vh;
+  box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.089);
 
+}
+
+.info h1{
+  color: #083532;
+  font-size: 25px;
+  margin-top: 10px;
+  margin-left: 3%;
+}
+
+.info h2{
+  color: #083532;
+  font-size: 18px;
+}
+
+.info h3{
+  color: #114440c4;
+  font-size: 20px;
+}
+
+.svg-info{
+  display: flex;
+  align-items: center;
+  
+}
+
+.size-6{
+  margin-left: 3%;
+  width: 24px;
+  height: 24px;
 }
 
 
 #txt{
-  margin-left: 5px;
+  margin-left: 3%;
+  margin-top: 4px;
+}
+
+.button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+  margin-top: 5%;
+}
+
+.button button{
+  border: 0;
+  margin: auto;
+  background-color: #012623;
+  color: white;
+  width: 80%;
+  height: 8vh;
+  border-radius: 10px;
+  font-size: 25px;
+  transition: all 0.5s;
 }
