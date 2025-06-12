@@ -20,6 +20,21 @@ import chape from "../../img/chape.png"
 
 import socio from "../../img/socio.png"
 
+import elenco1 from "../../img/TR-G.png"
+import elenco2 from "../../img/TD-G.png"
+import elenco3 from "../../img/EZ-G.png"
+import elenco4 from "../../img/JV-G.png"
+
+import elenco5 from "../../img/AT-Z.png"
+import elenco6 from "../../img/MS-Z.png"
+import elenco7 from "../../img/LR-Z.png"
+import elenco8 from "../../img/LF-Z.png"
+
+import elenco9 from "../../img/LL-L.png"
+import elenco10 from "../../img/WL-L.png"
+import elenco11 from "../../img/DN-L.png"
+import elenco12 from "../../img/DG-L.png"
+
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 
 function Home() {
@@ -292,6 +307,38 @@ function Home() {
         </Link>
         
        </div>
+
+       <Swiper
+        modules={[Navigation, Pagination, Autoplay]}
+        slidesPerView={0}
+        spaceBetween={200}
+        navigation
+        pagination = {{clickable: true}}
+        //autoplay = {{delay: 5000}}
+        breakpoints={{
+          320: {  
+            slidesPerView: 1.5,
+          },
+          640:{
+            slidesPerView: 1.3,
+          },
+          1024:{
+            slidesPerView: 2.5,
+          },
+          1440:{
+            slidesPerView: 3.5,
+          },
+        }} className="elenco"
+       >
+        
+          <SwiperSlide>
+            <div className="j-elenco">
+              <img src={elenco1} alt="Jogador" />
+            </div> 
+          </SwiperSlide>
+
+        
+       </Swiper>
 
       </main>
     </div>
