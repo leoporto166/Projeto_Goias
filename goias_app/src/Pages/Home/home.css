@@ -416,7 +416,7 @@
   background-color: rgba(1, 38, 35, 0.95);
   color: white;
   text-align: center;
-  opacity: ;
+  opacity: 0;
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
