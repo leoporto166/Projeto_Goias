@@ -24,6 +24,28 @@ import jogador10 from "../Assets/WL-L.png"
 import jogador11 from "../Assets/DN-L.png"
 import jogador12 from "../Assets/DG-L.png"
 
+import jogador13 from "../Assets/BD-V.png"
+import jogador14 from "../Assets/MR-V.png"
+import jogador15 from "../Assets/AL-V.png"
+import jogador16 from "../Assets/JN-V.png"
+import jogador17 from "../Assets/RA-V.png"
+
+import jogador18 from "../Assets/RG-M.png"
+import jogador19 from "../Assets/VT-M.png"
+import jogador20 from "../Assets/JC-M.png"
+import jogador21 from "../Assets/BZ-M.png"
+
+import jogador22 from "../Assets/AC-A.png"
+import jogador23 from "../Assets/AR-A.png"
+import jogador24 from "../Assets/VH-A.png"
+import jogador25 from "../Assets/WM-A.png"
+import jogador26 from "../Assets/ZH-A.png"
+import jogador27 from "../Assets/JJ-A.png"
+import jogador28 from "../Assets/FB-A.png"
+import jogador29 from "../Assets/EG-A.png"
+import jogador30 from "../Assets/HL-A.png"
+import jogador31 from "../Assets/PD-A.png"
+
 interface Jogador{
   nome: string;
   posicao: string;
@@ -49,6 +71,28 @@ export function Elenco(){
     {nome: "Willian Lepo", posicao: "LAT", imagem: jogador10},
     {nome: "Danilo", posicao: "LAT", imagem: jogador11},
     {nome: "Diego Caito", posicao: "LAT", imagem: jogador12},
+
+    {nome: "Baldoria", posicao: "VOL", imagem: jogador13},
+    {nome: "Marcão", posicao: "VOL", imagem: jogador14},
+    {nome: "Aloisio", posicao: "VOL", imagem: jogador15},
+    {nome: "Juninho", posicao: "VOL", imagem: jogador16},
+    {nome: "Rodrgo A.", posicao: "VOL", imagem: jogador17},
+
+    {nome: "Rafael Gava", posicao: "MEI", imagem: jogador18},
+    {nome: "Vitinho", posicao: "MEI", imagem: jogador19},
+    {nome: "Jean Carlos", posicao: "MEI", imagem: jogador20},
+    {nome: "Banitez", posicao: "MEI", imagem: jogador21},
+
+    {nome: "Arthur Caike", posicao: "ATA", imagem: jogador22},
+    {nome: "Anselmo Ramon", posicao: "ATA", imagem: jogador23},
+    {nome: "Vitor Hugo", posicao: "ATA", imagem: jogador24},
+    {nome: "Welliton Mathues", posicao: "ATA", imagem: jogador25},
+    {nome: "Zé Hugo", posicao: "ATA", imagem: jogador26},
+    {nome: "Jaja", posicao: "ATA", imagem: jogador27},
+    {nome: "Facundo Barceló", posicao: "ATA", imagem: jogador28},
+    {nome: "Esli Garcia", posicao: "ATA", imagem: jogador29},
+    {nome: "Hallerandrio", posicao: "ATA", imagem: jogador30},
+    {nome: "Pedrinho", posicao: "ATA", imagem: jogador31},
 
 
   ]
