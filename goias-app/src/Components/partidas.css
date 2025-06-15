@@ -1,18 +1,4 @@
-@media (max-width: 380px) {
 
-
-  .button button{
-    border: 0;
-    margin: auto;
-    background-color: #0affeb;
-    color: rgb(0, 0, 0);
-    width: 80%;
-    height: 4vh;
-    border-radius: 10px;
-    font-size: 25px;
-    transition: all 0.5s;
-  }
-}
 
 @media (max-width: 640px) {
  .info{
@@ -77,9 +63,24 @@
     background-color: #012623;
     color: white;
     width: 80%;
-    height: 8vh;
+    height: 6vh;
     border-radius: 10px;
     font-size: 25px;
     transition: all 0.5s;
+  }
+}
+
+@media (max-height: 750px) {
+  .button button{
+    border: 0;
+    margin: auto;
+    background-color: #012623;
+    color: white;
+    width: 80%;
+    height: 5vh;
+    border-radius: 10px;
+    font-size: 25px;
+    transition: all 0.5s;
+    font-size: 20px;
   }
 }
