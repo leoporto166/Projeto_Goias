@@ -1,3 +1,19 @@
+@media (max-width: 380px) {
+
+
+  .button button{
+    border: 0;
+    margin: auto;
+    background-color: #0affeb;
+    color: rgb(0, 0, 0);
+    width: 80%;
+    height: 4vh;
+    border-radius: 10px;
+    font-size: 25px;
+    transition: all 0.5s;
+  }
+}
+
 @media (max-width: 640px) {
  .info{
     position: absolute;

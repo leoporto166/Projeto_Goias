@@ -62,16 +62,16 @@ export function Elenco(){
 
             <Swiper
                 modules={[Navigation, Pagination, Autoplay]}
-                slidesPerView={1.3}
-                spaceBetween={100}
+                slidesPerView={1}
+                spaceBetween={0}
                 navigation
                 //autoplay = {{delay: 5000}}
                 breakpoints={{
                   320: {  
-                    slidesPerView: 1.5,
+                    slidesPerView: 1,
                   },
                   640:{
-                    slidesPerView: 1.3,
+                    slidesPerView: 1,
                   },
                   1024:{
                     slidesPerView: 2.5,
