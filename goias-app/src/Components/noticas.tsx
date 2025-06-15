@@ -51,8 +51,7 @@ export function Noticias(){
                 <SwiperSlide>
                 <div className="card-principal">
                 <img src = {not.img}></img>
-                <span className="text">{not.legenda} <br></br>
-                Atlético-go</span>
+                <span className="text">{not.legenda} </span><br></br>
                 </div>
             </SwiperSlide>
                 
