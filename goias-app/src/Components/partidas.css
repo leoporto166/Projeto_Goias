@@ -14,6 +14,11 @@
 
   }
 
+  .title h1{
+    color: #00C18E;
+    font-size: 2em;
+  }
+
   .info h1{
     color: #083532;
     font-size: 25px;

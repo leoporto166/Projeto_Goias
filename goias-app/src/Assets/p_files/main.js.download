@@ -1,0 +1,269 @@
+// ==========  BUSCA =============
+
+jQuery(document).ready(function($) {
+
+    $(".abre-busca").click(function (e) {
+        e.stopPropagation();
+        $('.busca').toggleClass("move");
+    });
+
+    $('.navbar, .carousel, .top_menu .col-md-5').click(function() {
+        $(".busca").removeClass("move");
+    });
+
+
+    // ==========  ADICIONA REQUERIDO NOS CAMPOS =============
+    $(".wpcf7-validates-as-required").after("<span class='req'>*</span>");
+
+
+    // ==========  CAROUSEL GERAL =============
+    // $("#carousel-home .carousel-inner .item:first").addClass("active");
+
+
+    $( ".nano .content" ).scrollTop(660);
+
+    if($('#carrosel-patrocinio').length) {
+        $('#carrosel-patrocinio').flexslider({
+            animation: "slide",
+            animationLoop: false,
+            itemWidth: 100,
+            itemMargin: 10,
+            minItems: 3,
+            maxItems: 8,
+            prevText: "",
+            nextText: ""
+        });
+    }
+
+    if($('#carrosel-jogadores').length) {
+        $('#carrosel-jogadores').flexslider({
+            animation: "slide",
+            animationLoop: false,
+            itemWidth: 300,
+            itemMargin: 20,
+            minItems: 1,
+            maxItems: 5,
+            prevText: "",
+            nextText: ""
+        });
+    }
+
+    if($('#carrosel-loja').length) {
+        $('#carrosel-loja').flexslider({
+            animation: "slide",
+            animationLoop: false,
+            itemWidth: 290,
+            itemMargin: 20,
+            minItems: 1,
+            maxItems: 4,
+            prevText: "",
+            nextText: ""
+        });
+    }
+
+    if($('#carrosel-loja-widget').length) {
+        $('#carrosel-loja-widget').flexslider({
+            animation: "slide",
+            animationLoop: false,
+            itemWidth: 290,
+            itemMargin: 20,
+            minItems: 1,
+            maxItems: 1,
+            prevText: "",
+            nextText: ""
+        });
+    }
+
+    if($('#carrosel-planos').length) {
+        var getGridSize = function() {
+            var qtd = 0;
+            if(window.innerWidth < 1400 && window.innerWidth >= 768) {
+                return 2;
+            } else if (window.innerWidth < 768) {
+                return 1;
+            } else {
+                return 3;
+            }
+        }
+
+        $('#carrosel-planos').flexslider({
+            animation: "slide",
+            animationLoop: false,
+            itemWidth: 200,
+            itemMargin: 10,
+            minItems: getGridSize(), // use function to pull in initial value
+            maxItems: getGridSize(), // use function to pull in initial value
+            prevText: "",
+            nextText: "",
+            controlNav: false
+        });
+    }
+});
+
+jQuery(document).ready(function($) {
+    if($('#carrosel-ct').length) {
+        $('#carrosel-ct').flexslider({
+            animation: "slide",
+            controlNav: false,
+            animationLoop: false,
+            slideshow: false,
+            itemWidth: 110,
+            itemMargin: 5,
+            asNavFor: '#slider-ct'
+        });
+         
+        $('#slider-ct').flexslider({
+            animation: "slide",
+            controlNav: false,
+            animationLoop: false,
+            directionNav: false,
+            slideshow: false,
+            sync: "#carrosel-ct"
+        });
+    }
+
+    // ==========  Player =============
+    // audiojs.events.ready(function() {
+    //   var as = audiojs.createAll();
+    // });
+
+    $(".cd-horizontal-timeline .events a:first").addClass("selected");
+    $(".cd-horizontal-timeline .events-content li:first").addClass("selected");
+
+
+    // ==========  ESCONDE MENU NO SCROLL =============
+    var didScroll;
+    var lastScrollTop = 0;
+    var delta = 5;
+    var navbarHeight = $('.top_menu').outerHeight();
+
+    $(window).scroll(function(event){
+        didScroll = true;
+    });
+
+    setInterval(function() {
+        if (didScroll) {
+            hasScrolled();
+            didScroll = false;
+        }
+    }, 250);
+
+    function hasScrolled() {
+        if(window.innerWidth > 769) {
+            var st = $(this).scrollTop();
+            
+            // Make sure they scroll more than delta
+            if(Math.abs(lastScrollTop - st) <= delta)
+                return;
+            
+            // If they scrolled down and are past the navbar, add class .nav-up.
+            // This is necessary so you never see what is "behind" the navbar.
+            if (st > lastScrollTop && st > navbarHeight){
+                // Scroll Down
+                $('.top_menu').removeClass('nav-down').addClass('nav-up');
+            } else {
+                // Scroll Up
+                if(st + $(window).height() < $(document).height()) {
+                    $('.top_menu').removeClass('nav-up').addClass('nav-down');
+                }
+            }
+            
+            lastScrollTop = st;
+        }
+    }
+
+    $(function() {
+        var slide_home = $("#slide_home .owl-carousel");
+        var slide_home_itens = $("#slide_home .owl-carousel > .item");
+        if(slide_home.length) {
+            slide_home.owlCarousel({
+                nav: true,
+                navText:["",""],
+                dots: true,
+                loop: slide_home_itens.length <= 1 ? false : true,
+                autoplay: slide_home_itens.length <= 1 ? false : true,
+                smartSpeed : 700,
+                autoplayTimeout : 7000,
+                autoplayHoverPause : true,
+                items:1
+            });
+        }
+
+        var slide_prin = $("#slide_prin .owl-carousel");
+        var slide_prin_itens = $("#slide_prin .owl-carousel > .item");
+        if(slide_prin.length) {
+            slide_prin.owlCarousel({
+                nav: true,
+                navText:["",""],
+                dots: true,
+                loop: true,
+                autoplay: true,
+                smartSpeed : 700,
+                autoplayTimeout : 7000,
+                autoplayHoverPause : true,
+                responsive:{
+                    0:{
+                        items:1
+                    },
+                    480:{
+                        items:2
+                    },
+                    990:{
+                        items:3
+                    },
+                    1366:{
+                        items:3
+                    }
+                }
+            });
+        }
+
+        var slide_prin_2 = $("#slide_prin_2 .owl-carousel");
+        var slide_prin_2_itens = $("#slide_prin_2 .owl-carousel > .item");
+        if(slide_prin_2.length) {
+            slide_prin_2.owlCarousel({
+                nav: true,
+                navText:["",""],
+                dots: true,
+                loop: true,
+                autoplay: true,
+                smartSpeed : 700,
+                autoplayTimeout : 7000,
+                autoplayHoverPause : true,
+                responsive:{
+                    0:{
+                        items:1
+                    }
+                }
+            });
+        }
+
+        
+
+        var slide_patrocinadores = $("#slide_patrocinadores .owl-carousel");
+        var slide_patrocinadores_itens = $("#slide_patrocinadores .owl-carousel > .item");
+        if(slide_patrocinadores.length) {
+            slide_patrocinadores.owlCarousel({
+                nav: true,
+                navText:["",""],
+                dots: false,
+                loop: slide_patrocinadores_itens.length <= 1 ? false : true,
+                autoplay: slide_patrocinadores_itens.length <= 1 ? false : true,
+                smartSpeed : 700,
+                autoplayTimeout : 7000,
+                autoplayHoverPause : true,
+                responsive:{
+                    0:{
+                        items:2
+                    },
+                    480:{
+                        items:2
+                    },
+                    990:{
+                        items:3
+                    }
+                }
+            });
+        }
+    });
+});

@@ -4,6 +4,8 @@ import {Noticias} from "./Components/noticas"
 import {Partidas} from "./Components/partidas"
 import {Socio} from "./Components/socio"
 import {Elenco} from "./Components/elenco"
+import {Loja} from "./Components/loja"
+import {Patrocionios} from "./Components/patrocinios"
 
 function App() {
 
@@ -14,6 +16,8 @@ function App() {
       <Partidas></Partidas>
       <Socio></Socio>
       <Elenco></Elenco>
+      <Loja></Loja>
+      <Patrocionios></Patrocionios>
     </div>
 
   )
