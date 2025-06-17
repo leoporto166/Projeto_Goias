@@ -3,9 +3,9 @@
 @media (max-width: 640px) {
  .info{
     position: absolute;
-    background-color:#ffffff ;
+    background-color:#000000 ;
     z-index: 1000;
-    margin-top: 50%;
+    margin-top: 45%;
     width: 120%;
     border-radius: 10px;
     

@@ -1,14 +1,56 @@
 import { Link } from "react-router-dom"
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./header.css";
 
 
 import logo from "../Assets/logo-goias-esporte-clube-256.png";
 
+interface HeaderProps{
+  txt: string;
+}
+
+
 
 export function Header(){
     const [menuActive, setMenuActive] = useState(false);
+
+
+    const [largura, setLargura] = useState(window.innerWidth);
+
+
+
+    useEffect(() => {
+      function atualizarLargura() {
+        setLargura(window.innerWidth);
+      }
+
+    window.addEventListener("resize", atualizarLargura);
+    return () => window.removeEventListener("resize", atualizarLargura);
+}, []);
+
+    const header: HeaderProps[] =[
+      {txt: "Ingressos"},
+      {txt: "Seja Esmeralda"},
+      {txt: "Loja Oficial"},
+    ]
+
+    const menu: HeaderProps[] =[
+      {txt: "Ingressos"},
+      {txt: "Seja Esmeralda"},
+      {txt: "Loja Oficial"},
+      {txt: "Clube"},
+      {txt: "Futebol"},
+      {txt: "Base"},
+      {txt: "Noticias"},
+    ]
+
+    const menut: HeaderProps[] =[
+      {txt: "Clube"},
+      {txt: "Futebol"},
+      {txt: "Base"},
+      {txt: "Noticias"},
+    ]
 
   const toggleMenu = () => {
     setMenuActive(!menuActive);
@@ -28,35 +70,51 @@ export function Header(){
                     <div className="divider"></div>
                     <span className="numero">33</span>
                   </div>
+
+                  {largura >= 760 && largura <= 2000 && ( <div className="header-nav">
+                    {header.map((txt) => (
+                      <Link>{txt.txt}</Link>
+                    ))}
+                    </div>
+                  )}
                   
                   <div className="login">
                         <button className="signin-btn">Sign in</button>
                   </div>  
                   
-        
-                  <ul className={`nav-list ${menuActive ? "active" : ""}`}>
-                    <li>
-                      <Link to="/">Ingressos</Link>
-                    </li>
-                    <li>
-                      <Link to="/">Loja</Link>
-                    </li>
-                    <li>
-                      <Link to="/">Seja Esmeralda</Link>
-                    </li>
-                    <li>
-                      <Link to="/">Clube</Link>
-                    </li>
-                    <li>
-                      <Link to="/">Futebol</Link>
-                    </li>
-                    <li>
-                      <Link to="/">Base</Link>
-                    </li>
-                    <li>
-                      <Link to="/">Noticias</Link>
-                    </li>
-                  </ul>
+                  {largura > 0 && largura <= 640 && 
+                  (<ul className={`nav-list ${menuActive ? "active" : ""}`}>
+                    
+                    {menu.map((menu, index) => (
+                     
+                        <li key={index}> 
+                          <Link>
+                            {menu.txt}
+                          </Link>
+                        </li>
+                      
+                    ))}
+                   </ul>
+                  )}
+
+                  {largura >= 760 && largura <= 2000 && 
+                  (<ul className={`nav-list ${menuActive ? "active" : ""}`}>
+                    
+                    {menut.map((menu, index) => (
+                      
+                        <li key={index}>
+                          <Link>
+                            {menu.txt}
+                          </Link>
+                        </li>
+                      
+                    ))}
+                   </ul>
+                  )}
+
+      
+                 
+                  
         
                   <div
                     className={`mobile-menu ${menuActive ? "active" : ""}`}
@@ -67,7 +125,12 @@ export function Header(){
                     <div className="line3"></div>
                   </div>
                 </nav>
+                <div className="divisor">
+
+                </div>
         </header>
+
+        
     </div>
     )
 }
