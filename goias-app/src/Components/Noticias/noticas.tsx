@@ -6,10 +6,10 @@ import 'swiper/css/pagination';
 import 'swiper/css/autoplay';
 
 
-import card1 from "../Assets/tadeu_ramom.jpeg"
-import card2 from "../Assets/ingressos-goxvolt.png"
-import card3 from "../Assets/benitez.webp"
-import card4 from "../Assets/torcida.png"
+import card1 from "../../Assets/tadeu_ramom.jpeg"
+import card2 from "../../Assets/ingressos-goxvolt.png"
+import card3 from "../../Assets/benitez.webp"
+import card4 from "../../Assets/torcida.png"
 
 interface NoticiaProps{
     img: string;

@@ -7,9 +7,9 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/autoplay'
 
-import ug from "../Assets/u.goleiro.webp"
-import ujl from "../Assets/u.joglinha.jpg"
-import urjl from "../Assets/ur.joglinha.jpg"
+import ug from "../../Assets/u.goleiro.webp"
+import ujl from "../../Assets/u.joglinha.jpg"
+import urjl from "../../Assets/ur.joglinha.jpg"
 
 export function Loja(){
     return(

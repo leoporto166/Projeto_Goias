@@ -4,7 +4,7 @@ import "./socio.css"
 
 
 
-import socio1 from "../Assets/socio.png"
+import socio1 from "../../Assets/socio.png"
 
 interface SocioProps{
     img: string;

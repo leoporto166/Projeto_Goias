@@ -7,10 +7,10 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
 
-import logo from "../Assets/logo-goias-esporte-clube-256.png";
-import crb from "../Assets/crb.png"
-import atle from "../Assets/athletic.png"
-import chape from "../Assets/chape.png"
+import logo from "../../Assets/logo-goias-esporte-clube-256.png";
+import crb from "../../Assets/crb.png"
+import atle from "../../Assets/athletic.png"
+import chape from "../../Assets/chape.png"
 
 interface PartidasProps{
   logo1: string;

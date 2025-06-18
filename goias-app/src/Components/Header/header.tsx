@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import "./header.css";
 
 
-import logo from "../Assets/logo-goias-esporte-clube-256.png";
+import logo from "../../Assets/logo-goias-esporte-clube-256.png";
 
 interface HeaderProps{
   txt: string;
