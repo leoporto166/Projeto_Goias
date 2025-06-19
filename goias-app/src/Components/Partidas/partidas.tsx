@@ -45,28 +45,61 @@ export function Partidas(){
                <Swiper
                 modules={[Navigation, Pagination, Autoplay]}
                 slidesPerView={1.3}
-                spaceBetween={100}
+                spaceBetween={65}
                 navigation
                 pagination = {{clickable: true}}
                 //autoplay = {{delay: 5000}}
                 breakpoints={{
                   320: {  
+                    slidesPerView: 1.2,
+                  },
+                  499: {
                     slidesPerView: 1.5,
                   },
-                  640:{
-                    slidesPerView: 1.3,
+                  520:{
+                    slidesPerView: 1.6,
+                  },
+                  600:{
+                    slidesPerView: 1.8,
+                  },
+                  700:{
+                    slidesPerView: 1.9,
+                  },
+                  840:{
+                    slidesPerView: 2.2,
+                  },
+                  920:{
+                    slidesPerView: 2.3,
                   },
                   1024:{
                     slidesPerView: 2.5,
                   },
-                  1440:{
-                    slidesPerView: 3.5,
+                  1080:{
+                    slidesPerView: 2.7,
+                  },
+                  1230:{
+                    slidesPerView: 2.9,
+                  },
+                  1280:{
+                    slidesPerView: 3.2,
+                  },
+                  1340:{
+                    slidesPerView: 3.4,
+                  },
+                  1460:{
+                    slidesPerView: 3.6,
+                  },
+                  1550:{
+                    slidesPerView: 3.8,
+                  },
+                  1630:{
+                    slidesPerView: 4,
                   },
                 }} className="part"
                >
-                {partidas.map((partida) => (
+                {partidas.map((partida, index) => (
                   <SwiperSlide>
-                  <div className="part-icon">
+                  <div className={`part-icon ${index === partidas.length - 1 ? "last-card" : ""}`}>
                     <img src={partida.logo1}></img>
                     <img src={partida.logo2}></img>
                     
