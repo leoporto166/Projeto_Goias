@@ -45,7 +45,7 @@ export function Noticias(){
             slidesPerView={1}
             pagination = {{clickable: true}}
 
-            className="noticias"
+            className="noticia-principal"
             >
             {noticia.map((not) => (
                 <SwiperSlide>
@@ -62,7 +62,7 @@ export function Noticias(){
             modules={[Navigation, Pagination, Autoplay]}
             spaceBetween={30}
             slidesPerView={1.5}
-            navigation
+            loop={true}
             pagination = {{clickable: true}}
             //autoplay = {{delay: 5000}}
             breakpoints={{
@@ -70,13 +70,16 @@ export function Noticias(){
                 slidesPerView: 1.5,
             },
             640:{
-                slidesPerView: 1.3,
+                slidesPerView: 2.2,
             },
             1024:{
-                slidesPerView: 2.5,
+                slidesPerView: 2.3,
+            },
+            1280:{
+                slidesPerView:2.5
             },
             1440:{
-                slidesPerView: 3.5,
+                slidesPerView: 3,
             },
             }}
             className="noticias">

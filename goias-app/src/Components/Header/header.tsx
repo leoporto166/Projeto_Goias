@@ -71,7 +71,7 @@ export function Header(){
                     <span className="numero">33</span>
                   </div>
 
-                  {largura >= 760 && largura <= 2000 && ( <div className="header-nav">
+                  {largura >= 800 && ( <div className="header-nav">
                     {header.map((txt) => (
                       <Link>{txt.txt}</Link>
                     ))}

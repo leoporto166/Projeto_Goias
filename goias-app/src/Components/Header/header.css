@@ -186,7 +186,7 @@
   }
 
   .divisor{
-    height: 0.5px;
+    height: 1px;
     background-color: #012623;
   }
 }
@@ -396,7 +396,7 @@
   }
 
   .divisor{
-    height: 2px;
+    height: 1px;
     background-color: #012623;
   }
 }
@@ -606,7 +606,7 @@
   }
 
   .divisor{
-    height: 2px;
+    height: 1px;
     background-color: #012623;
   }
 }
@@ -817,7 +817,7 @@
   }
 
   .divisor{
-    height: 2px;
+    height: 1px;
     background-color: #012623;
   }
 }
