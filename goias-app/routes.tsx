@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
-import Home from "./src/Components/Home/home"
-import NotFound from "./src/Erro/erro"
+import Home from "./src/pages/Home/home"
+import NotFound from "./src/pages/Erro/erro"
 const router = createBrowserRouter([
     {
         path:"/Projeto_Goias",
