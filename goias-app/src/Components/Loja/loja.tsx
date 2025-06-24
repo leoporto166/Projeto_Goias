@@ -38,10 +38,10 @@ export function Loja(){
                         slidesPerView: 1,
                       },
                       1024:{
-                        slidesPerView: 2.5,
+                        slidesPerView: 1,
                       },
                       1440:{
-                        slidesPerView: 3.5,
+                        slidesPerView: 1,
                       },
                     }} className="uniforme"
                    >

@@ -120,12 +120,27 @@ export function Elenco(){
                   640:{
                     slidesPerView: 1,
                   },
+                  641:{
+                    slidesPerView: 1.5
+                  },
+                  760:{
+                    slidesPerView: 2
+                  },
+                  910:{
+                    slidesPerView: 2.5
+                  },
                   1024:{
                     slidesPerView: 2.5,
                   },
-                  1440:{
+                  1100:{
+                    slidesPerView: 3,
+                  },
+                  1330:{
                     slidesPerView: 3.5,
                   },
+                  1600:{
+                    slidesPerView: 3.8,
+                  }
                 }} className="elenco"
                >
 

@@ -1,6 +1,33 @@
-.uniforme{
-    width: 69%;
-    height: 40vh;
+@media (max-width: 640px) {
+    .uniforme{
+    width: 350px;
+    height: 400px;
+    background-color: rgba(0, 0, 0, 0);
+    margin-top: 10px;
+    margin-bottom: 30px;
+    
+
+    
+}
+
+.uniforme img{
+    width: 100%;
+    height: 100%;
+
+}
+
+.colecao h1{
+    margin: 10px;
+    font-size: 2em;
+    color: #00C18E;
+}
+
+}
+
+@media (min-width: 641px) and (max-width: 900px) {
+    .uniforme{
+    width: 450px;
+    height: 500px;
     background-color: rgba(0, 0, 0, 0);
     margin-top: 10px;
     margin-bottom: 30px;
@@ -19,3 +46,63 @@
     font-size: 2em;
     color: #00C18E;
 }
+
+}
+
+@media (min-width: 901px) and (max-width: 1200px) {
+    .uniforme{
+    width: 550px;
+    height: 600px;
+    background-color: rgba(0, 0, 0, 0);
+    margin-top: 10px;
+    margin-bottom: 30px;
+
+    
+}
+
+.uniforme img{
+    width: 100%;
+    height: 100%;
+
+}
+
+.colecao h1{
+    margin: 10px;
+    font-size: 2em;
+    color: #00C18E;
+}
+
+.dividir{
+    margin-top: 20px;
+}
+
+}
+
+@media (min-width: 1201px){
+    .uniforme{
+    width: 650px;
+    height: 700px;
+    background-color: rgba(0, 0, 0, 0);
+    margin-top: 10px;
+    margin-bottom: 30px;
+
+    
+}
+
+.uniforme img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+
+}
+
+.colecao h1{
+    margin: 10px;
+    font-size: 2em;
+    color: #00C18E;
+}
+
+}
+
+
