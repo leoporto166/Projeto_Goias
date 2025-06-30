@@ -6,6 +6,13 @@ import "./header.css";
 
 import logo from "../../Assets/logo-goias-esporte-clube-256.png";
 
+import { db, auth } from "../../services/firebaseconnection";
+
+import { BiLogOut } from "react-icons/bi"
+
+import { onAuthStateChanged } from "firebase/auth";
+import { signOut } from "firebase/auth";
+
 interface HeaderProps{
   txt: string;
 }
@@ -14,6 +21,7 @@ interface HeaderProps{
 
 export function Header(){
     const [menuActive, setMenuActive] = useState(false);
+    const [logado, setLogado] = useState(false)
 
 
     const [largura, setLargura] = useState(window.innerWidth);
@@ -27,7 +35,27 @@ export function Header(){
 
     window.addEventListener("resize", atualizarLargura);
     return () => window.removeEventListener("resize", atualizarLargura);
-}, []);
+    }, []);
+
+    useEffect(() => {
+
+      const unsub = onAuthStateChanged(auth, (user) => {
+        setLogado(true)
+          
+      })
+
+      return() => unsub()
+      
+
+    }, [])
+
+     async function handleLogOut(){
+      signOut(auth)
+      setLogado(false)
+
+     }
+
+
 
     const header: HeaderProps[] =[
       {txt: "Ingressos"},
@@ -78,9 +106,15 @@ export function Header(){
                     </div>
                   )}
                   
-                  <div className="login">
-                        <Link to= {"/Projeto_Goias/Cadastro"} className="signin-btn">Sign in</Link>
-                  </div>  
+                  {logado ? (
+                    <div className="login">
+                        <button onClick={handleLogOut} className="signin-btn"><BiLogOut size={26} /></button>
+                    </div>
+                  ): (
+                    <div className="login">
+                        <Link to= {"/Projeto_Goias/Cadastro"} className="signin-btn">Sign In</Link>
+                    </div>
+                  )}  
                   
                   {largura > 0 && largura <= 640 && 
                   (<ul className={`nav-list ${menuActive ? "active" : ""}`}>
