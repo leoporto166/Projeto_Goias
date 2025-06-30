@@ -79,7 +79,7 @@ export function Header(){
                   )}
                   
                   <div className="login">
-                        <button className="signin-btn">Sign in</button>
+                        <Link to= {"/Projeto_Goias/Cadastro"} className="signin-btn">Sign in</Link>
                   </div>  
                   
                   {largura > 0 && largura <= 640 && 
