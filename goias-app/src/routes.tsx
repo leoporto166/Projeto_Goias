@@ -3,6 +3,8 @@ import Home from "./pages/Home/home"
 import NotFound from "./pages/Erro/erro"
 import  Cadastro  from "./pages/Cadastro";
 import { Login } from "./pages/Login"
+import { Elenco } from "./pages/Elenco"
+import { DetalhesElenco } from "./pages/DetelhesElenco"
 const router = createBrowserRouter([
     {
         path:"/Projeto_Goias",
@@ -17,6 +19,16 @@ const router = createBrowserRouter([
     {
         path: "/Projeto_Goias/login",
         element: <Login />
+    },
+
+    {
+        path: "/Projeto_Goias/elenco",
+        element: <Elenco />
+    },
+
+    {
+        path: "/Projeto_Goias/detalhesElenco/:id",
+        element: <DetalhesElenco />
     },
 
     {

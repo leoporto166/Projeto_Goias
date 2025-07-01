@@ -1,4 +1,5 @@
 import "./elenco.css"
+import { Link } from "react-router-dom";
 
 
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
@@ -147,21 +148,25 @@ export function Elenco(){
                 
                   {jogadores.map((jogador, index) => (
                     <SwiperSlide key={index}>
-                      <div 
-                        className={`jogador ${ativoIndex === index ? "ativo" : ""}`}
-                        onClick={() => setAtivoIndex(ativoIndex === index ? null : index)}
-                      >
-                        <img 
-                        src={ativoIndex === index && jogador.pose ?jogador.pose : jogador.imagem}
-                         alt={`Imagem de ${jogador.nome}`} />
-
-                        <div 
-                          className={`inf ${ativoIndex === index ? "ativo" : ""}`}
-                        >
-                          <h3>{jogador.posicao}</h3>
-                          <p>{jogador.nome}</p>
-                        </div>
-                      </div>
+                      
+                        <Link to={`/Projeto_Goias/detalhesElenco/${jogador.nome}`}>
+                          <div
+                            className={`jogador ${ativoIndex === index ? "ativo" : ""}`}
+                            onMouseEnter={() => setAtivoIndex(index)}
+                            onMouseLeave={() => setAtivoIndex(null)}
+                          >
+                            <img
+                            src={ativoIndex === index && jogador.pose ?jogador.pose : jogador.imagem}
+                             alt={`Imagem de ${jogador.nome}`} />
+                            <div
+                              className={`inf ${ativoIndex === index ? "ativo" : ""}`}
+                            >
+                              <h3>{jogador.posicao}</h3>
+                              <p>{jogador.nome}</p>
+                            </div>
+                          </div>
+                        </Link>
+                      
                     </SwiperSlide>
                   ))}
                 

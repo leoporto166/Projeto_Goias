@@ -65,7 +65,7 @@ export function Login(){
                     <h1 
                     className="text-4xl font-semibold mb-10 mt-5"
                     style={{color: "#012623"}}
-                    >Bem-Vindo</h1>
+                    >Bem-Vindo Novamente</h1>
 
                 <form className=" flex flex-col 
                 text-xl w-full max-w-11/12 px-2 gap-2"
