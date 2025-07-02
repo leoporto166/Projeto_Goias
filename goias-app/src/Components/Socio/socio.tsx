@@ -31,7 +31,7 @@ export function Socio(){
                 </div>
             
                 <div className="socio-img">
-                    <Link>
+                    <Link to={"/"}>
                     {largura <= 641 &&<img src={socio1}></img>}
                     {(largura >= 642 && largura <= 749) && <img src={socio3} alt="Sócio 3" />}
                     {largura >= 750 &&<img src={socio2}></img>}

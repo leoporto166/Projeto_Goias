@@ -6,7 +6,7 @@ import "./header.css";
 
 import logo from "../../Assets/logo-goias-esporte-clube-256.png";
 
-import { db, auth } from "../../services/firebaseconnection";
+import { auth } from "../../services/firebaseconnection";
 
 import { BiLogOut } from "react-icons/bi"
 
@@ -39,7 +39,7 @@ export function Header(){
 
     useEffect(() => {
 
-      const unsub = onAuthStateChanged(auth, (user) => {
+      const unsub = onAuthStateChanged(auth, () => {
         setLogado(true)
           
       })
@@ -101,7 +101,7 @@ export function Header(){
 
                   {largura >= 800 && ( <div className="header-nav">
                     {header.map((txt) => (
-                      <Link>{txt.txt}</Link>
+                      <Link to={"/"}>{txt.txt}</Link>
                     ))}
                     </div>
                   )}
@@ -122,7 +122,7 @@ export function Header(){
                     {menu.map((menu, index) => (
                      
                         <li key={index}> 
-                          <Link>
+                          <Link to={"/"}>
                             {menu.txt}
                           </Link>
                         </li>
@@ -137,7 +137,7 @@ export function Header(){
                     {menut.map((menu, index) => (
                       
                         <li key={index}>
-                          <Link>
+                          <Link to={"/"}>
                             {menu.txt}
                           </Link>
                         </li>
