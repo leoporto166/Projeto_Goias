@@ -8,7 +8,8 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/autoplay';
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
 
 import jogador1 from "../../Assets/TR-G.png"
 import jogador2 from "../../Assets/TD-G.png"
@@ -57,7 +58,15 @@ interface Jogador{
 }
 
 
+
+
 export function Elenco(){
+
+  useEffect(() => {
+
+
+
+  }, [])
   const[ativoIndex, setAtivoIndex] = useState<number | null>(null);
   
   const jogadores: Jogador[] = [
