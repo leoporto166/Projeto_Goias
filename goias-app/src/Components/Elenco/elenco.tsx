@@ -181,6 +181,8 @@ export function Elenco(){
                 
 
             </Swiper>
+
+            <span><Link to={"/Projeto_Goias/elenco"}>Elenco completo</Link></span>
         </article>
     )
 }

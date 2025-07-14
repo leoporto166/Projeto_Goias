@@ -1,5 +1,6 @@
 
 
+
 import jogador1 from "../../Assets/TR-G.png"
 import jogador2 from "../../Assets/TD-G.png"
 import jogador3 from "../../Assets/EZ-G.png"
@@ -36,6 +37,13 @@ import jogador28 from "../../Assets/FB-A.png"
 import jogador29 from "../../Assets/EG-A.png"
 import jogador30 from "../../Assets/HL-A.png"
 import jogador31 from "../../Assets/PD-A.png"
+
+import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/autoplay';
 
 interface Jogador{
   nome: string;
@@ -86,24 +94,61 @@ const jogadores: Jogador[] = [
   { nome: "Pedrinho", posicao: "Atacantes", imagem: jogador31 },
 ];
 
-  const posicoes = Array.from(new Set(jogadores.map((j) => j.posicao)))
 
     return(
-        <div className="flex flex-col items-center">
-            {posicoes.map((pos) => (
-                <section key={pos} className="flex gap-3 flex-wrap justify-center items-center w-full max-w-7xl mb-8">
-                    <div className="w-[300px] sm:w-full max-w-7xl bg-green-300">
-                        <h2 className="">{pos}</h2>
+        <div className="flex flex-row items-center">
+
+
+            <Swiper
+                modules={[Navigation, Pagination, Autoplay]}
+                slidesPerView={1}
+                spaceBetween={0}
+                navigation
+                breakpoints={{
+                  320: {  
+                    slidesPerView: 1,
+                  },
+                  640:{
+                    slidesPerView: 1,
+                  },
+                  641:{
+                    slidesPerView: 1.5
+                  },
+                  760:{
+                    slidesPerView: 2
+                  },
+                  910:{
+                    slidesPerView: 2.5
+                  },
+                  1024:{
+                    slidesPerView: 2.5,
+                  },
+                  1100:{
+                    slidesPerView: 3,
+                  },
+                  1330:{
+                    slidesPerView: 3.5,
+                  },
+                  1600:{
+                    slidesPerView: 3.8,
+                  }
+                }} className="w-full max-w-7xl bg-amber-400 h-50"
+               >
+
+
+                <SwiperSlide className="bg-amber-200 w-full flex flex-col items-center">
+                    <div className="w-full max-w-7xl">
+                        <h2 className="">Goleiros</h2>
                     </div>
 
-                    <div className="flex flex-wrap items-center justify-center sm:justify-start w-full max-w-7xl gap-10">
-                    {jogadores.filter((j) => j.posicao === pos)
+                    <div className="flex  justify-center gap-10 w-full">
+                    {jogadores.filter((j) => j.posicao === "Goleiros")
                     .map((jogador, index) => (
                         <div key={index} className="flex flex-col items-center">
                             <img
                             src={jogador.imagem}
                             alt={jogador.nome}
-                            className="w-[300px]"
+                            className="w-[250px] sm:w-[600px]"
                             >
                             </img>
                             <strong>{jogador.nome}</strong>
@@ -111,8 +156,9 @@ const jogadores: Jogador[] = [
                     ))
                     }
                     </div>
-                </section>
-            ))}
+                </SwiperSlide>
+            
+        </Swiper>
         </div>
     )
 
