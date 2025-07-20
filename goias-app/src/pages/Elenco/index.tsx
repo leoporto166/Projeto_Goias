@@ -38,13 +38,6 @@ import jogador29 from "../../Assets/EG-A.png"
 import jogador30 from "../../Assets/HL-A.png"
 import jogador31 from "../../Assets/PD-A.png"
 
-import { Navigation, Pagination, Autoplay } from 'swiper/modules';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import 'swiper/css/autoplay';
-
 interface Jogador{
   nome: string;
   posicao: string;
@@ -131,7 +124,7 @@ const jogadores: Jogador[] = [
                             <img
                               src={jogador.imagem}
                               alt={jogador.nome}
-                              className="w-60 shadow-inner object-cover h-60 sm:h-90 sm:w-full md:h-75 lg:h-90 xl:h-120"
+                              className="w-85 shadow-inner object-cover h-100 sm:h-90 sm:w-full md:h-75 lg:h-90 xl:h-120"
                             />
                         
                     <strong className="text-xl sm:text-2xl mt-2">
