@@ -71,13 +71,15 @@ export function Header(){
       {txt: "Futebol"},
       {txt: "Base"},
       {txt: "Noticias"},
+      {txt: "Elenco"},
     ]
 
-    const menut: HeaderProps[] =[
+    const menu2: HeaderProps[] =[
       {txt: "Clube"},
       {txt: "Futebol"},
       {txt: "Base"},
       {txt: "Noticias"},
+      {txt: "Elenco"},
     ]
 
   const toggleMenu = () => {
@@ -122,7 +124,7 @@ export function Header(){
                     {menu.map((menu, index) => (
                      
                         <li key={index}> 
-                          <Link to={"/"}>
+                          <Link to={`/Projeto_Goias/${menu.txt}`}>
                             {menu.txt}
                           </Link>
                         </li>
@@ -134,10 +136,10 @@ export function Header(){
                   {largura >= 760 && largura <= 2000 && 
                   (<ul className={`nav-list ${menuActive ? "active" : ""}`}>
                     
-                    {menut.map((menu, index) => (
+                    {menu2.map((menu, index) => (
                       
                         <li key={index}>
-                          <Link to={"/"}>
+                          <Link to={`/Projeto_Goias/${menu.txt}`}>
                             {menu.txt}
                           </Link>
                         </li>

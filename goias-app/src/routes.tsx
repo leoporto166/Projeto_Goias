@@ -22,7 +22,7 @@ const router = createBrowserRouter([
     },
 
     {
-        path: "/Projeto_Goias/elenco",
+        path: "/Projeto_Goias/Elenco",
         element: <ElencoTela />
     },
 

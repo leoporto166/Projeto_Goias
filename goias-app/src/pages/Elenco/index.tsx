@@ -1,5 +1,5 @@
 
-
+import { Header } from "../../Components/Header/header"
 
 import jogador1 from "../../Assets/TR-G.png"
 import jogador2 from "../../Assets/TD-G.png"
@@ -52,6 +52,16 @@ interface Jogador{
   pose?: string;
 }
 
+
+const posicoes = [
+  "Goleiros",
+  "Zagueiros",
+  "Laterais",
+  "Volantes",
+  "Meias",
+  "Atacantes"
+];
+
 export function ElencoTela(){
 
   
@@ -96,70 +106,46 @@ const jogadores: Jogador[] = [
 
 
     return(
-        <div className="flex flex-row items-center">
 
-
-            <Swiper
-                modules={[Navigation, Pagination, Autoplay]}
-                slidesPerView={1}
-                spaceBetween={0}
-                navigation
-                breakpoints={{
-                  320: {  
-                    slidesPerView: 1,
-                  },
-                  640:{
-                    slidesPerView: 1,
-                  },
-                  641:{
-                    slidesPerView: 1.5
-                  },
-                  760:{
-                    slidesPerView: 2
-                  },
-                  910:{
-                    slidesPerView: 2.5
-                  },
-                  1024:{
-                    slidesPerView: 2.5,
-                  },
-                  1100:{
-                    slidesPerView: 3,
-                  },
-                  1330:{
-                    slidesPerView: 3.5,
-                  },
-                  1600:{
-                    slidesPerView: 3.8,
-                  }
-                }} className="w-full max-w-7xl bg-amber-400 h-50"
-               >
-
-
-                <SwiperSlide className="bg-amber-200 w-full flex flex-col items-center">
-                    <div className="w-full max-w-7xl">
-                        <h2 className="">Goleiros</h2>
-                    </div>
-
-                    <div className="flex  justify-center gap-10 w-full">
-                    {jogadores.filter((j) => j.posicao === "Goleiros")
-                    .map((jogador, index) => (
-                        <div key={index} className="flex flex-col items-center">
+        
+    <div>
+      <Header />
+      <div className="flex flex-col items-center w-full">
+        {posicoes.map((posicao) => ( 
+          <div key={posicao} className="w-full max-w-7xl">
+            <h2 className="text-xl sm:text-2xl w-full max-w-7xl font-bold text-green-950 my-6 text-center sm:text-start px-4">
+              {posicao.toUpperCase()}
+            </h2>
+            <div className="gap-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 px-2 ">
+              {jogadores
+                .filter((j) => j.posicao === posicao)
+                .map((jogador, index) => (
+                  <div
+                    key={index}
+                    className="flex flex-col items-center justify-center p-2 text-white "
+                   >
+                        <div
+                         style={{ background: "#01401C" }}
+                         className="p-2 flex flex-col items-center sm:w-full"
+                         >
                             <img
-                            src={jogador.imagem}
-                            alt={jogador.nome}
-                            className="w-[250px] sm:w-[600px]"
-                            >
-                            </img>
-                            <strong>{jogador.nome}</strong>
-                        </div>
-                    ))
-                    }
+                              src={jogador.imagem}
+                              alt={jogador.nome}
+                              className="w-60 shadow-inner object-cover h-60 sm:h-90 sm:w-full md:h-75 lg:h-90 xl:h-120"
+                            />
+                        
+                    <strong className="text-xl sm:text-2xl mt-2">
+                      {jogador.nome}
+                    </strong>
                     </div>
-                </SwiperSlide>
-            
-        </Swiper>
-        </div>
+                  </div>
+                ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
     )
 
 }
