@@ -37,6 +37,8 @@ import jogador28 from "../../Assets/FB-A.png"
 import jogador29 from "../../Assets/EG-A.png"
 import jogador30 from "../../Assets/HL-A.png"
 import jogador31 from "../../Assets/PD-A.png"
+import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
 interface Jogador{
   nome: string;
@@ -103,40 +105,89 @@ const jogadores: Jogador[] = [
         
     <div>
       <Header />
-      <div className="flex flex-col items-center w-full">
+
+      
         {posicoes.map((posicao) => ( 
-          <div key={posicao} className="w-full max-w-7xl">
-            <h2 className="text-xl sm:text-2xl w-full max-w-7xl font-bold text-green-950 my-6 text-center sm:text-start px-4">
-              {posicao.toUpperCase()}
+          <div key={posicao} className="w-full mt-2">
+            <h2 className="text-xl sm:text-2xl w-full font-bold text-center sm:text-start px-2"
+            style={{color: "#165953"}}
+            >
+                  {posicao.toUpperCase()}
             </h2>
-            <div className="gap-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 px-2 ">
-              {jogadores
-                .filter((j) => j.posicao === posicao)
-                .map((jogador, index) => (
-                  <div
-                    key={index}
-                    className="flex flex-col items-center justify-center p-2 text-white "
-                   >
-                        <div
-                         style={{ background: "#01401C" }}
-                         className="p-2 flex flex-col items-center sm:w-full"
-                         >
-                            <img
-                              src={jogador.imagem}
-                              alt={jogador.nome}
-                              className="w-85 shadow-inner object-cover h-100 sm:h-90 sm:w-full md:h-75 lg:h-90 xl:h-120"
-                            />
+          
+
+            <Swiper
+                modules={[Navigation, Pagination, Autoplay]}
+                slidesPerView={1}
+                spaceBetween={0}
+                navigation
+                //autoplay = 5000
+                breakpoints={{
+                  320: {  
+                    slidesPerView: 1.3,
+                  },
+                  640:{
+                    slidesPerView: 1.3,
+                  }, 
+                  641:{
+                    slidesPerView: 1.5
+                  },
+                  760:{
+                    slidesPerView: 2.3
+                  },
+                  910:{
+                    slidesPerView: 2.5
+                  },
+                  1024:{
+                    slidesPerView: 2.5,
+                  },
+                  1100:{
+                    slidesPerView: 3.2,
+                  },
+                  1330:{
+                    slidesPerView: 3.5,
+                  },
+                  1600:{
+                    slidesPerView: 5.2,
+                  }
+                }} className="w-full mb-10 mt-2"
+               >
+              
+                
+                  
+                  <div className="gap-10 flex px-2 ">
+                    
+                    {jogadores
+                      .filter((j) => j.posicao === posicao)
+                      .map((jogador, index) => (
+                      <SwiperSlide key={index}
+                          className="flex flex-col items-center justify-center px-2 text-white gap-10 mt-3">
                         
-                    <strong className="text-xl sm:text-2xl mt-2">
-                      {jogador.nome}
-                    </strong>
-                    </div>
+                              <div
+                              style={{ background: "#01401C" }}
+                              className=" flex flex-col items-center w-[300px] rounded p-1 hover:-translate-y-2 transition-transform duration-300 hover:shadow"
+                              >
+                                <img
+                                  src={jogador.imagem}
+                                  alt={jogador.nome}
+                                  className="w-100 h-90"
+                                />
+                              
+                                <strong className="text-xl sm:text-2xl my-2"
+                                >
+                                  {jogador.nome}
+                                </strong>
+                            </div>
+                          </SwiperSlide>
+                        
+                        
+                      ))}
                   </div>
-                ))}
-            </div>
-          </div>
+            </Swiper>
+        </div>
+          
         ))}
-      </div>
+      
     </div>
 
     )

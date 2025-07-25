@@ -129,7 +129,7 @@ export function Elenco(){
                   },
                   640:{
                     slidesPerView: 1,
-                  },
+                  }, 
                   641:{
                     slidesPerView: 1.5
                   },
