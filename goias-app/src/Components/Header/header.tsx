@@ -65,16 +65,8 @@ export function Header(){
 
     const menu: HeaderProps[] =[
       {txt: "Ingressos"},
-      {txt: "Seja Esmeralda"},
+      {txt: "Esmeralda"},
       {txt: "Loja Oficial"},
-      {txt: "Clube"},
-      {txt: "Futebol"},
-      {txt: "Base"},
-      {txt: "Noticias"},
-      {txt: "Elenco"},
-    ]
-
-    const menu2: HeaderProps[] =[
       {txt: "Clube"},
       {txt: "Futebol"},
       {txt: "Base"},
@@ -118,40 +110,43 @@ export function Header(){
                     </div>
                   )}  
                   
-                  {largura > 0 && largura <= 640 && 
-                  (<ul className={`nav-list ${menuActive ? "active" : ""}`}>
+                  <ul className={`nav-list ${menuActive ? "active" : ""}`}>
                     
                     {menu.map((menu, index) => (
+
                      
-                        <li key={index}> 
-                          <Link to={`/Projeto_Goias/${menu.txt}`}>
+                        <li key={index} className="group"> 
+
+                          {menu.txt === "Esmeralda" && (
+                            
+                            <Link to={`/Projeto_Goias/${menu.txt}`}
+                            style={{color: "#A8BFB0"}}
+                            >
                             {menu.txt}
                           </Link>
+                          ) || (
+                            <Link to={`/Projeto_Goias/${menu.txt}`}
+                            style={{color: "#FFFF"}}
+                            >
+                            {menu.txt}
+                          </Link>
+                          )
+
+                          }
+
+                          <div 
+                          className="w-0 h-[2px] transition-all duration-200 group-hover:w-12/12" 
+                          style={{background: "#A8BFB0"}}
+                          >
+                          </div>
                         </li>
+
+                        
                       
                     ))}
                    </ul>
-                  )}
-
-                  {largura >= 760 && largura <= 2000 && 
-                  (<ul className={`nav-list ${menuActive ? "active" : ""}`}>
-                    
-                    {menu2.map((menu, index) => (
-                      
-                        <li key={index}>
-                          <Link to={`/Projeto_Goias/${menu.txt}`}>
-                            {menu.txt}
-                          </Link>
-                        </li>
-                      
-                    ))}
-                   </ul>
-                  )}
-
-      
-                 
                   
-        
+
                   <div
                     className={`mobile-menu ${menuActive ? "active" : ""}`}
                     onClick={toggleMenu}

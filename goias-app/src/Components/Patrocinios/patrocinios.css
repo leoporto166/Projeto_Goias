@@ -9,8 +9,9 @@
 
 .pat-title h1{
     font-size: 2em;
-    color: #00C18E;
+    color: #012623;
     margin-left: 10px;
+    font-weight: 500;
 }
 
 .pat-img img{
@@ -19,7 +20,6 @@
     align-items: center;
     justify-content: center;
     width: 60%;
-    height: 22vh;
     margin: auto;
     margin-top: 20px;
 }

@@ -48,13 +48,11 @@ import jogador29 from "../../Assets/EG-A.png"
 import jogador30 from "../../Assets/HL-A.png"
 import jogador31 from "../../Assets/PD-A.png"
 
-import pose1 from "../../Assets/jogador-pose.jpg"
 
 interface Jogador{
   nome: string;
   posicao: string;
   imagem: string;
-  pose?: string;
 }
 
 
@@ -70,7 +68,7 @@ export function Elenco(){
   const[ativoIndex, setAtivoIndex] = useState<number | null>(null);
   
   const jogadores: Jogador[] = [
-    {nome: "Thiago R.", posicao: "GOL", imagem: jogador1, pose: pose1},
+    {nome: "Thiago R.", posicao: "GOL", imagem: jogador1},
     {nome: "Tadeu", posicao: "GOL", imagem: jogador2},
     {nome: "Ezequiel", posicao: "GOL", imagem: jogador3},
     {nome: "José Vitor", posicao: "GOL", imagem: jogador4},
@@ -165,7 +163,7 @@ export function Elenco(){
                             onMouseLeave={() => setAtivoIndex(null)}
                           >
                             <img
-                            src={ativoIndex === index && jogador.pose ?jogador.pose : jogador.imagem}
+                            src={jogador.imagem}
                              alt={`Imagem de ${jogador.nome}`} />
                             <div
                               className={`inf ${ativoIndex === index ? "ativo" : ""}`}
@@ -181,8 +179,6 @@ export function Elenco(){
                 
 
             </Swiper>
-
-            <span><Link to={"/Projeto_Goias/elenco"}>Elenco completo</Link></span>
         </article>
     )
 }

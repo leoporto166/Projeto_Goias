@@ -90,7 +90,7 @@ export function Patrocionios(){
                     {patrocinios.map((patrocinio) => (
                         <SwiperSlide>
                             <div className="pat-img">
-                                <img src={patrocinio.img}></img>
+                                <img src={patrocinio.img} className="h-50 sm:h-60 sm:w-30"></img>
                             </div>
                         </SwiperSlide>
                     ))}

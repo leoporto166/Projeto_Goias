@@ -223,7 +223,7 @@
 
 @media (min-width: 1001px) and (max-width:1400px)   {
   .elenco{
-    height: 52vh;
+    height: 40vh;
     background-color: #ffffff;
 }
 
@@ -234,7 +234,7 @@
     justify-content: center;
     align-items: center;
     width: 80%;
-    height: 48vh;
+    height: 40vh;
     background-color: rgba(255, 255, 255, 0);
     margin: auto;
     margin-top: 20px;
