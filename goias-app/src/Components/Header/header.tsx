@@ -67,11 +67,12 @@ export function Header(){
       {txt: "Ingressos"},
       {txt: "Esmeralda"},
       {txt: "Loja Oficial"},
-      {txt: "Clube"},
+      {txt: "Clube dos 33"},
       {txt: "Futebol"},
       {txt: "Base"},
       {txt: "Noticias"},
       {txt: "Elenco"},
+      {txt: "Raiz Verde"}
     ]
 
   const toggleMenu = () => {
