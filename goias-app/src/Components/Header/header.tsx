@@ -25,6 +25,7 @@ export function Header(){
 
 
     const [largura, setLargura] = useState(window.innerWidth);
+    const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
 
 
@@ -58,9 +59,12 @@ export function Header(){
 
 
     const header: HeaderProps[] =[
-      {txt: "Ingressos"},
-      {txt: "Seja Esmeralda"},
-      {txt: "Loja Oficial"},
+      {txt: "Noticias"},
+      {txt: "Esmeralda"},
+      {txt: "Loja"},
+      {txt: "Clube"},
+      {txt: "Base"},
+      {txt: "Elenco"},
     ]
 
     const menu: HeaderProps[] =[
@@ -75,94 +79,123 @@ export function Header(){
       {txt: "Raiz Verde"}
     ]
 
+    const menuN: HeaderProps[] = [
+      {txt: "Todas Noticias"},
+      {txt: "Videos"},
+      {txt: "Noticias"}
+    ]
+
+    const menuE: HeaderProps[] = [
+      {txt: "Esmeralda"},
+      
+    ]
+
+    const menuL: HeaderProps[] = [
+      {txt: "Loja"},
+    ]
+
+    const menuC: HeaderProps[] = [
+      {txt: "Clube"}
+    ]
+
+    const menuB: HeaderProps[] = [
+      {txt: "Base"}
+    ]
+
+    const menuEl: HeaderProps[] = [
+      {txt: "Elenco"}
+    ]
+
   const toggleMenu = () => {
     setMenuActive(!menuActive);
     };
     return(
-    <div>
-        <header>
-                <nav>
-                  <div className="logo-area">
-                    <a href="/">
-                      <img
-                        src={logo}
-                        alt="Logo Goiás Esporte Clube"
-                        className="logo"
-                      />
-                    </a>
-                    <div className="divider"></div>
-                    <span className="numero">33</span>
+    <div className="flex flex-col justify-center items-center">
+        <header className="w-full h-[120px] relative flex items-center px-2 gap-4 max-w-7xl justify-center">
+          
+            <div className="relative w-[140px] h-[110px] sm:w-[135px]  md:w-[130px] lg:w-[120px]">
+              <img
+                src={logo}
+                alt="Logo Goiás Esporte Clube"
+                className="absolute w-full h-full z-10 mt-10"
+              />
+            </div>
+            <div className="flex gap-6 h-12/12 items-end mb-8 w-full relative">
+
+              <div
+                className={`mobile-menu ${menuActive ? "active" : ""}, absolute start-0 flex gap-6`}
+                onClick={toggleMenu}>
+                {header.map((txt, index) => (
+                  <div key={`menu-${index}`} onClick={() => setSelectedIndex(index)} className="cursor-pointer select-none">
+                    {txt.txt}
                   </div>
-
-                  {largura >= 800 && ( <div className="header-nav">
-                    {header.map((txt) => (
-                      <Link to={"/"}>{txt.txt}</Link>
-                    ))}
-                    </div>
-                  )}
-                  
-                  {logado ? (
-                    <div className="login">
-                        <button onClick={handleLogOut} className="signin-btn"><BiLogOut size={26} /></button>
-                    </div>
-                  ): (
-                    <div className="login">
-                        <Link to= {"/Projeto_Goias/Cadastro"} className="signin-btn">Sign In</Link>
-                    </div>
-                  )}  
-                  
-                  <ul className={`nav-list ${menuActive ? "active" : ""}`}>
-                    
-                    {menu.map((menu, index) => (
-
-                     
-                        <li key={index} className="group"> 
-
-                          {menu.txt === "Esmeralda" && (
-                            
-                            <Link to={`/Projeto_Goias/${menu.txt}`}
-                            style={{color: "#A8BFB0"}}
-                            >
-                            {menu.txt}
-                          </Link>
-                          ) || (
-                            <Link to={`/Projeto_Goias/${menu.txt}`}
-                            style={{color: "#FFFF"}}
-                            >
-                            {menu.txt}
-                          </Link>
-                          )
-
-                          }
-
-                          <div 
-                          className="w-0 h-[2px] transition-all duration-200 group-hover:w-12/12" 
-                          style={{background: "#A8BFB0"}}
-                          >
-                          </div>
-                        </li>
-
-                        
-                      
-                    ))}
-                   </ul>
-                  
-
+                ))}
+              </div>
+              {selectedIndex === 0 && (
+                <ul className={`nav-list ${menuActive ? "active" : ""}`}>
+                  {menuN.map((noticia, subIndex) => (
+                    <li key={`noticia-${subIndex}`}>{noticia.txt}</li>
+                  ))}
+                </ul>
+              )}
+              {selectedIndex === 1 && (
+                <ul className={`nav-list ${menuActive ? "active" : ""}`}>
+                  {menuE.map((esmeralda, subIndex) => (
+                    <li key={`noticia-${subIndex}`}>{esmeralda.txt}</li>
+                  ))}
+                </ul>
+              )}
+              {selectedIndex === 2 && (
+                <ul className={`nav-list ${menuActive ? "active" : ""}`}>
+                  {menuL.map((loja, subIndex) => (
+                    <li key={`noticia-${subIndex}`}>{loja.txt}</li>
+                  ))}
+                </ul>
+              )}
+              {selectedIndex === 3 && (
+                <ul className={`nav-list ${menuActive ? "active" : ""}`}>
+                  {menuC.map((clube, subIndex) => (
+                    <li key={`noticia-${subIndex}`}>{clube.txt}</li>
+                  ))}
+                </ul>
+              )}
+              {selectedIndex === 4 && (
+                <ul className={`nav-list ${menuActive ? "active" : ""}`}>
+                  {menuB.map((base, subIndex) => (
+                    <li key={`noticia-${subIndex}`}>{base.txt}</li>
+                  ))}
+                </ul>
+              )}
+              {selectedIndex === 5 && (
+                <ul className={`nav-list ${menuActive ? "active" : ""}`}>
+                  {menuEl.map((elenco, subIndex) => (
+                    <li key={`noticia-${subIndex}`}>{elenco.txt}</li>
+                  ))}
+                </ul>
+              )}
+            
+            
+            
+            
+              <div className="login absolute end-0 cursor-pointer mb-[-5px] ">
+                {logado ? (
                   <div
-                    className={`mobile-menu ${menuActive ? "active" : ""}`}
-                    onClick={toggleMenu}
                   >
-                    <div className="line1"></div>
-                    <div className="line2"></div>
-                    <div className="line3"></div>
+                      <button onClick={handleLogOut} className="signin-btn cursor-pointer "><BiLogOut size={26} /></button>
                   </div>
-                </nav>
-                <div className="divisor">
-
-                </div>
+                ): (
+                  <div className="login">
+                      <Link to= {"/Projeto_Goias/Cadastro"} className="signin-btn cursor-pointer">Sign In</Link>
+                  </div>
+                )}
+              </div>
+            
+            </div>
         </header>
-
-        
+          
+        <div className="w-full h-[1px] bg-green-800">
+            
+        </div>
     </div>
     )
 }
