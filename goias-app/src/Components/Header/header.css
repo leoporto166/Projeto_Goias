@@ -822,6 +822,8 @@
 */
 
 
+@media (min-width: 1300px){
+
   
     body {
       overflow-y: hidden;
@@ -831,12 +833,12 @@
       display: flex;
       position: absolute;
       top: 0;
-      left: -30%;
-      width: 100.3vw;
+      width: 100%;
       height: 20vh;
       flex-direction: row;
       align-items: center;
-      background-color: #011816b6;
+      justify-content: center;
+      background-color: #0118167a;
       transform: translateY(0);
       transition: transform 0.3s ease;
       z-index: 9;
@@ -845,8 +847,8 @@
     }
 
     .nav-list li {
+      display: flex;
       opacity: 0;
-      margin-left: 143px;
       margin-top: 10px;
       transform: translateY(0);
       font-size: 15px;
@@ -855,15 +857,78 @@
     }
 
 
-    .nav-list.active {
-      transform: translateY(74%);
+    .nav-list.zero{
+      transform: translateY(65%);
       display: block;
     }
 
 
-    .nav-list.active li {
+    .nav-list.um {
+      transform: translateY(65%);
+      display: block;
+    }
+
+    .nav-list.dois {
+      transform: translateY(65%);
+      display: block;
+    }
+
+    .nav-list.tres {
+      transform: translateY(65%);
+      display: block;
+    }
+
+    .nav-list.quatro {
+      transform: translateY(65%);
+      display: block;
+    }
+
+    .nav-list.cinco {
+      transform: translateY(65%);
+      display: block;
+    }
+
+
+    .nav-list.zero li {
       opacity: 1;
       animation: navLinkFade 0.5s ease forwards;transition: all 1s;
+      margin-left: 148px;
+    }
+
+    .nav-list.um li {
+      opacity: 1;
+      animation: navLinkFade 0.5s ease forwards;transition: all 1s;
+      margin-left: 258px;
+    }
+
+    .nav-list.dois li {
+      opacity: 1;
+      animation: navLinkFade 0.5s ease forwards;transition: all 1s;
+      margin-left: 398px;
+    }
+
+    .nav-list.tres li {
+      opacity: 1;
+      animation: navLinkFade 0.5s ease forwards;transition: all 1s;
+      margin-left: 469px;
+    }
+
+
+    .nav-list.quatro li {
+      opacity: 1;
+      animation: navLinkFade 0.5s ease forwards;transition: all 1s;
+      margin-left: 555px;
+    }
+
+
+    .nav-list.cinco li {
+      opacity: 1;
+      animation: navLinkFade 0.5s ease forwards;transition: all 1s;
+      margin-left: 628px;
+    }
+
+    menu.active{
+      color: black;
     }
 
     @keyframes navLinkFade {
@@ -876,5 +941,5 @@
         transform: translateY(0);
       }
     }
-
+}
 
