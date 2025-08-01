@@ -971,11 +971,10 @@
       transition: transform 0.3s ease;
       pointer-events: none;
       z-index: 5;
-      
+
     }
 
     .nav-list.active{
-      transition: 1s all;
       transform: translateY(100px);
       opacity: 1;
       pointer-events: auto;
@@ -983,6 +982,7 @@
       width: 100%;
       animation: navLinkFade 0.5s ease forwards;
       z-index: 5;
+      
     }
 
     .nav{
@@ -1000,6 +1000,7 @@
       pointer-events: none;
       color: white;
       opacity: 0;
+      transition: all 3s ;
     }
 
     .nav.zero{
@@ -1077,10 +1078,34 @@
       margin-left: 628px;
     }
 
+    .line{
+      transition: all 0.5s;
+    }
+
+    .line-um{
+      transform: rotate(45deg) translateY(12px) ;
+      transition: all 0.5s;
+      width: 30px;
+      margin-left: 5px;
+    }
+
+    .line-dois{
+      opacity: 0;
+      transition: all 0.5s;
+    }
+
+    .line-tres{
+      transform: rotate(-45deg) translateY(-13px) ;
+      transition: all 0.5s;
+      width: 30px;
+      margin-left: 5px;
+    }
+
    @keyframes navLinkFade {
       from {
         opacity: 0;
         transform: translateY(-50px);
+        z-index: 1;
       }
       to {
         opacity: 1;

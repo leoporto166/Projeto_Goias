@@ -220,14 +220,14 @@ export function Header(){
               <div className="relative z-50">
                 <header className="relative flex items-center h-[100px]">
                   <div  className="flex flex-row items-center px-2 mt-2">
-                    <img src={logo} className="w-[90px]"></img>
+                    <img src={logo} className="w-[60px]"></img>
 
                     <div className="w-[1px] h-[50px] bg-green-800"></div>
 
                     <div className="ml-2 text-xl font-semibold text-gray-400">33</div>
                     </div>
                   
-                    <div className="login end-0 cursor-pointer text-black absolute mr-15">
+                    <div className="login end-0 cursor-pointer text-black absolute mr-15 mt-4">
                     {logado ? (
                       <div
                       >
@@ -240,10 +240,12 @@ export function Header(){
                     )}
                   </div>
 
-                  <div  onClick={toggleMenu} className={` login end-0 cursor-pointer absolute px-2`}>
-                    <div className="w-[40px] h-[1px] bg-green-950"></div>
-                    <div className="w-[40px] h-[1px] bg-green-950 mt-2"></div>
-                    <div className="w-[40px] h-[1px] bg-green-950 mt-2"></div>
+                  <div  onClick={toggleMenu} className={` login end-0 cursor-pointer absolute px-2 mt-2`}>
+                    <div className={`${menuActive === true ? "line-um" : "line"} w-[40px] h-[1px] bg-green-950`}></div>
+
+                    <div className={`${menuActive === true ? "line-dois" : "line"} w-[40px] h-[1px] bg-green-950 mt-2`}></div>
+
+                    <div className={` ${menuActive === true ? "line-tres" : "line"} w-[40px] h-[1px] bg-green-950 mt-2`}></div>
                   </div>
                 
                 </header>
@@ -279,7 +281,7 @@ export function Header(){
 
                         {
                         clickIndex === index ? (
-                        <div className="w-full h-[1px] bg-white mt-[100px]"></div>
+                        <div className="w-full h-[1px] bg-white mt-[100px] transition-all duration-100 "></div>
 
                         ) : (
                         <div className="w-full h-[1px] bg-white"></div>
