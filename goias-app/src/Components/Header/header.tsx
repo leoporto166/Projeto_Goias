@@ -15,6 +15,7 @@ import { signOut } from "firebase/auth";
 
 import { FaTimes } from "react-icons/fa";
 import { AiOutlineDown } from "react-icons/ai";
+import { AiOutlineUp } from "react-icons/ai";
 
 interface HeaderProps{
   txt: string;
@@ -102,6 +103,8 @@ export function Header(){
 
   const toggleMenu = () => {
     setMenuActive(!menuActive);
+    setHeader(false);
+    setClickIndex(-1);
     };
 
 
@@ -261,30 +264,37 @@ export function Header(){
                           if (selectedIndex === index && header) {
                             setHeader(false);
                             setSelectedIndex(-1);
-                            setClickIndex(-1)
+                            setClickIndex(-1);
                           } else {
                             setSelectedIndex(index);
                             setHeader(true);
                             setClickIndex(index)
                           }
                         }}
-                        className={`menu mt-1 w-full px-2 cursor-pointer select-none ${selectedIndex === index ? "text-white" : ""}`}
+                        className={`menu mt-1 w-full px-4 sm:px-2 cursor-pointer select-none ${selectedIndex === index ? "text-white" : ""}`}
                       >
-                        <div className="w-full h-[1px] bg-white"></div>
+                        <div className="w-11/12 h-[1px] bg-white"></div>
 
-                        <div className="flex items-center relative py-2">
+                        <div className="flex items-center justify-between py-2 w-full">
                           {txt.txt}
-                          <div className="absolute end-0">
-                            <AiOutlineDown />
+                          <div className="text-white shrink-0 pr-8">
+                            {
+                              headersub ? (<AiOutlineUp />
+                                
+                              ) : (
+                                <AiOutlineDown />
+                              )
+                            }
+                            
                           </div>
                         </div>
 
                         {
                         clickIndex === index ? (
-                        <div className="w-full h-[1px] bg-white mt-[100px] transition-all duration-100 "></div>
+                        <div className="w-11/12 h-[1px] bg-white mt-[100px] transition-all duration-100 "></div>
 
                         ) : (
-                        <div className="w-full h-[1px] bg-white"></div>
+                        <div className="w-11/12 h-[1px] bg-white"></div>
                       )
                           }
                       </div>
@@ -294,7 +304,7 @@ export function Header(){
 
                   <div>
                     {headersub && (
-                      <div className="px-8 text-lg">
+                      <div className="px-6 text-lg w-10/12">
                         {selectedIndex === 0 && (
                           <ul className="nav zero">
                             {menuN.map((noticia, subIndex) => (
