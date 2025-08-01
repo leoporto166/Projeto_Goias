@@ -1,6 +1,6 @@
 
 import { Header } from "../../Components/Header/header"
-import tg from "../../Assets/taça_goiano.png"
+import TG from "../../Assets/taça_goiano.png"
 import quantGoiano from "../../Assets/28.png"
 import goias from "../../Assets/goias.webp"
 export function RaizVerde(){
@@ -21,7 +21,7 @@ export function RaizVerde(){
 
                     <div className="flex items-start">
                         
-                        <img src={tg} alt="Taça Goianão" className="w-[100px] mt-2 "/>
+                        <img src={TG} alt="Taça Goianão" className="w-[100px] mt-2 "/>
                         <img src={quantGoiano} className="w-[80px] h-[130px]"/>
                     </div>
 

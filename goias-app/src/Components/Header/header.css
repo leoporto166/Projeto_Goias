@@ -842,7 +842,7 @@
       transform: translateY(0);
       transition: transform 0.3s ease;
       z-index: 9;
-      display: none;
+      pointer-events: none;
       
     }
 
@@ -927,8 +927,20 @@
       margin-left: 628px;
     }
 
+    .nav-list.active{
+      transform: translateY(65%);
+      opacity: 1;
+      pointer-events: auto;
+      height: 50vh;
+      width: full;
+    }
+
     menu.active{
-      color: black;
+      transform: translateY(65%);
+      opacity: 1;
+      display: block;
+      pointer-events: auto;
+      height: 50vh;
     }
 
     @keyframes navLinkFade {
@@ -939,6 +951,140 @@
       to {
         opacity: 1;
         transform: translateY(0);
+      }
+    }
+}
+
+@media (max-width: 1299px){
+
+    .nav-list {
+      position: fixed;
+      display: flex;
+      top: 0;
+      width: 0;
+      height: 0;
+      flex-direction: column;
+      align-items: start;
+      justify-content: start;
+      background-color: #011816ad;
+      transform: translateY(100px);
+      transition: transform 0.3s ease;
+      pointer-events: none;
+      z-index: 5;
+      
+    }
+
+    .nav-list.active{
+      transition: 1s all;
+      transform: translateY(100px);
+      opacity: 1;
+      pointer-events: auto;
+      height: 100vh;
+      width: 100%;
+      animation: navLinkFade 0.5s ease forwards;
+      z-index: 5;
+    }
+
+    .nav{
+      display: flex;
+      position: absolute;
+      top: 0;
+      width: 100%;
+      height: 20vh;
+      flex-direction: column;
+      align-items: start;
+      justify-content: start;
+      transform: translateY(0);
+      transition: transform 0.3s ease;
+      z-index: 5;
+      pointer-events: none;
+      color: white;
+      opacity: 0;
+    }
+
+    .nav.zero{
+      transform: translateY(150px);
+      display: block;
+      opacity: 1;
+     
+    }
+
+
+    .nav.um {
+      transform: translateY(220px);
+      display: block;
+      opacity: 1;
+    }
+
+    .nav.dois {
+      transform: translateY(290px);
+      display: block;
+      opacity: 1;
+    }
+
+    .nav.tres {
+      transform: translateY(360px);
+      display: block;
+      opacity: 1;
+    }
+
+    .nav.quatro {
+      transform: translateY(430px);
+      display: block;
+      opacity: 1;
+    }
+
+    .nav.cinco {
+      transform: translateY(500px);
+      display: block;
+      opacity: 1;
+    }
+     .nav-list.zero li {
+      opacity: 1;
+      animation: navLinkFade 0.5s ease forwards;transition: all 1s;
+      margin-left: 148px;
+    }
+
+    .nav-list.um li {
+      opacity: 1;
+      animation: navLinkFade 0.5s ease forwards;transition: all 1s;
+      margin-left: 258px;
+    }
+
+    .nav-list.dois li {
+      opacity: 1;
+      animation: navLinkFade 0.5s ease forwards;transition: all 1s;
+      margin-left: 398px;
+    }
+
+    .nav-list.tres li {
+      opacity: 1;
+      animation: navLinkFade 0.5s ease forwards;transition: all 1s;
+      margin-left: 469px;
+    }
+
+
+    .nav-list.quatro li {
+      opacity: 1;
+      animation: navLinkFade 0.5s ease forwards;transition: all 1s;
+      margin-left: 555px;
+    }
+
+
+    .nav-list.cinco li {
+      opacity: 1;
+      animation: navLinkFade 0.5s ease forwards;transition: all 1s;
+      margin-left: 628px;
+    }
+
+   @keyframes navLinkFade {
+      from {
+        opacity: 0;
+        transform: translateY(-50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(100px);
       }
     }
 }

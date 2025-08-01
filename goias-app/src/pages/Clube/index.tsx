@@ -1,5 +1,4 @@
 import { Header } from "../../Components/Header/header"
-import tg from "../../Assets/taça_goiano.png"
 export function Clube(){
     return(
         <div>
