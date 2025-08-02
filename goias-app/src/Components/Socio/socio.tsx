@@ -26,10 +26,6 @@ export function Socio(){
 
     return(
         <main>
-            <div className="dividir">
-            
-                </div>
-            
                 <div className="socio-img">
                     <Link to={"/"}>
                     {largura <= 641 &&<img src={socio1}></img>}

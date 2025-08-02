@@ -1,8 +1,14 @@
-@import "tailwindcss";
-@tailwind utilities;
 
 @import url(https://db.onlinewebfonts.com/c/42470b72e1438d561b81bd6527debde9?family=MilanTypeRev+Regular);
 
+@import "tailwindcss";
+@tailwind utilities;
+
+
 * {
   font-family: 'MilanTypeRev Regular', sans-serif;
+}
+
+body{
+  background-color: #f7fafc;
 }

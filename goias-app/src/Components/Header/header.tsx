@@ -25,6 +25,7 @@ interface HeaderProps{
 
 export function Header(){
     const [menuActive, setMenuActive] = useState(false);
+    const [menuPhoneActive, setMenuPhoneActive] = useState(false);
     const [headersub, setHeader] = useState(false)
     const [logado, setLogado] = useState(false)
     const [clickIndex, setClickIndex] = useState(-1)
@@ -101,28 +102,35 @@ export function Header(){
       {txt: "Elenco"}
     ]
 
-  const toggleMenu = () => {
-    setMenuActive(!menuActive);
+    const toggleMenuPhone = () => {
+      setMenuPhoneActive(!menuPhoneActive);
     setHeader(false);
     setClickIndex(-1);
+    }
+
+  const toggleMenu = () => {
+    setMenuActive(!menuActive);
+    
     };
 
 
     useEffect(() => {
-      document.body.style.overflow = menuActive ? "hidden" : "auto";
-    }, [menuActive]);
+      document.body.style.overflow = menuPhoneActive ? "hidden" : "auto";
+    }, [menuPhoneActive]);
     
     return(
-      <div>
+      <div style={{background: "#012623"}}>
         {largura >= 1300 ? (<div className="flex flex-col justify-center items-center">
           <header className="w-full h-[120px] relative flex items-center px-2 gap-4 justify-center">
         
               <div className="relative w-[140px] h-[110px] sm:w-[135px]  md:w-[130px] lg:w-[120px]">
-                <img
-                  src={logo}
-                  alt="Logo Goiás Esporte Clube"
-                  className="absolute w-full h-full z-10 mt-10"
-                />
+                <Link to={"/Projeto_Goias"}>
+                  <img
+                    src={logo}
+                    alt="Logo Goiás Esporte Clube"
+                    className="absolute w-full h-full z-10 mt-10"
+                  />
+                </Link>
               </div>
               <div className="flex gap-6 h-12/12 items-end mb-8 w-full relative ml-4 text-lg font-bold ">
                 <div
@@ -133,17 +141,33 @@ export function Header(){
                   <div
                     key={`menu-${index}`}
                     onClick={() => setSelectedIndex(index)}
-                    className={`menu cursor-pointer select-none ${selectedIndex === index ? "text-green-950" : ""}`}
+                    className={`menu cursor-pointer select-none ${selectedIndex === index ? "text-white" : ""}`}
                   >
                     {txt.txt}
+                    
+                    
                   </div>
+                  
                 ))}
+
+                {selectedIndex !== -1 ? (
+                      <FaTimes
+                      className="cursor-pointer mt-1 text-white"
+                      size={20}
+                      onClick={() => {setSelectedIndex(-1)
+                        setMenuActive(false)
+                      } }></FaTimes>
+                      ) : (
+                        <></>
+                      )
+                  }
+                  
               </div>
         
         
         
         
-                <div className="login absolute end-0 cursor-pointer mb-[-5px] text-black ">
+                <div className="login absolute end-0 cursor-pointer mb-[-5px] text-white ">
                   {logado ? (
                     <div
                     >
@@ -159,11 +183,7 @@ export function Header(){
               </div>
         
           </header>
-        
-        
-          <div className="w-full h-[1px] bg-green-800">
-        
-          </div>
+
               {selectedIndex === 0 && (
                       <ul className={`nav-list ${selectedIndex === 0 ? "zero" : ""}`}>
                         {menuN.map((noticia, subIndex) => (
@@ -206,31 +226,20 @@ export function Header(){
                         ))}
                       </ul>
                     )}
-                    {selectedIndex !== -1 ? (
-                    <FaTimes
-                    className="ml-[98%] cursor-pointer z-1000"
-                    size={20}
-                    onClick={() => {setSelectedIndex(-1)
-                      setMenuActive(false)
-                    } }></FaTimes>
-                    ) : (
-                      <></>
-                    )
-                  }
-        
-          
             </div>) : (
               <div className="relative z-50">
                 <header className="relative flex items-center h-[100px]">
                   <div  className="flex flex-row items-center px-2 mt-2">
-                    <img src={logo} className="w-[60px]"></img>
+                    <Link to={"/Projeto_Goias"}>
+                      <img src={logo} className="w-[50px]"></img>
+                    </Link>
 
-                    <div className="w-[1px] h-[50px] bg-green-800"></div>
+                    <div className="w-[1px] h-[50px] bg-green-100"></div>
 
-                    <div className="ml-2 text-xl font-semibold text-gray-400">33</div>
+                    <div className="ml-2 text-xl font-semibold text-gray-200">33</div>
                     </div>
                   
-                    <div className="login end-0 cursor-pointer text-black absolute mr-15 mt-4">
+                    <div className="login end-0 cursor-pointer text-white absolute mr-15 mt-4">
                     {logado ? (
                       <div
                       >
@@ -243,20 +252,20 @@ export function Header(){
                     )}
                   </div>
 
-                  <div  onClick={toggleMenu} className={` login end-0 cursor-pointer absolute px-2 mt-2`}>
-                    <div className={`${menuActive === true ? "line-um" : "line"} w-[40px] h-[1px] bg-green-950`}></div>
+                  <div  onClick={toggleMenuPhone} className={`end-0 cursor-pointer absolute px-5 mt-2`}>
+                    <div className={`${menuPhoneActive === true ? "line-um" : "line"} w-[30px] h-[1px] bg-white text-white `}></div>
 
-                    <div className={`${menuActive === true ? "line-dois" : "line"} w-[40px] h-[1px] bg-green-950 mt-2`}></div>
+                    <div className={`${menuPhoneActive === true ? "line-dois" : "line"} w-[30px] h-[1px] bg-white text-white mt-2`}></div>
 
-                    <div className={` ${menuActive === true ? "line-tres" : "line"} w-[40px] h-[1px] bg-green-950 mt-2`}></div>
+                    <div className={` ${menuPhoneActive === true ? "line-tres" : "line"} w-[30px] h-[1px] bg-white text-white mt-2`}></div>
                   </div>
                 
                 </header>
                  
-                {menuActive && (
+                {menuPhoneActive && (
 
                   
-                  <div className={`nav-list ${menuActive ? "active" : ""} absolute start-0 flex gap-6 text-white z-10`}>
+                  <div className={`nav-list ${menuPhoneActive ? "active" : ""} absolute start-0 flex gap-6 text-white z-10`}>
                     {header.map((txt, index) => (
                       <div
                         key={`menu-${index}`}
@@ -273,30 +282,72 @@ export function Header(){
                         }}
                         className={`menu mt-1 w-full px-4 sm:px-2 cursor-pointer select-none ${selectedIndex === index ? "text-white" : ""}`}
                       >
-                        <div className="w-11/12 h-[1px] bg-white"></div>
+
+                        {
+                          clickIndex === index && headersub ? (
+                            <div className="w-11/12 sm:w-full h-[1px] bg-white pr-8 opacity-0"></div>
+                          ) : (
+                            <div className="w-full h-[1px] bg-white pr-8 opacity-0"></div>
+                          )
+                        }
+
+                        {
+                          headersub ? (
+                            <div className="w-11/12 sm:w-full h-[1px] bg-white "></div>
+                          ) : (
+                           <div className="w-full h-[1px] bg-white pr-8"></div>
+                           )
+                        }
+                        
 
                         <div className="flex items-center justify-between py-2 w-full">
                           {txt.txt}
-                          <div className="text-white shrink-0 pr-8">
-                            {
-                              headersub ? (<AiOutlineUp />
-                                
-                              ) : (
-                                <AiOutlineDown />
-                              )
-                            }
+                          
+                              {
+                                clickIndex === index && headersub ? (
+                                <div className="text-white shrink-0 pr-8 sm:pr-0 opacity-0">
+                                    <AiOutlineUp />
+                                </div>
+                              
+                                ) : (
+                                  <div className="text-white shrink-0 opacity-0">
+                                    <AiOutlineDown />
+                                </div>
+                                )
+                              }
+
+                              {
+                                headersub ? (
+                                  <div className="text-white shrink-0 pr-8 sm:pr-0">
+                                    <AiOutlineUp />
+                                </div>
+                                ) : (
+                                  <div className="text-white shrink-0">
+                                    <AiOutlineDown />
+                                </div>
+                                )
+                              }
                             
-                          </div>
+                            
+                          
                         </div>
 
                         {
-                        clickIndex === index ? (
-                        <div className="w-11/12 h-[1px] bg-white mt-[100px] transition-all duration-100 "></div>
+                        clickIndex === index &&headersub ? (
+                        <div className="w-11/12 sm:w-full h-[1px] bg-white mt-[100px] transition-all duration-100 pr-8 opacity-0"></div>
 
                         ) : (
-                        <div className="w-11/12 h-[1px] bg-white"></div>
+                        <div className="w-full h-[1px] bg-white opacity-0"></div>
                       )
                           }
+
+                          {
+                          headersub ? (
+                            <div className="w-11/12 sm:w-full h-[1px] bg-white  transition-all duration-100 pr-8"></div>
+                          ) : (
+                           <div className="w-full h-[1px] bg-white pr-8"></div>
+                           )
+                        }
                       </div>
                     ))}
                   </div>
@@ -357,15 +408,6 @@ export function Header(){
                       </div>
                     )}
                   </div>
-
-                  
-
-                  
-
-                
-
-                <div className="w-full h-[1px] bg-green-950"></div>
-
               </div>
             )}
 

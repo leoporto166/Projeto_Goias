@@ -19,7 +19,7 @@ interface PartidasProps{
   rodada: string;
   calendario: React.ReactNode;
   data: string;
-  loc: React.ReactNode;
+
   estadio: string;
   ingresso?: string;
 }
