@@ -43,7 +43,7 @@ interface NoticiasProps{
 }
 
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 export function Noticias2(){
 
     const [indexBusca, setIndexBusca] = useState(0)
