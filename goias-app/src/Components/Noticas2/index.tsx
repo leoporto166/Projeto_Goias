@@ -1,7 +1,6 @@
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
-import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/autoplay';
 
@@ -14,6 +13,9 @@ import logo from "../../Assets/logo-goias-esporte-clube-256.png";
 import crb from "../../Assets/crb.png"
 import atle from "../../Assets/athletic.png"
 import chape from "../../Assets/chape.png"
+import {MdOutlineArrowBackIos, MdOutlineArrowForwardIos } from "react-icons/md";
+
+
 
   const partidas: PartidasProps[]=[
     {logo1: crb, logo2: logo, titulo: "Campeonato brasileiro serie B", rodada: "12º rodada", data: "Domingo, Junho 14, 16h00", estadio: "Estadio Rei Pelé"},
@@ -41,13 +43,18 @@ interface NoticiasProps{
 }
 
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+import { useEffect, useState } from 'react';
 export function Noticias2(){
+
+    const [indexBusca, setIndexBusca] = useState(0)
 
     const noticia: NoticiasProps[] = [
        {img: card1, legenda: "GOIAS VENCE ATLETICO EM CLASSICO EMOCIONANTE", button: "LER MAIS"},
        {img: card3, legenda: "ANUNCIO OFICIAl: MARTIN BENITÉZ", button: "LER MAIS"},
 
     ]
+
+
 
     return(
 
@@ -93,86 +100,98 @@ export function Noticias2(){
             </Swiper>
 
 
-     <article className='flex flex-col justify-center items-center gap-5 shadow-lg w-[350px] sm:w-[400px] mt-[-30px]  z-11 p-2 mb-10  xl:p-0 xl:shadow-none xl:mb-0 xl:mt-0 md:w-[520px] bg-white xl:h-[384px]'>   
 
-        <div>PARTIDAS</div>
-               <Swiper
-                modules={[Navigation, Pagination, Autoplay]}
-                slidesPerView={1}
-                spaceBetween={30}
-                //autoplay = {{delay: 5000}}
-                 className="w-[300px] h-[220px] md:w-[500px] xl:w-[280px] "
-               >
+            <div className='flex items-center justify-center mt-[-30px] xl:mt-0 bg-white z-11 shadow-lg xl:w-[400px]'>
 
-                {partidas.map((partida) => (
+                {
+                    indexBusca === 0 ? (
+                      <div className='w-[24px]'></div> 
+                    ) : (
+                        <MdOutlineArrowBackIos className='swiper-button-prev text-2xl cursor-pointer'></MdOutlineArrowBackIos> 
+                    )
+                }
 
-                  <SwiperSlide>
-                  <div className=" items-center justify-center flex  text-black flex-col">
+                
 
-                    <div className='text-lg text-gray-800'>
-                        {partida.titulo}
-                    </div>
+                     <article className='flex flex-col justify-center items-center gap-5 w-[350px] sm:w-[400px]  z-11 p-2 mb-10  xl:p-0 xl:shadow-none xl:mb-0 xl:mt-0 md:w-[520px] bg-white xl:h-[384px]'>   
+                
+                        <div className='w-full flex items-center gap-2 xl:justify-center'>
 
-                    <div className='text text-gray-600'>
-                        {partida.data}
-                    </div>
+                            <div className='w-full h-[1px] bg-green-950 xl:w-[90px]'></div>
 
-                    <div className='text text-gray-600'>
-                        {partida.estadio}
-                    </div>
+                            <div>PARTIDAS</div>
 
-                    <div className=' flex gap-6 justify-between items-center w-full h-[40px]'>
-                        <div className='w-[50px]'>
-                            <img src={partida.logo1} ></img>
+                            <div className='w-full h-[1px] bg-green-950 xl:w-[90px]'></div>
+
                         </div>
-                        <div>
-                            <h1 className='text-3xl'>X</h1>
+                   <Swiper
+                    modules={[Navigation, Pagination, Autoplay]}
+                    slidesPerView={1}
+                    spaceBetween={30}
+                    navigation = {{nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev"}}
+                    //autoplay = {{delay: 5000}}
+                    onSlideChange={(swiper) => setIndexBusca(swiper.activeIndex)}
+                     className="w-[300px] h-[220px] md:w-[500px] xl:w-[280px] "
+                   >
+                    {partidas.map((partida) => (
+                
+                      <SwiperSlide>
+                      <div className=" items-center justify-center flex  text-black flex-col">
+                        <div className='text-lg text-gray-800'>
+                            {partida.titulo}
                         </div>
-                        <div>
-                            <img className='w-[50px]' src={partida.logo2}>
-                            </img>
+                        <div className='text text-gray-600'>
+                            {partida.data}
                         </div>
-                    </div>
-
-                    {
-                        partida.ingresso && (
-                            <div
-                                className='bg-green-700 text-white p-1 rounded cursor-pointer'
-                                >{partida.ingresso}
-                            </div> 
-                        )
-                        
-                    }
-
-                    {
-                        partida.ingresso ? (
-                            <div className="overflow-hidden whitespace-nowrap w-full  mt-[8px]">
-
-                        <div className="animate-marquee inline-block text-gray-200 text-xl">
-                            {Array(20).fill("VAI PRA CIMA DELES GOIÁS•")}
+                        <div className='text text-gray-600'>
+                            {partida.estadio}
                         </div>
-
-                    </div>
-                        ) : (
-                            <div className="overflow-hidden whitespace-nowrap w-full  mt-[40px]">
-                                <div className="animate-marquee inline-block text-gray-300 text-xl">
-                                    {Array(20).fill("VAI PRA CIMA DELES GOIÁS•")}
-                                </div>
+                        <div className=' flex gap-6 justify-between items-center w-full h-[40px]'>
+                            <div className='w-[50px]'>
+                                <img src={partida.logo1} ></img>
                             </div>
-                        )
-                    }
-
-                    
-
-                    
-
-                    
-                  </div>
-                </SwiperSlide>
-                ))}
-
-               </Swiper>
-            </article>    
+                            <div>
+                                <h1 className='text-3xl'>X</h1>
+                            </div>
+                            <div>
+                                <img className='w-[50px]' src={partida.logo2}>
+                                </img>
+                            </div>
+                        </div>
+                        {
+                            partida.ingresso && (
+                                <div
+                                    className='bg-green-700 text-white p-1 rounded cursor-pointer'
+                                    >{partida.ingresso}
+                                </div>
+                            )
+                
+                        }
+                        {
+                            partida.ingresso ? (
+                                <div className="overflow-hidden whitespace-nowrap w-full  mt-[8px]">
+                            <div className="animate-marquee inline-block text-gray-200 text-xl">
+                                {Array(20).fill("VAI PRA CIMA DELES GOIÁS•")}
+                            </div>
+                        </div>
+                            ) : (
+                                <div className="overflow-hidden whitespace-nowrap w-full  mt-[40px]">
+                                    <div className="animate-marquee inline-block text-gray-300 text-xl">
+                                        {Array(20).fill("VAI PRA CIMA DELES GOIÁS•")}
+                                    </div>
+                                </div>
+                            )
+                        }
+                
+                
+                
+                      </div>
+                    </SwiperSlide>
+                    ))}
+                   </Swiper>
+                </article>
+                <MdOutlineArrowForwardIos className='swiper-button-next text-2xl cursor-pointer'></MdOutlineArrowForwardIos>
+            </div>   
 
            
         </main>
