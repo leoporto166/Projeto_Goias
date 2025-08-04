@@ -196,10 +196,12 @@ return (
             }`}
           >
             <td className="px-2 border-green-900 py-3">{index + 1}</td>
-            <td className="px-2 border-green-900 flex items-center">
-              <img src={time.img} alt={time.time} className="w-8 m-2" />
-              {time.time}</td>
-            <td className="px-2 border-green-900">{time.jogos}</td>
+
+            <td className="px-4 border-green-900 flex items-center w-[180px]">
+              <img src={time.img} className="w-15 p-2"/>
+              {time.time}
+              </td>
+            <td className="px-2 border-green-900 ml-10">{time.jogos}</td>
             <td className="px-2 border-green-900">{time.pontos}</td>
             
           </tr>
@@ -227,7 +229,7 @@ return (
             }`}
           >
             <td className="px-4 border-green-900 py-2">{index + 1}</td>
-            <td className="px-4 border-green-900 flex items-center">
+            <td className="px-4 border-green-900 flex items-center w-[200px]">
               <img src={time.img} className="w-15 p-2"/>
               {time.time}
               </td>
