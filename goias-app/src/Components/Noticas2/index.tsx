@@ -180,8 +180,11 @@ export function Noticias2(){
                 </div>
             </main>
 
-                <div className='w-full flex  justify-center bg-black mt-4 xl:mt-0'>
-                    <div className="">
+                <div className='w-full flex flex-col justify-center bg-black mt-4 xl:mt-0 items-center'>
+
+                    <div className="mt-4">
+                        <h1 className='text-white text-xl sm:text-2xl font-semibold'>TABELA </h1>
+                    
                         <Tabela></Tabela>
                     </div>
                 </div>

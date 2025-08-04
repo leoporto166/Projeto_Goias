@@ -1,53 +1,84 @@
 import { useEffect, useState } from "react";
 
+import escudoGoias from "../../Assets/logo-goias-esporte-clube-256.png"
+import escudoCoritiba from "../../Assets/coritiba.png"
+import escudoRemo from "../../Assets/Remo.png"
+import escudoCriciuma from "../../Assets/Criciuma.webp"
+import escudoChape from "../../Assets/Chape.png"
+import escudoCuiba from "../../Assets/Cuiabá.png"
+import escudoNovo from "../../Assets/Novorizontino.png"
+import escudoAvai from "../../Assets/avai.png"
+import escudoByla from "../../Assets/byla.png"
+import escudoAtl from "../../Assets/athletic.png"
+import escudoCap from "../../Assets/cap.png"
+import escudoAma from "../../Assets/amazonas.png"
+import escudoAmer from "../../Assets/América.png"
+import escudoPay from "../../Assets/Paysandu.png"
+import escudoOpr from "../../Assets/OPR.png"
+import escudoBota from "../../Assets/botafogo.png"
+import escudoCRB from "../../Assets/crb.png"
+import escudoAtlGO from "../../Assets/Atlético_Goianiense.png"
+import escudoFerro from "../../Assets/Ferroviária.png"
+import escudoVoltaço from "../../Assets/Voltaço.png"
+
+
+
+
+
+
+
+
+
+
 interface TabelaProps{
     time: string;
     jogos: number;
     vitorias: number;
     pontos: number;
     empates: number;
+    img: string
 }
 
 const tabela : TabelaProps[] = [
-    { time: "Athletico‑PR", jogos: 0, vitorias: 0, pontos: 0, empates: 0 },
+    { time: "Athletico‑PR", jogos: 0, vitorias: 0, pontos: 0, empates: 0, img: ""},
 
-    { time: "Atlético‑GO", jogos: 0, vitorias: 0, pontos: 0, empates: 0 },
+    { time: "Atlético‑GO", jogos: 0, vitorias: 0, pontos: 0, empates: 0, img: "" },
 
-    { time: "Cuiabá",  jogos: 0, vitorias: 0, pontos: 0, empates: 0 },
+    { time: "Cuiabá",  jogos: 0, vitorias: 0, pontos: 0, empates: 0, img: "" },
 
-    { time: "Criciúma", jogos: 0, vitorias: 0, pontos: 0, empates: 0 },
+    { time: "Criciúma", jogos: 0, vitorias: 0, pontos: 0, empates: 0, img: "" },
 
-    { time: "Volta Redonda", jogos: 0, vitorias: 0, pontos: 0, empates: 0 },
+    { time: "Volta Redonda", jogos: 0, vitorias: 0, pontos: 0, empates: 0, img: "" },
 
-    { time: "Athletic", jogos: 0, vitorias: 0, pontos: 0, empates: 0 },
+    { time: "Athletic", jogos: 0, vitorias: 0, pontos: 0, empates: 0, img: "" },
 
-    { time: "Ferroviária", jogos: 0, vitorias: 0, pontos: 0, empates: 0 },
+    { time: "Ferroviária", jogos: 0, vitorias: 0, pontos: 0, empates: 0, img: "" },
 
-    { time: "Remo", jogos: 0, vitorias: 0, pontos: 0, empates: 0 },
+    { time: "Remo", jogos: 0, vitorias: 0, pontos: 0, empates: 0, img: "" },
 
-    { time: "Goiás", jogos: 0, vitorias: 0, pontos: 0, empates: 0 },
+    { time: "Goiás", jogos: 0, vitorias: 0, pontos: 0, empates: 0, img: "" },
 
-    { time: "Novorizontino", jogos: 0, vitorias: 0, pontos: 0, empates: 0 },
+    { time: "Novorizontino", jogos: 0, vitorias: 0, pontos: 0, empates: 0, img: "" },
 
-    { time: "Operário‑PR", jogos: 0, vitorias: 0, pontos: 0, empates: 0 },
+    { time: "Operário‑PR", jogos: 0, vitorias: 0, pontos: 0, empates: 0, img: "" },
 
-    { time: "América‑MG", jogos: 0, vitorias: 0, pontos: 0, empates: 0 },
+    { time: "América‑MG", jogos: 0, vitorias: 0, pontos: 0, empates: 0, img: "" },
 
-    { time: "Vila Nova", jogos: 0, vitorias: 0, pontos: 0, empates: 0 },
+    { time: "Vila Nova", jogos: 0, vitorias: 0, pontos: 0, empates: 0, img: "" },
 
-    { time: "Avaí", jogos: 0, vitorias: 0, pontos: 0, empates: 0 },
+    { time: "Avaí", jogos: 0, vitorias: 0, pontos: 0, empates: 0, img: "" },
 
-    { time: "Botafogo‑SP", jogos: 0, vitorias: 0, pontos: 0, empates: 0 },
+    { time: "Botafogo‑SP", jogos: 0, vitorias: 0, pontos: 0, empates: 0, img: "" },
 
-    { time: "Chapecoense", jogos: 0, vitorias: 0, pontos: 0, empates: 0 },
+    { time: "Chapecoense", jogos: 0, vitorias: 0, pontos: 0, empates: 0, img: "" },
 
-    { time: "Coritiba", jogos: 0, vitorias: 0, pontos: 0, empates: 0 },
+    { time: "Coritiba", jogos: 0, vitorias: 0, pontos: 0, empates: 0, img: "" },
 
-    { time: "CRB", jogos: 0, vitorias: 0, pontos: 0, empates: 0 },
+    { time: "CRB", jogos: 0, vitorias: 0, pontos: 0, empates: 0, img: "" },
 
-    { time: "Amazonas", jogos: 0, vitorias: 0, pontos: 0, empates: 0 },
+    { time: "Amazonas", jogos: 0, vitorias: 0, pontos: 0, empates: 0, img: "" },
 
-    { time: "Paysandu", jogos: 0, vitorias: 0, pontos: 0, empates: 0 },
+    { time: "Paysandu", jogos: 0, vitorias: 0, pontos: 0, empates: 0, img: "" },
 
 
 ]
@@ -64,12 +95,12 @@ export function Tabela(){
     const [table, setTable] = useState<TabelaProps[]>(tabela)
 
     
-   function tabelaFun({ time, jogos, vitorias, empates }: Omit<TabelaProps, "pontos">) {
+   function tabelaFun({ time, jogos, vitorias, empates, img }: Omit<TabelaProps, "pontos">) {
   setTable(currentTable => {
     return currentTable.map(t => {
       if (t.time === time) {
         const pontos = vitorias * 3 + empates;
-        return { ...t, jogos, vitorias, pontos, empates };
+        return { ...t, jogos, vitorias, pontos, empates, img };
       }
       return t;
     });
@@ -78,26 +109,26 @@ export function Tabela(){
 
 
 useEffect(() => {
-  tabelaFun({ time: "Goiás", jogos: 20, vitorias: 11, empates: 5 });    // 38 pontos
-  tabelaFun({ time: "Coritiba", jogos: 20, vitorias: 11, empates: 5 }); // 38
-  tabelaFun({ time: "Novorizontino", jogos: 20, vitorias: 9, empates: 8 }); // 35
-  tabelaFun({ time: "Chapecoense", jogos: 20, vitorias: 10, empates: 3 });  // 33
-  tabelaFun({ time: "Remo", jogos: 20, vitorias: 7, empates: 9 });    // 30
-  tabelaFun({ time: "Criciúma", jogos: 20, vitorias: 8, empates: 5 }); // 29
-  tabelaFun({ time: "Avaí", jogos: 20, vitorias: 7, empates: 8 });     // 29
-  tabelaFun({ time: "Cuiabá", jogos: 19, vitorias: 8, empates: 4 });   // 28
-  tabelaFun({ time: "Vila Nova", jogos: 20, vitorias: 8, empates: 3 }); // 27
-  tabelaFun({ time: "Operário‑PR", jogos: 20, vitorias: 7, empates: 5 }); // 26
-  tabelaFun({ time: "Athletico‑PR", jogos: 20, vitorias: 7, empates: 5 }); // 26
-  tabelaFun({ time: "CRB", jogos: 20, vitorias: 7, empates: 4 });       // 25
-  tabelaFun({ time: "Athletic", jogos: 19, vitorias: 7, empates: 2 });   // 23
-  tabelaFun({ time: "Ferroviária", jogos: 20, vitorias: 5, empates: 8 }); // 23
-  tabelaFun({ time: "Atlético‑GO", jogos: 19, vitorias: 5, empates: 8 }); // 23
-  tabelaFun({ time: "América‑MG", jogos: 20, vitorias: 6, empates: 3 });  // 21
-  tabelaFun({ time: "Volta Redonda", jogos: 19, vitorias: 5, empates: 6 }); // 21
-  tabelaFun({ time: "Botafogo‑SP", jogos: 20, vitorias: 5, empates: 6 }); // 21
-  tabelaFun({ time: "Paysandu", jogos: 20, vitorias: 4, empates: 8 });   // 20
-  tabelaFun({ time: "Amazonas", jogos: 20, vitorias: 4, empates: 8 });
+   tabelaFun({ time: "Goiás", jogos: 20, vitorias: 11, empates: 5, img: escudoGoias });
+  tabelaFun({ time: "Coritiba", jogos: 20, vitorias: 11, empates: 5, img: escudoCoritiba });
+  tabelaFun({ time: "Novorizontino", jogos: 20, vitorias: 9, empates: 8, img: escudoNovo });
+  tabelaFun({ time: "Chapecoense", jogos: 20, vitorias: 10, empates: 3, img: escudoChape });
+  tabelaFun({ time: "Remo", jogos: 20, vitorias: 7, empates: 9, img: escudoRemo });
+  tabelaFun({ time: "Criciúma", jogos: 20, vitorias: 8, empates: 5, img: escudoCriciuma });
+  tabelaFun({ time: "Avaí", jogos: 20, vitorias: 7, empates: 8, img: escudoAvai });
+  tabelaFun({ time: "Cuiabá", jogos: 19, vitorias: 8, empates: 4, img: escudoCuiba });
+  tabelaFun({ time: "Vila Nova", jogos: 20, vitorias: 8, empates: 3, img: escudoByla });
+  tabelaFun({ time: "Athletic", jogos: 19, vitorias: 7, empates: 2, img: escudoAtl });
+  tabelaFun({ time: "Athletico‑PR", jogos: 20, vitorias: 7, empates: 5, img: escudoCap });
+  tabelaFun({ time: "Amazonas", jogos: 20, vitorias: 4, empates: 8, img: escudoAma });
+  tabelaFun({ time: "América‑MG", jogos: 20, vitorias: 6, empates: 3, img: escudoAmer });
+  tabelaFun({ time: "Paysandu", jogos: 20, vitorias: 4, empates: 8, img: escudoPay });
+  tabelaFun({ time: "Operário‑PR", jogos: 20, vitorias: 7, empates: 5, img: escudoOpr });
+  tabelaFun({ time: "Botafogo‑SP", jogos: 20, vitorias: 5, empates: 6, img: escudoBota });
+  tabelaFun({ time: "CRB", jogos: 20, vitorias: 7, empates: 4, img: escudoCRB });
+  tabelaFun({ time: "Atlético‑GO", jogos: 19, vitorias: 5, empates: 8, img: escudoAtlGO });
+  tabelaFun({ time: "Ferroviária", jogos: 20, vitorias: 5, empates: 8, img: escudoFerro });
+  tabelaFun({ time: "Volta Redonda", jogos: 19, vitorias: 5, empates: 6, img: escudoVoltaço });
   
   function atualizarLargura() {
         setLargura(window.innerWidth);
@@ -153,7 +184,7 @@ return (
           <th className="px-2 border-green-900 py-3">Classificação</th>
           <th className="px-2 border-green-900 ">Time</th>
           <th className="px-2 border-green-900">J</th>
-          <th className="px-2 border-green-900">P</th>
+          <th className="px-2 border-green-900">PTS</th>
         </tr>
       </thead>
       <tbody>
@@ -165,7 +196,9 @@ return (
             }`}
           >
             <td className="px-2 border-green-900 py-3">{index + 1}</td>
-            <td className="px-2 border-green-900">{time.time}</td>
+            <td className="px-2 border-green-900 flex items-center">
+              <img src={time.img} alt={time.time} className="w-8 m-2" />
+              {time.time}</td>
             <td className="px-2 border-green-900">{time.jogos}</td>
             <td className="px-2 border-green-900">{time.pontos}</td>
             
@@ -194,7 +227,10 @@ return (
             }`}
           >
             <td className="px-4 border-green-900 py-2">{index + 1}</td>
-            <td className="px-4 border-green-900">{time.time}</td>
+            <td className="px-4 border-green-900 flex items-center">
+              <img src={time.img} className="w-15 p-2"/>
+              {time.time}
+              </td>
             <td className="px-4 border-green-900">{time.jogos}</td>
             <td className="px-4 border-green-900">{time.vitorias}</td>
             <td className="px-4 border-green-900">{time.pontos}</td>
