@@ -98,7 +98,8 @@ export function Noticias2(){
                         style={{ backgroundImage: `url(${not.img})` }}>
                             <div className='absolute inset-0 bg-gradient-to-t from-black/90'></div>
                             <div className='text-white text-2xl z-10'>{not.legenda.toUpperCase()}</div>
-                            <div className='text-white z-10 bg-green-400 py-1 w-[150px] text-center rounded mt-4 cursor-pointer mb-20'>{not.button.toUpperCase()}</div>
+                            <div className='text-white z-10 bg-green-400 py-1 w-[150px] text-center rounded mt-4 cursor-pointer mb-20'>{not
+                            .button?.toUpperCase()}</div>
                         </div>
                     </SwiperSlide>
             
