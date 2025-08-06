@@ -62,14 +62,16 @@ export function Noticias2(){
     const noticia2: NoticiasProps[] =[
         {img: n1, legenda: "Noticia Ofical: Treino realizado!", id:1, data: "06/08/25"},
         
-        {img: n1, legenda: "Noticia Ofical: Treino realizado!", id:1, data: "06/08/25"}
+        {img: n1, legenda: "Noticia Ofical: Treino realizado!", id:2, data: "06/08/25"},
+
+        {img: n1, legenda: "Noticia Ofical: Treino realizado!", id:3, data: "06/08/25"}
     ]
 
 
 
     return(
 
-        <div className=''>
+        <div className="">
             <main className='flex flex-col justify-center items-center xl:flex-row '>
                 <Swiper
                     modules={[Navigation, Pagination, Autoplay]}
@@ -199,39 +201,39 @@ export function Noticias2(){
                             <Tabela></Tabela>
                         </div>
                     </div>
-                    <div className='flex flex-col justify-center items-center w-full py-2'>
 
-                        {
-                            noticia2.map((not) => (
-                                <div key={not.id} className='flex flex-col items-center' >
-
-                                    <div>
-                                        <img src={not.img} alt={not.legenda}  className='w-[300px]'/>
-                                    </div>
-                                
-                                    <div className='bg-white mt-[-10px] w-[260px] mb-10 z-11 relative'>
-                                        <h1 className="break-words whitespace-pre-line text-lg ml-1">{not.legenda.toLocaleUpperCase()}</h1>
-
-
-                                    
-                                        <div className='ml-1 text-gray-500 text-center flex items-center'>
-
-                                            <div className='w-[40%] h-[1px] bg-green-600'>
-                                            </div>
-
-                                            <h2 className='px-1'>{not.data}</h2>
-
-                                            <div className='w-[40%] h-[1px] bg-green-600 mr-1'>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
+                        <div className='flex w-full justify-center items-center'>
+                            <div className='w-[380px] flex flex-col items-center justify-center sm:w-[650px]'>
+                                <div className='w-full flex text-lg font-bold mb-2 px-1.5'>
+                                        <h1 className='text-white'>UlTIMAS NOTICIAS</h1>
                                 </div>
-                            ))
-                        }
+                                <div className='flex flex-col justify-center items-center w-full py-2 px-1.5 lg:flex-row lg:flex-wrap'>
+                            
+                                    {
+                                        noticia2.map((not) => (
+                                            <div key={not.id} className='flex flex-col items-center' >
+                                                <div className=''>
+                                                    <img src={not.img} alt={not.legenda}  className='w-full'/>
+                                                </div>
+                            
+                                                <div className='bg-black text-white mt-[-20px] w-[320px] sm:w-[550px] mb-10 z-11 relative'>
+                                                    <h1 className="break-words whitespace-pre-line text-lg ml-3 font-semibold">{not.legenda.toLocaleUpperCase()}</h1>
+                            
+                                                    <div className='ml-3 text-gray-300 text-center flex items-center'>
+                                                        <div className='w-[40%] h-[1px] bg-green-200 '>
+                                                        </div>
+                                                        <h2 className='px-1'>{not.data}</h2>
+                                                        <div className='w-[40%] h-[1px] bg-green-200 mr-1'>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        ))
+                                    }
+                                </div>
+                            </div>
+                            </div>
                     </div>
-                </div>
             
             
         </div>

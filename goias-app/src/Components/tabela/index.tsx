@@ -183,7 +183,7 @@ return (
         <tr className="text-green-950 font-bold">
           <th className="px-2 border-green-900 py-3">Classificação</th>
           <th className="px-2 border-green-900 ">Time</th>
-          <th className="px-2 border-green-900">J</th>
+          <th className="px-2 border-green-900">JGS</th>
           <th className="px-2 border-green-900">PTS</th>
         </tr>
       </thead>
@@ -198,7 +198,7 @@ return (
             <td className="px-2 border-green-900 py-3">{index + 1}</td>
 
             <td className=" border-green-900 flex items-center w-[180px]">
-              <img src={time.img} className="w-15 p-2"/>
+              <img src={time.img} className="w-15 p-[6px] ml-[-3px]"/>
               {time.time}
               </td>
             <td className="px-2 border-green-900 ml-10">{time.jogos}</td>
@@ -230,7 +230,7 @@ return (
           >
             <td className="px-4 border-green-900 py-2">{index + 1}</td>
             <td className=" border-green-900 flex items-center w-[200px]">
-              <img src={time.img} className="w-15 p-2"/>
+              <img src={time.img} className="w-15 p-2 ml-[-3px]"/>
               {time.time}
               </td>
             <td className="px-4 border-green-900">{time.jogos}</td>
