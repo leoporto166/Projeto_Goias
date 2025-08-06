@@ -15,6 +15,8 @@ import atle from "../../Assets/athletic.png"
 import chape from "../../Assets/chape.png"
 import {MdOutlineArrowBackIos, MdOutlineArrowForwardIos } from "react-icons/md";
 
+import n1 from "../../Assets/Elenco goias.webp"
+
 
 
   const partidas: PartidasProps[]=[
@@ -39,7 +41,9 @@ interface PartidasProps{
 interface NoticiasProps{
     img: string;
     legenda: string;
-    button: string
+    button?: string
+    id?: number;
+    data?: string;
 }
 
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
@@ -53,6 +57,12 @@ export function Noticias2(){
        {img: card1, legenda: "GOIAS VENCE ATLETICO EM CLASSICO EMOCIONANTE", button: "LER MAIS"},
        {img: card3, legenda: "ANUNCIO OFICIAl: MARTIN BENITÉZ", button: "LER MAIS"},
 
+    ]
+
+    const noticia2: NoticiasProps[] =[
+        {img: n1, legenda: "Noticia Ofical: Treino realizado!", id:1, data: "06/08/25"},
+        
+        {img: n1, legenda: "Noticia Ofical: Treino realizado!", id:1, data: "06/08/25"}
     ]
 
 
@@ -180,12 +190,45 @@ export function Noticias2(){
                 </div>
             </main>
 
-                <div className='w-full flex flex-col justify-center bg-black mt-4 xl:mt-0 items-center'>
-
-                    <div className="mt-4">
-                        <h1 className='text-white text-xl sm:text-2xl font-semibold'>TABELA </h1>
+                <div className='bg-black'>
+                    <div className='w-full flex flex-col justify-center  mt-4 xl:mt-0 items-center'>
+                        <div className="mt-4">
+                            <h1 className='text-white text-xl sm:text-2xl font-semibold'>TABELA</h1>
                     
-                        <Tabela></Tabela>
+                            <Tabela></Tabela>
+                        </div>
+                    </div>
+                    <div className='flex flex-col justify-center items-center w-full py-2'>
+
+                        {
+                            noticia2.map((not) => (
+                                <div key={not.id} className='flex flex-col items-center' >
+
+                                    <div>
+                                        <img src={not.img} alt={not.legenda}  className='w-[300px]'/>
+                                    </div>
+                                
+                                    <div className='bg-white mt-[-10px] w-[260px] mb-10 z-11 relative'>
+                                        <h1 className="break-words whitespace-pre-line text-lg ml-1">{not.legenda.toLocaleUpperCase()}</h1>
+
+
+                                    
+                                        <div className='ml-1 text-gray-500 text-center flex items-center'>
+
+                                            <div className='w-[40%] h-[1px] bg-green-600'>
+                                            </div>
+
+                                            <h2 className='px-1'>{not.data}</h2>
+
+                                            <div className='w-[40%] h-[1px] bg-green-600 mr-1'>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            ))
+                        }
                     </div>
                 </div>
             
