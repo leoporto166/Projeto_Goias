@@ -46,10 +46,35 @@ interface NoticiasProps{
     data?: string;
 }
 
+interface VideosProps{
+    link: string;
+    legenda: string;
+    button: string;
+    data: string;
+    id: number;
+    
+}
+
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Tabela } from '../tabela';
+
+
 export function Noticias2(){
+    
+    const [largura, setLargura] = useState(window.innerWidth);
+
+    useEffect(() => {
+
+        function atualizarLargura() {
+        setLargura(window.innerWidth);
+
+        }
+
+        window.addEventListener("resize", atualizarLargura);
+        return () => window.removeEventListener("resize", atualizarLargura)
+
+    }, [])
 
     const [indexBusca, setIndexBusca] = useState(0)
 
@@ -62,9 +87,15 @@ export function Noticias2(){
     const noticia2: NoticiasProps[] =[
         {img: n1, legenda: "Noticia Ofical: Treino realizado!", id:1, data: "06/08/25"},
         
-        {img: n1, legenda: "Noticia Ofical: Treino realizado!", id:2, data: "06/08/25"},
+        {img: n1, legenda: "Noticia Ofical: Treino bbbrealizado!", id:2, data: "06/08/25"},
 
-        {img: n1, legenda: "Noticia Ofical: Treino realizado!", id:3, data: "06/08/25"}
+        {img: n1, legenda: "Noticia Ofical: Treino aaarealizado!", id:3, data: "06/08/25"}
+    ]
+
+    const videos: VideosProps[] = [
+        {
+            link: "GmCyxZt_G1I", legenda: "COLETIVA AO VIVO | JUNINHO | GOIÁS E.C", button: "VER NO YOUTUBE", data: "06/08/2025", id: 1
+        }
     ]
 
 
@@ -193,47 +224,143 @@ export function Noticias2(){
                 </div>
             </main>
 
-                <div className='bg-black'>
-                    <div className='w-full flex flex-col justify-center  mt-4 xl:mt-0 items-center'>
-                        <div className="mt-4">
-                            <h1 className='text-white text-xl sm:text-2xl font-semibold'>TABELA</h1>
-                    
-                            <Tabela></Tabela>
-                        </div>
+            <section className='bg-black'>
+                <div className='w-full flex flex-col justify-center mt-4 xl:mt-0 items-center'>
+                    <div className="my-2">
+                        <h1 className='text-white text-xl sm:text-2xl font-semibold'>TABELA</h1>
+                
+                        <Tabela></Tabela>
                     </div>
+                </div>
 
-                        <div className='flex w-full justify-center items-center'>
-                            <div className='w-[380px] flex flex-col items-center justify-center sm:w-[650px]'>
-                                <div className='w-full flex text-lg font-bold mb-2 px-1.5'>
-                                        <h1 className='text-white'>UlTIMAS NOTICIAS</h1>
-                                </div>
-                                <div className='flex flex-col justify-center items-center w-full py-2 px-1.5 lg:flex-row lg:flex-wrap'>
-                            
+                    <div className='flex w-full justify-center items-center'>
+                        <div className='w-[380px] flex flex-col items-center justify-center sm:w-[650px]'>
+                            <div className='w-full flex text-lg font-bold mb-2 px-1.5'>
+                                    <h1 className='text-white'>UlTIMAS NOTICIAS</h1>
+                            </div>
+
+                            {
+                                largura < 1024 ? (
+                                    <div className='flex flex-col justify-center items-center w-full py-2 px-1.5 lg:flex-row lg:flex-wrap'>
                                     {
-                                        noticia2.map((not) => (
-                                            <div key={not.id} className='flex flex-col items-center' >
-                                                <div className=''>
-                                                    <img src={not.img} alt={not.legenda}  className='w-full'/>
-                                                </div>
-                            
-                                                <div className='bg-black text-white mt-[-20px] w-[320px] sm:w-[550px] mb-10 z-11 relative'>
-                                                    <h1 className="break-words whitespace-pre-line text-lg ml-3 font-semibold">{not.legenda.toLocaleUpperCase()}</h1>
-                            
-                                                    <div className='ml-3 text-gray-300 text-center flex items-center'>
-                                                        <div className='w-[40%] h-[1px] bg-green-200 '>
-                                                        </div>
-                                                        <h2 className='px-1'>{not.data}</h2>
-                                                        <div className='w-[40%] h-[1px] bg-green-200 mr-1'>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                        noticia2.slice(0, 2).map((not) => (
+                                        <div key={not.id} className='flex flex-col items-center'>
+                                            <div>
+                                            <img src={not.img} alt={not.legenda} className='w-full' />
                                             </div>
+
+                                            <div className='bg-black text-white mt-[-20px] w-[320px] sm:w-[550px] mb-10 z-11 relative'>
+                                            <h1 className="break-words whitespace-pre-line text-lg ml-3 font-semibold">
+                                                {not.legenda.toLocaleUpperCase()}
+                                            </h1>
+
+                                            <div className='ml-3 text-gray-300 text-center flex items-center'>
+                                                <div className='w-[40%] h-[1px] bg-green-200'></div>
+                                                <h2 className='px-1'>{not.data}</h2>
+                                                <div className='w-[40%] h-[1px] bg-green-200 mr-1'></div>
+                                            </div>
+                                            </div>
+                                        </div>
                                         ))
                                     }
-                                </div>
-                            </div>
-                            </div>
-                    </div>
+                                    </div>
+                                ) : (
+                                    <div>
+                                        <div className='flex flex-col justify-center items-center w-full py-2 px-1.5 '>
+                                        {
+                                            noticia2.slice(0,1).map((not) => (
+                                            <div key={not.id} className='flex flex-col items-center'>
+                                                <div>
+                                                <img src={not.img} alt={not.legenda} className='w-full' />
+                                                </div>
+                                                <div className='bg-black text-white mt-[-20px] w-[320px] sm:w-[550px] mb-10 z-11 relative'>
+                                                <h1 className="break-words whitespace-pre-line text-lg ml-3 font-semibold">
+                                                    {not.legenda.toLocaleUpperCase()}
+                                                </h1>
+                                                <div className='ml-3 text-gray-300 text-center flex items-center'>
+                                                    <div className='w-[40%] h-[1px] bg-green-200'></div>
+                                                    <h2 className='px-1'>{not.data}</h2>
+                                                    <div className='w-[40%] h-[1px] bg-green-200 mr-1'></div>
+                                                </div>
+                                                </div>
+                                            </div>
+                                            ))
+                                        }
+                                        </div>
+
+
+                                        <div className='flex flex-row justify-center items-center w-full py-2 px-1.5 gap-4'>
+                                        {
+                                            noticia2.slice(1,3).map((not) => (
+                                            <div key={not.id} className='flex flex-col items-center'>
+
+                                                <div>
+                                                <img src={not.img} alt={not.legenda} className='w-full' />
+                                                </div>
+                                                <div className="bg-black text-white mt-[-20px] w-[300px] mb-10 z-11 relative">
+                                                <h1 className="break-words whitespace-pre-line text-lg ml-3 font-semibold">
+                                                    {not.legenda.toLocaleUpperCase()}
+                                                </h1>
+                                                <div className='ml-3 text-gray-300 text-center flex items-center'>
+                                                    <div className='w-[40%] h-[1px] bg-green-200'></div>
+                                                    <h2 className='px-1'>{not.data}</h2>
+                                                    <div className='w-[40%] h-[1px] bg-green-200 mr-1'></div>
+                                                </div>
+                                                </div>
+                                            </div>
+                                            ))
+                                        }
+                                        </div>
+                                    </div>
+                                )
+                                }
+
+                        </div>
+                        </div>
+            </section>
+
+            <section className='flex flex-col justify-center items-center my-2'> 
+                <div className='w-[380px] flex flex-col sm:w-[650px]'>
+                    <h1 className='font-bold'>VIDEOS</h1>
+                </div>
+
+                {
+                    largura < 1024 ? (
+                        <div>
+                            {
+                                videos.slice(0, 2).map((video) => (
+                                    <div key={video.id} className='w-[380px] flex flex-col sm:w-[650px] justify-center items-center'>
+                                        <iframe
+                                            className="w-full aspect-video"
+                                            src={`https://www.youtube.com/embed/${video.link}`}
+                                            title={video.legenda}
+                                            frameBorder="0"
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                            allowFullScreen
+                                        ></iframe>
+
+                                        <div className=' bg-white mt-[-30px] shadow w-[320px] sm:w-[550px] mb-10 z-11 relative'>
+                                            <h1 className="break-words whitespace-pre-line text-lg ml-3 font-semibold">
+                                                {video.legenda.toLocaleUpperCase()}
+                                            </h1>
+
+                                            <div className='ml-3  text-center flex items-center'>
+                                                <div className='w-[40%] h-[1px] bg-green-200'></div>
+                                                <h2 className='px-1'>{video.data}</h2>
+                                                <div className='w-[40%] h-[1px] bg-green-200 mr-1'></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))
+                            }
+                        </div>
+                    ) : (
+                        <div></div>
+                    )
+                }
+            </section>
+
+
             
             
         </div>

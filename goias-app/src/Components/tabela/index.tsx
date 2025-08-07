@@ -146,36 +146,9 @@ const start = Math.max(0, indexGoias - 1);
 const end = Math.min(tabelaOrdenada.length, indexGoias + 4);
 const timesProximos = tabelaOrdenada.slice(start, end);
 
-<div className="flex gap-4">
-                <h1>Classificação</h1>
-                <h1>Jogos</h1>
-                <h1>Vitorias</h1>
-                <h1>Pontos</h1>
-            </div>
-            {
-                timesProximos.map((time) => (
-                    <div key={time.time} className="flex flex-col">
-                        <div className="flex">
-                            <div>{time.time}</div>
-
-                            <div className="ml-[67px]">{time.jogos}</div>
-
-                            <div className="ml-[41px]">{time.vitorias}</div>
-
-                            <div className="ml-[55px]">{time.pontos}</div>
-                        </div>
-                        <div className="w-full h-[1px] bg-green-950"></div>
-                    </div>
-
-                ))
-            }
-
-console.log(tabelaOrdenada)
-
-
 
 return (
-<main className="my-10">
+<main className="mt-2 mb-5">
     {
         largura < 700 ? (
     <table className=" w-[100px] text-left  border-collapse border bg-white">
