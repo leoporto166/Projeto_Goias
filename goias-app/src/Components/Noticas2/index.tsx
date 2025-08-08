@@ -329,7 +329,7 @@ export function Noticias2(){
             </section>
 
             <section className='flex flex-col justify-center items-center my-2'> 
-                <div className='w-[380px] flex sm:w-[650px] gap-2 py-2 items-center'>
+                <div className='w-[380px] flex sm:w-[650px] gap-2 py-2 items-center '>
                     <h1 className='font-bold text-xl sm:text-2xl'>VIDEOS</h1>
                     <div className='w-[1px] h-[25px] bg-green-400'></div>
                     <div className='font-light text-[15px]'><a href='https://www.youtube.com/@TVGoias' target='_blank'>Acessar Canal</a></div>
