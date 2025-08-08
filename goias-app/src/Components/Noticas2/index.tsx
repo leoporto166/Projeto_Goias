@@ -55,9 +55,19 @@ interface VideosProps{
     
 }
 
+interface LojaProps{
+    titulo: string;
+    img: string;
+    preco: number; 
+    button: string;
+    id: number;
+}
+
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import { useEffect, useState } from 'react';
 import { Tabela } from '../tabela';
+import CamisaLinha from "../../Assets/CamisaGoias-2025-2.jpg"
+import CamisaGOL from "../../Assets/camisaGoiasGOL2025.jpg"
 
 
 export function Noticias2(){
@@ -101,6 +111,15 @@ export function Noticias2(){
         },
         {
             link: "jVs4iQ_kcB0", legenda: "WELLINGTON RATO | ENTREVISTA EXCLUSIVA ", button: "VER NO YOUTUBE", data: "11/07/25", id: 3
+        },
+    ]
+
+    const Loja: LojaProps[] =[
+        {
+            titulo: "Camisa Linha 01 Masculina - 2025", img: CamisaLinha, preco: 399.99, button: "Comprar", id:1
+        },
+        {
+            titulo: "Camisa Goleiro 01 Maculina - 2025", img: CamisaGOL, preco: 399.99, button: "Comprar", id:2
         },
     ]
 
@@ -439,6 +458,38 @@ export function Noticias2(){
                         </div>
                     )
                 }
+            </section>
+
+
+
+            <section className='flex justify-center items-center flex-row w-full'>
+                <Swiper
+                modules={[Navigation, Pagination, Autoplay]}
+                        slidesPerView={1}
+                        pagination = {{clickable: true}}
+                        className="w-[380px] h-[700px] relative mb-10">
+                    {
+                        Loja.map((prod) => (
+                            <SwiperSlide>
+                                <div key={prod.id} className='w-[380px]'>
+                                    <img src={prod.img} alt=""></img>
+                                </div>
+
+                                <div className='flex- flex-col'>
+                                    <h1 className='text-xl font-semibold mt-2'>{prod.titulo}</h1>
+
+                                    <strong className='text-green-800 text-2xl'>
+                                        {prod.preco.toLocaleString("pt-BR", {style: "currency",
+                                        currency: "BRL"
+                                        })}
+                                    </strong>
+
+                                </div>
+
+                            </SwiperSlide>
+                        ))
+                    }
+                </Swiper>
             </section>
 
 
