@@ -17,16 +17,12 @@ import {MdOutlineArrowBackIos, MdOutlineArrowForwardIos } from "react-icons/md";
 
 import n1 from "../../Assets/Elenco goias.webp"
 
+import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+import { useEffect, useState } from 'react';
+import { Tabela } from '../tabela';
+import CamisaLinha from "../../Assets/CamisaGoias-2025-2.jpg"
+import CamisaGOL from "../../Assets/camisaGoiasGOL2025.jpg"
 
-
-  const partidas: PartidasProps[]=[
-    {logo1: crb, logo2: logo, titulo: "Campeonato brasileiro serie B", rodada: "12º rodada", data: "Domingo, Junho 14, 16h00", estadio: "Estadio Rei Pelé"},
-
-    {logo1: logo, logo2: atle, titulo: "Campeonato brasileiro serie B", rodada: "13º rodada", data: "Segunda, Junho 23, 21h00", estadio: "Estadio Haile Pinheiro", ingresso: "Comprar ingresso"},
-
-    {logo1: chape, logo2: logo, titulo: "Campeonato brasileiro serie B", rodada: "14º rodada", data: "Domingo, Junho 29, 19h00", estadio: "Arena Condá"},
-
-  ]
 
 interface PartidasProps{
   logo1: string;
@@ -63,13 +59,6 @@ interface LojaProps{
     link: string;
     id: number;
 }
-
-import { Navigation, Pagination, Autoplay } from 'swiper/modules';
-import { useEffect, useState } from 'react';
-import { Tabela } from '../tabela';
-import CamisaLinha from "../../Assets/CamisaGoias-2025-2.jpg"
-import CamisaGOL from "../../Assets/camisaGoiasGOL2025.jpg"
-
 
 export function Noticias2(){
     
@@ -124,11 +113,21 @@ export function Noticias2(){
         },
     ]
 
+      const partidas: PartidasProps[]=[
+    {logo1: crb, logo2: logo, titulo: "Campeonato brasileiro serie B", rodada: "12º rodada", data: "Domingo, Junho 14, 16h00", estadio: "Estadio Rei Pelé"},
+
+    {logo1: logo, logo2: atle, titulo: "Campeonato brasileiro serie B", rodada: "13º rodada", data: "Segunda, Junho 23, 21h00", estadio: "Estadio Haile Pinheiro", ingresso: "Comprar ingresso"},
+
+    {logo1: chape, logo2: logo, titulo: "Campeonato brasileiro serie B", rodada: "14º rodada", data: "Domingo, Junho 29, 19h00", estadio: "Arena Condá"},
+
+  ]
+
 
 
     return(
 
         <div className="">
+
             <main className='flex flex-col justify-center items-center xl:flex-row '>
                 <Swiper
                     modules={[Navigation, Pagination, Autoplay]}
@@ -260,7 +259,7 @@ export function Noticias2(){
                 </div>
 
                     <div className='flex w-full justify-center items-center'>
-                        <div className='w-[380px] flex flex-col items-center justify-center sm:w-[650px]'>
+                        <div className='w-[380px] flex flex-col items-center justify-center sm:w-[650px] lg:w-[850px] xl:w-[1024px]'>
                             <div className='w-full flex text-lg font-bold mb-2 px-1.5'>
                                     <h1 className='text-white text-xl sm:text-2xl'>UlTIMAS NOTICIAS</h1>
                             </div>
@@ -272,7 +271,7 @@ export function Noticias2(){
                                         noticia2.slice(0, 2).map((not) => (
                                         <div key={not.id} className='flex flex-col items-center'>
                                             <div>
-                                            <img src={not.img} alt={not.legenda} className='w-full' />
+                                            <img src={not.img} alt={not.legenda} className='w-full cursor-pointer transition-transform duration-2000 hover:scale-103' />
                                             </div>
 
                                             <div className='bg-black text-white mt-[-20px] w-[320px] sm:w-[550px] mb-10 z-11 relative'>
@@ -281,10 +280,10 @@ export function Noticias2(){
                                             </h1>
 
                                             <div className='ml-3 text-gray-300 text-center flex items-center'>
-                                                <div className='w-[40%] h-[1px] bg-green-200'></div>
+                                                <div className='w-[50%] h-[1px] bg-green-200'></div>
                                                 <h2 className='px-1'
                                                 style={{ fontVariantLigatures: "none" }}>{not.data}</h2>
-                                                <div className='w-[40%] h-[1px] bg-green-200 mr-1'></div>
+                                                <div className='w-[50%] h-[1px] bg-green-200 mr-1'></div>
                                             </div>
                                             </div>
                                         </div>
@@ -298,17 +297,17 @@ export function Noticias2(){
                                             noticia2.slice(0,1).map((not) => (
                                             <div key={not.id} className='flex flex-col items-center'>
                                                 <div>
-                                                <img src={not.img} alt={not.legenda} className='w-full' />
+                                                <img src={not.img} alt={not.legenda} className='w-full cursor-pointer transition-transform duration-2000 hover:scale-103' />
                                                 </div>
-                                                <div className='bg-black text-white mt-[-20px] w-[320px] sm:w-[550px] mb-10 z-11 relative'>
+                                                <div className='bg-black text-white mt-[-20px] w-[320px] sm:w-[550px] mb-10 z-11 relative lg:w-[800px] xl:w-[980px]'>
                                                 <h1 className="break-words whitespace-pre-line text-lg ml-3 font-semibold">
                                                     {not.legenda.toLocaleUpperCase()}
                                                 </h1>
                                                 <div className='ml-3 text-gray-300 text-center flex items-center'>
-                                                    <div className='w-[40%] h-[1px] bg-green-200'></div>
+                                                    <div className='w-[50%] h-[1px] bg-green-200'></div>
                                                     <h2 className='px-1'
                                                     style={{ fontVariantLigatures: "none" }}>{not.data}</h2>
-                                                    <div className='w-[40%] h-[1px] bg-green-200 mr-1'></div>
+                                                    <div className='w-[50%] h-[1px] bg-green-200 mr-1'></div>
                                                 </div>
                                                 </div>
                                             </div>
@@ -323,17 +322,17 @@ export function Noticias2(){
                                             <div key={not.id} className='flex flex-col items-center'>
 
                                                 <div>
-                                                <img src={not.img} alt={not.legenda} className='w-full' />
+                                                <img src={not.img} alt={not.legenda} className='w-full cursor-pointer transition-transform duration-2000 hover:scale-103' />
                                                 </div>
-                                                <div className="text-white bg-black mt-[-20px] w-[300px] mb-10 z-11 relative">
+                                                <div className="text-white bg-black mt-[-20px] w-[300px] lg:w-[400px] xl:w-[480px] mb-10 z-11 relative">
                                                 <h1 className="break-words whitespace-pre-line text-lg ml-3 font-semibold">
                                                     {not.legenda.toLocaleUpperCase()}
                                                 </h1>
                                                 <div className='ml-3 text-gray-300 text-center flex items-center'>
-                                                    <div className='w-[40%] h-[1px] bg-green-200'></div>
+                                                    <div className='w-[50%] h-[1px] bg-green-200'></div>
                                                     <h2 className='px-1'
                                                     style={{ fontVariantLigatures: "none" }}>{not.data}</h2>
-                                                    <div className='w-[40%] h-[1px] bg-green-200 mr-1'></div>
+                                                    <div className='w-[50%] h-[1px] bg-green-200 mr-1'></div>
                                                 </div>
                                                 </div>
                                             </div>
@@ -349,7 +348,7 @@ export function Noticias2(){
             </section>
 
             <section className='flex flex-col justify-center items-center my-2'> 
-                <div className='w-[380px] flex sm:w-[650px] gap-2 py-2 items-center '>
+                <div className='w-[380px] flex sm:w-[650px] lg:w-[850px]  xl:w-[1024px] gap-2 py-2 items-center '>
                     <h1 className='font-bold text-xl sm:text-2xl'>VIDEOS</h1>
                     <div className='w-[1px] h-[25px] bg-green-400'></div>
                     <div className='font-light text-[15px]'><a href='https://www.youtube.com/@TVGoias' target='_blank'>Acessar Canal</a></div>
@@ -360,7 +359,7 @@ export function Noticias2(){
                         <div>
                             {
                                 videos.slice(0, 2).map((video) => (
-                                    <div key={video.id} className='w-[380px] flex flex-col sm:w-[650px] justify-center items-center'>
+                                    <div key={video.id} className='w-[380px] flex flex-col sm:w-[650px]  justify-center items-center cursor-pointer'>
                                         <iframe
                                             className="w-full aspect-video"
                                             src={`https://www.youtube.com/embed/${video.link}`}
@@ -376,10 +375,10 @@ export function Noticias2(){
                                             </h1>
 
                                             <div className='ml-3  text-center flex items-center'>
-                                                <div className='w-[40%] h-[1px] bg-green-200'></div>
+                                                <div className='w-[50%] h-[1px] bg-green-200'></div>
                                                 <h2 className='px-1'
                                                 style={{ fontVariantLigatures: "none" }}>{video.data}</h2>
-                                                <div className='w-[40%] h-[1px] bg-green-200 mr-1'></div>
+                                                <div className='w-[50%] h-[1px] bg-green-200 mr-1'></div>
                                             </div>
                                         </div>
                                     </div>
@@ -390,9 +389,9 @@ export function Noticias2(){
                         <div>
                             {
                                 videos.slice(0,1).map((video) => (
-                                    <div key={video.id} className='w-full flex flex-col justify-center items-center'>
+                                    <div key={video.id} className='w-full flex flex-col justify-center items-center lg:w-[850px] xl:w-[1024px]'>
                                         <iframe
-                                            className="w-[650px] aspect-video"
+                                            className="lg:w-[850px] xl:w-[1024px] aspect-video"
                                             src={`https://www.youtube.com/embed/${video.link}`}
                                             title={video.legenda}
                                             frameBorder="0"
@@ -406,23 +405,23 @@ export function Noticias2(){
                                             </h1>
 
                                             <div className='ml-3  text-center flex items-center'>
-                                                <div className='w-[40%] h-[1px] bg-green-200'></div>
+                                                <div className='w-[50%] h-[1px] bg-green-200'></div>
                                                 <h2 className='px-1'
                                                 style={{ fontVariantLigatures: "none" }}>{video.data}</h2>
-                                                <div className='w-[40%] h-[1px] bg-green-200 mr-1'></div>
+                                                <div className='w-[50%] h-[1px] bg-green-200 mr-1'></div>
                                             </div>
                                         </div>
                                     </div>
                                 ))
                             }
 
-                            <div className="flex flex-col py-2 gap-4  w-[650px] ">
+                            <div className="flex flex-col py-2 gap-4 w-[650px] xl:w-[1024px]">
                                 {
                                     videos.slice(1,3).map((video) => (
-                                        <div key={video.id} className='flex flex-row items-center '>
+                                        <div key={video.id} className='flex flex-row items-center lg:w-[850px] xl:w-[1024px] '>
 
                                             <iframe
-                                                className="w-[400px] aspect-video m-0"
+                                                className="w-[550px] lg:w-[650px] aspect-video m-0"
                                                 src={`https://www.youtube.com/embed/${video.link}`}
                                                 title={video.legenda}
                                                 frameBorder="0"
@@ -431,16 +430,16 @@ export function Noticias2(){
                                             ></iframe>
 
                                             <div className=' bg-green-50 mt-
-                                             shadow w-[40%] z-11 relative h-[224px] flex flex-col'>
+                                             shadow w-[300px] z-11 relative h-[307px] flex flex-col lg:w-[100%] lg:h-[365px]'>
 
                                                 <h1 className="break-words whitespace-pre-line text-lg ml-3 font-semibold">
                                                     {video.legenda.toLocaleUpperCase()}
                                                 </h1>
                                                 <div className='ml-3 text-center flex items-center h-screen'>
-                                                    <div className='w-[40%] h-[1px] bg-green-200'></div>
+                                                    <div className='w-[50%] h-[1px] bg-green-200'></div>
                                                     <h2 className='px-1'
                                                     style={{ fontVariantLigatures: "none" }}>{video.data}</h2>
-                                                    <div className='w-[40%] h-[1px] bg-green-200 mr-1 '></div>
+                                                    <div className='w-[50%] h-[1px] bg-green-200 mr-1 '></div>
                                                 </div>
                                             
                                                 <a href={`https://www.youtube.com/watch?v=${video.link}`} target='_blank'>
@@ -461,17 +460,17 @@ export function Noticias2(){
                 }
             </section>
 
-
-
             <section className='flex justify-center items-center flex-col w-full'>
 
-                <div className='w-[380px] flex gap-2 items-center sm:w-[650px] '>
+                <div className='w-[380px] flex gap-2 items-center sm:w-[650px] lg:w-[850px] xl:w-[1024px] '>
                     <h1 className='text-xl font-bold py-2'>GOIÁS STORE</h1>
                     <div className='w-[1px] h-[25px] bg-green-400'></div>
                     <div className='font-light text-[15px]'><a href='#' target='_blank'>Acessar Loja</a></div>
                 </div>
 
-                <Swiper
+                {
+                    largura < 750 ? (
+                    <Swiper
                 modules={[Navigation, Pagination, Autoplay]}
                         slidesPerView={1}
                         pagination = {{clickable: true}}
@@ -496,7 +495,7 @@ export function Noticias2(){
                         Loja.map((prod) => (
                             <SwiperSlide className=''>
                                 <div key={prod.id} className='w-full flex justify-center bg-green-50'>
-                                    <img src={prod.img} alt=""></img>
+                                    <img src={prod.img} alt="" className=''></img>
                                 </div>
 
                                 <div className='flex- flex-col'>
@@ -520,11 +519,38 @@ export function Noticias2(){
                         ))
                     }
                 </Swiper>
+                ) : (
+                    <div className='flex gap-4 h-[750px] w-[650px] lg:w-[850px] xl:w-[1024px]'>
+                        {
+                        Loja.map((prod) => (
+                                <div key={prod.id}>
+                                    <div className='w-full flex
+                                    justify-center bg-green-50'>
+                                        <img src={prod.img} alt=""></img>
+                                    </div>
+                                    <div className='flex- flex-col'>
+                                        <h1 className='text-xl font-semibold mt-2'>{prod.titulo}</h1>
+                                        <strong className='text-green-800 text-2xl'>
+                                            {prod.preco.toLocaleString("pt-BR", {style: "currency",
+                                            currency: "BRL"
+                                            })}
+                                        </strong>
+                                        <div className='w-full flex justify-center items-center my-2'>
+                                            <div className='w-[100%] bg-green-500 rounded text-center text-white h-8 flex justify-center items-center cursor-pointer'>
+                                                <a href={prod.link} target='_blank'>{prod.button}</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                        ))
+                    }
+                            
+                    </div>
+                )
+                }
             </section>
-
-
-            
-            
+ 
         </div>
     )
 }

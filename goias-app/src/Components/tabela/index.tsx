@@ -183,7 +183,7 @@ return (
       </tbody>
     </table>
     ) : (
-        <table className=" w-[100px] text-left border-collapse border bg-white border-green-900">
+        <table className=" w-[100px] text-left border-collapse border bg-white border-green-900 lg:w-[850px] xl:w-[1024px]">
       <thead>
         <tr className="text-green-950 font-bold text-lg ">
           <th className="px-4 border-green-900 py-2">CLASSIFICAÇÃO</th>

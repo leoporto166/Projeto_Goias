@@ -47,8 +47,12 @@ export function Header(){
 
     useEffect(() => {
 
-      const unsub = onAuthStateChanged(auth, () => {
-        setLogado(true)
+      const unsub = onAuthStateChanged(auth, (user) => {
+        if(user){
+          setLogado(true)
+        } else {
+          setLogado(false)
+        }
           
       })
 
@@ -60,7 +64,6 @@ export function Header(){
      async function handleLogOut(){
       signOut(auth)
       setLogado(false)
-
      }
 
 
@@ -245,7 +248,7 @@ export function Header(){
                       >
                           <button onClick={handleLogOut} className="signin-btn cursor-pointer"><BiLogOut size={26} /></button>
                       </div>
-                    ): (
+                    ) : (
                       <div className="login">
                           <Link to= {"/Projeto_Goias/Cadastro"} className="signin-btn cursor-pointer bg-green-600 text-white p-2 rounded-xl">Sign In</Link>
                       </div>
