@@ -23,6 +23,8 @@ import { Tabela } from '../tabela';
 import CamisaLinha from "../../Assets/CamisaGoias-2025-2.jpg"
 import CamisaGOL from "../../Assets/camisaGoiasGOL2025.jpg"
 
+import Fundo1 from "../../Assets/FundoTitulos2.png"
+
 
 interface PartidasProps{
   logo1: string;
@@ -59,6 +61,8 @@ interface LojaProps{
     link: string;
     id: number;
 }
+
+
 
 export function Noticias2(){
     
@@ -474,7 +478,7 @@ export function Noticias2(){
                 modules={[Navigation, Pagination, Autoplay]}
                         slidesPerView={1}
                         pagination = {{clickable: true}}
-                        className="w-[380px] h-[700px] sm:h-[750px] sm:w-[650px] relative mb-10"
+                        className="w-[380px] h-[700px] sm:h-[750px] sm:w-[650px] relative"
                         >
                         <style>
                         {`
@@ -549,6 +553,39 @@ export function Noticias2(){
                     </div>
                 )
                 }
+            </section>
+
+            <section className='flex justify-center items-center flex-col w-full mt-[-30px]'>
+                <div className='w-[380px] flex gap-2 items-center sm:w-[650px] lg:w-[850px] xl:w-[1024px] '>
+                    <h1 className='text-xl font-bold py-2'>CLUBE</h1>
+                    <div className='w-[1px] h-[25px] bg-green-400'></div>
+                    <div className='font-light text-[15px]'><a href='#' target='_blank'>Acessar Página</a></div>
+                </div>
+
+                <div className='w-[380px] flex flex-col lg:flex-row gap-2 items-center sm:w-[650px] lg:w-[850px] xl:w-[1024px]'>
+
+                    <div className=' flex flex-col justify-center items-center gap-2 shadow'>
+                        <img src={Fundo1} className=''></img>
+                        <h1 className='text-xl'>TITULOS</h1>
+                        <p className='text-[15px] mb-2'>Saiba mais sobre a vitoriosa caminhada do GOIÁS</p>
+                        <div className='bg-green-500 text-white py-1 mb-4 rounded w-[120px] text-center cursor-pointer hover:bg-white hover:text-green-500 border border-green-500 transition duration-500'>
+                            Descubra
+                        </div>
+                        
+                    </div>
+
+                    <div className=' flex flex-col justify-center items-center gap-2 shadow'>
+                        <img src={Fundo1} className=''></img>
+                        <h1 className='text-xl'>TITULOS</h1>
+                        <p className='text-[15px] mb-2'>Saiba mais sobre a vitoriosa caminhada do GOIÁS</p>
+                        <div className='bg-green-500 text-white py-1 mb-4 rounded w-[120px] text-center cursor-pointer hover:bg-white hover:text-green-500 border border-green-500 transition duration-500'>
+                            Descubra
+                        </div>
+                        
+                    </div>
+
+                </div>
+
             </section>
  
         </div>
