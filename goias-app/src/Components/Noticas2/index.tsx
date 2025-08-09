@@ -60,6 +60,7 @@ interface LojaProps{
     img: string;
     preco: number; 
     button: string;
+    link: string;
     id: number;
 }
 
@@ -116,10 +117,10 @@ export function Noticias2(){
 
     const Loja: LojaProps[] =[
         {
-            titulo: "Camisa Linha 01 Masculina - 2025", img: CamisaLinha, preco: 399.99, button: "Comprar", id:1
+            titulo: "Camisa Linha 01 Masculina - 2025", img: CamisaLinha, preco: 399.99, button: "Comprar", link: "", id:1
         },
         {
-            titulo: "Camisa Goleiro 01 Maculina - 2025", img: CamisaGOL, preco: 399.99, button: "Comprar", id:2
+            titulo: "Camisa Goleiro 01 Maculina - 2025", img: CamisaGOL, preco: 399.99, button: "Comprar", link: "", id:2
         },
     ]
 
@@ -462,16 +463,39 @@ export function Noticias2(){
 
 
 
-            <section className='flex justify-center items-center flex-row w-full'>
+            <section className='flex justify-center items-center flex-col w-full'>
+
+                <div className='w-[380px] flex gap-2 items-center sm:w-[650px] '>
+                    <h1 className='text-xl font-bold py-2'>GOIÁS STORE</h1>
+                    <div className='w-[1px] h-[25px] bg-green-400'></div>
+                    <div className='font-light text-[15px]'><a href='#' target='_blank'>Acessar Loja</a></div>
+                </div>
+
                 <Swiper
                 modules={[Navigation, Pagination, Autoplay]}
                         slidesPerView={1}
                         pagination = {{clickable: true}}
-                        className="w-[380px] h-[700px] relative mb-10">
+                        className="w-[380px] h-[700px] sm:h-[750px] sm:w-[650px] relative mb-10"
+                        >
+                        <style>
+                        {`
+                        .swiper-pagination {
+                            margin-bottom: 2rem;
+                        }
+            
+                        .swiper-pagination-bullet {
+                            background-color: #0f0f0f0f !important; /* azul (Tailwind blue-500) */
+                            opacity: 1;
+                            }
+                            .swiper-pagination-bullet-active {
+                            background-color: #000F0F !important; /* verde (Tailwind green-500) */
+                            }
+                        `}
+                    </style>
                     {
                         Loja.map((prod) => (
-                            <SwiperSlide>
-                                <div key={prod.id} className='w-[380px]'>
+                            <SwiperSlide className=''>
+                                <div key={prod.id} className='w-full flex justify-center bg-green-50'>
                                     <img src={prod.img} alt=""></img>
                                 </div>
 
@@ -483,6 +507,12 @@ export function Noticias2(){
                                         currency: "BRL"
                                         })}
                                     </strong>
+
+                                    <div className='w-full flex justify-center items-center my-2'>
+                                        <div className='w-[100%] bg-green-500 rounded text-center text-white h-8 flex justify-center items-center cursor-pointer'>
+                                            <a href={prod.link} target='_blank'>{prod.button}</a>
+                                        </div>
+                                    </div>
 
                                 </div>
 
