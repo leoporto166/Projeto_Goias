@@ -24,6 +24,7 @@ import CamisaLinha from "../../Assets/CamisaGoias-2025-2.jpg"
 import CamisaGOL from "../../Assets/camisaGoiasGOL2025.jpg"
 
 import Fundo1 from "../../Assets/FundoTitulos2.png"
+import Fundo2 from "../../Assets/FundoLendas.png"
 
 
 interface PartidasProps{
@@ -575,7 +576,7 @@ export function Noticias2(){
                     </div>
 
                     <div className=' flex flex-col justify-center items-center gap-2 shadow'>
-                        <img src={Fundo1} className=''></img>
+                        <img src={Fundo2} className=''></img>
                         <h1 className='text-xl'>TITULOS</h1>
                         <p className='text-[15px] mb-2'>Saiba mais sobre a vitoriosa caminhada do GOIÁS</p>
                         <div className='bg-green-500 text-white py-1 mb-4 rounded w-[120px] text-center cursor-pointer hover:bg-white hover:text-green-500 border border-green-500 transition duration-500'>
@@ -587,6 +588,7 @@ export function Noticias2(){
                 </div>
 
             </section>
+
  
         </div>
     )
