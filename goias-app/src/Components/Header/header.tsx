@@ -13,7 +13,7 @@ import { BiLogOut} from "react-icons/bi"
 import { onAuthStateChanged } from "firebase/auth";
 import { signOut } from "firebase/auth";
 
-import { FaSadCry, FaTimes } from "react-icons/fa";
+import { FaTimes } from "react-icons/fa";
 import { AiOutlineDown } from "react-icons/ai";
 import { AiOutlineUp } from "react-icons/ai";
 
