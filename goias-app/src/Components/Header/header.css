@@ -835,19 +835,34 @@
       flex-direction: row;
       align-items: center;
       justify-content: center;
-      background-color: #0118167a;
-      transform: translateY(0);
+      transform: translateY();
       transition: transform 0.3s ease;
       z-index: 9;
       pointer-events: none;
       
     }
 
+    .fundo{
+      background-color: #0118167a;
+      width: 100%;
+      height: 20vh; /* ou 100vh se quiser cobrir a tela inteira */
+      position: fixed; /* ou absolute se for relativo a um container */
+      top: 0;
+      left: 0;
+      z-index: 9; /* para ficar acima do conteúdo */
+      transform: translateY(120px);
+      opacity: 1;
+    }
+
+    .fundo-des{
+      opacity: 0;
+    }
+
     .nav-list li {
       display: flex;
       opacity: 0;
       margin-top: 10px;
-      transform: translateY(0);
+      transform: translateY();
       font-size: 15px;
       color: white;
 
@@ -930,6 +945,7 @@
       pointer-events: auto;
       height: 50vh;
       width: full;
+      background-color: #0118167a;
     }
 
     menu.active{
@@ -938,16 +954,19 @@
       display: block;
       pointer-events: auto;
       height: 50vh;
+      background-color: #0118167a;
     }
 
     @keyframes navLinkFade {
       from {
         opacity: 0;
         transform: translateY(-50px);
+
       }
       to {
         opacity: 1;
         transform: translateY(0);
+        
       }
     }
 }
@@ -955,7 +974,6 @@
 @media (max-width: 1299px){
 
     .nav-list {
-      position: fixed;
       display: flex;
       top: 0;
       width: 0;

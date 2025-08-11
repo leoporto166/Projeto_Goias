@@ -13,7 +13,7 @@ import { BiLogOut} from "react-icons/bi"
 import { onAuthStateChanged } from "firebase/auth";
 import { signOut } from "firebase/auth";
 
-import { FaTimes } from "react-icons/fa";
+import { FaSadCry, FaTimes } from "react-icons/fa";
 import { AiOutlineDown } from "react-icons/ai";
 import { AiOutlineUp } from "react-icons/ai";
 
@@ -112,9 +112,12 @@ export function Header(){
     }
 
   const toggleMenu = () => {
-    setMenuActive(!menuActive);
-    
+    setMenuActive(false);
     };
+
+  const active = () => {
+    setMenuActive(true)
+  }
 
 
     useEffect(() => {
@@ -138,7 +141,7 @@ export function Header(){
               <div className="flex gap-6 h-12/12 items-end mb-8 w-full relative ml-4 text-lg font-bold ">
                 <div
                 className={` absolute start-0 flex gap-6 text-gray-500`}
-                onClick={toggleMenu}
+                onClick={active}
               >
                 {header.map((txt, index) => (
                   <div
@@ -153,13 +156,15 @@ export function Header(){
                   
                 ))}
 
-                {selectedIndex !== -1 ? (
+                {menuActive ? (
                       <FaTimes
                       className="cursor-pointer mt-1 text-white"
                       size={20}
-                      onClick={() => {setSelectedIndex(-1)
-                        setMenuActive(false)
-                      } }></FaTimes>
+                      onClick={() => {
+                        setSelectedIndex(-1);
+                        toggleMenu()
+                      }}
+                    />
                       ) : (
                         <></>
                       )
@@ -186,6 +191,10 @@ export function Header(){
               </div>
         
           </header>
+
+          <div className={`${menuActive === true ? "fundo" : "fundo-des"}`}>
+
+          </div>
 
               {selectedIndex === 0 && (
                       <ul className={`nav-list ${selectedIndex === 0 ? "zero" : ""}`}>
