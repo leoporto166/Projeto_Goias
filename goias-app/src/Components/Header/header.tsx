@@ -160,9 +160,10 @@ export function Header(){
                       <FaTimes
                       className="cursor-pointer mt-1 text-white"
                       size={20}
-                      onClick={() => {
+                      onClick={(e) => {
+                        e.stopPropagation();  // <- PARA A BORBULHA DO EVENTO AQUI
                         setSelectedIndex(-1);
-                        toggleMenu()
+                        toggleMenu();
                       }}
                     />
                       ) : (
