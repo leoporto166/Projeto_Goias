@@ -768,12 +768,12 @@ export function Noticias2(){
                     </div>
                 </Link>
 
-                <div className='w-full flex justify-center items-center mt-20'>
+                <div className='w-full flex justify-center items-center mt-20 '>
                         <div className='w-11/12 text-white flex flex-col justify-center items-center mt-4'>
 
                             <h1 className='text-xl'>REDES DO VERDÃO</h1>
 
-                            <div className='grid grid-cols-3 gap-2 my-2'>
+                            <div className='grid grid-cols-3 gap-2 mt-2 mb-10'>
 
                                 <a href="https://www.youtube.com/@TVGoias" aria-label="YouTube" target='_blank'>
                                 <FaYoutube size={40}/>
