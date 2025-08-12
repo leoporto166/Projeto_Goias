@@ -22,31 +22,44 @@ import { useEffect, useState } from 'react';
 import { Tabela } from '../tabela';
 import CamisaLinha from "../../Assets/CamisaGoias-2025-2.jpg"
 import CamisaGOL from "../../Assets/camisaGoiasGOL2025.jpg"
+import socio2 from "../../Assets/banner2025_socio.jpg"
+
 
 import Fundo1 from "../../Assets/FundoTitulos2.png"
-//import Fundo2 from "../../Assets/FundoLendas.png"
+import Fundo2 from "../../Assets/FundoLendas2.png"
 
-import p1 from "../../Assets/p.viva.png"
-import p2 from "../../Assets/p.unimed.png"
-import p3 from "../../Assets/p.5G.jpg"
-import p4 from "../../Assets/p.Vedacil.jpg"
-import p5 from "../../Assets/p.fiber.png"
-import p6 from "../../Assets/p.Frutos.png"
-import p7 from "../../Assets/p.cristal.webp"
-import p8 from "../../Assets/p.Dtc.jpeg"
-import p9 from "../../Assets/p.Farias.png"
-import p10 from "../../Assets/p.Josidiyh.png"
-import p11 from "../../Assets/p.La.png"
-import p12 from "../../Assets/p.Mica.png"
-import p13 from "../../Assets/p.vulcano.jpg"
-import p14 from "../../Assets/p.Italac.jpeg"
-import p15 from "../../Assets/p.Leinertex.png"
-import p16 from "../../Assets/p.Colombina.png"
-import p17 from "../../Assets/p.Wrap.png"
-import p18 from "../../Assets/p.academy.jpg"
-import p19 from "../../Assets/p.bambu.jpeg"
-import p20 from "../../Assets/p.desprag.jpeg"
-import p21 from "../../Assets/p.multi.jpeg"
+import p1 from "../../Assets/p1.jpeg"
+import p2 from "../../Assets/p2.png"
+import p3 from "../../Assets/p3.png"
+import p4 from "../../Assets/p4.png"
+import p5 from "../../Assets/p5.png"
+import p6 from "../../Assets/p6.jpeg"
+import p7 from "../../Assets/p7.jpeg"
+import p8 from "../../Assets/p8.jpeg"
+import p9 from "../../Assets/p9.jpeg"
+import p10 from "../../Assets/p10.jpeg"
+import p11 from "../../Assets/p11.jpg"
+import p12 from "../../Assets/p12.jpg"
+import p13 from "../../Assets/p13.png"
+import p14 from "../../Assets/p14.jpeg"
+import p15 from "../../Assets/p15.png"
+import p16 from "../../Assets/p16.jpeg"
+import p17 from "../../Assets/p17.jpeg"
+import p18 from "../../Assets/p18.png"
+import p19 from "../../Assets/p19.png"
+import p20 from "../../Assets/p20.jpg"
+import p21 from "../../Assets/p21.png"
+import p22 from "../../Assets/p22.png"
+import p23 from "../../Assets/p23.png"
+import p24 from "../../Assets/p24.png"
+import p25 from "../../Assets/p25.png"
+import p26 from "../../Assets/p26.png"
+
+import { FaYoutube, FaInstagram, FaFacebook, FaLinkedin } from "react-icons/fa";
+import { SiTiktok } from "react-icons/si";
+import { FaTwitter } from "react-icons/fa";
+import { Link } from 'react-router-dom';
+
 
 interface Patrocionios{
     img: string;
@@ -175,6 +188,12 @@ export function Noticias2(){
             {img: p19},
             {img: p20},
             {img: p21},
+            {img: p22},
+            {img: p23},
+            {img: p24},
+            {img: p25},
+            {img: p26},
+
         ]
 
 
@@ -563,7 +582,7 @@ export function Noticias2(){
                                     </strong>
 
                                     <div className='w-full flex justify-center items-center my-2'>
-                                        <div className='w-[100%] bg-green-500 rounded text-center text-white h-8 flex justify-center items-center cursor-pointer'>
+                                        <div className='w-[100%] bg-green-700 rounded text-center text-white h-8 flex justify-center items-center cursor-pointer'>
                                             <a href={prod.link} target='_blank'>{prod.button}</a>
                                         </div>
                                     </div>
@@ -591,7 +610,7 @@ export function Noticias2(){
                                             })}
                                         </strong>
                                         <div className='w-full flex justify-center items-center'>
-                                            <div className='w-[100%] bg-green-500 rounded text-center text-white h-8 flex justify-center items-center cursor-pointer'>
+                                            <div className='w-[100%] bg-green-700 rounded text-center text-white h-8 flex justify-center items-center cursor-pointer'>
                                                 <a href={prod.link} target='_blank'>{prod.button}</a>
                                             </div>
                                         </div>
@@ -606,7 +625,8 @@ export function Noticias2(){
                 }
             </section>
 
-            <section className='flex justify-center items-center flex-col w-full mt-[-30px]'>
+            <section className='flex justify-center items-center flex-col w-full mt-[-30px] mb-20'>
+
                 <div className='w-[380px] flex gap-2 items-center sm:w-[650px] lg:w-[850px] xl:w-[1024px] '>
                     <h1 className='text-xl font-bold py-2'>CLUBE</h1>
                     <div className='w-[1px] h-[25px] bg-green-400'></div>
@@ -617,19 +637,19 @@ export function Noticias2(){
 
                     <div className=' flex flex-col justify-center items-center gap-2 shadow'>
                         <img src={Fundo1} className=''></img>
-                        <h1 className='text-xl'>TITULOS</h1>
+                        <h1 className='text-xl font-semibold'>TÍTULOS</h1>
                         <p className='text-[15px] mb-2'>Saiba mais sobre a vitoriosa caminhada do GOIÁS</p>
-                        <div className='bg-green-500 text-white py-1 mb-4 rounded w-[120px] text-center cursor-pointer hover:bg-white hover:text-green-500 border border-green-500 transition duration-500'>
+                        <div className='bg-green-700 text-white py-1 mb-4 rounded w-[120px] text-center cursor-pointer hover:bg-white hover:text-green-500 border border-green-500 transition duration-500'>
                             Descubra
                         </div>
                         
                     </div>
 
                     <div className=' flex flex-col justify-center items-center gap-2 shadow'>
-                        <img src={Fundo1} className=''></img>
-                        <h1 className='text-xl'>LENDAS</h1>
+                        <img src={Fundo2} className=''></img>
+                        <h1 className='text-xl font-semibold'>LENDAS</h1>
                         <p className='text-[15px] mb-2'>Saiba mais sobre os ídolos do GOIÁS</p>
-                        <div className='bg-green-500 text-white py-1 mb-4 rounded w-[120px] text-center cursor-pointer hover:bg-white hover:text-green-500 border border-green-500 transition duration-500'>
+                        <div className='bg-green-700 text-white py-1 mb-4 rounded w-[120px] text-center cursor-pointer hover:bg-white hover:text-green-500 border border-green-500 transition duration-500'>
                             Descubra
                         </div>
                         
@@ -637,84 +657,161 @@ export function Noticias2(){
 
                 </div>
 
+                <div className='w-[380px] flex flex-col gap-2 items-center sm:w-[650px] lg:w-[850px] xl:w-[1024px] mt-2 shadow'>
+                    <img src={socio2} className=''></img>
+                        <h1 className='text-xl font-semibold'>Sócios</h1>
+                        <p className='text-[15px] mb-2'>Saiba mais sobre o programa de sócios</p>
+                        <div className='bg-green-700 text-white py-1 mb-4 rounded w-[120px] text-center cursor-pointer hover:bg-white hover:text-green-500 border border-green-500 transition duration-500'>
+                            Descubra
+                        </div>
+                </div>
+
             </section>
 
-            <footer className='mt-10 bg-black relative w-full'>
-                <div className='flex items-center justify-center relative z-50 '>
-                    <img src={logo} alt="" className='w-[150px] absolute' />
-                    
-                </div>
-
-                
-
-                <div className='w-full flex flex-col justify-center items-center'>
-                    <div className='flex flex-wrap w-11/12 justify-center items-center gap-2 mt-20'>
-                        {
-                            patrocinios.slice(0, 7).map((pat) => (
-                                <div>
-                                    <img src={pat.img} alt=""  className='w-[100px]'/>
-                    
-                                </div>
-                    
-                            ))
-                    
-                        }
-                        <div className='w-full h-[1px] bg-green-50 mt-1'>
-                        </div>
-
-                        {
-                            patrocinios.slice(7, 13).map((pat) => (
-                                <div>
-                                    <img src={pat.img} alt=""  className='w-[100px]'/>
-                    
-                                </div>
-                    
-                            ))
-                    
-                        }
-
-                        <div className='w-full h-[1px] bg-green-50 mt-1'>
-                        </div>
-
-                        {
-                            patrocinios.slice(13, 17).map((pat) => (
-                                <div>
-                                    <img src={pat.img} alt=""  className='w-[100px]'/>
-                    
-                                </div>
-                    
-                            ))
-                    
-                        }
-
-                        <div className='w-full h-[1px] bg-green-50 mt-1'>
-                        </div>
-
-                        {
-                            patrocinios.slice(17, 21).map((pat) => (
-                                <div>
-                                    <img src={pat.img} alt=""  className='w-[100px]'/>
-                    
-                                </div>
-                    
-                            ))
-                    
-                        }
-
-                        <div className='w-full h-[1px] bg-green-50 mt-1'>
-                        </div>
-                    </div>
-                </div>
-
+            <div>
                 <div className='w-full flex justify-center items-center'>
-                    <div className='w-11/12 text-white flex flex-col justify-center items-center mt-4'>
-                        <h1 className='text-xl'>REDES DO VERDÃO</h1>
-
-                        <div>
-                            
+                    <div className='flex justify-center items-center w-11/12'>
+                            <div className='w-full h-[1px] bg-green-800'>
+                            </div>
+                            <h1 className='font-bold text-xl px-2 sm:text-2xl'>Patrocinadores</h1>
+                            <div className='w-full h-[1px] bg-green-800'>
+                            </div>
+                        </div>
+                </div>
+                <div className=' mt-[-50px] w-full flex flex-col justify-center items-center'>
+                    <div className='w-full flex flex-col justify-center items-center'>
+                        <div className='flex flex-wrap w-11/12 justify-center items-center gap-2 mt-20'>
+                            {
+                                patrocinios.slice(0, 7).map((pat) => (
+                                    <div>
+                                        <img src={pat.img} alt=""  className='w-[100px]'/>
+                
+                                    </div>
+                
+                                ))
+                
+                            }
+                            <div className='w-full h-[1px] bg-green-800 mt-1'>
+                            </div>
+                            {
+                                patrocinios.slice(7, 14).map((pat) => (
+                                    <div>
+                                        <img src={pat.img} alt=""  className='w-[100px]'/>
+                
+                                    </div>
+                
+                                ))
+                
+                            }
+                            <div className='w-full h-[1px] bg-green-800 mt-1'>
+                            </div>
+                            {
+                                patrocinios.slice(14, 19).map((pat) => (
+                                    <div>
+                                        <img src={pat.img} alt=""  className='w-[100px]'/>
+                
+                                    </div>
+                
+                                ))
+                
+                            }
+                            <div className='w-full h-[1px] bg-green-800 mt-1'>
+                            </div>
+                            {
+                                patrocinios.slice(19, 23).map((pat) => (
+                                    <div>
+                                        <img src={pat.img} alt=""  className='w-[100px]'/>
+                
+                                    </div>
+                
+                                ))
+                
+                            }
+                            <div className='w-full h-[1px] bg-green-800 mt-1'>
+                            </div>
+                            {
+                                patrocinios.slice(23, 25).map((pat) => (
+                                    <div>
+                                        <img src={pat.img} alt=""  className='w-[100px]'/>
+                
+                                    </div>
+                
+                                ))
+                
+                            }
+                            <div className='w-full h-[1px] bg-green-800 mt-1'>
+                            </div>
+                            {
+                                patrocinios.slice(25).map((pat) => (
+                                    <div>
+                                        <img src={pat.img} alt=""  className='w-[40px]'/>
+                
+                                    </div>
+                
+                                ))
+                
+                            }
+                            <div className='w-full h-[1px] bg-green-800 mt-1'>
+                            </div>
                         </div>
                     </div>
+                    
                 </div>
+            </div>
+
+            <footer className='relative bg-black'>
+                <Link to={"/Projeto_Goias/"}>
+                    <div className='w-full flex justify-center items-center mt-40'>
+                        
+                        <img src={logo} alt="Escudo Goias" className='absolute w-[150px]'></img>
+                        
+                    </div>
+                </Link>
+
+                <div className='w-full flex justify-center items-center mt-20'>
+                        <div className='w-11/12 text-white flex flex-col justify-center items-center mt-4'>
+
+                            <h1 className='text-xl'>REDES DO VERDÃO</h1>
+
+                            <div className='grid grid-cols-3 gap-2 my-2'>
+
+                                <a href="https://www.youtube.com/@TVGoias" aria-label="YouTube" target='_blank'>
+                                <FaYoutube size={40}/>
+                                </a>
+
+                                <a href="https://www.tiktok.com/@goiasec" aria-label="TikTok"
+                                target='_blank'>
+                                <SiTiktok size={40}/>
+                                </a>
+
+                                <a href="https://x.com/goiasoficial" aria-label="X (Twitter)"
+                                target='_blank'>
+                                <FaTwitter size={40}/>
+                                </a>
+
+                                <a href="https://www.instagram.com/goiasoficial/" aria-label="Instagram"
+                                target='_blank'>
+                                <FaInstagram size={40}/>
+                                </a>
+
+                                <a href="https://web.facebook.com/goiasoficial?locale=pt_BR" aria-label="facebook"
+                                target='_blank'>
+                                <FaFacebook size={40}/>
+                                </a>
+
+                                <a href="https://www.linkedin.com/company/goi%C3%A1s-esporte-clube/posts/?feedView=all" aria-label="linkedin"
+                                target='_blank'>
+                                <FaLinkedin size={40}/>
+                                </a>
+
+
+
+
+                            </div>
+
+                        </div>
+
+                    </div>
             </footer>
 
  
