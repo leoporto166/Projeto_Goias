@@ -24,7 +24,33 @@ import CamisaLinha from "../../Assets/CamisaGoias-2025-2.jpg"
 import CamisaGOL from "../../Assets/camisaGoiasGOL2025.jpg"
 
 import Fundo1 from "../../Assets/FundoTitulos2.png"
-import Fundo2 from "../../Assets/FundoLendas.png"
+//import Fundo2 from "../../Assets/FundoLendas.png"
+
+import p1 from "../../Assets/p.viva.png"
+import p2 from "../../Assets/p.unimed.png"
+import p3 from "../../Assets/p.5G.jpg"
+import p4 from "../../Assets/p.Vedacil.jpg"
+import p5 from "../../Assets/p.fiber.png"
+import p6 from "../../Assets/p.Frutos.png"
+import p7 from "../../Assets/p.cristal.webp"
+import p8 from "../../Assets/p.Dtc.jpeg"
+import p9 from "../../Assets/p.Farias.png"
+import p10 from "../../Assets/p.Josidiyh.png"
+import p11 from "../../Assets/p.La.png"
+import p12 from "../../Assets/p.Mica.png"
+import p13 from "../../Assets/p.vulcano.jpg"
+import p14 from "../../Assets/p.Italac.jpeg"
+import p15 from "../../Assets/p.Leinertex.png"
+import p16 from "../../Assets/p.Colombina.png"
+import p17 from "../../Assets/p.Wrap.png"
+import p18 from "../../Assets/p.academy.jpg"
+import p19 from "../../Assets/p.bambu.jpeg"
+import p20 from "../../Assets/p.desprag.jpeg"
+import p21 from "../../Assets/p.multi.jpeg"
+
+interface Patrocionios{
+    img: string;
+}
 
 
 interface PartidasProps{
@@ -126,6 +152,30 @@ export function Noticias2(){
     {logo1: chape, logo2: logo, titulo: "Campeonato brasileiro serie B", rodada: "14º rodada", data: "Domingo, Junho 29, 19h00", estadio: "Arena Condá"},
 
   ]
+
+  const patrocinios: Patrocionios[] =[
+            {img: p1},
+            {img: p2},
+            {img: p3},
+            {img: p4},
+            {img: p5},
+            {img: p6},
+            {img: p7},
+            {img: p8},
+            {img: p9},
+            {img: p10},
+            {img: p11},
+            {img: p12},
+            {img: p13},
+            {img: p14},
+            {img: p15},
+            {img: p16},
+            {img: p17},
+            {img: p18},
+            {img: p19},
+            {img: p20},
+            {img: p21},
+        ]
 
 
 
@@ -525,7 +575,7 @@ export function Noticias2(){
                     }
                 </Swiper>
                 ) : (
-                    <div className='flex gap-4 h-[750px] w-[650px] lg:w-[850px] xl:w-[1024px]'>
+                    <div className='flex gap-4 h-[750px] w-[650px] lg:w-[850px] xl:w-[1024px] mb-[-150px] lg:mb-[-15px]' >
                         {
                         Loja.map((prod) => (
                                 <div key={prod.id}>
@@ -540,7 +590,7 @@ export function Noticias2(){
                                             currency: "BRL"
                                             })}
                                         </strong>
-                                        <div className='w-full flex justify-center items-center my-2'>
+                                        <div className='w-full flex justify-center items-center'>
                                             <div className='w-[100%] bg-green-500 rounded text-center text-white h-8 flex justify-center items-center cursor-pointer'>
                                                 <a href={prod.link} target='_blank'>{prod.button}</a>
                                             </div>
@@ -576,9 +626,9 @@ export function Noticias2(){
                     </div>
 
                     <div className=' flex flex-col justify-center items-center gap-2 shadow'>
-                        <img src={Fundo2} className=''></img>
-                        <h1 className='text-xl'>TITULOS</h1>
-                        <p className='text-[15px] mb-2'>Saiba mais sobre a vitoriosa caminhada do GOIÁS</p>
+                        <img src={Fundo1} className=''></img>
+                        <h1 className='text-xl'>LENDAS</h1>
+                        <p className='text-[15px] mb-2'>Saiba mais sobre os ídolos do GOIÁS</p>
                         <div className='bg-green-500 text-white py-1 mb-4 rounded w-[120px] text-center cursor-pointer hover:bg-white hover:text-green-500 border border-green-500 transition duration-500'>
                             Descubra
                         </div>
@@ -588,6 +638,84 @@ export function Noticias2(){
                 </div>
 
             </section>
+
+            <footer className='mt-10 bg-black relative w-full'>
+                <div className='flex items-center justify-center relative z-50 '>
+                    <img src={logo} alt="" className='w-[150px] absolute' />
+                    
+                </div>
+
+                
+
+                <div className='w-full flex flex-col justify-center items-center'>
+                    <div className='flex flex-wrap w-11/12 justify-center items-center gap-2 mt-20'>
+                        {
+                            patrocinios.slice(0, 7).map((pat) => (
+                                <div>
+                                    <img src={pat.img} alt=""  className='w-[100px]'/>
+                    
+                                </div>
+                    
+                            ))
+                    
+                        }
+                        <div className='w-full h-[1px] bg-green-50 mt-1'>
+                        </div>
+
+                        {
+                            patrocinios.slice(7, 13).map((pat) => (
+                                <div>
+                                    <img src={pat.img} alt=""  className='w-[100px]'/>
+                    
+                                </div>
+                    
+                            ))
+                    
+                        }
+
+                        <div className='w-full h-[1px] bg-green-50 mt-1'>
+                        </div>
+
+                        {
+                            patrocinios.slice(13, 17).map((pat) => (
+                                <div>
+                                    <img src={pat.img} alt=""  className='w-[100px]'/>
+                    
+                                </div>
+                    
+                            ))
+                    
+                        }
+
+                        <div className='w-full h-[1px] bg-green-50 mt-1'>
+                        </div>
+
+                        {
+                            patrocinios.slice(17, 21).map((pat) => (
+                                <div>
+                                    <img src={pat.img} alt=""  className='w-[100px]'/>
+                    
+                                </div>
+                    
+                            ))
+                    
+                        }
+
+                        <div className='w-full h-[1px] bg-green-50 mt-1'>
+                        </div>
+                    </div>
+                </div>
+
+                <div className='w-full flex justify-center items-center'>
+                    <div className='w-11/12 text-white flex flex-col justify-center items-center mt-4'>
+                        <h1 className='text-xl'>REDES DO VERDÃO</h1>
+
+                        <div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </footer>
 
  
         </div>
