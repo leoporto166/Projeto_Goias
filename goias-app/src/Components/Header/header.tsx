@@ -26,7 +26,7 @@ interface HeaderProps{
 export function Header(){
     const [menuActive, setMenuActive] = useState(false);
     const [menuPhoneActive, setMenuPhoneActive] = useState(false);
-    const [headersub, setHeader] = useState(false)
+    const [headersub, setHeaderSub] = useState(false)
     const [logado, setLogado] = useState(false)
     const [clickIndex, setClickIndex] = useState(-1)
 
@@ -107,8 +107,8 @@ export function Header(){
 
     const toggleMenuPhone = () => {
       setMenuPhoneActive(!menuPhoneActive);
-    setHeader(false);
-    setClickIndex(-1);
+      setHeaderSub(false);
+      setClickIndex(-1);
     }
 
   const toggleMenu = () => {
@@ -265,8 +265,11 @@ export function Header(){
                     )}
                   </div>
 
-                  <div  onClick={toggleMenuPhone} className={`end-0 cursor-pointer absolute px-5 mt-2`}>
-                    <div className={`${menuPhoneActive === true ? "line-um" : "line"} w-[30px] h-[1px] bg-white text-white `}></div>
+                  <div  onClick={
+                    toggleMenuPhone
+                  } className={`end-0 cursor-pointer absolute px-5 mt-2`}
+                  >
+                    <div className={`${menuPhoneActive === true ? "line-um" : "line"} w-[30px] h-[1px] bg-white text-white`}></div>
 
                     <div className={`${menuPhoneActive === true ? "line-dois" : "line"} w-[30px] h-[1px] bg-white text-white mt-2`}></div>
 
@@ -278,65 +281,62 @@ export function Header(){
                 {menuPhoneActive && (
 
                   
-                  <div className={`nav-list ${menuPhoneActive ? "active" : ""} absolute start-0 flex gap-6 text-white z-10`}>
+                  <div className={`nav-list ${menuPhoneActive ? "active" : ""} absolute start-0 flex gap-6 text-white z-10`}
+                  
+                  >
                     {header.map((txt, index) => (
                       <div
                         key={`menu-${index}`}
-                        onClick={() => {
-                          if (selectedIndex === index && header) {
-                            setHeader(false);
-                            setSelectedIndex(-1);
-                            setClickIndex(-1);
-                          } else {
-                            setSelectedIndex(index);
-                            setHeader(true);
-                            setClickIndex(index)
-                          }
-                        }}
+                        
                         className={`menu mt-1 w-full px-4 sm:px-2 cursor-pointer select-none ${selectedIndex === index ? "text-white" : ""}`}
                       >
 
                         {
                           clickIndex === index && headersub ? (
-                            <div className="w-11/12 sm:w-full h-[1px] bg-white pr-8 opacity-0"></div>
+                            <div className="w-12/12 sm:w-full h-[1px] bg-black pr-8 opacity-0"></div>
                           ) : (
-                            <div className="w-full h-[1px] bg-white pr-8 opacity-0"></div>
+                            <div className="w-12/12 h-[1px] bg-black pr-8 opacity-0"></div>
                           )
                         }
 
                         {
                           headersub ? (
-                            <div className="w-11/12 sm:w-full h-[1px] bg-white "></div>
+                            <div className="w-12/12 sm:w-full h-[1px] bg-white "></div>
                           ) : (
                            <div className="w-full h-[1px] bg-white pr-8"></div>
                            )
                         }
                         
 
-                        <div className="flex items-center justify-between py-2 w-full">
+                        <div className="flex items-center justify-between py-2 w-full"
+                        onClick={() => {
+                                    if (selectedIndex === index && header) {
+                                      setSelectedIndex(-1);
+                                      setClickIndex(-1);
+                                      setHeaderSub(false);
+                                    } else {
+                                      setSelectedIndex(index);
+                                      setClickIndex(index)
+                                      setHeaderSub(true);
+                                    }
+                                  }}
+                        
+                        >
                           {txt.txt}
                           
                               {
                                 clickIndex === index && headersub ? (
-                                <div className="text-white shrink-0 pr-8 sm:pr-0 opacity-0">
-                                    <AiOutlineUp />
+                                <div className="text-white shrink-0 pr-0 sm:pr-0"
+                                >
+                                    <AiOutlineUp 
+                                    />
                                 </div>
                               
                                 ) : (
-                                  <div className="text-white shrink-0 opacity-0">
-                                    <AiOutlineDown />
-                                </div>
-                                )
-                              }
-
-                              {
-                                headersub ? (
-                                  <div className="text-white shrink-0 pr-8 sm:pr-0">
-                                    <AiOutlineUp />
-                                </div>
-                                ) : (
-                                  <div className="text-white shrink-0">
-                                    <AiOutlineDown />
+                                  <div className="text-white shrink-0 ">
+                                    <AiOutlineDown 
+                                    
+                                    />
                                 </div>
                                 )
                               }
@@ -356,7 +356,7 @@ export function Header(){
 
                           {
                           headersub ? (
-                            <div className="w-11/12 sm:w-full h-[1px] bg-white  transition-all duration-100 pr-8"></div>
+                            <div className="w-12/12 sm:w-full h-[1px] bg-white  transition-all duration-100 pr-8"></div>
                           ) : (
                            <div className="w-full h-[1px] bg-white pr-8"></div>
                            )
@@ -372,9 +372,11 @@ export function Header(){
                         {selectedIndex === 0 && (
                           <ul className="nav zero">
                             {menuN.map((noticia, subIndex) => (
-                              <li key={`noticia-${subIndex}`}
-                              
-                              >{noticia.txt}</li>
+                              <a href={`/Projeto_Goias/${noticia.txt}`}>
+                                <li key={`noticia-${subIndex}`}
+                                
+                                >{noticia.txt}</li>
+                              </a>
                             ))}
                           </ul>
                         )}
@@ -382,7 +384,9 @@ export function Header(){
                         {selectedIndex === 1 && (
                           <ul className="nav um">
                             {menuE.map((esmeralda, subIndex) => (
-                              <li key={`esmeralda-${subIndex}`}>{esmeralda.txt}</li>
+                              <a href={`/Projeto_Goias/${esmeralda.txt}`}>
+                                <li key={`esmeralda-${subIndex}`}>{esmeralda.txt}</li>
+                              </a>
                             ))}
                           </ul>
                         )}
@@ -390,7 +394,9 @@ export function Header(){
                         {selectedIndex === 2 && (
                           <ul className="nav dois">
                             {menuL.map((loja, subIndex) => (
-                              <li key={`loja-${subIndex}`}>{loja.txt}</li>
+                              <a href={`/Projeto_Goias/${loja.txt}`}>
+                                <li key={`loja-${subIndex}`}>{loja.txt}</li>
+                              </a>
                             ))}
                           </ul>
                         )}
@@ -398,7 +404,9 @@ export function Header(){
                         {selectedIndex === 3 && (
                           <ul className="nav tres">
                             {menuC.map((clube, subIndex) => (
-                              <li key={`clube-${subIndex}`}>{clube.txt}</li>
+                              <a href={`/Projeto_Goias/${clube.txt}`}>
+                                <li key={`clube-${subIndex}`}>{clube.txt}</li>
+                              </a>
                             ))}
                           </ul>
                         )}
@@ -406,7 +414,9 @@ export function Header(){
                         {selectedIndex === 4 && (
                           <ul className="nav quatro">
                             {menuB.map((base, subIndex) => (
-                              <li key={`base-${subIndex}`}>{base.txt}</li>
+                              <a href={`/Projeto_Goias/${base.txt}`}>
+                                <li key={`base-${subIndex}`}>{base.txt}</li>
+                              </a>
                             ))}
                           </ul>
                         )}
@@ -414,7 +424,17 @@ export function Header(){
                         {selectedIndex === 5 && (
                           <ul className="nav cinco">
                             {menuEl.map((elenco, subIndex) => (
-                              <li key={`elenco-${subIndex}`}>{elenco.txt}</li>
+                              
+                                <li key={`elenco-${subIndex}`}>
+                                  <Link to={`/Projeto_Goias/${elenco.txt}`}
+                                  onClick={() => {
+                                  setMenuPhoneActive(false);
+                                  setHeaderSub(false);
+                                }}>
+                                    <h2>{elenco.txt}</h2>
+                                  </Link>
+                                  </li>
+                              
                             ))}
                           </ul>
                         )}
