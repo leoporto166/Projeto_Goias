@@ -288,7 +288,7 @@ export function Header(){
                       <div
                         key={`menu-${index}`}
                         
-                        className={`menu mt-1 w-full px-4 sm:px-2 cursor-pointer select-none ${selectedIndex === index ? "text-white" : ""}`}
+                        className={`menu mt-1 w-full px-4 sm:px-2 select-none ${selectedIndex === index ? "text-white" : ""}`}
                       >
 
                         {
@@ -308,7 +308,7 @@ export function Header(){
                         }
                         
 
-                        <div className="flex items-center justify-between py-2 w-full"
+                        <div className="flex items-center justify-between py-2 w-full cursor-pointer"
                         onClick={() => {
                                     if (selectedIndex === index && header) {
                                       setSelectedIndex(-1);
@@ -366,75 +366,114 @@ export function Header(){
                   </div>
                 )}
 
-                  <div>
+                  <div className="">
                     {headersub && (
-                      <div className="px-6 text-lg w-10/12">
+                      <div className="px-6 text-lg w-10/12 z-50 ">
+                        
                         {selectedIndex === 0 && (
-                          <ul className="nav zero">
+                          <ul className="nav zero  z-50">
                             {menuN.map((noticia, subIndex) => (
-                              <a href={`/Projeto_Goias/${noticia.txt}`}>
-                                <li key={`noticia-${subIndex}`}
-                                
-                                >{noticia.txt}</li>
-                              </a>
+                              <li
+                                key={`noticia-${subIndex}`}
+                                onClick={() => {
+                                  setMenuPhoneActive(false);
+                                  setHeaderSub(false);
+                                }}
+                              >
+                                <Link to={`/Projeto_Goias/${noticia.txt}`}>
+                                  <h2>{noticia.txt}</h2>
+                                </Link>
+                              </li>
                             ))}
                           </ul>
                         )}
 
                         {selectedIndex === 1 && (
-                          <ul className="nav um">
+                          <ul className="nav um  z-50">
                             {menuE.map((esmeralda, subIndex) => (
-                              <a href={`/Projeto_Goias/${esmeralda.txt}`}>
-                                <li key={`esmeralda-${subIndex}`}>{esmeralda.txt}</li>
-                              </a>
+                              <li
+                                key={`esmeralda-${subIndex}`}
+                                onClick={() => {
+                                  setMenuPhoneActive(false);
+                                  setHeaderSub(false);
+                                }}
+                              >
+                                <Link to={`/Projeto_Goias/${esmeralda.txt}`}>
+                                  <h2>{esmeralda.txt}</h2>
+                                </Link>
+                              </li>
                             ))}
                           </ul>
                         )}
 
                         {selectedIndex === 2 && (
-                          <ul className="nav dois">
+                          <ul className="nav dois relative z-50">
                             {menuL.map((loja, subIndex) => (
-                              <a href={`/Projeto_Goias/${loja.txt}`}>
-                                <li key={`loja-${subIndex}`}>{loja.txt}</li>
-                              </a>
+                              <li
+                                key={`loja-${subIndex}`}
+                                onClick={() => {
+                                  setMenuPhoneActive(false);
+                                  setHeaderSub(false);
+                                }}
+                              >
+                                <Link to={`/Projeto_Goias/${loja.txt}`}>
+                                  <h2>{loja.txt}</h2>
+                                </Link>
+                              </li>
                             ))}
                           </ul>
                         )}
 
                         {selectedIndex === 3 && (
-                          <ul className="nav tres">
+                          <ul className="nav tres relative z-50">
                             {menuC.map((clube, subIndex) => (
-                              <a href={`/Projeto_Goias/${clube.txt}`}>
-                                <li key={`clube-${subIndex}`}>{clube.txt}</li>
-                              </a>
+                              <li
+                                key={`clube-${subIndex}`}
+                                onClick={() => {
+                                  setMenuPhoneActive(false);
+                                  setHeaderSub(false);
+                                }}
+                              >
+                                <Link to={`/Projeto_Goias/${clube.txt}`}>
+                                  <h2>{clube.txt}</h2>
+                                </Link>
+                              </li>
                             ))}
                           </ul>
                         )}
 
                         {selectedIndex === 4 && (
-                          <ul className="nav quatro">
+                          <ul className="nav quatro relative z-50">
                             {menuB.map((base, subIndex) => (
-                              <a href={`/Projeto_Goias/${base.txt}`}>
-                                <li key={`base-${subIndex}`}>{base.txt}</li>
-                              </a>
+                              <li
+                                key={`base-${subIndex}`}
+                                onClick={() => {
+                                  setMenuPhoneActive(false);
+                                  setHeaderSub(false);
+                                }}
+                              >
+                                <Link to={`/Projeto_Goias/${base.txt}`}>
+                                  <h2>{base.txt}</h2>
+                                </Link>
+                              </li>
                             ))}
                           </ul>
                         )}
 
                         {selectedIndex === 5 && (
-                          <ul className="nav cinco">
+                          <ul className="nav cinco z-50">
                             {menuEl.map((elenco, subIndex) => (
-                              
-                                <li key={`elenco-${subIndex}`}>
-                                  <Link to={`/Projeto_Goias/${elenco.txt}`}
-                                  onClick={() => {
+                              <li
+                                key={`elenco-${subIndex}`}
+                                onClick={() => {
                                   setMenuPhoneActive(false);
                                   setHeaderSub(false);
-                                }}>
-                                    <h2>{elenco.txt}</h2>
-                                  </Link>
-                                  </li>
-                              
+                                }}
+                              >
+                                <Link to={`/Projeto_Goias/${elenco.txt}`}>
+                                  <h2>{elenco.txt}</h2>
+                                </Link>
+                              </li>
                             ))}
                           </ul>
                         )}
