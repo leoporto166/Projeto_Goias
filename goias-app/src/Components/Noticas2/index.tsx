@@ -16,6 +16,8 @@ import chape from "../../Assets/chape.png"
 import {MdOutlineArrowBackIos, MdOutlineArrowForwardIos } from "react-icons/md";
 
 import n1 from "../../Assets/Elenco goias.webp"
+import n2 from "../../Assets/NoticiaGoiXOpr.jpeg"
+import n3 from "../../Assets/NoticiaTorcida.jpeg"
 
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import { useEffect, useState } from 'react';
@@ -101,7 +103,7 @@ export function Noticias2(){
     const noticia2: NoticiasProps[] =[
         {img: n1, legenda: "Noticia Ofical: Treino realizado!", id:1, data: "06/08/25"},
         
-        {img: n1, legenda: "Noticia Ofical: Treino realizado!", id:2, data: "06/08/25"},
+        {img: n2, legenda: "Goiás vence o Operário em casa", id:2, data: "09/08/25"},
 
         {img: n1, legenda: "Noticia Ofical: Treino realizado!", id:3, data: "06/08/25"}
     ]

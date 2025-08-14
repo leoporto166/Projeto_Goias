@@ -7,6 +7,7 @@ import { ElencoTela } from "./pages/Elenco"
 import { DetalhesElenco } from "./pages/DetelhesElenco"
 import { Clube } from "./pages/Clube";
 import { RaizVerde } from "./pages/Raiz Verde";
+import { TodasNoticias } from "./pages/TodasNoticias";
 const router = createBrowserRouter([
     {
         path:"/Projeto_Goias",
@@ -41,6 +42,11 @@ const router = createBrowserRouter([
     {
         path: "/Projeto_Goias/Raiz Verde",
         element: <RaizVerde />
+    },
+
+    {
+        path: "/Projeto_Goias/Todas Noticias",
+        element: <TodasNoticias />
     },
 
     {
