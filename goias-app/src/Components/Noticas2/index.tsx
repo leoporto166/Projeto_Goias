@@ -105,7 +105,7 @@ export function Noticias2(){
         
         {img: n2, legenda: "Goiás vence o Operário em casa", id:2, data: "09/08/25"},
 
-        {img: n1, legenda: "Noticia Ofical: Treino realizado!", id:3, data: "06/08/25"}
+        {img: n3, legenda: "Noticia Ofical: Treino realizado!", id:3, data: "06/08/25"}
     ]
 
     const videos: VideosProps[] = [
