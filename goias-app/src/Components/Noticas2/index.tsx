@@ -15,7 +15,7 @@ import atle from "../../Assets/athletic.png"
 import chape from "../../Assets/chape.png"
 import {MdOutlineArrowBackIos, MdOutlineArrowForwardIos } from "react-icons/md";
 
-import n1 from "../../Assets/Elenco goias.webp"
+import n1 from "../../Assets/NoticiaLoja.jpg"
 import n2 from "../../Assets/NoticiaGoiXOpr.jpeg"
 import n3 from "../../Assets/NoticiaTorcida.jpeg"
 
@@ -101,11 +101,11 @@ export function Noticias2(){
     ]
 
     const noticia2: NoticiasProps[] =[
-        {img: n1, legenda: "Noticia Ofical: Treino realizado!", id:1, data: "06/08/25"},
+        {img: n2, legenda: "Goiás vence o Operário em casa", id:1, data: "06/08/25"},
         
-        {img: n2, legenda: "Goiás vence o Operário em casa", id:2, data: "09/08/25"},
+        {img: n3, legenda: "ATENÇÃO Sócios torcedores!", id:2, data: "09/08/25"},
 
-        {img: n3, legenda: "Noticia Ofical: Treino realizado!", id:3, data: "06/08/25"}
+        {img: n1, legenda: "Goias abre nova loja, veja", id:3, data: "06/08/25"}
     ]
 
     const videos: VideosProps[] = [
@@ -277,7 +277,7 @@ export function Noticias2(){
 
                     <div className='flex w-full justify-center items-center'>
                         <div className='w-[380px] flex flex-col items-center justify-center sm:w-[650px] lg:w-[850px] xl:w-[1024px]'>
-                            <div className='w-full flex text-lg font-bold mb-2 px-1.5'>
+                            <div className='w-full flex text-lg font-bold mb-2'>
                                     <h1 className='text-white text-xl sm:text-2xl'>UlTIMAS NOTICIAS</h1>
                             </div>
 
@@ -309,12 +309,12 @@ export function Noticias2(){
                                     </div>
                                 ) : (
                                     <div>
-                                        <div className='flex flex-col justify-center items-center w-full py-2 px-1.5 '>
+                                        <div className='flex flex-col justify-center items-center w-full py-2 px-1.5 sm:w-[650px] lg:w-[850px] xl:w-[1024px]'>
                                         {
                                             noticia2.slice(0,1).map((not) => (
-                                            <div key={not.id} className='flex flex-col items-center'>
+                                            <div key={not.id} className='flex flex-col items-center sm:w-[650px] lg:w-[850px] xl:w-[1024px]'>
                                                 <div>
-                                                <img src={not.img} alt={not.legenda} className='w-full cursor-pointer transition-transform duration-2000 hover:scale-103' />
+                                                <img src={not.img} alt={not.legenda} className='w-full cursor-pointer transition-transform duration-2000 hover:scale-103 sm:w-[650px] lg:w-[850px] xl:w-[1024px]' />
                                                 </div>
                                                 <div className='bg-black text-white mt-[-20px] w-[320px] sm:w-[550px] mb-10 z-11 relative lg:w-[800px] xl:w-[980px]'>
                                                 <h1 className="break-words whitespace-pre-line text-lg ml-3 font-semibold">
@@ -333,13 +333,13 @@ export function Noticias2(){
                                         </div>
 
 
-                                        <div className='flex flex-row justify-center items-center w-full py-2 px-1.5 gap-4'>
+                                        <div className='flex flex-row justify-center items-center w-full py-2 px-1.5 gap-4 sm:w-[650px] lg:w-[850px] xl:w-[1024px]'>
                                         {
                                             noticia2.slice(1,3).map((not) => (
                                             <div key={not.id} className='flex flex-col items-center'>
 
                                                 <div>
-                                                <img src={not.img} alt={not.legenda} className='w-full cursor-pointer transition-transform duration-2000 hover:scale-103' />
+                                                <img src={not.img} alt={not.legenda} className='w-full cursor-pointer transition-transform duration-2000 hover:scale-103 sm:w-[650px] lg:w-[850px] xl:w-[1024px]'/>
                                                 </div>
                                                 <div className="text-white bg-black mt-[-20px] w-[300px] lg:w-[400px] xl:w-[480px] mb-10 z-11 relative">
                                                 <h1 className="break-words whitespace-pre-line text-lg ml-3 font-semibold">
@@ -576,9 +576,9 @@ export function Noticias2(){
                     <div className='font-light text-[15px]'><a href='#' target='_blank'>Acessar Página</a></div>
                 </div>
 
-                <div className='w-[380px] flex flex-col lg:flex-row gap-2 items-center sm:w-[650px] lg:w-[850px] xl:w-[1024px]'>
+                <div className='w-[380px] flex gap-2 items-center sm:w-[650px] lg:w-[850px] xl:w-[1024px] '>
 
-                    <div className=' flex flex-col justify-center items-center gap-2 shadow'>
+                    <div className=' flex flex-col justify-center items-center gap-2 shadow sm:w-[650px] lg:w-[850px] xl:w-[1024px] p-2'>
                         <img src={Fundo1} className=''></img>
                         <h1 className='text-xl font-semibold'>TÍTULOS</h1>
                         <p className='text-[15px] mb-2'>Saiba mais sobre a vitoriosa caminhada do GOIÁS</p>
@@ -588,7 +588,7 @@ export function Noticias2(){
                         
                     </div>
 
-                    <div className=' flex flex-col justify-center items-center gap-2 shadow'>
+                    <div className=' flex flex-col justify-center items-center gap-2 shadow sm:w-[650px] lg:w-[850px] xl:w-[1024px] p-2'>
                         <img src={Fundo2} className=''></img>
                         <h1 className='text-xl font-semibold'>LENDAS</h1>
                         <p className='text-[15px] mb-2'>Saiba mais sobre os ídolos do GOIÁS</p>

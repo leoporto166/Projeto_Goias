@@ -106,7 +106,7 @@ const jogadores: Jogador[] = [
 
       
         {posicoes.map((posicao) => ( 
-          <div key={posicao} className="w-full mt-2">
+          <div key={posicao} className="w-full mt-10">
             <h2 className="text-xl sm:text-2xl w-full font-bold text-center sm:text-start px-2"
             style={{color: "#165953"}}
             >

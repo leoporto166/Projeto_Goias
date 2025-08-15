@@ -198,44 +198,56 @@ export function Header(){
           </div>
 
               {selectedIndex === 0 && (
-                      <ul className={`nav-list ${selectedIndex === 0 ? "zero" : ""}`}>
+                      <ul className={`nav-list ${selectedIndex === 0 ? "zero" : ""} z-50`}>
                         {menuN.map((noticia, subIndex) => (
-                          <li key={`noticia-${subIndex}`}>{noticia.txt}</li>
+                          <Link to={`/Projeto_Goias/${noticia.txt}`}>
+                            <li key={`noticia-${subIndex}`}>{noticia.txt}</li>
+                          </Link>
                         ))}
                       </ul>
                     )}
                     {selectedIndex === 1 && (
                       <ul className={`nav-list ${selectedIndex === 1 ? "um" : ""}`}>
                         {menuE.map((esmeralda, subIndex) => (
-                          <li key={`noticia-${subIndex}`}>{esmeralda.txt}</li>
+                          <Link to={`/Projeto_Goias/${esmeralda.txt}`}>
+                            <li key={`noticia-${subIndex}`}>{esmeralda.txt}</li>
+                          </Link>
                         ))}
                       </ul>
                     )}
                     {selectedIndex === 2 && (
                       <ul className={`nav-list ${selectedIndex === 2? "dois" : ""}`}>
                         {menuL.map((loja, subIndex) => (
-                          <li key={`noticia-${subIndex}`}>{loja.txt}</li>
+                          <Link to={`/Projeto_Goias/${loja.txt}`} >
+                            <li key={`noticia-${subIndex}`}>{loja.txt}</li>
+                          </Link>
                         ))}
                       </ul>
                     )}
                     {selectedIndex === 3 && (
                       <ul className={`nav-list ${selectedIndex === 3 ? "tres" : ""}`}>
                         {menuC.map((clube, subIndex) => (
-                          <li key={`noticia-${subIndex}`}>{clube.txt}</li>
+                          <Link to={`/Projeto_Goias/${clube.txt}`}>
+                            <li key={`noticia-${subIndex}`}>{clube.txt}</li>
+                          </Link>
                         ))}
                       </ul>
                     )}
                     {selectedIndex === 4 && (
                       <ul className={`nav-list ${selectedIndex === 4 ? "quatro" : ""}`}>
                         {menuB.map((base, subIndex) => (
-                          <li key={`noticia-${subIndex}`}>{base.txt}</li>
+                          <Link to={`/Projeto_Goias/${base.txt}`}>
+                            <li key={`noticia-${subIndex}`}>{base.txt}</li>
+                          </Link>
                         ))}
                       </ul>
                     )}
                     {selectedIndex === 5 && (
                       <ul className={`nav-list ${selectedIndex === 5 ? "cinco" : ""}`}>
                         {menuEl.map((elenco, subIndex) => (
-                          <li key={`noticia-${subIndex}`}>{elenco.txt}</li>
+                          <Link to={`/Projeto_Goias/${elenco.txt}`}>
+                            <li key={`noticia-${subIndex}`}>{elenco.txt}</li>
+                          </Link>
                         ))}
                       </ul>
                     )}
