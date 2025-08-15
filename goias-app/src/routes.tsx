@@ -8,6 +8,7 @@ import { DetalhesElenco } from "./pages/DetelhesElenco"
 import { Clube } from "./pages/Clube";
 import { RaizVerde } from "./pages/Raiz Verde";
 import { TodasNoticias } from "./pages/TodasNoticias";
+import { CadastroNoticias } from "./pages/CadastroNoticias";
 const router = createBrowserRouter([
     {
         path:"/Projeto_Goias",
@@ -47,6 +48,11 @@ const router = createBrowserRouter([
     {
         path: "/Projeto_Goias/Todas Noticias",
         element: <TodasNoticias />
+    },
+
+    {
+        path: "/Projeto_Goias/Cadastro Noticias",
+        element: <CadastroNoticias />
     },
 
     {

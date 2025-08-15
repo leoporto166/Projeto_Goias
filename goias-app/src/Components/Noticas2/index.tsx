@@ -4,20 +4,12 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/autoplay';
 
-
-import card1 from "../../Assets/tadeu_ramom.jpeg"
-import card3 from "../../Assets/benitez.webp"
-
-
 import logo from "../../Assets/logo-goias-esporte-clube-256.png";
 import crb from "../../Assets/crb.png"
 import atle from "../../Assets/athletic.png"
 import chape from "../../Assets/chape.png"
 import {MdOutlineArrowBackIos, MdOutlineArrowForwardIos } from "react-icons/md";
 
-import n1 from "../../Assets/NoticiaLoja.jpg"
-import n2 from "../../Assets/NoticiaGoiXOpr.jpeg"
-import n3 from "../../Assets/NoticiaTorcida.jpeg"
 
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import { useEffect, useState } from 'react';
@@ -31,9 +23,9 @@ import Fundo1 from "../../Assets/FundoTitulos2.png"
 import Fundo2 from "../../Assets/FundoLendas2.png"
 
 
-
-
 import { Footer } from '../footer';
+import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
+import { db } from '../../services/firebaseconnection';
 
 
 
@@ -52,8 +44,8 @@ interface NoticiasProps{
     img: string;
     legenda: string;
     button?: string
-    id?: number;
-    data?: string;
+    id: string;
+    data: string;
 }
 
 interface VideosProps{
@@ -61,7 +53,7 @@ interface VideosProps{
     legenda: string;
     button: string;
     data: string;
-    id: number;
+    id: string;
     
 }
 
@@ -80,6 +72,61 @@ export function Noticias2(){
     
     const [largura, setLargura] = useState(window.innerWidth);
 
+    const [noticias, setNoticias] = useState<NoticiasProps[]>([])
+    
+    const [videos, setVideos] = useState<VideosProps[]>([])
+    
+    useEffect(() => {
+    
+            const notRef = collection(db, "Noticias")
+            const queryRef = query(notRef, orderBy("data", "desc"))
+    
+            const unsub = onSnapshot(queryRef, 
+                (snapshot) => {
+                    let lista = [] as NoticiasProps[]
+    
+                    snapshot.forEach((doc) => {
+                        const data = doc.data()
+                        lista.push({
+                            id: doc.id,
+                            img: data.img,
+                            legenda: data.legenda,
+                            data: data.data,
+                            button: "Ver Mais"
+                        })
+                    })
+    
+                    setNoticias(lista)
+            })
+    
+            const notVideoRef = collection(db, "NoticiasVideos")
+            const queryRefVideos = query(notVideoRef, orderBy("data", "desc"))
+    
+            const unsubVideo = onSnapshot(queryRefVideos, (snapshot) => {
+                let lista = [] as VideosProps[]
+    
+                snapshot.forEach((doc) => {
+                    const data = doc.data()
+                    lista.push({
+                        id: doc.id,
+                        link: data.link,
+                        legenda: data.legenda,
+                        data: data.data,
+                        button: "VER NO YOUTUBE"
+                    })
+                })
+    
+                setVideos(lista)
+            })
+    
+            return () => {
+                unsub()
+                unsubVideo()
+            }
+    
+    
+    }, [])
+
     useEffect(() => {
 
         function atualizarLargura() {
@@ -94,21 +141,21 @@ export function Noticias2(){
 
     const [indexBusca, setIndexBusca] = useState(0)
 
-    const noticia: NoticiasProps[] = [
+    /*const noticia: NoticiasProps[] = [
        {img: card1, legenda: "GOIAS VENCE ATLETICO EM CLASSICO EMOCIONANTE", button: "LER MAIS"},
        {img: card3, legenda: "ANUNCIO OFICIAl: MARTIN BENITÉZ", button: "LER MAIS"},
 
-    ]
+    ]*/
 
-    const noticia2: NoticiasProps[] =[
+    /*const noticia2: NoticiasProps[] =[
         {img: n2, legenda: "Goiás vence o Operário em casa", id:1, data: "06/08/25"},
         
         {img: n3, legenda: "ATENÇÃO Sócios torcedores!", id:2, data: "09/08/25"},
 
         {img: n1, legenda: "Goias abre nova loja, veja", id:3, data: "06/08/25"}
-    ]
+    ]*/
 
-    const videos: VideosProps[] = [
+    /*const videos: VideosProps[] = [
         {
             link: "GmCyxZt_G1I", legenda: "COLETIVA AO VIVO | JUNINHO | GOIÁS E.C", button: "VER NO YOUTUBE", data: "06/08/25", id: 1
         },
@@ -118,7 +165,7 @@ export function Noticias2(){
         {
             link: "jVs4iQ_kcB0", legenda: "WELLINGTON RATO | ENTREVISTA EXCLUSIVA ", button: "VER NO YOUTUBE", data: "11/07/25", id: 3
         },
-    ]
+    ]*/
 
     const Loja: LojaProps[] =[
         {
@@ -167,7 +214,7 @@ export function Noticias2(){
                             }
                         `}
                     </style>
-                    {noticia.map((not) => (
+                    {noticias.map((not) => (
                         <SwiperSlide className="">
                         <div className="h-96 bg-cover bg-no-repeat bg-center flex p-4 items-start flex-col justify-end md:bg-top"
                         style={{ backgroundImage: `url(${not.img})` }}>
@@ -180,7 +227,7 @@ export function Noticias2(){
             
                     ))}
                 </Swiper>
-                <div className='flex items-center justify-center mt-[-30px] xl:mt-0 bg-white z-11 shadow-lg xl:w-[400px]'>
+                <div className='flex items-center justify-center mt-[-30px] xl:mt-0 bg-white z-11 shadow-lg xl:w-[400px] select-none'>
                         {
                             indexBusca === 0 ? (
                             <div className='w-[24px]'></div>
@@ -285,7 +332,7 @@ export function Noticias2(){
                                 largura < 1024 ? (
                                     <div className='flex flex-col justify-center items-center w-full py-2 px-1.5 lg:flex-row lg:flex-wrap'>
                                     {
-                                        noticia2.slice(0, 2).map((not) => (
+                                        noticias.slice(0, 2).map((not) => (
                                         <div key={not.id} className='flex flex-col items-center'>
                                             <div>
                                             <img src={not.img} alt={not.legenda} className='w-full cursor-pointer transition-transform duration-2000 hover:scale-103' />
@@ -311,7 +358,7 @@ export function Noticias2(){
                                     <div>
                                         <div className='flex flex-col justify-center items-center w-full py-2 px-1.5 sm:w-[650px] lg:w-[850px] xl:w-[1024px]'>
                                         {
-                                            noticia2.slice(0,1).map((not) => (
+                                            noticias.slice(0,1).map((not) => (
                                             <div key={not.id} className='flex flex-col items-center sm:w-[650px] lg:w-[850px] xl:w-[1024px]'>
                                                 <div>
                                                 <img src={not.img} alt={not.legenda} className='w-full cursor-pointer transition-transform duration-2000 hover:scale-103 sm:w-[650px] lg:w-[850px] xl:w-[1024px]' />
@@ -335,7 +382,7 @@ export function Noticias2(){
 
                                         <div className='flex flex-row justify-center items-center w-full py-2 px-1.5 gap-4 sm:w-[650px] lg:w-[850px] xl:w-[1024px]'>
                                         {
-                                            noticia2.slice(1,3).map((not) => (
+                                            noticias.slice(1,3).map((not) => (
                                             <div key={not.id} className='flex flex-col items-center'>
 
                                                 <div>
@@ -581,7 +628,7 @@ export function Noticias2(){
                     <div className=' flex flex-col justify-center items-center gap-2 shadow sm:w-[650px] lg:w-[850px] xl:w-[1024px] p-2'>
                         <img src={Fundo1} className=''></img>
                         <h1 className='text-xl font-semibold'>TÍTULOS</h1>
-                        <p className='text-[15px] mb-2'>Saiba mais sobre a vitoriosa caminhada do GOIÁS</p>
+                        <p className='text-[15px] mb-2'>Saiba mais sobre nossa vitoriosa caminhada</p>
                         <div className='bg-green-700 text-white py-1 mb-4 rounded w-[120px] text-center cursor-pointer hover:bg-white hover:text-green-500 border border-green-500 transition duration-500'>
                             Descubra
                         </div>

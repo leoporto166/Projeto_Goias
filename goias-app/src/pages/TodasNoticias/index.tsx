@@ -1,17 +1,17 @@
 
-import n3 from "../../Assets/Elenco goias.webp"
-import n1 from "../../Assets/NoticiaGoiXOpr.jpeg"
-import n2 from "../../Assets/NoticiaTorcida.jpeg"
 import { Footer } from "../../Components/footer";
 import { Header } from "../../Components/Header/header";
+
+import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
+import { db } from "../../services/firebaseconnection";
+import { useEffect, useState } from "react";
 
 
 interface NoticiasProps{
     img: string;
     legenda: string;
-    button?: string
-    id?: number;
-    data?: string;
+    id: string;
+    data: string;
 }
 
 interface VideosProps{
@@ -19,19 +19,19 @@ interface VideosProps{
     legenda: string;
     button: string;
     data: string;
-    id: number;
+    id: string;
     
 }
 
-    const noticias: NoticiasProps[] =[
-        {img: n1, legenda: "Goiás vence o Operário em casa", id:2, data: "09/08/25"},
+    /*const noticias: NoticiasProps[] =[
+        {img: n1, legenda: "Goiás vence o Operário em casa", id:"2", data: "09/08/25"},
         
-        {img: n2, legenda: "Atenção, sócio-torcedor:", id:2, data: "06/08/25"},
+        {img: n2, legenda: "Atenção, sócio-torcedor:", id:"2", data: "06/08/25"},
 
-        {img: n3, legenda: "Noticia Ofical: Treino realizado!", id:1, data: "06/08/25"},
-    ]
+        {img: n3, legenda: "Noticia Ofical: Treino realizado!", id:"1", data: "06/08/25"},
+    ]*/
 
-        const videos: VideosProps[] = [
+       /* const videos: VideosProps[] = [
         {
             link: "GmCyxZt_G1I", legenda: "COLETIVA AO VIVO | JUNINHO | GOIÁS E.C", button: "VER NO YOUTUBE", data: "06/08/25", id: 1
         },
@@ -39,14 +39,70 @@ interface VideosProps{
             link: "KouYLb2BFFk", legenda: "BASTIDORES VIVA SORTE | GOIÁS 1x1 REMO", button: "VER NO YOUTUBE", data: "30/07/25", id: 2
         },
         {
-            link: "jVs4iQ_kcB0", legenda: "WELLINGTON RATO | ENTREVISTA EXCLUSIVA ", button: "VER NO YOUTUBE", data: "11/07/25", id: 3
+            link: "jVs4iQ_kcB0", legenda: "WELLINGTON RATO | ENTREVISTA EXCLUSIVA", button: "VER NO YOUTUBE", data: "11/07/25", id: 3
         },
-    ]
+    ]*/
+
+
 
 export function TodasNoticias(){
 
+    const [noticias, setNoticias] = useState<NoticiasProps[]>([])
 
+    const [videos, setVideos] = useState<VideosProps[]>([])
+
+    useEffect(() => {
+
+        const notRef = collection(db, "Noticias")
+        const queryRef = query(notRef, orderBy("data", "desc"))
+
+        const unsub = onSnapshot(queryRef, 
+            (snapshot) => {
+                let lista = [] as NoticiasProps[]
+
+                snapshot.forEach((doc) => {
+                    const data = doc.data()
+                    lista.push({
+                        id: doc.id,
+                        img: data.img,
+                        legenda: data.legenda,
+                        data: data.data
+                    })
+                })
+
+                setNoticias(lista)
+        })
+
+        const notVideoRef = collection(db, "NoticiasVideos")
+        const queryRefVideos = query(notVideoRef, orderBy("data", "desc"))
+
+        const unsubVideo = onSnapshot(queryRefVideos, (snapshot) => {
+            let lista = [] as VideosProps[]
+
+            snapshot.forEach((doc) => {
+                const data = doc.data()
+                lista.push({
+                    id: doc.id,
+                    link: data.link,
+                    legenda: data.legenda,
+                    data: data.data,
+                    button: "VER NO YOUTUBE"
+                })
+            })
+
+            setVideos(lista)
+        })
+
+        return () => {
+            unsub()
+            unsubVideo()
+        }
+
+
+    }, [])
     return(
+
+        
 
         <main>
             <Header></Header>
@@ -55,7 +111,7 @@ export function TodasNoticias(){
                 <div className='flex w-full justify-center items-center'>
                     <div className='w-[380px] flex flex-col items-center justify-center sm:w-[650px] lg:w-[850px]'>
                         <div className='w-full flex text-lg font-bold mb-2 px-1.5'>
-                                <h1 className='text-white text-xl sm:text-2xl'>UlTIMAS NOTICIAS</h1>
+                                <h1 className='text-black text-xl sm:text-2xl mt-2'>TODAS NOTÍCIAS</h1>
                         </div>
     
                             <div className='flex flex-col justify-center items-center w-full py-2 px-1.5 lg:flex-row lg:flex-wrap'>
