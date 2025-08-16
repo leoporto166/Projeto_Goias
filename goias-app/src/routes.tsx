@@ -8,7 +8,7 @@ import { DetalhesElenco } from "./pages/DetelhesElenco"
 import { Clube } from "./pages/Clube";
 import { RaizVerde } from "./pages/Raiz Verde";
 import { TodasNoticias } from "./pages/TodasNoticias";
-import { CadastroNoticias } from "./pages/CadastroNoticias";
+import { CadastroNoticias } from "./pages/CadastroInfo";
 const router = createBrowserRouter([
     {
         path:"/Projeto_Goias",

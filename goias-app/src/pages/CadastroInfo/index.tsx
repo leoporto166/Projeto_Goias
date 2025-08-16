@@ -4,10 +4,46 @@ import { z }  from "zod"
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { db } from "../../services/firebaseconnection";
-import { addDoc } from "firebase/firestore";
+import { addDoc, doc, setDoc } from "firebase/firestore";
 import { collection } from "firebase/firestore";
 import { useState } from "react";
 import { Input } from "../../Components/Input";
+
+interface PartidasProps{
+  logo1: string;
+  logo2: string;
+  titulo: string;
+  rodada: string;
+  data: string;
+  estadio: string;
+  ingresso?: string;
+}
+
+interface NoticiasProps{
+    img: string;
+    legenda: string;
+    button?: string
+    id: string;
+    data: string;
+}
+
+interface VideosProps{
+    link: string;
+    legenda: string;
+    button: string;
+    data: string;
+    id: string;
+    
+}
+
+interface LojaProps{
+    titulo: string;
+    img: string;
+    preco: number; 
+    button: string;
+    link: string;
+    id: number;
+}
 
 
 const schemaImg = z.object({
@@ -25,14 +61,28 @@ const schemaVideos = z.object({
     button: z.string().default("VER NO YOUTUBE")
 })
 
+const schemaPartidas = z.object({
+    docId: z.enum(["partida1", "partida2", "partida3"]),
+    logo1: z.string().nonempty("Preencha o campo"),
+    logo2: z.string().nonempty("Preencha o campo"),
+    titulo: z.string().nonempty("Preencha esse campo"),
+    rodada: z.string().nonempty("Preencha essa campo"),
+    estadio: z.string().nonempty("Preencha esse campo"),
+    data: z.string().nonempty("Preencha essa campo"),
+    ingresso: z.string().default("Comprar"),
+    id: z.coerce.number(),
+})
+
 type FormDataImg = z.infer<typeof schemaImg>
 type FormDataVideos = z.infer<typeof schemaVideos>
+type FormDataPartidas = z.infer<typeof schemaPartidas>
 
 
 export function CadastroNoticias(){
 
     const [videos, setVideos] = useState(false)
     const [img, setImg] = useState(false)
+    const [partidas, setPartidas] = useState(false)
     const [escolha,  setEscolha] = useState("")
 
     const {register, handleSubmit, formState: {errors}, reset} = useForm<FormDataImg>({
@@ -85,13 +135,40 @@ export function CadastroNoticias(){
         
     }
 
+        const {register: registerPartidas, handleSubmit: handleSubmitPartidas, formState: {errors: errorsPartidas}, reset: resetPartidas} = useForm<FormDataPartidas>({
+            resolver: zodResolver(schemaPartidas) as any,
+            mode:"onChange"
+        })
+
+    async function onSubmitPartidas(data: FormDataPartidas) {
+
+          try {
+            // Aponta para o documento específico dentro da coleção "Partidas"
+            await setDoc(doc(db, "Partidas", data.docId), {
+            logo1: data.logo1,
+            logo2: data.logo2,
+            titulo: data.titulo,
+            rodada: data.rodada,
+            estadio: data.estadio,
+            data: data.data,
+            ingresso: data.ingresso || "Comprar",
+            id: data.id
+            });
+
+            resetPartidas();
+            console.log(`Documento ${data.docId} atualizado com sucesso!`);
+        } catch (error) {
+            console.log(`ERRO: ${error}`);
+        }
+        }
+
     return(
 
         <main className="flex flex-col justify-center items-center w-full h-screen">
 
             <div className="bg-white p-2 flex flex-col justify-center items-center">
                 {
-                    videos === false && img === false ? (
+                    videos === false && img === false && partidas === false ? (
                         <div>
                             <h1>Escolha uma das opções</h1>
                         </div>
@@ -105,6 +182,7 @@ export function CadastroNoticias(){
                     onClick={() => {
                         setImg(true)
                         setVideos(false)
+                        setPartidas(false)
                         setEscolha("Imagens")
                     }}
                     className={`${img === true ? "text-green-600" : ""}`}
@@ -116,11 +194,23 @@ export function CadastroNoticias(){
                     onClick={() => {
                         setImg(false)
                         setVideos(true)
+                        setPartidas(false)
                         setEscolha("Videos")
                     }}
                     className={`${videos === true ? "text-green-600" : ""}`}
                     >
                         Videos
+                    </h2>
+                    <h2
+                    onClick={() => {
+                        setImg(false)
+                        setVideos(false)
+                        setPartidas(true)
+                        setEscolha("Partidas")
+                    }}
+                    className={`${partidas === true ? "text-green-600" : ""}`}
+                    >
+                        Partidas
                     </h2>
                 </div>
                 {
@@ -150,7 +240,7 @@ export function CadastroNoticias(){
                     />
                     {errors.data && <p className="text-red-500 mt-0 mb-2">{errors.data?.message}</p>}
 
-                    <Input
+                     <Input
                         type="number"
                         {...register("id")}
                         placeholder="id da noticia"
@@ -196,6 +286,70 @@ export function CadastroNoticias(){
 
                     <button type="submit" className="cursor-pointer">Cadastrar</button>
                 </form>
+                    )
+                }
+
+                {
+                    partidas && (
+                        <form onSubmit={handleSubmitPartidas(onSubmitPartidas)} className="flex flex-col">
+
+                            <select {...registerPartidas("docId")}>
+                                <option value="partida1">Partida 1</option>
+                                <option value="partida2">Partida 2</option>
+                                <option value="partida3">Partida 3</option>
+                            </select>
+
+                            <Input
+                                type="text"
+                                placeholder="Logo 1"
+                                {...registerPartidas("logo1")}
+                            />
+                            {errorsPartidas.logo1 && <p className="text-red-500">{errorsPartidas.logo1.message}</p>}
+
+                            <Input
+                                type="text"
+                                placeholder="Logo 2"
+                                {...registerPartidas("logo2")}
+                            />
+                            {errorsPartidas.logo2 && <p className="text-red-500">{errorsPartidas.logo2.message}</p>}
+
+                            <Input
+                                type="text"
+                                placeholder="Título"
+                                {...registerPartidas("titulo")}
+                            />
+                            {errorsPartidas.titulo && <p className="text-red-500">{errorsPartidas.titulo.message}</p>}
+
+                            <Input
+                                type="text"
+                                placeholder="Rodada"
+                                {...registerPartidas("rodada")}
+                            />
+                            {errorsPartidas.rodada && <p className="text-red-500">{errorsPartidas.rodada.message}</p>}
+
+                            <Input
+                                type="text"
+                                placeholder="Estádio"
+                                {...registerPartidas("estadio")}
+                            />
+                            {errorsPartidas.estadio && <p className="text-red-500">{errorsPartidas.estadio.message}</p>}
+
+                            <Input
+                                type="text"
+                                placeholder="Data da partida"
+                                {...registerPartidas("data")}
+                            />
+                            {errorsPartidas.data && <p className="text-red-500">{errorsPartidas.data.message}</p>}
+
+                           <Input
+                            type="number"
+                            {...registerPartidas("id")}
+                            placeholder="id da noticia"
+                            />
+                            {errorsPartidas.id && <p className="text-red-500 mt-0 mb-2">{errorsPartidas.id?.message}</p>}
+
+                            <button type="submit" className="cursor-pointer">Cadastrar</button>
+                        </form>
                     )
                 }
                 

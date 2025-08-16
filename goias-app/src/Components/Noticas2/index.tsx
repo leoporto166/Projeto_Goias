@@ -38,6 +38,7 @@ interface PartidasProps{
   data: string;
   estadio: string;
   ingresso?: string;
+  id: string;
 }
 
 interface NoticiasProps{
@@ -75,6 +76,8 @@ export function Noticias2(){
     const [noticias, setNoticias] = useState<NoticiasProps[]>([])
     
     const [videos, setVideos] = useState<VideosProps[]>([])
+
+    const [partidas, setPartidas] = useState<PartidasProps[]>([])
     
     useEffect(() => {
     
@@ -118,10 +121,34 @@ export function Noticias2(){
     
                 setVideos(lista)
             })
+
+            const notPartidaRef = collection(db, "Partidas")
+            const queryRefPartidas = query(notPartidaRef, orderBy("data", "asc"))
+
+            const unsubPartidas = onSnapshot(queryRefPartidas, (snapshot) => {
+                let lista = [] as PartidasProps[]
+
+                snapshot.forEach((doc) => {
+                    const data = doc.data()
+                    lista.push({
+                        id: doc.id,
+                        logo1: data.logo1,
+                        logo2: data.logo2,
+                        titulo: data.titulo,
+                        rodada: data.rodada,
+                        estadio: data.estadio,
+                        data: data.data,
+                        ingresso: "COMPRAR"
+                    })
+                })
+
+                setPartidas(lista)
+            })
     
             return () => {
                 unsub()
                 unsubVideo()
+                unsubPartidas
             }
     
     
@@ -176,14 +203,14 @@ export function Noticias2(){
         },
     ]
 
-      const partidas: PartidasProps[]=[
+    /*const partidas: PartidasProps[]=[
     {logo1: crb, logo2: logo, titulo: "Campeonato brasileiro serie B", rodada: "12º rodada", data: "Domingo, Junho 14, 16h00", estadio: "Estadio Rei Pelé"},
 
     {logo1: logo, logo2: atle, titulo: "Campeonato brasileiro serie B", rodada: "13º rodada", data: "Segunda, Junho 23, 21h00", estadio: "Estadio Haile Pinheiro", ingresso: "Comprar ingresso"},
 
     {logo1: chape, logo2: logo, titulo: "Campeonato brasileiro serie B", rodada: "14º rodada", data: "Domingo, Junho 29, 19h00", estadio: "Arena Condá"},
 
-  ]
+  ]*/
 
 
 
