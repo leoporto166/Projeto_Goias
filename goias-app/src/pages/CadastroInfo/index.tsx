@@ -38,9 +38,19 @@ const schemaPartidas = z.object({
     id: z.coerce.number(),
 })
 
+const schemaNoticiasCapa = z.object({
+    docId: z.enum(["noticia1", "noticias2", "noticias3"]),
+    data: z.string().nonempty("Preencha o campo"),
+    id: z.coerce.number(),
+    img: z.string().nonempty("Preencha esse campo"),
+    legenda: z.string().nonempty("Preencha essa campo").max(35, "O campo deve ter no maximo 35 caracteres"),
+    button: z.string().default("VER MAIS"),
+})
+
 type FormDataImg = z.infer<typeof schemaImg>
 type FormDataVideos = z.infer<typeof schemaVideos>
 type FormDataPartidas = z.infer<typeof schemaPartidas>
+type FormDataNoticiasCapa = z.infer<typeof schemaNoticiasCapa>
 
 
 export function CadastroNoticias(){
@@ -48,6 +58,7 @@ export function CadastroNoticias(){
     const [videos, setVideos] = useState(false)
     const [img, setImg] = useState(false)
     const [partidas, setPartidas] = useState(false)
+    const [capa, setCapa] = useState(false)
     const [escolha,  setEscolha] = useState("")
 
     const {register, handleSubmit, formState: {errors}, reset} = useForm<FormDataImg>({
@@ -127,6 +138,28 @@ export function CadastroNoticias(){
         }
         }
 
+        const {register: registerCapa, handleSubmit: handleSubmitCapa, formState: {errors: errorsCapa}, reset: resetCapa} = useForm<FormDataNoticiasCapa>({
+            resolver: zodResolver(schemaNoticiasCapa) as any,
+            mode:"onChange"
+        })
+
+        async function onSubmitCapa(data: FormDataNoticiasCapa) {
+
+          try {
+            await setDoc(doc(db, "NoticiasCapa", data.docId), {
+            data: data.data,
+            id: data.id,
+            img: data.img,
+            legenda: data.legenda.toUpperCase(),
+            });
+
+            resetCapa();
+            console.log(`Documento ${data.docId} atualizado com sucesso!`);
+        } catch (error) {
+            console.log(`ERRO: ${error}`);
+        }
+        }
+
     return(
 
         <main className="flex flex-col justify-center items-center w-full h-screen">
@@ -148,6 +181,7 @@ export function CadastroNoticias(){
                         setImg(true)
                         setVideos(false)
                         setPartidas(false)
+                        setCapa(false)
                         setEscolha("Imagens")
                     }}
                     className={`${img === true ? "text-green-600" : ""}`}
@@ -160,6 +194,7 @@ export function CadastroNoticias(){
                         setImg(false)
                         setVideos(true)
                         setPartidas(false)
+                        setCapa(false)
                         setEscolha("Videos")
                     }}
                     className={`${videos === true ? "text-green-600" : ""}`}
@@ -171,11 +206,25 @@ export function CadastroNoticias(){
                         setImg(false)
                         setVideos(false)
                         setPartidas(true)
+                        setCapa(false)
                         setEscolha("Partidas")
                     }}
                     className={`${partidas === true ? "text-green-600" : ""}`}
                     >
                         Partidas
+                    </h2>
+
+                    <h2
+                    onClick={() => {
+                        setImg(false)
+                        setVideos(false)
+                        setPartidas(false)
+                        setCapa(true)
+                        setEscolha("Capa")
+                    }}
+                    className={`${partidas === true ? "text-green-600" : ""}`}
+                    >
+                        Capa
                     </h2>
                 </div>
                 {
@@ -314,6 +363,50 @@ export function CadastroNoticias(){
                             {errorsPartidas.id && <p className="text-red-500 mt-0 mb-2">{errorsPartidas.id?.message}</p>}
 
                             <button type="submit" className="cursor-pointer">Cadastrar</button>
+                        </form>
+                    )
+                }
+
+                {
+                    capa && (
+                        <form onSubmit={handleSubmitCapa(onSubmitCapa)} className="flex flex-col">
+
+                            <select {...registerCapa("docId")}>
+                                <option value="noticia1">Noticia 1</option>
+                                <option value="noticia2">Noticia 2</option>
+                                <option value="noticia3">Noticia 3</option>
+                            </select>
+
+                            <Input
+                        type="text"
+                        placeholder="link da imagem"
+                        {...registerCapa("img")}
+                        
+                    />
+                    {errorsCapa.img && <p className="text-red-500 mt-0 mb-2">{errorsCapa.img?.message}</p>}
+
+                    <Input
+                        type="text"
+                        placeholder="Legenda da noticia"
+                        {...registerCapa("legenda")}
+                    />
+                    {errorsCapa.legenda && <p className="text-red-500 mt-0 mb-2">{errorsCapa.legenda?.message}</p>}
+
+                    <Input
+                        type="text"
+                        {...registerCapa("data")}
+                        placeholder="data da postagem"
+                    />
+                    {errorsCapa.data && <p className="text-red-500 mt-0 mb-2">{errorsCapa.data?.message}</p>}
+
+                     <Input
+                        type="number"
+                        {...registerCapa("id")}
+                        placeholder="id da noticia"
+                    />
+                    {errorsCapa.id && <p className="text-red-500 mt-0 mb-2">{errorsCapa.id?.message}</p>}
+
+                    <button type="submit" className="cursor-pointer">Cadastrar</button>
                         </form>
                     )
                 }

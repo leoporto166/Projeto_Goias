@@ -74,6 +74,8 @@ export function Noticias2(){
     const [videos, setVideos] = useState<VideosProps[]>([])
 
     const [partidas, setPartidas] = useState<PartidasProps[]>([])
+
+    const [capa, setCapa] = useState<NoticiasProps[]>([])
     
     useEffect(() => {
     
@@ -140,11 +142,33 @@ export function Noticias2(){
 
                 setPartidas(lista)
             })
+
+            const notCapaRef = collection(db, "NoticiasCapa")
+            const queryCapa = query(notCapaRef, orderBy("data", "asc"))
+
+            const unsubCapa = onSnapshot(queryCapa, (snapshot) => {
+                let lista = [] as NoticiasProps[]
+
+                snapshot.forEach((doc) => {
+                    const data = doc.data()
+                    lista.push({
+                        id: doc.id,
+                        img: data.img,
+                        legenda: data.legenda,
+                        data: data.data,
+                        button: "Ver Mais"
+                    })
+                })
+
+                setCapa(lista)
+
+            })
     
             return () => {
                 unsub()
                 unsubVideo()
-                unsubPartidas
+                unsubPartidas()
+                unsubCapa()
             }
     
     
@@ -237,7 +261,7 @@ export function Noticias2(){
                             }
                         `}
                     </style>
-                    {noticias.map((not) => (
+                    {capa.map((not) => (
                         <SwiperSlide className="">
                         <div className="h-96 bg-cover bg-no-repeat bg-center flex p-4 items-start flex-col justify-end md:bg-top"
                         style={{ backgroundImage: `url(${not.img})` }}>
