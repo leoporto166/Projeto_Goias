@@ -9,41 +9,6 @@ import { collection } from "firebase/firestore";
 import { useState } from "react";
 import { Input } from "../../Components/Input";
 
-interface PartidasProps{
-  logo1: string;
-  logo2: string;
-  titulo: string;
-  rodada: string;
-  data: string;
-  estadio: string;
-  ingresso?: string;
-}
-
-interface NoticiasProps{
-    img: string;
-    legenda: string;
-    button?: string
-    id: string;
-    data: string;
-}
-
-interface VideosProps{
-    link: string;
-    legenda: string;
-    button: string;
-    data: string;
-    id: string;
-    
-}
-
-interface LojaProps{
-    titulo: string;
-    img: string;
-    preco: number; 
-    button: string;
-    link: string;
-    id: number;
-}
 
 
 const schemaImg = z.object({

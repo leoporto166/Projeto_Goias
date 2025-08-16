@@ -4,10 +4,6 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/autoplay';
 
-import logo from "../../Assets/logo-goias-esporte-clube-256.png";
-import crb from "../../Assets/crb.png"
-import atle from "../../Assets/athletic.png"
-import chape from "../../Assets/chape.png"
 import {MdOutlineArrowBackIos, MdOutlineArrowForwardIos } from "react-icons/md";
 
 
