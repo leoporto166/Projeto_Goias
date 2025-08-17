@@ -63,7 +63,7 @@ type FormDataNoticiasCapa = z.infer<typeof schemaNoticiasCapa>
 type FormDataLoja = z.infer<typeof schemaLoja>
 
 
-export function CadastroNoticias(){
+export function CadastroInfo(){
 
     const [videos, setVideos] = useState(false)
     const [img, setImg] = useState(false)
