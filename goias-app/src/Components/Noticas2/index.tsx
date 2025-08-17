@@ -83,107 +83,97 @@ export function Noticias2(){
             const notRef = collection(db, "Noticias")
             const queryRef = query(notRef, orderBy("data", "desc"))
     
-            const unsub = onSnapshot(queryRef, 
-                (snapshot) => {
-                    let lista = [] as NoticiasProps[]
-    
-                    snapshot.forEach((doc) => {
-                        const data = doc.data()
-                        lista.push({
-                            id: doc.id,
-                            img: data.img,
-                            legenda: data.legenda,
-                            data: data.data,
-                            button: "Ver Mais"
-                        })
-                    })
-    
-                    setNoticias(lista)
-            })
+            const unsub = onSnapshot(queryRef, (snapshot) => {
+                const lista: NoticiasProps[] = snapshot.docs.map((doc, index) => {
+                    const data = doc.data();
+                    return {
+                        id: index.toString(), // id baseado na posição
+                        img: data.img,
+                        legenda: data.legenda,
+                        data: data.data,
+                        button: "Ver Mais",
+                    };
+                });
+
+                setNoticias(lista);
+            });
     
             const notVideoRef = collection(db, "NoticiasVideos")
             const queryRefVideos = query(notVideoRef, orderBy("data", "desc"))
     
             const unsubVideo = onSnapshot(queryRefVideos, (snapshot) => {
-                let lista = [] as VideosProps[]
-    
-                snapshot.forEach((doc) => {
-                    const data = doc.data()
-                    lista.push({
-                        id: doc.id,
+                const lista: VideosProps[] = snapshot.docs.map((doc, index) => {
+                    const data = doc.data();
+                    return {
+                        id: index.toString(),
                         link: data.link,
                         legenda: data.legenda,
                         data: data.data,
-                        button: "VER NO YOUTUBE"
-                    })
-                })
-    
-                setVideos(lista)
-            })
+                        button: "VER NO YOUTUBE",
+                    };
+                });
+
+                setVideos(lista);
+            });
 
             const notPartidaRef = collection(db, "Partidas")
             const queryRefPartidas = query(notPartidaRef, orderBy("data", "asc"))
 
             const unsubPartidas = onSnapshot(queryRefPartidas, (snapshot) => {
-                let lista = [] as PartidasProps[]
-
-                snapshot.forEach((doc) => {
-                    const data = doc.data()
-                    lista.push({
-                        id: doc.id,
+                const lista: PartidasProps[] = snapshot.docs.map((doc, index) => {
+                    const data = doc.data();
+                    return {
+                        id: index.toString(),
                         logo1: data.logo1,
                         logo2: data.logo2,
                         titulo: data.titulo,
                         rodada: data.rodada,
                         estadio: data.estadio,
                         data: data.data,
-                        ingresso: "COMPRAR"
-                    })
-                })
+                        ingresso: "COMPRAR",
+                    };
+                });
 
-                setPartidas(lista)
-            })
+                setPartidas(lista);
+            });
 
             const notCapaRef = collection(db, "NoticiasCapa")
-            const queryCapa = query(notCapaRef, orderBy("data", "asc"))
+            const queryCapa = query(notCapaRef, orderBy("data", "desc"))
 
             const unsubCapa = onSnapshot(queryCapa, (snapshot) => {
-                let lista = [] as NoticiasProps[]
+            const lista: NoticiasProps[] = snapshot.docs.map((doc, index) => {
+                const data = doc.data();
+                return {
+                id: index.toString(),
+                img: data.img,
+                legenda: data.legenda,
+                data: data.data,
+                button: "Ver Mais",
+                };
+            });
 
-                snapshot.forEach((doc) => {
-                    const data = doc.data()
-                    lista.push({
-                        id: doc.id,
-                        img: data.img,
-                        legenda: data.legenda,
-                        data: data.data,
-                        button: "Ver Mais"
-                    })
-                })
-
-                setCapa(lista)
-
-            })
+            setCapa(lista);
+            });
 
             const lojaRef = collection(db, "Loja")
             const queryLoja = query(lojaRef, orderBy("id", "asc"))
 
-            const unsubLoja = onSnapshot(queryLoja,(snapshot) => {
-                let lista = [] as LojaProps[]
-
-                snapshot.forEach((doc) => {
+            const unsubLoja = onSnapshot(queryLoja, (snapshot) => {
+                // transforma o snapshot em um array de dados
+                const lista = snapshot.docs.map((doc, index) => {
                     const data = doc.data()
-                    lista.push({
-                        id: doc.id,
+                    return {
+                        id: index.toString(), // índice do array
                         img: data.img,
                         titulo: data.titulo,
                         link: data.link,
                         button: data.button,
                         preco: data.preco
-                    })
+                    }
                 })
 
                 setLoja(lista)
+                console.log(lista)
             })
     
             return () => {
@@ -332,7 +322,7 @@ export function Noticias2(){
                         >
                             {partidas.map((partida) => (
             
-                            <SwiperSlide>
+                            <SwiperSlide key={partida.id}>
                             <div className=" items-center justify-center flex  text-black flex-col">
                                 <div className='text-lg text-gray-800'>
                                     {partida.titulo}
@@ -577,18 +567,23 @@ export function Noticias2(){
                                                 <h1 className="break-words whitespace-pre-line text-lg ml-3 font-semibold">
                                                     {video.legenda.toLocaleUpperCase()}
                                                 </h1>
-                                                <div className='ml-3 text-center flex items-center h-screen'>
+                                                
+                                            
+                                                
+                                                    <div className='flex justify-center bg-green-700 m-1 rounded text-green-50 mb-4 cursor-pointer py-1 w-full text-center  hover:bg-white hover:text-green-500 border border-green-500 transition duration-500 mt-[230px]'>
+                                                        <a href={`https://www.youtube.com/watch?v=${video.link}`} target='_blank'
+                                                         >
+                                                        {video.button.toLocaleUpperCase()}
+                                                        </a>
+                                                    </div>
+                                                
+                                                
+                                                <div className='ml-3 text-center flex h-screen justify-center items-center'>
                                                     <div className='w-[50%] h-[1px] bg-green-200'></div>
                                                     <h2 className='px-1'
                                                     style={{ fontVariantLigatures: "none" }}>{video.data}</h2>
                                                     <div className='w-[50%] h-[1px] bg-green-200 mr-1 '></div>
                                                 </div>
-                                            
-                                                <a href={`https://www.youtube.com/watch?v=${video.link}`} target='_blank'>
-                                                    <div className='flex justify-center bg-green-700 m-1 rounded text-green-50 mb-4 cursor-pointer'>
-                                                        {video.button.toLocaleUpperCase()}
-                                                    </div>
-                                                </a>
                                             </div>
 
                                             
@@ -660,7 +655,7 @@ export function Noticias2(){
                     }
                 </Swiper>
                 ) : (
-                    <div className='flex gap-4 h-[850px] w-[650px] lg:w-[850px] xl:w-[1024px] mb-[-150px] lg:mb-[-15px]' >
+                    <div className='flex gap-4 h-[750px] w-[650px] lg:w-[850px] xl:w-[1024px] mb-[-150px] lg:mb-[-15px]' >
                         {
                         loja.slice(0,3).map((prod) => (
                                 <div key={prod.id}>
