@@ -899,6 +899,11 @@
       display: block;
     }
 
+    .nav-list.seis {
+      transform: translateY(65%);
+      display: block;
+    }
+
 
     .nav-list.zero li {
       opacity: 1;
@@ -936,6 +941,12 @@
       opacity: 1;
       animation: navLinkFade 0.5s ease forwards;transition: all 1s;
       margin-left: 582px;
+    }
+
+    .nav-list.seis li {
+      opacity: 1;
+      animation: navLinkFade 0.5s ease forwards;transition: all 1s;
+      margin-left: 670px;
     }
 
     .nav-list.active{
@@ -1054,6 +1065,15 @@
       opacity: 1;
       
     }
+
+    .nav.seis {
+      transform: translateY(570px);
+      display: block;
+      opacity: 1;
+      
+    }
+
+
      .nav-list.zero li {
       opacity: 1;
       animation: navLinkFade 0.5s ease forwards;transition: all 1s;
@@ -1090,6 +1110,12 @@
       opacity: 1;
       animation: navLinkFade 0.5s ease forwards;transition: all 1s;
       margin-left: 628px;
+    }
+
+    .nav-list.seis li {
+      opacity: 1;
+      animation: navLinkFade 0.5s ease forwards;transition: all 1s;
+      margin-left: 7001px;
     }
 
     .line{

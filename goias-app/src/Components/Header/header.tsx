@@ -75,6 +75,7 @@ export function Header(){
       {txt: "CLUBE"},
       {txt: "BASE"},
       {txt: "ELENCO"},
+      {txt: "RESTRITO"}
     ]
 
 
@@ -103,6 +104,10 @@ export function Header(){
 
     const menuEl: HeaderProps[] = [
       {txt: "Elenco"}
+    ]
+
+    const menuR: HeaderProps[] = [
+      {txt: "Cadastro Informações"}
     ]
 
     const toggleMenuPhone = () => {
@@ -247,6 +252,15 @@ export function Header(){
                         {menuEl.map((elenco, subIndex) => (
                           <Link to={`/Projeto_Goias/${elenco.txt}`}>
                             <li key={`noticia-${subIndex}`}>{elenco.txt}</li>
+                          </Link>
+                        ))}
+                      </ul>
+                    )}
+                    {selectedIndex === 6 && (
+                      <ul className={`nav-list ${selectedIndex === 6 ? "seis" : ""}`}>
+                        {menuR.map((res, subIndex) => (
+                          <Link to={`/Projeto_Goias/${res.txt}`}>
+                            <li key={`noticia-${subIndex}`}>{res.txt}</li>
                           </Link>
                         ))}
                       </ul>
@@ -489,6 +503,25 @@ export function Header(){
                             ))}
                           </ul>
                         )}
+
+                        {selectedIndex === 6 && (
+                          <ul className="nav seis z-50">
+                            {menuR.map((res, subIndex) => (
+                              <li
+                                key={`elenco-${subIndex}`}
+                                onClick={() => {
+                                  setMenuPhoneActive(false);
+                                  setHeaderSub(false);
+                                }}
+                              >
+
+                                <Link to={`/Projeto_Goias/${res.txt}`}>
+                                  <li key={`noticia-${subIndex}`}>{res.txt}</li>
+                                </Link>
+                              </li>
+                            ))}
+                          </ul>
+                      )}
                       </div>
                     )}
                   </div>

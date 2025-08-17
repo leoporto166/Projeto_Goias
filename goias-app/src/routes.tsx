@@ -51,7 +51,7 @@ const router = createBrowserRouter([
     },
 
     {
-        path: "/Projeto_Goias/CadastroInfo",
+        path: "/Projeto_Goias/Cadastro Informações",
         element: <CadastroInfo />
     },
 
