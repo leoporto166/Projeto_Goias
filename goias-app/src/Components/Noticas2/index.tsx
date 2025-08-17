@@ -694,7 +694,7 @@ export function Noticias2(){
                     <div className='font-light text-[15px]'><Link to={`/Projeto_Goias/Clube`}>Acessar Página</Link></div>
                 </div>
 
-                <div className='w-[380px] flex gap-2 items-center sm:w-[650px] lg:w-[850px] xl:w-[1024px] '>
+                <div className='w-[380px] flex gap-2 items-center sm:w-[650px] lg:w-[850px] xl:w-[1024px] flex-col sm:flex-row'>
 
                     <div className=' flex flex-col justify-center items-center gap-2 shadow sm:w-[650px] lg:w-[850px] xl:w-[1024px] p-2'>
                         <img src={Fundo1} className=''></img>
