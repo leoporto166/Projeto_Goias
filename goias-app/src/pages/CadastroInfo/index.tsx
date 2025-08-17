@@ -13,44 +13,49 @@ import { Input } from "../../Components/Input";
 
 const schemaImg = z.object({
     data: z.string().nonempty("Preencha o campo"),
-    id: z.coerce.number(),
-    img: z.string().nonempty("Preencha esse campo"),
+    img: z.string().nonempty("Preencha esse campo").url("Insira um link válido"),
     legenda: z.string().nonempty("Preencha essa campo").max(35, "O campo deve ter no maximo 35 caracteres"),
 })
 
 const schemaVideos = z.object({
     data: z.string().nonempty("Preencha o campo"),
-    id: z.coerce.number(),
-    link: z.string().nonempty("Preencha esse campo"),
+    link: z.string().nonempty("Preencha esse campo").url("Insira um link válido"),
     legenda: z.string().nonempty("Preencha essa campo").max(40, "O campo deve ter no maximo 40 caracteres"),
     button: z.string().default("VER NO YOUTUBE")
 })
 
 const schemaPartidas = z.object({
     docId: z.enum(["partida1", "partida2", "partida3"]),
-    logo1: z.string().nonempty("Preencha o campo"),
-    logo2: z.string().nonempty("Preencha o campo"),
+    logo1: z.string().nonempty("Preencha o campo").url("Insira um link válido"),
+    logo2: z.string().nonempty("Preencha o campo").url("Insira um link válido"),
     titulo: z.string().nonempty("Preencha esse campo"),
     rodada: z.string().nonempty("Preencha essa campo"),
     estadio: z.string().nonempty("Preencha esse campo"),
     data: z.string().nonempty("Preencha essa campo"),
     ingresso: z.string().default("Comprar"),
-    id: z.coerce.number(),
 })
 
 const schemaNoticiasCapa = z.object({
-    docId: z.enum(["noticia1", "noticias2", "noticias3"]),
+    docId: z.enum(["noticia1", "noticia2", "noticia3"]),
     data: z.string().nonempty("Preencha o campo"),
-    id: z.coerce.number(),
-    img: z.string().nonempty("Preencha esse campo"),
+    img: z.string().nonempty("Preencha esse campo").url("Insira um link válido"),
     legenda: z.string().nonempty("Preencha essa campo").max(35, "O campo deve ter no maximo 35 caracteres"),
     button: z.string().default("VER MAIS"),
+})
+
+const schemaLoja = z.object({
+    titulo: z.string().nonempty("Preencha o campo"),
+    img: z.string().nonempty("Preencha esse campo").url("Insira um link válido"),
+    preco: z.coerce.number(),
+    button: z.string().default("COMPRAR"),
+    link: z.string().url("Insira um link válido"),
 })
 
 type FormDataImg = z.infer<typeof schemaImg>
 type FormDataVideos = z.infer<typeof schemaVideos>
 type FormDataPartidas = z.infer<typeof schemaPartidas>
 type FormDataNoticiasCapa = z.infer<typeof schemaNoticiasCapa>
+type FormDataLoja = z.infer<typeof schemaLoja>
 
 
 export function CadastroNoticias(){
@@ -60,6 +65,7 @@ export function CadastroNoticias(){
     const [partidas, setPartidas] = useState(false)
     const [capa, setCapa] = useState(false)
     const [escolha,  setEscolha] = useState("")
+    const [loja, setLoja] = useState(false)
 
     const {register, handleSubmit, formState: {errors}, reset} = useForm<FormDataImg>({
         resolver: zodResolver(schemaImg) as any,
@@ -70,7 +76,6 @@ export function CadastroNoticias(){
 
         await addDoc(collection(db, "Noticias"), {
             data: data.data,
-            id: data.id,
             img: data.img,
             legenda: data.legenda.toUpperCase()
         })
@@ -95,7 +100,6 @@ export function CadastroNoticias(){
 
         await addDoc(collection(db, "NoticiasVideos"), {
             data: data.data,
-            id: data.id,
             link: data.link,
             legenda: data.legenda.toUpperCase()
         })
@@ -128,7 +132,6 @@ export function CadastroNoticias(){
             estadio: data.estadio,
             data: data.data,
             ingresso: data.ingresso || "Comprar",
-            id: data.id
             });
 
             resetPartidas();
@@ -148,7 +151,6 @@ export function CadastroNoticias(){
           try {
             await setDoc(doc(db, "NoticiasCapa", data.docId), {
             data: data.data,
-            id: data.id,
             img: data.img,
             legenda: data.legenda.toUpperCase(),
             });
@@ -159,6 +161,34 @@ export function CadastroNoticias(){
             console.log(`ERRO: ${error}`);
         }
         }
+
+        const {register: registerLoja, handleSubmit: handleSubmitLoja, formState: {errors: errorsLoja}, reset: resetLoja} = useForm<FormDataLoja>({
+            resolver: zodResolver(schemaLoja) as any,
+            mode:"onChange"
+        })
+
+    async function onSubmitLoja(data: FormDataLoja) {
+
+        await addDoc(collection(db, "Loja"), {
+            img: data.img,
+            link: data.link,
+            button: data.button,
+            preco: data.preco,
+            titulo: data.titulo,        
+        })
+
+        .then(() => {
+            resetLoja()
+            console.log("Produto cadastrado")
+        })
+
+        .catch((error) => {
+            console.log(`ERRO: ${error}`)
+        })
+        
+    }
+
+        
 
     return(
 
@@ -182,11 +212,12 @@ export function CadastroNoticias(){
                         setVideos(false)
                         setPartidas(false)
                         setCapa(false)
-                        setEscolha("Imagens")
+                        setLoja(false)
+                        setEscolha("Noticias")
                     }}
                     className={`${img === true ? "text-green-600" : ""}`}
                     >
-                        Imagens
+                        Noticias
                     </h2>
                 
                     <h2
@@ -195,6 +226,7 @@ export function CadastroNoticias(){
                         setVideos(true)
                         setPartidas(false)
                         setCapa(false)
+                        setLoja(false)
                         setEscolha("Videos")
                     }}
                     className={`${videos === true ? "text-green-600" : ""}`}
@@ -207,6 +239,7 @@ export function CadastroNoticias(){
                         setVideos(false)
                         setPartidas(true)
                         setCapa(false)
+                        setLoja(false)
                         setEscolha("Partidas")
                     }}
                     className={`${partidas === true ? "text-green-600" : ""}`}
@@ -220,11 +253,26 @@ export function CadastroNoticias(){
                         setVideos(false)
                         setPartidas(false)
                         setCapa(true)
+                        setLoja(false)
                         setEscolha("Capa")
                     }}
-                    className={`${partidas === true ? "text-green-600" : ""}`}
+                    className={`${capa === true ? "text-green-600" : ""}`}
                     >
                         Capa
+                    </h2>
+
+                    <h2
+                    onClick={() => {
+                        setImg(false)
+                        setVideos(false)
+                        setPartidas(false)
+                        setCapa(false)
+                        setLoja(true)
+                        setEscolha("Loja")
+                    }}
+                    className={`${loja === true ? "text-green-600" : ""}`}
+                    >
+                        Loja
                     </h2>
                 </div>
                 {
@@ -253,13 +301,6 @@ export function CadastroNoticias(){
                         placeholder="data da postagem"
                     />
                     {errors.data && <p className="text-red-500 mt-0 mb-2">{errors.data?.message}</p>}
-
-                     <Input
-                        type="number"
-                        {...register("id")}
-                        placeholder="id da noticia"
-                    />
-                    {errors.id && <p className="text-red-500 mt-0 mb-2">{errors.id?.message}</p>}
 
                     <button type="submit" className="cursor-pointer">Cadastrar</button>
                 </form>
@@ -290,13 +331,6 @@ export function CadastroNoticias(){
                         placeholder="data da postagem"
                     />
                     {errorsVideos.data && <p className="text-red-500 mt-0 mb-2">{errorsVideos.data?.message}</p>}
-
-                    <Input
-                        type="number"
-                        {...registerVideos("id")}
-                        placeholder="id da noticia"
-                    />
-                    {errorsVideos.id && <p className="text-red-500 mt-0 mb-2">{errorsVideos.id?.message}</p>}
 
                     <button type="submit" className="cursor-pointer">Cadastrar</button>
                 </form>
@@ -355,13 +389,6 @@ export function CadastroNoticias(){
                             />
                             {errorsPartidas.data && <p className="text-red-500">{errorsPartidas.data.message}</p>}
 
-                           <Input
-                            type="number"
-                            {...registerPartidas("id")}
-                            placeholder="id da noticia"
-                            />
-                            {errorsPartidas.id && <p className="text-red-500 mt-0 mb-2">{errorsPartidas.id?.message}</p>}
-
                             <button type="submit" className="cursor-pointer">Cadastrar</button>
                         </form>
                     )
@@ -399,12 +426,43 @@ export function CadastroNoticias(){
                     />
                     {errorsCapa.data && <p className="text-red-500 mt-0 mb-2">{errorsCapa.data?.message}</p>}
 
-                     <Input
-                        type="number"
-                        {...registerCapa("id")}
-                        placeholder="id da noticia"
+                    <button type="submit" className="cursor-pointer">Cadastrar</button>
+                        </form>
+                    )
+                }
+
+                {
+                    loja && (
+                        <form onSubmit={handleSubmitLoja(onSubmitLoja)} className="flex flex-col">
+
+                            <Input
+                        type="text"
+                        placeholder="link da imagem"
+                        {...registerLoja("img")}
+                        
                     />
-                    {errorsCapa.id && <p className="text-red-500 mt-0 mb-2">{errorsCapa.id?.message}</p>}
+                    {errorsLoja.img && <p className="text-red-500 mt-0 mb-2">{errorsLoja.img?.message}</p>}
+
+                        <Input 
+                            type="text"
+                            placeholder="link do produto"
+                            {...registerLoja("link")}
+                        />
+                        {errorsLoja.link && <p className="text-red-500 mt-0 mb-2">{errorsLoja.link?.message}</p>}
+
+                    <Input
+                        type="text"
+                        placeholder="Titulo do produto"
+                        {...registerLoja("titulo")}
+                    />
+                    {errorsLoja.titulo && <p className="text-red-500 mt-0 mb-2">{errorsLoja.titulo?.message}</p>}
+
+                    <Input
+                        type="text"
+                        {...registerLoja("preco")}
+                        placeholder="Preço do produto"
+                    />
+                    {errorsLoja.preco && <p className="text-red-500 mt-0 mb-2">{errorsLoja.preco?.message}</p>}
 
                     <button type="submit" className="cursor-pointer">Cadastrar</button>
                         </form>

@@ -10,8 +10,6 @@ import {MdOutlineArrowBackIos, MdOutlineArrowForwardIos } from "react-icons/md";
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import { useEffect, useState } from 'react';
 import { Tabela } from '../tabela';
-import CamisaLinha from "../../Assets/CamisaGoias-2025-2.jpg"
-import CamisaGOL from "../../Assets/camisaGoiasGOL2025.jpg"
 import socio2 from "../../Assets/banner2025_socio.jpg"
 
 
@@ -22,6 +20,7 @@ import Fundo2 from "../../Assets/FundoLendas2.png"
 import { Footer } from '../footer';
 import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
 import { db } from '../../services/firebaseconnection';
+import { Link } from 'react-router-dom';
 
 
 
@@ -60,7 +59,7 @@ interface LojaProps{
     preco: number; 
     button: string;
     link: string;
-    id: number;
+    id: string;
 }
 
 
@@ -76,6 +75,8 @@ export function Noticias2(){
     const [partidas, setPartidas] = useState<PartidasProps[]>([])
 
     const [capa, setCapa] = useState<NoticiasProps[]>([])
+
+    const [loja, setLoja] = useState<LojaProps[]>([])
     
     useEffect(() => {
     
@@ -163,12 +164,34 @@ export function Noticias2(){
                 setCapa(lista)
 
             })
+
+            const lojaRef = collection(db, "Loja")
+            const queryLoja = query(lojaRef, orderBy("id", "asc"))
+
+            const unsubLoja = onSnapshot(queryLoja,(snapshot) => {
+                let lista = [] as LojaProps[]
+
+                snapshot.forEach((doc) => {
+                    const data = doc.data()
+                    lista.push({
+                        id: doc.id,
+                        img: data.img,
+                        titulo: data.titulo,
+                        link: data.link,
+                        button: data.button,
+                        preco: data.preco
+                    })
+                })
+
+                setLoja(lista)
+            })
     
             return () => {
                 unsub()
                 unsubVideo()
                 unsubPartidas()
                 unsubCapa()
+                unsubLoja()
             }
     
     
@@ -214,14 +237,20 @@ export function Noticias2(){
         },
     ]*/
 
-    const Loja: LojaProps[] =[
+    /*const Loja: LojaProps[] =[
         {
             titulo: "Camisa Linha 01 Masculina - 2025", img: CamisaLinha, preco: 399.99, button: "Comprar", link: "", id:1
         },
         {
             titulo: "Camisa Goleiro 01 Maculina - 2025", img: CamisaGOL, preco: 399.99, button: "Comprar", link: "", id:2
         },
-    ]
+        {
+            titulo: "Camisa Goleiro 01 Maculina - 2025", img: CamisaGOL, preco: 399.99, button: "Comprar", link: "", id:3
+        },
+        {
+            titulo: "Camisa Goleiro 01 Maculina - 2025", img: CamisaGOL, preco: 399.99, button: "Comprar", link: "", id:4
+        },
+    ]*/
 
     /*const partidas: PartidasProps[]=[
     {logo1: crb, logo2: logo, titulo: "Campeonato brasileiro serie B", rodada: "12º rodada", data: "Domingo, Junho 14, 16h00", estadio: "Estadio Rei Pelé"},
@@ -267,8 +296,10 @@ export function Noticias2(){
                         style={{ backgroundImage: `url(${not.img})` }}>
                             <div className='absolute inset-0 bg-gradient-to-t from-black/90'></div>
                             <div className='text-white text-2xl z-10'>{not.legenda.toUpperCase()}</div>
-                            <div className='text-white z-10 bg-green-400 py-1 w-[150px] text-center rounded mt-4 cursor-pointer mb-20'>{not
-                            .button?.toUpperCase()}</div>
+                            <Link to={`/Projeto_Goias/${not.legenda}`} className='text-white z-10 bg-green-400 py-1 w-[150px] text-center rounded mt-4 cursor-pointer mb-20'>
+                                <div className="">{not
+                                .button?.toUpperCase()}</div>
+                            </Link>
                         </div>
                     </SwiperSlide>
             
@@ -325,7 +356,7 @@ export function Noticias2(){
                                     </div>
                                 </div>
                                 {
-                                    partida.ingresso && (
+                                    partida.estadio == "Serrinha" && (
                                         <div
                                             className='bg-green-700 text-white p-1 rounded cursor-pointer'
                                             >{partida.ingresso}
@@ -382,7 +413,7 @@ export function Noticias2(){
                                         noticias.slice(0, 2).map((not) => (
                                         <div key={not.id} className='flex flex-col items-center'>
                                             <div>
-                                            <img src={not.img} alt={not.legenda} className='w-full cursor-pointer transition-transform duration-2000 hover:scale-103' />
+                                            <Link to={`/Projeto_Goias/${not.legenda}`}><img src={not.img} alt={not.legenda} className='w-full cursor-pointer transition-transform duration-2000 hover:scale-103' /></Link>
                                             </div>
 
                                             <div className='bg-black text-white mt-[-20px] w-[320px] sm:w-[550px] mb-10 z-11 relative'>
@@ -408,7 +439,7 @@ export function Noticias2(){
                                             noticias.slice(0,1).map((not) => (
                                             <div key={not.id} className='flex flex-col items-center sm:w-[650px] lg:w-[850px] xl:w-[1024px]'>
                                                 <div>
-                                                <img src={not.img} alt={not.legenda} className='w-full cursor-pointer transition-transform duration-2000 hover:scale-103 sm:w-[650px] lg:w-[850px] xl:w-[1024px]' />
+                                                <Link to={`/Projeto_Goias/${not.legenda}`}><img src={not.img} alt={not.legenda} className='w-full cursor-pointer transition-transform duration-2000 hover:scale-103 sm:w-[650px] lg:w-[850px] xl:w-[1024px]' /></Link>
                                                 </div>
                                                 <div className='bg-black text-white mt-[-20px] w-[320px] sm:w-[550px] mb-10 z-11 relative lg:w-[800px] xl:w-[980px]'>
                                                 <h1 className="break-words whitespace-pre-line text-lg ml-3 font-semibold">
@@ -603,7 +634,7 @@ export function Noticias2(){
                         `}
                     </style>
                     {
-                        Loja.map((prod) => (
+                        loja.map((prod) => (
                             <SwiperSlide className=''>
                                 <div key={prod.id} className='w-full flex justify-center bg-green-50'>
                                     <img src={prod.img} alt="" className=''></img>
@@ -613,13 +644,11 @@ export function Noticias2(){
                                     <h1 className='text-xl font-semibold mt-2'>{prod.titulo}</h1>
 
                                     <strong className='text-green-800 text-2xl'>
-                                        {prod.preco.toLocaleString("pt-BR", {style: "currency",
-                                        currency: "BRL"
-                                        })}
+                                        {(prod.preco ?? 0).toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}
                                     </strong>
 
                                     <div className='w-full flex justify-center items-center my-2'>
-                                        <div className='w-[100%] bg-green-700 rounded text-center text-white h-8 flex justify-center items-center cursor-pointer'>
+                                        <div className='bg-green-700 text-white py-1 mb-4 rounded w-full text-center cursor-pointer hover:bg-white hover:text-green-500 border border-green-500 transition duration-500'>
                                             <a href={prod.link} target='_blank'>{prod.button}</a>
                                         </div>
                                     </div>
@@ -631,9 +660,9 @@ export function Noticias2(){
                     }
                 </Swiper>
                 ) : (
-                    <div className='flex gap-4 h-[750px] w-[650px] lg:w-[850px] xl:w-[1024px] mb-[-150px] lg:mb-[-15px]' >
+                    <div className='flex gap-4 h-[850px] w-[650px] lg:w-[850px] xl:w-[1024px] mb-[-150px] lg:mb-[-15px]' >
                         {
-                        Loja.map((prod) => (
+                        loja.slice(0,3).map((prod) => (
                                 <div key={prod.id}>
                                     <div className='w-full flex
                                     justify-center bg-green-50'>
@@ -642,12 +671,10 @@ export function Noticias2(){
                                     <div className='flex- flex-col'>
                                         <h1 className='text-xl font-semibold mt-2'>{prod.titulo}</h1>
                                         <strong className='text-green-800 text-2xl'>
-                                            {prod.preco.toLocaleString("pt-BR", {style: "currency",
-                                            currency: "BRL"
-                                            })}
+                                            {(prod.preco ?? 0).toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}
                                         </strong>
                                         <div className='w-full flex justify-center items-center'>
-                                            <div className='w-[100%] bg-green-700 rounded text-center text-white h-8 flex justify-center items-center cursor-pointer'>
+                                            <div className='bg-green-700 text-white py-1 mb-4 rounded w-full text-center cursor-pointer hover:bg-white hover:text-green-500 border border-green-500 transition duration-500'>
                                                 <a href={prod.link} target='_blank'>{prod.button}</a>
                                             </div>
                                         </div>
@@ -667,7 +694,7 @@ export function Noticias2(){
                 <div className='w-[380px] flex gap-2 items-center sm:w-[650px] lg:w-[850px] xl:w-[1024px] '>
                     <h1 className='text-xl font-bold py-2'>CLUBE</h1>
                     <div className='w-[1px] h-[25px] bg-green-400'></div>
-                    <div className='font-light text-[15px]'><a href='#' target='_blank'>Acessar Página</a></div>
+                    <div className='font-light text-[15px]'><Link to={`/Projeto_Goias/Clube`}>Acessar Página</Link></div>
                 </div>
 
                 <div className='w-[380px] flex gap-2 items-center sm:w-[650px] lg:w-[850px] xl:w-[1024px] '>
@@ -677,7 +704,7 @@ export function Noticias2(){
                         <h1 className='text-xl font-semibold'>TÍTULOS</h1>
                         <p className='text-[15px] mb-2'>Saiba mais sobre nossa vitoriosa caminhada</p>
                         <div className='bg-green-700 text-white py-1 mb-4 rounded w-[120px] text-center cursor-pointer hover:bg-white hover:text-green-500 border border-green-500 transition duration-500'>
-                            Descubra
+                            <Link to={`/Projeto_Goias/Titulos`}>Descubra</Link>
                         </div>
                         
                     </div>
@@ -687,7 +714,7 @@ export function Noticias2(){
                         <h1 className='text-xl font-semibold'>LENDAS</h1>
                         <p className='text-[15px] mb-2'>Saiba mais sobre os ídolos do GOIÁS</p>
                         <div className='bg-green-700 text-white py-1 mb-4 rounded w-[120px] text-center cursor-pointer hover:bg-white hover:text-green-500 border border-green-500 transition duration-500'>
-                            Descubra
+                            <Link to={`/Projeto_Goias/Lendas`}>Descubra</Link>
                         </div>
                         
                     </div>
@@ -699,7 +726,7 @@ export function Noticias2(){
                         <h1 className='text-xl font-semibold'>Sócios</h1>
                         <p className='text-[15px] mb-2'>Saiba mais sobre o programa de sócios</p>
                         <div className='bg-green-700 text-white py-1 mb-4 rounded w-[120px] text-center cursor-pointer hover:bg-white hover:text-green-500 border border-green-500 transition duration-500'>
-                            Descubra
+                            <Link to={`/Projeto_Goias/Socio`}>Descubra</Link>
                         </div>
                 </div>
 
