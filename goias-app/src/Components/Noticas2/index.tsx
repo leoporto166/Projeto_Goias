@@ -327,7 +327,9 @@ export function Noticias2(){
                                 <div className='text-lg text-gray-800'>
                                     {partida.titulo}
                                 </div>
-                                <div className='text text-gray-600'>
+                                <div className='text text-gray-600'
+                                style={{ fontVariantLigatures: "none" }}
+                                >
                                     {partida.data}
                                 </div>
                                 <div className='text text-gray-600'>
