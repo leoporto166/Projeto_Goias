@@ -108,20 +108,24 @@ export function TodasNoticias(){
             <Header></Header>
 
             <section>
-                <div className='flex w-full justify-center items-center'>
-                    <div className='w-[380px] flex flex-col items-center justify-center sm:w-[650px] lg:w-[850px]'>
-                        <div className='w-full flex text-lg font-bold mb-2 px-1.5'>
+                <div className='flex flex-col justify-center items-center mt-5'>
+                    <div className='w-[90%] md:w-full flex-col justify-center items-center'>
+                        <div className='w-full text-lg font-bold mb-2 px-1.5 justify-center items-center sm:justify-start sm:items-start'>
                                 <h1 className='text-black text-xl sm:text-2xl mt-2'>TODAS NOTÍCIAS</h1>
                         </div>
     
-                            <div className='flex flex-col justify-center items-center w-full py-2 px-1.5 lg:flex-row lg:flex-wrap'>
+                            <div className='flex flex-wrap md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 justify-center items-center sm:justify-start sm:items-start px-1.5'>
                                 {
                                     noticias.map((not) => (
-                                    <div key={not.id} className='flex flex-col items-center'>
-                                        <div>
-                                        <img src={not.img} alt={not.legenda} className='w-full cursor-pointer transition-transform duration-2000 hover:scale-103' />
+                                    <div key={not.id} className='w-full'>
+                                        <div className="">
+                                        <img src={not.img} alt={not.legenda} className='cursor-pointer
+                                        w-full aspect-video h-[180px] sm:h-[300px] md:h-[200px] lg:h-[200px]
+                                                xl:h-[200px]
+                                        
+                                        '/>
                                         </div>
-                                        <div className='bg-black text-white mt-[-20px] w-[320px] sm:w-[600px] mb-10 z-11 relative'>
+                                        <div className='bg-black text-white z-11'>
                                         <h1 className="break-words whitespace-pre-line text-lg ml-3 font-semibold">
                                             {not.legenda.toLocaleUpperCase()}
                                         </h1>
@@ -137,22 +141,23 @@ export function TodasNoticias(){
                                 }
                                 {
                                     videos.map((video) => (
-                                        <div key={video.id} className='w-[380px] flex flex-col items-center justify-center sm:w-[650px] lg:w-[850px]'>
+                                        <div key={video.id} className='w-full flex flex-col items-center justify-center'>
                                             <iframe
-                                                className="w-full aspect-video"
+                                                className="w-full aspect-video h-[180px] sm:h-[300px] md:h-[200px] lg:h-[200px]
+                                                xl:h-[200px]"
                                                 src={`https://www.youtube.com/embed/${video.link}`}
                                                 title={video.legenda}
                                                 frameBorder="0"
                                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                                 allowFullScreen
                                             ></iframe>
-                                            <div className=' bg-green-50 shadow w-full mb-10 z-11 relative'>
+                                            <div className=' bg-black text-white w-full z-11 relative'>
                                                 <h1 className="break-words whitespace-pre-line text-lg ml-3 font-semibold">
                                                     {video.legenda.toLocaleUpperCase()}
                                                 </h1>
                                                 <div className='ml-3  text-center flex items-center'>
-                                                    <div className='w-[50%] h-[1px] bg-green-200'></div>
-                                                    <h2 className='px-1'
+                                                    <div className='w-[50%] h-[1px] bg-green-200 '></div>
+                                                    <h2 className='px-1 text-gray-300'
                                                     style={{ fontVariantLigatures: "none" }}>{video.data}</h2>
                                                     <div className='w-[50%] h-[1px] bg-green-200 mr-1'></div>
                                                 </div>

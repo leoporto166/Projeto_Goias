@@ -56,11 +56,41 @@ const schemaLoja = z.object({
     link: z.string().url("Insira um link válido"),
 })
 
+const schemaTabela = z.object({
+    docId: z.enum([
+        "Amazonas",
+        "América-MG",
+        "Athletic-MG",
+        "Athletico-PR",
+        "Atlético-GO",
+        "Avaí",
+        "Botafogo-SP",
+        "CRB",
+        "Chapecoense",
+        "Coritiba",
+        "Criciúma",
+        "Cuiabá",
+        "Ferroviária",
+        "Goiás",
+        "Novorizontino",
+        "Operário-PR",
+        "Paysandu",
+        "Remo",
+        "Vila Nova-GO",
+        "Volta Redonda",
+    ]),
+    vitorias: z.coerce.number(),
+    empates: z.coerce.number(),
+    jogos: z.coerce.number(),
+    img: z.string().nonempty("Preencha esse campo").url("Insira um link válido"),
+})
+
 type FormDataImg = z.infer<typeof schemaImg>
 type FormDataVideos = z.infer<typeof schemaVideos>
 type FormDataPartidas = z.infer<typeof schemaPartidas>
 type FormDataNoticiasCapa = z.infer<typeof schemaNoticiasCapa>
 type FormDataLoja = z.infer<typeof schemaLoja>
+type FormDataTabela = z.infer<typeof schemaTabela>
 
 
 export function CadastroInfo(){
@@ -71,6 +101,7 @@ export function CadastroInfo(){
     const [capa, setCapa] = useState(false)
     const [escolha,  setEscolha] = useState("")
     const [loja, setLoja] = useState(false)
+    const [tabela, setTabela] = useState(false)
 
     const {register, handleSubmit, formState: {errors}, reset} = useForm<FormDataImg>({
         resolver: zodResolver(schemaImg) as any,
@@ -224,6 +255,33 @@ export function CadastroInfo(){
         })
         
     }
+
+    const {register: registerTabela, handleSubmit: handleSubmitTabela, formState: {errors: errorsTabela}, reset: resetTabela} = useForm<FormDataTabela>({
+            resolver: zodResolver(schemaTabela) as any,
+            mode:"onChange"
+        })
+
+    async function onSubmitTabela(data: FormDataTabela) {
+
+          try {
+
+            await setDoc(doc(db, "Tabela", data.docId), {
+            nome: data.docId,
+            logo: data.img,
+            jogos: data.jogos,
+            vitorias: data.vitorias,
+            empates: data.empates,
+            });
+
+            resetPartidas();
+            console.log(`Documento ${data.docId} atualizado com sucesso!`);
+        } catch (error) {
+            console.log(`ERRO: ${error}`);
+        }
+        }    
+    }
+
+    
 
         
 
