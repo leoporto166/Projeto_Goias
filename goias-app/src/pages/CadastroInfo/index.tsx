@@ -273,13 +273,13 @@ export function CadastroInfo(){
             empates: data.empates,
             });
 
-            resetPartidas();
+            resetTabela();
             console.log(`Documento ${data.docId} atualizado com sucesso!`);
         } catch (error) {
             console.log(`ERRO: ${error}`);
         }
         }    
-    }
+    
 
     
 
@@ -311,6 +311,7 @@ export function CadastroInfo(){
                             setPartidas(false)
                             setCapa(false)
                             setLoja(false)
+                            setTabela(false)
                             setEscolha("Imagens")
                         }}
                         className={`${img === true ? "text-green-600" : ""}`}
@@ -325,6 +326,7 @@ export function CadastroInfo(){
                             setPartidas(false)
                             setCapa(false)
                             setLoja(false)
+                            setTabela(false)
                             setEscolha("Videos")
                         }}
                         className={`${videos === true ? "text-green-600" : ""}`}
@@ -338,6 +340,7 @@ export function CadastroInfo(){
                             setPartidas(true)
                             setCapa(false)
                             setLoja(false)
+                            setTabela(false)
                             setEscolha("Partidas")
                         }}
                         className={`${partidas === true ? "text-green-600" : ""}`}
@@ -351,6 +354,7 @@ export function CadastroInfo(){
                             setPartidas(false)
                             setCapa(true)
                             setLoja(false)
+                            setTabela(false)
                             setEscolha("Capa")
                         }}
                         className={`${capa === true ? "text-green-600" : ""}`}
@@ -364,11 +368,27 @@ export function CadastroInfo(){
                             setPartidas(false)
                             setCapa(false)
                             setLoja(true)
+                            setTabela(false)
                             setEscolha("Loja")
                         }}
                         className={`${loja === true ? "text-green-600" : ""}`}
                         >
                             Loja
+                        </h2>
+
+                        <h2
+                        onClick={() => {
+                            setImg(false)
+                            setVideos(false)
+                            setPartidas(false)
+                            setCapa(false)
+                            setLoja(false)
+                            setTabela(true)
+                            setEscolha("Tabela")
+                        }}
+                        className={`${tabela === true ? "text-green-600" : ""}`}
+                        >
+                            Tabela
                         </h2>
                     </div>
                     {
@@ -552,6 +572,74 @@ export function CadastroInfo(){
                         {errorsLoja.id && <p className="text-red-500 mt-0 mb-2">{errorsLoja.id?.message}</p>}
                         <button type="submit" className="flex justify-center bg-green-700 my-2 rounded text-green-50 mb-4 cursor-pointer py-1 w-full text-center  hover:bg-white hover:text-green-500 border border-green-500 transition duration-500">Cadastrar</button>
                             </form>
+                        )
+                    }
+                    {
+                        tabela && (
+
+                            <div>
+                                <form onSubmit={handleSubmitTabela(onSubmitTabela)} className="flex flex-col">
+                                    <select {...registerTabela("docId")}>
+                                        <option value="Amazonas">Amazonas</option>
+                                        <option value="América-MG">América-MG</option>
+                                        <option value="Athletic-MG">Athletic-MG</option>
+                                        <option value="Athletico-PR">Athletico-PR</option>
+                                        <option value="Atlético-GO">Atlético-GO</option>
+                                        <option value="Avaí">Avaí</option>
+                                        <option value="Botafogo-SP">Botafogo-SP</option>
+                                        <option value="CRB">CRB</option>
+                                        <option value="Chapecoense">Chapecoense</option>
+                                        <option value="Coritiba">Coritiba</option>
+                                        <option value="Criciúma">Criciúma</option>
+                                        <option value="Cuiabá">Cuiabá</option>
+                                        <option value="Ferroviária">Ferroviária</option>
+                                        <option value="Goiás">Goiás</option>
+                                        <option value="Novorizontino">Novorizontino</option>
+                                        <option value="Operário-PR">Operário-PR</option>
+                                        <option value="Paysandu">Paysandu</option>
+                                        <option value="Remo">Remo</option>
+                                        <option value="Vila Nova-GO">Vila Nova-GO</option>
+                                        <option value="Volta Redonda">Volta Redonda</option>
+                                    </select>
+                                    <Input
+                                        type="text"
+                                        placeholder="link escudo time"
+                                        {...registerTabela("img")} 
+                                    
+                                    />
+                                    {errorsTabela.img && <p className="text-red-500 mt-0 mb-2">{errorsTabela.img?.message}</p>}
+
+                                    <Input
+                                        type="text"
+                                        placeholder="jogos do time"
+                                        {...registerTabela("jogos")} 
+                                    
+                                    />
+                                    {errorsTabela.jogos && <p className="text-red-500 mt-0 mb-2">{errorsTabela.jogos?.message}</p>}
+
+                                    <Input
+                                        type="text"
+                                        placeholder="vitorias do time"
+                                        {...registerTabela("vitorias")} 
+                                    
+                                    />
+                                    {errorsTabela.vitorias && <p className="text-red-500 mt-0 mb-2">{errorsTabela.vitorias?.message}</p>}
+
+                                    <Input
+                                        type="text"
+                                        placeholder="empates do time"
+                                        {...registerTabela("empates")} 
+                                    
+                                    />
+                                    {errorsTabela.empates && <p className="text-red-500 mt-0 mb-2">{errorsTabela.empates?.message}</p>}
+
+                                    <button type="submit" className="flex justify-center bg-green-700 my-2 rounded text-green-50 mb-4 cursor-pointer py-1 w-full text-center  hover:bg-white hover:text-green-500 border border-green-500 transition duration-500">Cadastrar</button>
+
+                                </form>
+
+                            </div>
+
+
                         )
                     }
             
