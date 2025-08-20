@@ -1,33 +1,7 @@
 import { useEffect, useState } from "react";
 
-import escudoGoias from "../../Assets/logo-goias-esporte-clube-256.png"
-import escudoCoritiba from "../../Assets/coritiba.png"
-import escudoRemo from "../../Assets/Remo.png"
-import escudoCriciuma from "../../Assets/Criciuma.webp"
-import escudoChape from "../../Assets/Chape.png"
-import escudoCuiba from "../../Assets/Cuiabá.png"
-import escudoNovo from "../../Assets/Novorizontino.png"
-import escudoAvai from "../../Assets/avai.png"
-import escudoByla from "../../Assets/byla.png"
-import escudoAtl from "../../Assets/athletic.png"
-import escudoCap from "../../Assets/cap.png"
-import escudoAma from "../../Assets/amazonas.png"
-import escudoAmer from "../../Assets/América.png"
-import escudoPay from "../../Assets/Paysandu.png"
-import escudoOpr from "../../Assets/OPR.png"
-import escudoBota from "../../Assets/botafogo.png"
-import escudoCRB from "../../Assets/crb.png"
-import escudoAtlGO from "../../Assets/Atlético_Goianiense.png"
-import escudoFerro from "../../Assets/Ferroviária.png"
-import escudoVoltaço from "../../Assets/Voltaço.png"
-
-
-
-
-
-
-
-
+import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
+import { db } from "../../services/firebaseconnection";
 
 
 interface TabelaProps{
@@ -39,7 +13,7 @@ interface TabelaProps{
     img: string
 }
 
-const tabela : TabelaProps[] = [
+/*const tabela : TabelaProps[] = [
     { time: "Athletico‑PR", jogos: 0, vitorias: 0, pontos: 0, empates: 0, img: ""},
 
     { time: "Atlético‑GO", jogos: 0, vitorias: 0, pontos: 0, empates: 0, img: "" },
@@ -82,54 +56,52 @@ const tabela : TabelaProps[] = [
 
 
 ]
-
-
-
-    
+  */
 
 
 
 export function Tabela(){
 
-    const [largura, setLargura] = useState(window.innerWidth);
-    const [table, setTable] = useState<TabelaProps[]>(tabela)
+    const [tabela, setTabela] = useState<TabelaProps[]>([])
 
-    
-   function tabelaFun({ time, jogos, vitorias, empates, img }: Omit<TabelaProps, "pontos">) {
-  setTable(currentTable => {
-    return currentTable.map(t => {
-      if (t.time === time) {
-        const pontos = vitorias * 3 + empates;
-        return { ...t, jogos, vitorias, pontos, empates, img };
-      }
-      return t;
+    const [largura, setLargura] = useState(window.innerWidth);
+
+    function calcularTabela(dados: any[]): TabelaProps[] {
+    return dados.map((item) => {
+      const pontos = (item.vitorias ?? 0) * 3 + (item.empates ?? 0);
+      return {
+        time: item.nome,
+        jogos: item.jogos,
+        vitorias: item.vitorias,
+        empates: item.empates,
+        pontos,
+        img: item.logo,
+      };
     });
-  });
-}
+  }
+
+  useEffect(() => {
+    const tabelaRef = collection(db, "Tabela");
+    const queryTabela = query(tabelaRef, orderBy("nome", "asc"));
+
+    const unsub = onSnapshot(queryTabela, (snapshot) => {
+      const lista = snapshot.docs.map((doc) => doc.data());
+      const tabelaCalculada = calcularTabela(lista);
+      setTabela(tabelaCalculada);
+      console.log(tabelaCalculada)
+      console.log("Snapshot Firestore:", lista);
+      console.log("Tabela calculada:", tabelaCalculada);
+    });
+
+
+    return () => unsub();
+  }, []);
+
+
+
 
 
 useEffect(() => {
-   tabelaFun({ time: "Goiás", jogos: 20, vitorias: 11, empates: 5, img: escudoGoias });
-  tabelaFun({ time: "Coritiba", jogos: 20, vitorias: 11, empates: 5, img: escudoCoritiba });
-  tabelaFun({ time: "Novorizontino", jogos: 20, vitorias: 9, empates: 8, img: escudoNovo });
-  tabelaFun({ time: "Chapecoense", jogos: 20, vitorias: 10, empates: 3, img: escudoChape });
-  tabelaFun({ time: "Remo", jogos: 20, vitorias: 7, empates: 9, img: escudoRemo });
-  tabelaFun({ time: "Criciúma", jogos: 20, vitorias: 8, empates: 5, img: escudoCriciuma });
-  tabelaFun({ time: "Avaí", jogos: 20, vitorias: 7, empates: 8, img: escudoAvai });
-  tabelaFun({ time: "Cuiabá", jogos: 19, vitorias: 8, empates: 4, img: escudoCuiba });
-  tabelaFun({ time: "Vila Nova", jogos: 20, vitorias: 8, empates: 3, img: escudoByla });
-  tabelaFun({ time: "Athletic", jogos: 19, vitorias: 7, empates: 2, img: escudoAtl });
-  tabelaFun({ time: "Athletico‑PR", jogos: 20, vitorias: 7, empates: 5, img: escudoCap });
-  tabelaFun({ time: "Amazonas", jogos: 20, vitorias: 4, empates: 8, img: escudoAma });
-  tabelaFun({ time: "América‑MG", jogos: 20, vitorias: 6, empates: 3, img: escudoAmer });
-  tabelaFun({ time: "Paysandu", jogos: 20, vitorias: 4, empates: 8, img: escudoPay });
-  tabelaFun({ time: "Operário‑PR", jogos: 20, vitorias: 7, empates: 5, img: escudoOpr });
-  tabelaFun({ time: "Botafogo‑SP", jogos: 20, vitorias: 5, empates: 6, img: escudoBota });
-  tabelaFun({ time: "CRB", jogos: 20, vitorias: 7, empates: 4, img: escudoCRB });
-  tabelaFun({ time: "Atlético‑GO", jogos: 19, vitorias: 5, empates: 8, img: escudoAtlGO });
-  tabelaFun({ time: "Ferroviária", jogos: 20, vitorias: 5, empates: 8, img: escudoFerro });
-  tabelaFun({ time: "Volta Redonda", jogos: 19, vitorias: 5, empates: 6, img: escudoVoltaço });
-  
   function atualizarLargura() {
         setLargura(window.innerWidth);
   }
@@ -139,7 +111,7 @@ useEffect(() => {
 
 }, []);
 
-const tabelaOrdenada = [...table].sort((a, b) => b.pontos - a.pontos);
+const tabelaOrdenada = [...tabela].sort((a, b) => b.pontos - a.pontos);
 const indexGoias = tabelaOrdenada.findIndex(t => t.time === "Goiás")
 
 const start = Math.max(0, indexGoias - 1);
