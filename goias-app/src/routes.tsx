@@ -9,6 +9,9 @@ import { Clube } from "./pages/Clube";
 import { RaizVerde } from "./pages/Raiz Verde";
 import { TodasNoticias } from "./pages/TodasNoticias";
 import { CadastroInfo } from "./pages/CadastroInfo";
+import { Videos } from "./pages/NotVideos";
+import { Imagens } from "./pages/NotImg";
+import { Private } from "./Components/RotaPrivada";
 const router = createBrowserRouter([
     {
         path:"/Projeto_Goias",
@@ -52,8 +55,24 @@ const router = createBrowserRouter([
 
     {
         path: "/Projeto_Goias/Cadastro Informações",
-        element: <CadastroInfo />
+        element: (
+            <Private>
+                <CadastroInfo />
+            </Private>
+        )
+        
     },
+
+    {
+        path: "/Projeto_Goias/Videos",
+        element: <Videos />
+    },
+
+    {
+        path: "/Projeto_Goias/Noticias",
+        element: <Imagens />
+    },
+
 
     {
         path:"*",

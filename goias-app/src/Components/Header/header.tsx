@@ -29,11 +29,25 @@ export function Header(){
     const [headersub, setHeaderSub] = useState(false)
     const [logado, setLogado] = useState(false)
     const [clickIndex, setClickIndex] = useState(-1)
+    const [acesso, setAcesso] = useState(false)
 
 
     const [largura, setLargura] = useState(window.innerWidth);
     const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
+
+useEffect(() => {
+  const unsubscribe = onAuthStateChanged(auth, (user) => {
+    if (user) {
+      console.log("Email do usuário logado:", user.email);
+      setAcesso(user.email === "goiaspermitido@gmail.com");
+    } else {
+      setAcesso(false);
+    }
+  });
+
+  return () => unsubscribe();
+}, []);
 
 
     useEffect(() => {
@@ -43,6 +57,8 @@ export function Header(){
 
     window.addEventListener("resize", atualizarLargura);
     return () => window.removeEventListener("resize", atualizarLargura);
+
+    
     }, []);
 
     useEffect(() => {
@@ -75,6 +91,9 @@ export function Header(){
       {txt: "CLUBE"},
       {txt: "BASE"},
       {txt: "ELENCO"},
+    ]
+
+    const Restrito: HeaderProps[] = [ 
       {txt: "RESTRITO"}
     ]
 
@@ -160,6 +179,25 @@ export function Header(){
                   </div>
                   
                 ))}
+
+                {
+                  acesso && 
+                  (
+                    Restrito.map((txt, index) => (
+                  <div
+                    key={`menu-${index}`}
+                    onClick={() => setSelectedIndex(index)}
+                    className={`menu cursor-pointer select-none ${selectedIndex === index ? "text-white" : ""}`}
+                  >
+                    {txt.txt}
+                    
+                    
+                  </div>
+                  
+                ))
+                  )
+              }
+
 
                 {menuActive ? (
                       <FaTimes
@@ -256,15 +294,19 @@ export function Header(){
                         ))}
                       </ul>
                     )}
-                    {selectedIndex === 6 && (
+
+                    { acesso && (
+                    selectedIndex === 6 && (
                       <ul className={`nav-list ${selectedIndex === 6 ? "seis" : ""}`}>
-                        {menuR.map((res, subIndex) => (
+                        {Restrito.map((res, subIndex) => (
                           <Link to={`/Projeto_Goias/${res.txt}`}>
                             <li key={`noticia-${subIndex}`}>{res.txt}</li>
                           </Link>
                         ))}
                       </ul>
-                    )}
+                    )
+                  )
+                  }
             </div>) : (
               <div className="relative z-50">
                 <header className="relative flex items-center h-[100px]">
