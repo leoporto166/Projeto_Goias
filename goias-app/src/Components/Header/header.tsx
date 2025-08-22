@@ -91,12 +91,8 @@ useEffect(() => {
       {txt: "CLUBE"},
       {txt: "BASE"},
       {txt: "ELENCO"},
-    ]
-
-    const Restrito: HeaderProps[] = [ 
       {txt: "RESTRITO"}
     ]
-
 
     const menuN: HeaderProps[] = [
       {txt: "Todas Noticias"},
@@ -180,23 +176,6 @@ useEffect(() => {
                   
                 ))}
 
-                {
-                  acesso && 
-                  (
-                    Restrito.map((txt, index) => (
-                  <div
-                    key={`menu-${index}`}
-                    onClick={() => setSelectedIndex(index)}
-                    className={`menu cursor-pointer select-none ${selectedIndex === index ? "text-white" : ""}`}
-                  >
-                    {txt.txt}
-                    
-                    
-                  </div>
-                  
-                ))
-                  )
-              }
 
 
                 {menuActive ? (
@@ -298,7 +277,7 @@ useEffect(() => {
                     { acesso && (
                     selectedIndex === 6 && (
                       <ul className={`nav-list ${selectedIndex === 6 ? "seis" : ""}`}>
-                        {Restrito.map((res, subIndex) => (
+                        {menuR.map((res, subIndex) => (
                           <Link to={`/Projeto_Goias/${res.txt}`}>
                             <li key={`noticia-${subIndex}`}>{res.txt}</li>
                           </Link>
