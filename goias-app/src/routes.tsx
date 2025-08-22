@@ -12,6 +12,7 @@ import { CadastroInfo } from "./pages/CadastroInfo";
 import { Videos } from "./pages/NotVideos";
 import { Imagens } from "./pages/NotImg";
 import { Private } from "./Components/RotaPrivada";
+import { Esmeralda } from "./pages/Esmeralda";
 const router = createBrowserRouter([
     {
         path:"/Projeto_Goias",
@@ -61,6 +62,11 @@ const router = createBrowserRouter([
             </Private>
         )
         
+    },
+
+    {
+        path: "/Projeto_Goias/Esmeralda",
+        element: <Esmeralda />
     },
 
     {

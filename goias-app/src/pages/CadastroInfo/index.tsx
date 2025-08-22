@@ -85,12 +85,27 @@ const schemaTabela = z.object({
     img: z.string().nonempty("Preencha esse campo").url("Insira um link válido"),
 })
 
+const schemaSocio = z.object({
+  id: z.coerce.number(),
+  titulo: z.string().nonempty("Preencha esse campo"),
+  descricao: z.string().nonempty("Preencha esse campo"),
+  preco: z.string().nonempty("Preencha esse campo"),
+  button: z.string().default("ASSINAR"),
+  informacao1: z.string().nonempty("Preencha esse campo"),
+  informacao2: z.string().nonempty("Preencha esse campo"),
+  informacao3: z.string().nonempty("Preencha esse campo"),
+  informacao4: z.string().optional(),
+  informacao5: z.string().optional(),
+  informacao6: z.string().optional(),
+});
+
 type FormDataImg = z.infer<typeof schemaImg>
 type FormDataVideos = z.infer<typeof schemaVideos>
 type FormDataPartidas = z.infer<typeof schemaPartidas>
 type FormDataNoticiasCapa = z.infer<typeof schemaNoticiasCapa>
 type FormDataLoja = z.infer<typeof schemaLoja>
 type FormDataTabela = z.infer<typeof schemaTabela>
+type FormDataSocio = z.infer<typeof schemaSocio>
 
 
 export function CadastroInfo(){
@@ -102,6 +117,7 @@ export function CadastroInfo(){
     const [escolha,  setEscolha] = useState("")
     const [loja, setLoja] = useState(false)
     const [tabela, setTabela] = useState(false)
+    const [socio, setSocio] = useState(false)
 
     const {register, handleSubmit, formState: {errors}, reset} = useForm<FormDataImg>({
         resolver: zodResolver(schemaImg) as any,
@@ -278,7 +294,37 @@ export function CadastroInfo(){
         } catch (error) {
             console.log(`ERRO: ${error}`);
         }
-        }    
+        }   
+        
+        const {register: registerSocio, handleSubmit: handleSubmitSocio, formState: {errors: errorsSocio}, reset: resetSocio} = useForm<FormDataSocio>({
+            resolver: zodResolver(schemaSocio) as any,
+            mode:"onChange"
+        })
+
+    async function onSubmitSocio(data: FormDataSocio) {
+    const socioData = {
+        id: data.id,
+        titulo: data.titulo,
+        descrição: data.descricao,
+        preco: data.preco,
+        button: data.button,
+        informacao1: data.informacao1,
+        informacao2: data.informacao2,
+        informacao3: data.informacao3,
+        ...(data.informacao4 && { informacao4: data.informacao4 }),
+        ...(data.informacao5 && { informacao5: data.informacao5 }),
+        ...(data.informacao6 && { informacao6: data.informacao6 }),
+    };
+
+    await setDoc(doc(db, "Socio", data.id.toString()), socioData)
+        .then(() => {
+        resetSocio();
+        console.log(`Socio atualizado com sucesso!`);
+        })
+        .catch((error) => {
+        console.log(`ERRO: ${error}`);
+        });
+    }
     
 
     
@@ -294,7 +340,7 @@ export function CadastroInfo(){
                 
                 <div className="bg-white p-2 flex flex-col justify-center items-center w-[400px]">
                     {
-                        videos === false && img === false && partidas === false && capa === false && loja=== false   ? (
+                        videos === false && img === false && partidas === false && capa === false && loja === false && tabela == false && socio === false  ? (
                             <div className="text-xl font-semibold my-5">
                                 <h1>Escolha uma das opções</h1>
                             </div>
@@ -312,6 +358,7 @@ export function CadastroInfo(){
                             setCapa(false)
                             setLoja(false)
                             setTabela(false)
+                            setSocio(false)
                             setEscolha("Imagens")
                         }}
                         className={`${img === true ? "text-green-600" : ""}`}
@@ -327,6 +374,7 @@ export function CadastroInfo(){
                             setCapa(false)
                             setLoja(false)
                             setTabela(false)
+                            setSocio(false)
                             setEscolha("Videos")
                         }}
                         className={`${videos === true ? "text-green-600" : ""}`}
@@ -341,6 +389,7 @@ export function CadastroInfo(){
                             setCapa(false)
                             setLoja(false)
                             setTabela(false)
+                            setSocio(false)
                             setEscolha("Partidas")
                         }}
                         className={`${partidas === true ? "text-green-600" : ""}`}
@@ -355,6 +404,7 @@ export function CadastroInfo(){
                             setCapa(true)
                             setLoja(false)
                             setTabela(false)
+                            setSocio(false)
                             setEscolha("Capa")
                         }}
                         className={`${capa === true ? "text-green-600" : ""}`}
@@ -369,6 +419,7 @@ export function CadastroInfo(){
                             setCapa(false)
                             setLoja(true)
                             setTabela(false)
+                            setSocio(false)
                             setEscolha("Loja")
                         }}
                         className={`${loja === true ? "text-green-600" : ""}`}
@@ -384,11 +435,28 @@ export function CadastroInfo(){
                             setCapa(false)
                             setLoja(false)
                             setTabela(true)
+                            setSocio(false)
                             setEscolha("Tabela")
                         }}
                         className={`${tabela === true ? "text-green-600" : ""}`}
                         >
                             Tabela
+                        </h2>
+
+                        <h2
+                        onClick={() => {
+                            setImg(false)
+                            setVideos(false)
+                            setPartidas(false)
+                            setCapa(false)
+                            setLoja(false)
+                            setTabela(false)
+                            setSocio(true)
+                            setEscolha("Socio")
+                        }}
+                        className={`${socio === true ? "text-green-600" : ""}`}
+                        >
+                            Socio
                         </h2>
                     </div>
                     {
@@ -640,6 +708,84 @@ export function CadastroInfo(){
                             </div>
 
 
+                        )
+                    }
+                    {
+                        socio && (
+                        <form onSubmit={handleSubmitSocio(onSubmitSocio)} className=" flex flex-col">
+
+                        <Input
+                            type="text"
+                            {...registerSocio("titulo")}
+                            placeholder="nome do plano"
+                        />
+                        {errorsSocio.titulo && <p className="text-red-500 mt-0 mb-2">{errorsSocio.titulo?.message}</p>}
+
+                        <Input
+                            type="text"
+                            placeholder="proço do plano"
+                            {...registerSocio("preco")}
+                        />
+                        {errorsSocio.preco && <p className="text-red-500 mt-0 mb-2">{errorsSocio.preco?.message}</p>}
+                        <Input
+                            type="text"
+                            {...registerSocio("descricao")}
+                            placeholder="descrição do plano"
+                        />
+
+                        {errorsSocio.descricao && <p className="text-red-500 mt-0 mb-2">{errorsSocio.descricao?.message}</p>}
+
+                        <Input
+                            type="text"
+                            {...registerSocio("informacao1")}
+                            placeholder="1 info do plano"
+                        />
+                        {errorsSocio.informacao1 && <p className="text-red-500 mt-0 mb-2">{errorsSocio.informacao1?.message}</p>}
+
+                        <Input
+                            type="text"
+                            {...registerSocio("informacao2")}
+                            placeholder="2 info do plano"
+                        />
+                        {errorsSocio.informacao2 && <p className="text-red-500 mt-0 mb-2">{errorsSocio.informacao2?.message}</p>}
+
+                        <Input
+                            type="text"
+                            {...registerSocio("informacao3")}
+                            placeholder="3 info do plano"
+                        />
+                        {errorsSocio.informacao3 && <p className="text-red-500 mt-0 mb-2">{errorsSocio.informacao3?.message}</p>}
+
+                        <Input
+                            type="text"
+                            {...registerSocio("informacao4")}
+                            placeholder="4 info do plano"
+                        />
+                         <p className="text-green-500 mt-0 mb-2">Campo não obrigatorio</p>
+
+                         <Input
+                            type="text"
+                            {...registerSocio("informacao5")}
+                            placeholder="5 info do plano"
+                        />
+                         <p className="text-green-500 mt-0 mb-2">Campo não obrigatorio</p>
+
+                         <Input
+                            type="text"
+                            {...registerSocio("informacao6")}
+                            placeholder="6 info do plano"
+                        />
+                         <p className="text-green-500 mt-0 mb-2">Campo não obrigatorio</p>
+
+                        <Input
+                            type="number"
+                            {...registerSocio("id")}
+                            placeholder="id do plano"
+                        />
+                        {errorsSocio.id && <p className="text-red-500 mt-0 mb-2">{errorsSocio.id?.message}</p>}
+
+                        <button type="submit" className="flex justify-center bg-green-700 my-2 rounded text-green-50 mb-4 cursor-pointer py-1 w-full text-center  hover:bg-white hover:text-green-500 border border-green-500 transition duration-500">Cadastrar</button>
+                    </form>
                         )
                     }
             

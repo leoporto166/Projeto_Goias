@@ -40,6 +40,7 @@ useEffect(() => {
   const unsubscribe = onAuthStateChanged(auth, (user) => {
     if (user) {
       console.log("Email do usuário logado:", user.email);
+      console.log(acesso)
       setAcesso(user.email === "goiaspermitido@gmail.com");
     } else {
       setAcesso(false);
@@ -163,7 +164,7 @@ useEffect(() => {
                 className={` absolute start-0 flex gap-6 text-gray-500`}
                 onClick={active}
               >
-                {header.map((txt, index) => (
+                {header.slice(0,6).map((txt, index) => (
                   <div
                     key={`menu-${index}`}
                     onClick={() => setSelectedIndex(index)}
@@ -175,6 +176,23 @@ useEffect(() => {
                   </div>
                   
                 ))}
+
+                {
+                  acesso && (
+                    header.slice(6).map((txt, index) => (
+                      <div
+                        key={`menu-${index}`}
+                        onClick={() => setSelectedIndex(6)}
+                        className={`menu cursor-pointer select-none ${selectedIndex === 6 ? "text-white" : ""}`}
+                      >
+                        {txt.txt}
+                        
+                        
+                      </div>
+                      
+                    ))
+                  )
+                }
 
 
 
@@ -331,7 +349,7 @@ useEffect(() => {
                   <div className={`nav-list ${menuPhoneActive ? "active" : ""} absolute start-0 flex gap-6 text-white z-10`}
                   
                   >
-                    {header.map((txt, index) => (
+                    {header.slice(0,6).map((txt, index) => (
                       <div
                         key={`menu-${index}`}
                         
@@ -353,6 +371,8 @@ useEffect(() => {
                            <div className="w-full h-[1px] bg-white pr-8"></div>
                            )
                         }
+
+                        
                         
 
                         <div className="flex items-center justify-between py-2 w-full cursor-pointer"
@@ -410,6 +430,62 @@ useEffect(() => {
                         }
                       </div>
                     ))}
+
+                    {acesso &&
+                      header.slice(6).map((txt, index) => {
+                        const realIndex = index + 6; // 🔥 agora é o index real dentro do header
+                        return (
+                          <div
+                            key={`menu-${realIndex}`}
+                            className={`menu mt-1 w-full px-4 sm:px-2 select-none ${
+                              selectedIndex === realIndex ? "text-white" : ""
+                            }`}
+                          >
+                            {/* linha invisível */}
+                            <div className="w-12/12 h-[1px] bg-black pr-8 opacity-0"></div>
+
+                            {/* linha divisória */}
+                            <div className="w-12/12 sm:w-full h-[1px] bg-white"></div>
+
+                            {/* item de menu */}
+                            <div
+                              className="flex items-center justify-between py-2 w-full cursor-pointer"
+                              onClick={() => {
+                                if (selectedIndex === realIndex) {
+                                  setSelectedIndex(-1);
+                                  setClickIndex(-1);
+                                  setHeaderSub(false);
+                                } else {
+                                  setSelectedIndex(realIndex);
+                                  setClickIndex(realIndex);
+                                  setHeaderSub(true);
+                                }
+                              }}
+                            >
+                              {txt.txt}
+                              <div className="text-white shrink-0">
+                                {clickIndex === realIndex && headersub ? (
+                                  <AiOutlineUp />
+                                ) : (
+                                  <AiOutlineDown />
+                                )}
+                              </div>
+                            </div>
+
+                            {/* linha inferior */}
+                            <div
+                              className={`w-11/12 sm:w-full h-[1px] bg-white ${
+                                clickIndex === realIndex && headersub
+                                  ? "mt-[100px] transition-all duration-100 opacity-0"
+                                  : "opacity-0"
+                              }`}
+                            ></div>
+
+                            <div className="w-12/12 sm:w-full h-[1px] bg-white transition-all duration-100 pr-8"></div>
+                          </div>
+                        );
+                      })}
+
                   </div>
                 )}
 
