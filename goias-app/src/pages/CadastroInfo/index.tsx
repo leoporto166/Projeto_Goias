@@ -99,6 +99,11 @@ const schemaSocio = z.object({
   informacao6: z.string().optional(),
 });
 
+const schemaSocioImg = z.object({
+    docId: z.enum(["img1", "img2", "img3"]),
+    img: z.string().nonempty("Preencha esse campo").url("Insira um link válido"),
+});
+
 type FormDataImg = z.infer<typeof schemaImg>
 type FormDataVideos = z.infer<typeof schemaVideos>
 type FormDataPartidas = z.infer<typeof schemaPartidas>
@@ -106,6 +111,7 @@ type FormDataNoticiasCapa = z.infer<typeof schemaNoticiasCapa>
 type FormDataLoja = z.infer<typeof schemaLoja>
 type FormDataTabela = z.infer<typeof schemaTabela>
 type FormDataSocio = z.infer<typeof schemaSocio>
+type FormDataSocioImg = z.infer<typeof schemaSocioImg>
 
 
 export function CadastroInfo(){
@@ -118,6 +124,7 @@ export function CadastroInfo(){
     const [loja, setLoja] = useState(false)
     const [tabela, setTabela] = useState(false)
     const [socio, setSocio] = useState(false)
+    const [socioImg, setSocioimg] = useState(false)
 
     const {register, handleSubmit, formState: {errors}, reset} = useForm<FormDataImg>({
         resolver: zodResolver(schemaImg) as any,
@@ -325,6 +332,26 @@ export function CadastroInfo(){
         console.log(`ERRO: ${error}`);
         });
     }
+
+            const {register: registerSocioImg, handleSubmit: handleSubmitSocioImg, formState: {errors: errorsSocioImg}, reset: resetSocioImg} = useForm<FormDataSocioImg>({
+            resolver: zodResolver(schemaSocioImg) as any,
+            mode:"onChange"
+        })
+
+    async function onSubmitSocioimg(data: FormDataSocioImg) {
+    const socioData = {
+        img: data.img
+    };
+
+    await setDoc(doc(db, "SocioImg", data.docId), socioData)
+        .then(() => {
+        resetSocioImg();
+        console.log(`Imagens Socio atualizado com sucesso!`);
+        })
+        .catch((error) => {
+        console.log(`ERRO: ${error}`);
+        });
+    }
     
 
     
@@ -338,9 +365,9 @@ export function CadastroInfo(){
 
             <div className="flex flex-col justify-center items-center w-full h-[89%]">
                 
-                <div className="bg-white p-2 flex flex-col justify-center items-center w-[400px]">
+                <div className="bg-white p-2 flex flex-col justify-center items-center w-[80%]">
                     {
-                        videos === false && img === false && partidas === false && capa === false && loja === false && tabela == false && socio === false  ? (
+                        videos === false && img === false && partidas === false && capa === false && loja === false && tabela == false && socio === false && socioImg === false ? (
                             <div className="text-xl font-semibold my-5">
                                 <h1>Escolha uma das opções</h1>
                             </div>
@@ -359,6 +386,7 @@ export function CadastroInfo(){
                             setLoja(false)
                             setTabela(false)
                             setSocio(false)
+                            setSocioimg(false)
                             setEscolha("Imagens")
                         }}
                         className={`${img === true ? "text-green-600" : ""}`}
@@ -375,6 +403,7 @@ export function CadastroInfo(){
                             setLoja(false)
                             setTabela(false)
                             setSocio(false)
+                            setSocioimg(false)
                             setEscolha("Videos")
                         }}
                         className={`${videos === true ? "text-green-600" : ""}`}
@@ -390,6 +419,7 @@ export function CadastroInfo(){
                             setLoja(false)
                             setTabela(false)
                             setSocio(false)
+                            setSocioimg(false)
                             setEscolha("Partidas")
                         }}
                         className={`${partidas === true ? "text-green-600" : ""}`}
@@ -405,6 +435,7 @@ export function CadastroInfo(){
                             setLoja(false)
                             setTabela(false)
                             setSocio(false)
+                            setSocioimg(false)
                             setEscolha("Capa")
                         }}
                         className={`${capa === true ? "text-green-600" : ""}`}
@@ -420,6 +451,7 @@ export function CadastroInfo(){
                             setLoja(true)
                             setTabela(false)
                             setSocio(false)
+                            setSocioimg(false)
                             setEscolha("Loja")
                         }}
                         className={`${loja === true ? "text-green-600" : ""}`}
@@ -436,6 +468,7 @@ export function CadastroInfo(){
                             setLoja(false)
                             setTabela(true)
                             setSocio(false)
+                            setSocioimg(false)
                             setEscolha("Tabela")
                         }}
                         className={`${tabela === true ? "text-green-600" : ""}`}
@@ -452,11 +485,29 @@ export function CadastroInfo(){
                             setLoja(false)
                             setTabela(false)
                             setSocio(true)
+                            setSocioimg(false)
                             setEscolha("Socio")
                         }}
                         className={`${socio === true ? "text-green-600" : ""}`}
                         >
                             Socio
+                        </h2>
+
+                        <h2
+                        onClick={() => {
+                            setImg(false)
+                            setVideos(false)
+                            setPartidas(false)
+                            setCapa(false)
+                            setLoja(false)
+                            setTabela(false)
+                            setSocio(false)
+                            setSocioimg(true)
+                            setEscolha("Imagens Socio")
+                        }}
+                        className={`${socioImg === true ? "text-green-600" : ""}`}
+                        >
+                            Imagens Socio
                         </h2>
                     </div>
                     {
@@ -784,6 +835,28 @@ export function CadastroInfo(){
                         />
                         {errorsSocio.id && <p className="text-red-500 mt-0 mb-2">{errorsSocio.id?.message}</p>}
 
+                        <button type="submit" className="flex justify-center bg-green-700 my-2 rounded text-green-50 mb-4 cursor-pointer py-1 w-full text-center  hover:bg-white hover:text-green-500 border border-green-500 transition duration-500">Cadastrar</button>
+                    </form>
+                        )
+                    }
+                    {
+                        socioImg && (
+                        <form onSubmit={handleSubmitSocioImg(onSubmitSocioimg) } className=" flex flex-col">
+
+                            <select {...registerSocioImg("docId")}>
+                                    <option value="img1">Imagem 1</option>
+                                    <option value="img2">Imagem 2</option>
+                                    <option value="img3">Imagem 3</option>
+                                </select>
+            
+                        <Input
+                            type="text"
+                            placeholder="link da imagem"
+                            {...registerSocioImg("img")}
+            
+                        />
+                        {errorsSocioImg.img && <p className="text-red-500 mt-0 mb-2">{errorsSocioImg.img?.message}</p>}
+                        
                         <button type="submit" className="flex justify-center bg-green-700 my-2 rounded text-green-50 mb-4 cursor-pointer py-1 w-full text-center  hover:bg-white hover:text-green-500 border border-green-500 transition duration-500">Cadastrar</button>
                     </form>
                         )
