@@ -100,7 +100,7 @@ const schemaSocio = z.object({
 });
 
 const schemaSocioImg = z.object({
-    docId: z.enum(["img1", "img2", "img3"]),
+    docId: z.enum(["1", "2", "3"]),
     img: z.string().nonempty("Preencha esse campo").url("Insira um link válido"),
 });
 
@@ -340,6 +340,7 @@ export function CadastroInfo(){
 
     async function onSubmitSocioimg(data: FormDataSocioImg) {
     const socioData = {
+        id: data.docId,
         img: data.img
     };
 
@@ -812,21 +813,21 @@ export function CadastroInfo(){
                             {...registerSocio("informacao4")}
                             placeholder="4 info do plano"
                         />
-                         <p className="text-green-500 mt-0 mb-2">Campo não obrigatorio</p>
+                         <p className="text-green-500 mt-0 mb">Campo não obrigatorio</p>
 
                          <Input
                             type="text"
                             {...registerSocio("informacao5")}
                             placeholder="5 info do plano"
                         />
-                         <p className="text-green-500 mt-0 mb-2">Campo não obrigatorio</p>
+                         <p className="text-green-500 mt-0">Campo não obrigatorio</p>
 
                          <Input
                             type="text"
                             {...registerSocio("informacao6")}
                             placeholder="6 info do plano"
                         />
-                         <p className="text-green-500 mt-0 mb-2">Campo não obrigatorio</p>
+                         <p className="text-green-500 mt-0">Campo não obrigatorio</p>
 
                         <Input
                             type="number"
@@ -844,9 +845,9 @@ export function CadastroInfo(){
                         <form onSubmit={handleSubmitSocioImg(onSubmitSocioimg) } className=" flex flex-col">
 
                             <select {...registerSocioImg("docId")}>
-                                    <option value="img1">Imagem 1</option>
-                                    <option value="img2">Imagem 2</option>
-                                    <option value="img3">Imagem 3</option>
+                                    <option value="1">Imagem 1</option>
+                                    <option value="2">Imagem 2</option>
+                                    <option value="3">Imagem 3</option>
                                 </select>
             
                         <Input
