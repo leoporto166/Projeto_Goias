@@ -86,7 +86,6 @@ export function Esmeralda(){
         return () => {
             unsub()
             unsubImg()
-            window.removeEventListener("resize", atualizarLargura)
         }
 
     }, [])
