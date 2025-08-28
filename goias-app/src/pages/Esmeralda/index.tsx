@@ -101,7 +101,7 @@ export function Esmeralda(){
 
             <section>
             { 
-                socioImg.slice(1).map((img, index) => (
+                socioImg.slice(0,1).map((img, index) => (
                 <div key={index}>
                     <div
                     style={{
@@ -109,25 +109,25 @@ export function Esmeralda(){
                     backgroundSize: "cover",
                     backgroundPosition: "center",
                 }}
-                className="w-[100%] h-[60vh] lg:h-[50vh]"
+                className="w-[100%] h-[60vh] lg:h-[60vh]"
                     >
-                        <div className="flex flex-col justify-center items-center w-[100%] h-[50vh] text-white ">
+                        <div className="flex flex-col justify-center items-center w-[100%] h-[50vh] text-white">
                             <div className="">
-                                <h2 className="text-2xl px-2 sm:text-3xl">
+                                <h2 className="text-2xl sm:text-3xl">
                                     QUEM É ESMERALDINO É
                                 </h2>
 
-                                <h1 className="text-6xl font-bold px-2 sm:text-7xl">
+                                <h1 className="text-6xl font-bold sm:text-7xl text-green-600">
                                     ESMERALDA
                                 </h1>
 
-                                <h3 className="mt-5 text-lg px-2 sm:text-xl">FAÇA PARTE DO MAIOR DO CENTRO-OESTE</h3>
+                                <h3 className="mt-5 text-lg  sm:text-xl">FAÇA PARTE DO MAIOR DO CENTRO-OESTE</h3>
 
                                 <div className="text-center mt-10 font-bold text-lg flex flex-col justify-center items-center">
 
                                     <h4 className="">CONHEÇA OS NOVOS PLANOS</h4>
 
-                                    <FaArrowDown className="mt-10"></FaArrowDown>
+                                    <FaArrowDown className="mt-10 text-green-600"></FaArrowDown>
                                 </div>
                             </div>
                         </div>
@@ -137,7 +137,7 @@ export function Esmeralda(){
 
             }
 
-                <div className="bg-black w-[100%] h-[100vh] mt-[-50px]">
+                <div className="bg-black w-[100%] h-[80vh] mt-[-50px]">
                 <Swiper
                 modules={[Navigation, Pagination, Autoplay]}
                 slidesPerView={1}
@@ -181,7 +181,7 @@ export function Esmeralda(){
                             <SwiperSlide key={socio.id} className="px-2 flex flex-col justify-center items-center">
                                 <div className="transform hover:-translate-y-4 transition-all duration-800 mt-5">
                                     <div className="w-[280px] flex flex-col justify-center items-center py-2 bg-white rounded-t-xl mb-[-2px]">
-                                        <div className="text-2xl font-semibold">
+                                        <div className="text-2xl font-semibold text-green-950">
                                                 {socio.titulo}
                                             </div>
                                             <div className="py-2">
