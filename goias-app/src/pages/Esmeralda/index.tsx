@@ -105,7 +105,7 @@ export function Esmeralda(){
                 <div key={index}>
                     <div
                     style={{
-                    backgroundImage: `linear-gradient(rgba(0,35,0,0.7), rgba(0,25,0,0.7), rgba(0,0,0,1)), url(${img.img})`,
+                    backgroundImage: `linear-gradient(rgba(0,35,0,0.7), rgba(0,25,0,0.7), rgba(0,0,0,0.9), rgba(0,0,0,1)), url(${img.img})`,
                     backgroundSize: "cover",
                     backgroundPosition: "center",
                 }}
@@ -179,92 +179,90 @@ export function Esmeralda(){
                     {
                         socio.map((socio) => (
                             <SwiperSlide key={socio.id} className="px-2 flex flex-col justify-center items-center">
-                                <div className="w-[280px] flex flex-col justify-center items-center py-2 bg-white rounded-t-xl mb-[-2px]">
-                                    <div className="text-2xl font-semibold">
-                                            {socio.titulo}
+                                <div className="transform hover:-translate-y-4 transition-all duration-800 mt-5">
+                                    <div className="w-[280px] flex flex-col justify-center items-center py-2 bg-white rounded-t-xl mb-[-2px]">
+                                        <div className="text-2xl font-semibold">
+                                                {socio.titulo}
+                                            </div>
+                                            <div className="py-2">
+                                                <h3 className="font-normal text-green-900/80">{socio.descricao}</h3>
                                         </div>
-                                        <div className="py-2">
-                                            <h3 className="font-normal text-green-900/80">{socio.descricao}</h3>
+                                        <div className="p-2 border rounded border-green-600/30 font-bold">
+                                            {Number(socio.preco).toLocaleString("pt-BR", {
+                                                style: "currency",
+                                                currency: "BRL"
+                                            })}
+                                        </div>
                                     </div>
-                                    <div className="p-2 border rounded border-green-600/30 font-bold">
-                                        {Number(socio.preco).toLocaleString("pt-BR", {
-                                            style: "currency",
-                                            currency: "BRL"
-                                        })}
-                                    </div>
-                                </div>
-                                <div className="w-[280px] flex flex-col h-[500px] items-center py-2 bg-white text-[16px]
-                                ">
-                                        <div className="py-2 px-2 flex flex-col justify-start items-start">
-                                            <div className="flex justify-center items-center gap-2">
+                                    <div className="w-[280px] flex flex-col h-[500px] items-center py-2 bg-white text-[16px]
+                                    ">
+                                            <div className="py-2 px-2 flex flex-col justify-start items-start">
+                                                <div className="flex justify-center items-center gap-2">
+                                                    <div className="w-[10px]">
+                                                        <FaCheckCircle color="green" size={12}></FaCheckCircle>
+                                                    </div>
+                                                    <h3 className="py-2">{socio.informacao1}</h3>
+                                                </div>
+                                                <div className="w-[98%] h-[0.5px] bg-green-800"></div>
+                                                <div className="flex justify-center items-center gap-2">
+                                                    <FaCheckCircle color="green" size={12}></FaCheckCircle>
+                                                    <h3 className="py-2">{socio.informacao2}</h3>
+                                                </div>
+                                                <div className="w-[98%] h-[0.5px] bg-green-800"></div>
+                                                <div className="flex justify-center items-center gap-2">
                                                 <div className="w-[10px]">
                                                     <FaCheckCircle color="green" size={12}></FaCheckCircle>
                                                 </div>
-                    
-                                                <h3 className="py-2">{socio.informacao1}</h3>
+                                                <h3 className="py-2">{socio.informacao3}</h3>
+                                                </div>
+                                                <div className="w-[98%] h-[0.5px] bg-green-800"></div>
+                                                {
+                                                    socio.informacao4 && (
+                                                      <div>
+                                                        <div className="flex justify-center items-center gap-2">
+                                                        <div className="w-[10px]">
+                                                            <FaCheckCircle color="green" size={12}></FaCheckCircle>
+                                                        </div>
+                                                        <h3 className="py-2">{socio.informacao4}</h3>
+                                                        </div>
+                                                        <div className="w-[98%] h-[0.5px] bg-green-800"></div>
+                                                      </div>
+                                                    )
+                                                }
+                                                 {
+                                                    socio.informacao5 && (
+                                                      <div>
+                                                        <div className="flex justify-center items-center gap-2">
+                                                        <div className="w-[10px]">
+                                                            <FaCheckCircle color="green" size={12}></FaCheckCircle>
+                                                        </div>
+                                                        <h3 className="py-2">{socio.informacao5}</h3>
+                                                        </div>
+                                                        <div className="w-[98%] h-[0.5px] bg-green-800"></div>
+                                                      </div>
+                                                    )
+                                                }
+                                                 {
+                                                    socio.informacao6 && (
+                                                      <div>
+                                                        <div className="flex justify-center items-center gap-2">
+                                                        <div className="w-[10px]">
+                                                            <FaCheckCircle color="green" size={12}></FaCheckCircle>
+                                                        </div>
+                                                        <h3 className="py-2">{socio.informacao6}</h3>
+                                                        </div>
+                                                        <div className="w-[98%] h-[0.5px] bg-green-800"></div>
+                                                      </div>
+                                                    )
+                                                }
                                             </div>
-                                            <div className="w-[98%] h-[0.5px] bg-green-800"></div>
-                                            <div className="flex justify-center items-center gap-2">
-                                                <FaCheckCircle color="green" size={12}></FaCheckCircle>
-                                                <h3 className="py-2">{socio.informacao2}</h3>
-                                            </div>
-                                            <div className="w-[98%] h-[0.5px] bg-green-800"></div>
-                    
-                                            <div className="flex justify-center items-center gap-2">
-                    
-                                            <div className="w-[10px]">
-                                                <FaCheckCircle color="green" size={12}></FaCheckCircle>
-                                            </div>
-                    
-                                            <h3 className="py-2">{socio.informacao3}</h3>
-                                            </div>
-                                            <div className="w-[98%] h-[0.5px] bg-green-800"></div>
-                                            {
-                                                socio.informacao4 && (
-                                                  <div>
-                                                    <div className="flex justify-center items-center gap-2">
-                                                    <div className="w-[10px]">
-                                                        <FaCheckCircle color="green" size={12}></FaCheckCircle>
-                                                    </div>
-                                                    <h3 className="py-2">{socio.informacao4}</h3>
-                                                    </div>
-                                                    <div className="w-[98%] h-[0.5px] bg-green-800"></div>
-                                                  </div>
-                                                )
-                                            }
-                                             {
-                                                socio.informacao5 && (
-                                                  <div>
-                                                    <div className="flex justify-center items-center gap-2">
-                                                    <div className="w-[10px]">
-                                                        <FaCheckCircle color="green" size={12}></FaCheckCircle>
-                                                    </div>
-                                                    <h3 className="py-2">{socio.informacao5}</h3>
-                                                    </div>
-                                                    <div className="w-[98%] h-[0.5px] bg-green-800"></div>
-                                                  </div>
-                                                )
-                                            }
-                                             {
-                                                socio.informacao6 && (
-                                                  <div>
-                                                    <div className="flex justify-center items-center gap-2">
-                                                    <div className="w-[10px]">
-                                                        <FaCheckCircle color="green" size={12}></FaCheckCircle>
-                                                    </div>
-                                                    <h3 className="py-2">{socio.informacao6}</h3>
-                                                    </div>
-                                                    <div className="w-[98%] h-[0.5px] bg-green-800"></div>
-                                                  </div>
-                                                )
-                                            }
-                                        </div>
-                                </div>
-                                <div className="w-[280px] flex flex-col py-2 bg-white mt-[-2px] rounded-b-xl justify-center items-center h-[50px]">
-                                    <div className="flex justify-center bg-green-700 my-2 rounded text-green-50 mb-4 cursor-pointer py-1  text-center  hover:bg-white hover:text-green-500 border border-green-500 transition duration-500 w-[98%]">
-                                            {socio.button}
                                     </div>
-                                </div>
+                                    <div className="w-[280px] flex flex-col py-2 bg-white mt-[-2px] rounded-b-xl justify-center items-center h-[50px]">
+                                        <div className="flex justify-center bg-green-700 my-2 rounded text-green-50 mb-4 cursor-pointer py-1  text-center  hover:bg-white hover:text-green-500 border border-green-500 transition duration-500 w-[98%]">
+                                                {socio.button}
+                                        </div>
+                                    </div>
+                                </div>a
                             </SwiperSlide>
                         ))
                     }
