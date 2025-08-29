@@ -201,7 +201,7 @@ useEffect(() => {
                       className="cursor-pointer mt-1 text-white"
                       size={20}
                       onClick={(e) => {
-                        e.stopPropagation();  // <- PARA A BORBULHA DO EVENTO AQUI
+                        e.stopPropagation();
                         setSelectedIndex(-1);
                         toggleMenu();
                       }}

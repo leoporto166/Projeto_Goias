@@ -7,6 +7,9 @@ import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { FaArrowDown } from "react-icons/fa";
 import { FaCheckCircle } from "react-icons/fa";
+import fundo from "../../Assets/FUNDO-PERG..png"
+import { AiOutlineDown } from "react-icons/ai";
+import { AiOutlineUp } from "react-icons/ai";
 
 
 
@@ -29,11 +32,42 @@ interface SocioImgProps {
     id: string;
 }
 
+interface DuvidasProps {
+    txt: string
+}
+
+const Pergutas: DuvidasProps[] = [
+    {txt: "COMO FUNCIONA O PROGRAMA ESMERALDA?"},
+    {txt: "QUALQUER PESSOA PODE SE TORNAR SÓCIO TORCEDOR?"},
+    {txt: "O QUE É UM PLANO INATIVO E COMO POSSO ATIVALO?"},
+    {txt: "QUANTOS DEPENDENTES POSSO INCLUIR NO MEU PLANO"},
+    {txt: "TEM JOGO HOJE, SE EU ME ASSOCIAR AGORA JÁ ENTRO NESTE JOGO?"},
+    {txt: "SOU SÓCIO ATIVO, CONSIGO REALIZAR O CHECK-IN PARA O JOGO EM QUALQUER MOMENTO?"},
+    {txt: "ESTOU COM UMA PARCELO EM ATRASO, VOU PODER ASSSIR OS JOGOS?"},
+    {txt: "COMO FAÇO PARA CADASTRAR UM DEPENDENTE EM MEU PLANO?"},
+    {txt: "ME TORNEI SÓCIO. PRECISO COMPRAR INGRESSO?"},
+]
+
+const Respostas: DuvidasProps[] = [
+    {txt: "Esmeralda Sócio-Torcedor é o projeto de sócio-torcedor do Goiás Esporte Clube. É um programa de relacionamento entre o clube e seus torcedores. O torcedor que se associa está adquirindo o direito de assistir aos jogos do clube, como mandante, no estádio Hailé Pinheiro, de acordo com os locais e restrições do plano contratado, durante a sua vigência. Além disso, o sócio-torcedor terá direito a outros benefícios, como descontos na Loja Oficial do Goiás EC e descontos em uma rede de parceiros. Verifique a página de planos para conhecer melhor as opções, valores e vigências dos planos oferecidos.É necessário estar em dia com os pagamentos das parcelas para usufruir de todos os benefícios e vantagens oferecidos."},
+    {txt: "Sim. Qualquer pessoa que possua um CPF válido pode se tornar sócio torcedor, basta confirmar o processo escolhendo um plano e forma de pagamento disponível. "},
+    {txt: "É uma associação que foi iniciada mas não obteve confirmação de pagamento. Todos os planos são ativados automaticamente após a confirmação do pagamento da primeira parcela. No caso do cartão de crédito certamente ocorreu algum problema com o pagamento, como erro, dados inválidos ou transação não autorizada pela operadora do cartão.Entre em contato com o atendimento para saber o que ocorreu. Você poderá tentar efetuar o pagamento novamente, fornecer outro cartão ou mudar o formato da cobrança."},
+    {txt: "Dependentes familiares no plano Nossa Família;               60,00 reais > Casal                                                  70,00 reais > Casal + 1 filho                                       *Em caso de mais dependentes diretos, será adicionado 10,00 reais por cada filho (até 18 anos)                                           Nos demais planos, será permitida apenas a inclusão de dependentes menores de 18 anos com 50% de desconto referente ao plano titular."},
+    {txt: "Sim, caso ainda haja disponibilidade de setores. Após o período de abertura para o público geral, havendo esgotamento da capacidade nos setores, não será possível a realização de check-ins. Podem haver duelos aonde haja trava de adesões no dia da partida, o período da trava de associações no site pode variar de acordo com o jogo, a ser determinado pelo Goiás Esporte Clube. "},
+    {txt: "Os sócios possuem a prioridade para confirmar seu check-in em todos os jogos, antes da abertura de venda dos ingressos para o público geral. Após o período de abertura para o público geral, havendo esgotamento da capacidade nos setores, não será possível a realização de check-ins, bem como a venda de ingressos."},
+    {txt: "Quando é reconhecido pelo sistema a parcela em atraso, o plano automaticamente será bloqueado por inadimplência, bloqueando também a realização do check-in e liberação do ingresso.                    Para o desbloqueio, acesse: https://socioesmeralda.com.br/Login      Você poderá conferir na aba *Financeiro*"},
+    {txt: "A inclusão dependente Nossa Família deverá ser realizada pelo nosso atendimento online.                                           Em caso de um novo plano ou renovação, pode ser realizada diretamente no ato de associação.                                               Em caso de dúvidas, basta nos acionar pelo número: (62) 99472-2541 para a conclusão do processo."},
+    {txt: "Somente em caso de cancelamento do ingresso ou esgotamento do mesmo por falta de confirmação de presença dentro do prazo de disponibilidade.                                                    Com o plano ativo, acessando o seu cadastro, terá a opção de confirmar check-in, para ter acesso ao seu ingresso (Nossa Glória, Nossa Garra, Nossa Família)"},
+    
+    
+]
+
 export function Esmeralda(){
 
 
     const [socio, setSocio] = useState<SocioProps[]>([])
     const [socioImg, setSocioImg] = useState<SocioImgProps[]>([])
+    const [selectIndex,  setSelectedIndex] = useState<null | number>(null)
 
     useEffect(() => {
 
@@ -274,8 +308,139 @@ export function Esmeralda(){
                 </div>
             </section>
 
-            <section>
+            <section className="px-2 h-[100vh]"
+            style={{backgroundImage: `linear-gradient(rgba(0,0,0,1), rgba(0,0,0,1), rgba(0,0,0,0.5), rgba(0,0,0,0.2), rgba(0,0,0,0.2), rgba(0,0,0,0.2), rgba(0,0,0,0)), url(${fundo})`}}
+            >
+                    <div className="pt-[50px] pb-2">
+                        <h1 className="text-white font-bold">PERGUNTAS FREQUENTES</h1>
+                    </div>
 
+                    <div className="">
+
+                        {
+                        
+
+                    <div className="">
+                    {Pergutas.map((perg, index) => (
+                        <div
+                        key={index}
+                        className="py-2 cursor-pointer select-none text-white"
+                        onClick={() =>
+                            setSelectedIndex(selectIndex === index ? null : index)
+                        }
+                        >
+                        <div className="flex justify-between">
+                            <h2>{perg.txt}</h2>
+
+                            {selectIndex === index ? (
+                            <AiOutlineUp className="" />
+                            ) : (
+                            <AiOutlineDown className="" />
+                            )}
+                        </div>
+
+                        <div className="w-[100%] h-[1px] bg-green-100"></div>
+
+                        {selectIndex === index && (
+  <div className="mt-2 bg-white text-black p-2 rounded">
+    {Respostas[index] ? Respostas[index].txt : "Resposta não encontrada"}
+  </div>
+)}
+                        </div>
+                    ))}
+                    </div>
+                                
+
+                        }
+
+                        
+
+{/*
+                        {
+                            selectIndex === 0 && (
+                                Respostas.slice(0,1).map((resp, index) => (
+                                    <div key={index} className="mt-[-570px] bg-white"
+                                    onClick={() => setSelectedIndex(null)}>
+                                        {resp.txt}
+                                    </div>
+                                ))
+                            )
+                        }
+                        {
+                            selectIndex === 1 && (
+                                Respostas.slice(1,2).map((resp, index) => (
+                                    <div key={index} className="mt-[-530px] bg-white">
+                                        {resp.txt}
+                                    </div>
+                                ))
+                            )
+                        }
+                        {
+                            selectIndex === 2 && (
+                                Respostas.slice(2,3).map((resp, index) => (
+                                    <div key={index} className="mt-[-490px] bg-white">
+                                        {resp.txt}
+                                    </div>
+                                ))
+                            )
+                        }
+                        {
+                            selectIndex === 3 && (
+                                Respostas.slice(3,4).map((resp, index) => (
+                                    <div key={index} className="mt-[-450px] bg-white">
+                                        {resp.txt}
+                                    </div>
+                                ))
+                            )
+                        }
+                        {
+                            selectIndex === 4 && (
+                                Respostas.slice(4,5).map((resp, index) => (
+                                    <div key={index} className="mt-[-410px] bg-white">
+                                        {resp.txt}
+                                    </div>
+                                ))
+                            )
+                        }
+                        {
+                            selectIndex === 5 && (
+                                Respostas.slice(4,5).map((resp, index) => (
+                                    <div key={index} className="mt-[-345px] bg-white">
+                                        {resp.txt}
+                                    </div>
+                                ))
+                            )
+                        }
+                        {
+                            selectIndex === 6 && (
+                                Respostas.slice(5,6).map((resp, index) => (
+                                    <div key={index} className="mt-[-300px] bg-white">
+                                        {resp.txt}
+                                    </div>
+                                ))
+                            )
+                        }
+                        {
+                            selectIndex === 7 && (
+                                Respostas.slice(6,7).map((resp, index) => (
+                                    <div key={index} className="mt-[-260px] bg-white">
+                                        {resp.txt}
+                                    </div>
+                                ))
+                            )
+                        }
+                        {
+                            selectIndex === 8 && (
+                                Respostas.slice(7).map((resp, index) => (
+                                    <div key={index} className="mt-[-220px] bg-white">
+                                        {resp.txt}
+                                    </div>
+                                ))
+                            )
+                        }
+*/}
+
+                    </div>
             </section>
             
             <Footer />
