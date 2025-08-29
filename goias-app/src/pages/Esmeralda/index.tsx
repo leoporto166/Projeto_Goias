@@ -308,10 +308,10 @@ export function Esmeralda(){
                 </div>
             </section>
 
-            <section className="px-2 h-[200vh] sm:h-[100vh]"
+            <section className="px-2 h-[120vh] sm:h-[100vh]"
             style={{backgroundImage: `linear-gradient(rgba(0,0,0,1), rgba(0,0,0,1), rgba(0,0,0,0.5), rgba(0,0,0,0.2), rgba(0,0,0,0.2), rgba(0,0,0,0.2), rgba(0,0,0,0)), url(${fundo})`}}
             >
-                    <div className="pt-[250px] sm:pt-[50px] pb-2">
+                    <div className="pt-[120px] sm:pt-[50px] pb-2">
                         <h1 className="text-white font-bold">PERGUNTAS FREQUENTES</h1>
                     </div>
 
