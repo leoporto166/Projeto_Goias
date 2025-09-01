@@ -11,6 +11,8 @@ import fundo from "../../Assets/FUNDO-PERG..png"
 import { AiOutlineDown } from "react-icons/ai";
 import { AiOutlineUp } from "react-icons/ai";
 import { motion, AnimatePresence } from "framer-motion";
+import { FaWhatsapp } from "react-icons/fa";
+import { FaEnvelope } from "react-icons/fa";
 
 
 
@@ -53,8 +55,8 @@ const Respostas: DuvidasProps[] = [
     {txt: "Esmeralda Sócio-Torcedor é o projeto de sócio-torcedor do Goiás Esporte Clube. É um programa de relacionamento entre o clube e seus torcedores. O torcedor que se associa está adquirindo o direito de assistir aos jogos do clube, como mandante, no estádio Hailé Pinheiro, de acordo com os locais e restrições do plano contratado, durante a sua vigência. Além disso, o sócio-torcedor terá direito a outros benefícios, como descontos na Loja Oficial do Goiás EC e descontos em uma rede de parceiros. Verifique a página de planos para conhecer melhor as opções, valores e vigências dos planos oferecidos.É necessário estar em dia com os pagamentos das parcelas para usufruir de todos os benefícios e vantagens oferecidos."},
     {txt: "Sim. Qualquer pessoa que possua um CPF válido pode se tornar sócio torcedor, basta confirmar o processo escolhendo um plano e forma de pagamento disponível. "},
     {txt: "É uma associação que foi iniciada mas não obteve confirmação de pagamento. Todos os planos são ativados automaticamente após a confirmação do pagamento da primeira parcela. No caso do cartão de crédito certamente ocorreu algum problema com o pagamento, como erro, dados inválidos ou transação não autorizada pela operadora do cartão.Entre em contato com o atendimento para saber o que ocorreu. Você poderá tentar efetuar o pagamento novamente, fornecer outro cartão ou mudar o formato da cobrança."},
-    {txt: "Dependentes familiares no plano Nossa Família;               60,00 reais > Casal                                                  70,00 reais > Casal + 1 filho                                       *Em caso de mais dependentes diretos, será adicionado 10,00 reais por cada filho (até 18 anos)                                           Nos demais planos, será permitida apenas a inclusão de dependentes menores de 18 anos com 50% de desconto referente ao plano titular."},
-    {txt: "Sim, caso ainda haja disponibilidade de setores. Após o período de abertura para o público geral, havendo esgotamento da capacidade nos setores, não será possível a realização de check-ins. Podem haver duelos aonde haja trava de adesões no dia da partida, o período da trava de associações no site pode variar de acordo com o jogo, a ser determinado pelo Goiás Esporte Clube. "},
+    {txt: "Dependentes familiares no plano Nossa Família;               60,00 reais > Casal                                                  70,00 reais > Casal + 1 filho                                       *Em caso de mais dependentes diretos, será adicionado 10,00 reais por cada filho (até 18 anos).                                           Nos demais planos, será permitida apenas a inclusão de dependentes menores de 18 anos com 50% de desconto referente ao plano titular."},
+    {txt: "Sim, caso ainda haja disponibilidade de setores. Após o período de abertura para o público geral, havendo esgotamento da capacidade nos setores, não será possível a realização de check-ins. Podem haver duelos onde haja trava de adesões no dia da partida, o período da trava de associações no site pode variar de acordo com o jogo, a ser determinado pelo Goiás Esporte Clube. "},
     {txt: "Os sócios possuem a prioridade para confirmar seu check-in em todos os jogos, antes da abertura de venda dos ingressos para o público geral. Após o período de abertura para o público geral, havendo esgotamento da capacidade nos setores, não será possível a realização de check-ins, bem como a venda de ingressos."},
     {txt: "Quando é reconhecido pelo sistema a parcela em atraso, o plano automaticamente será bloqueado por inadimplência, bloqueando também a realização do check-in e liberação do ingresso.                    Para o desbloqueio, acesse: https://socioesmeralda.com.br/Login      Você poderá conferir na aba *Financeiro*"},
     {txt: "A inclusão dependente Nossa Família deverá ser realizada pelo nosso atendimento online.                                           Em caso de um novo plano ou renovação, pode ser realizada diretamente no ato de associação.                                               Em caso de dúvidas, basta nos acionar pelo número: (62) 99472-2541 para a conclusão do processo."},
@@ -309,8 +311,10 @@ export function Esmeralda(){
                 </div>
             </section>
 
-            <section className="px-2 h-[120vh] sm:h-[100vh]"
-            style={{backgroundImage: `linear-gradient(rgba(0,0,0,1), rgba(0,0,0,1), rgba(0,0,0,0.5), rgba(0,0,0,0.2), rgba(0,0,0,0.2), rgba(0,0,0,0.2), rgba(0,0,0,0)), url(${fundo})`}}
+            <section className="px-2 h-[120vh] sm:h-[70vh]"
+            style={{backgroundImage: `linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0), rgba(0,0,0,0), rgba(0,0,0,0), rgba(0,0,0,0), rgba(0,0,0,0), rgba(0,0,0,0)),
+            linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,1), rgba(0,0,0,0.5), rgba(0,0,0,0.2), rgba(0,0,0,0.2), rgba(0,0,0,0.2), rgba(0,0,0,0)),
+            url(${fundo})`}}
             >
                     <div className="pt-[120px] sm:pt-[50px] pb-2">
                         <h1 className="text-white font-bold">PERGUNTAS FREQUENTES</h1>
@@ -450,6 +454,83 @@ export function Esmeralda(){
 */}
 
                     </div>
+            </section>
+
+            <section>
+                {
+                    socioImg.slice(1,2).map((img, index) => (
+                        <div key={index}
+                        
+                        className="px-2 mb-10"
+                        >
+
+                            
+                            <div className="text-green-950 font-bold text-xl sm:text-2xl">
+                                <h1>MAPA DO CALDEIRÃO</h1>
+                            </div>
+                            <div className="mt-5 flex flex-col justify-center items-center text-white">
+                                <img src={img.img} alt="" className="w-[100%]"/>
+                            </div>
+                        </div>
+                    ))
+                }
+            </section>
+
+            <section className="px-2">
+                <div className="text-green-950 font-bold text-xl sm:text-2xl mb-10">
+
+                    <div className="mt-2 flex flex-col justify-center items-center">
+
+                        <h3 className="text-gray-400 text-[15px] w-[75%] flex justify-center items-center mb-5">
+                            Goiás Esporte Clube - Av. Edmundo P. de Abreu, 721 - St. Bela Vista, Goiânia - GO
+                        </h3>
+
+                        <div className="w-full flex flex-col justify-center items-center gap-3">
+                            <h2 className=" text-2xl sm:text-3xl">Central de Atendimento</h2>
+
+                            <h3><span className="text-green-400">Seg - Sex</span> : 09h30 às 17h30</h3>
+                        </div>
+
+                        <div className="flex flex-col sm:flex-row gap-2 text-[18px] my-10">
+                            <a href="https://wa.me/5562994722541"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="border p-2 rounded-2xl flex justify-center items-center hover:bg-green-400 hover:text-white border-green-800 transition-all duration-500 "
+                            >
+                                <button className="flex justify-center items-center gap-1">
+                                    <FaWhatsapp color=""></FaWhatsapp>
+                                    <span>(62) 99472-2541</span>
+                                </button>
+                            </a>
+
+                            <a href="mailto:atendimento@socioesmeralda.com"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="border p-2 rounded-2xl flex justify-center items-center hover:bg-green-400 hover:text-white border-green-800 transition-all duration-500 "
+                            >
+                                <button className="flex justify-center items-center gap-1">
+                                    <FaEnvelope color=""></FaEnvelope>
+                                    <span>atendimento@socioesmeralda.com</span>
+                                </button>
+                            </a>
+                        </div>
+
+
+
+                        
+                        {
+                            socioImg.slice(2,3).map((img, index) => (
+                                <div key={index} className=" flex justify-center items-center">
+
+                                    <img src={img.img} alt="" className="w-[60%]" />
+
+                                </div>
+                            ))
+                        }
+
+                        
+                    </div>
+                </div>
             </section>
             
             <Footer />
