@@ -10,6 +10,7 @@ import { FaCheckCircle } from "react-icons/fa";
 import fundo from "../../Assets/FUNDO-PERG..png"
 import { AiOutlineDown } from "react-icons/ai";
 import { AiOutlineUp } from "react-icons/ai";
+import { motion, AnimatePresence } from "framer-motion";
 
 
 
@@ -341,11 +342,19 @@ export function Esmeralda(){
 
                         <div className="w-[100%] h-[1px] bg-green-100"></div>
 
-                        {selectIndex === index && (
-  <div className="mt-2 bg-white text-black p-2 rounded">
-    {Respostas[index] ? Respostas[index].txt : "Resposta não encontrada"}
-  </div>
-)}
+                            <AnimatePresence>
+                            {selectIndex === index && (
+                                <motion.div
+                                initial={{ height: 0, opacity: 0 }}
+                                animate={{ height: "auto", opacity: 1 }}
+                                exit={{ height: 0, opacity: 0 }}
+                                transition={{ duration: 0.4, ease: "easeInOut" }}
+                                className="mt-2 bg-white text-black p-2 rounded overflow-hidden"
+                                >
+                                {Respostas[index] ? Respostas[index].txt : "Resposta não encontrada"}
+                                </motion.div>
+                            )}
+                            </AnimatePresence>
                         </div>
                     ))}
                     </div>
