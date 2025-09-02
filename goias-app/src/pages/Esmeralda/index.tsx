@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { Footer } from "../../Components/footer";
-import { Header } from "../../Components/Header/header";
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { db } from "../../services/firebaseconnection";
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
@@ -134,9 +133,10 @@ export function Esmeralda(){
     }, [])
     return(
         <main>
-            <Header />
+            
 
             <section>
+                
             { 
                 socioImg.slice(0,1).map((img, index) => (
                 <div key={index}>
@@ -148,8 +148,36 @@ export function Esmeralda(){
                 }}
                 className="w-[100%] h-[60vh] lg:h-[60vh]"
                     >
+                        <header className="w-full h-[15vh] bg-green-200/30 px-2 flex flex-col justify-center sm:justify-between sm:flex-row sm:h-[10vh] backdrop-blur-md fixed z-10">
+                            {
+                                socioImg.slice(2,3).map((img, index) => (
+                                    <div key={index} className="">
+                                        <div className="flex  items-center h-[10vh] justify-center sm:justify-start">
+                                            <img src={img.img} className="w-[160px]"></img>
+                                        </div>
+                                    </div>
+                                ))
+                            }
+
+                            <div className="flex gap-2 items-center h-[10vh] text-white text-lg sm:text-xl justify-center sm:justify-start ">
+                                <a href="#planos" className="hover:text-green-500 transition-all duration-300">
+                                    <h3>PLANOS</h3>
+                                </a>
+                                <a href="#perguntas" className="hover:text-green-500 transition-all duration-300">
+                                    <h3>PERGUNTAS</h3>
+                                </a>
+                                <a href="#mapa" className="hover:text-green-500 transition-all duration-300">
+                                    <h3>MAPA</h3>
+                                </a>
+                                <a href="#atendimento"className="hover:text-green-500 transition-all duration-300">
+                                    <h3>ATENDIMENTO</h3>
+                                </a>
+                            </div>
+                            
+                        </header>
+
                         <div className="flex flex-col justify-center items-center w-[100%] h-[50vh] text-white">
-                            <div className="">
+                            <div className="mt-30">
                                 <h2 className="text-2xl sm:text-3xl">
                                     QUEM É ESMERALDINO É
                                 </h2>
@@ -174,7 +202,7 @@ export function Esmeralda(){
 
             }
 
-                <div className="bg-black w-[100%] h-[80vh] mt-[-50px]">
+                <div className="bg-black w-[100%] h-[80vh] mt-[-120px]" id="planos">
                 <Swiper
                 modules={[Navigation, Pagination, Autoplay]}
                 slidesPerView={1}
@@ -215,7 +243,7 @@ export function Esmeralda(){
                 <div className="">
                     {
                         socio.map((socio) => (
-                            <SwiperSlide key={socio.id} className="px-2 flex flex-col justify-center items-center">
+                            <SwiperSlide key={socio.id} className="px-2 flex flex-col justify-center items-center mt-[90px]">
                                 <div className="transform hover:-translate-y-4 transition-all duration-800 mt-5">
                                     <div className="w-[280px] flex flex-col justify-center items-center py-2 bg-white rounded-t-xl mb-[-2px]">
                                         <div className="text-2xl font-semibold text-green-950">
@@ -311,12 +339,12 @@ export function Esmeralda(){
                 </div>
             </section>
 
-            <section className="px-2 h-[120vh] sm:h-[70vh]"
+            <section className="px-2 h-[120vh] sm:h-[70vh]" id="perguntas"
             style={{backgroundImage: `linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0), rgba(0,0,0,0), rgba(0,0,0,0), rgba(0,0,0,0), rgba(0,0,0,0), rgba(0,0,0,0)),
             linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,1), rgba(0,0,0,0.5), rgba(0,0,0,0.2), rgba(0,0,0,0.2), rgba(0,0,0,0.2), rgba(0,0,0,0)),
             url(${fundo})`}}
             >
-                    <div className="pt-[120px] sm:pt-[50px] pb-2">
+                    <div className="pt-[120px] sm:pt-[100px] pb-2">
                         <h1 className="text-white font-bold">PERGUNTAS FREQUENTES</h1>
                     </div>
 
@@ -456,7 +484,7 @@ export function Esmeralda(){
                     </div>
             </section>
 
-            <section>
+            <section id="mapa">
                 {
                     socioImg.slice(1,2).map((img, index) => (
                         <div key={index}
@@ -476,7 +504,7 @@ export function Esmeralda(){
                 }
             </section>
 
-            <section className="px-2">
+            <section className="px-2" id="atendimento">
                 <div className="text-green-950 font-bold text-xl sm:text-2xl mb-10">
 
                     <div className="mt-2 flex flex-col justify-center items-center">
