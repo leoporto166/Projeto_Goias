@@ -79,6 +79,10 @@ const router = createBrowserRouter([
         element: <Imagens />
     },
 
+    {
+        path: "/Projeto_Goias/Clube",
+        element: <Clube />
+    },
 
     {
         path:"*",

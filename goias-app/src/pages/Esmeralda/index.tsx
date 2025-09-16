@@ -12,6 +12,8 @@ import { AiOutlineUp } from "react-icons/ai";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaWhatsapp } from "react-icons/fa";
 import { FaEnvelope } from "react-icons/fa";
+import { FaArrowLeft } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 
 
@@ -176,8 +178,16 @@ export function Esmeralda(){
                             
                         </header>
 
+
                         <div className="flex flex-col justify-center items-center w-[100%] h-[50vh] text-white">
-                            <div className="mt-30">
+
+                        <div className="flex w-full px-2 mt-45 sm:mt-30">
+                        <Link to={"/Projeto_Goias/"} className="text-xl">
+                            <FaArrowLeft />
+                        </Link>
+                        </div>
+
+                            <div className="mt-12">
                                 <h2 className="text-2xl sm:text-3xl">
                                     QUEM É ESMERALDINO É
                                 </h2>
