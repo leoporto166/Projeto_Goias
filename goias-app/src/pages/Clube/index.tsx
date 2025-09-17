@@ -1,5 +1,46 @@
+import { useEffect, useState } from "react";
 import { Header } from "../../Components/Header/header"
+import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
+import { db } from "../../services/firebaseconnection";
+
+interface idolosProps {
+        nome: string;
+        id: string;
+        numero: string;
+        imagem: string;
+}
+
 export function Clube(){
+
+    const [idolos, setIdolos] = useState<idolosProps[]>([])
+
+    useEffect(() => {
+                const idolosRef  = collection(db, "Socio")
+                const queryRef = query(idolosRef, orderBy("id", "asc"))
+        
+                const unsub = onSnapshot(queryRef, (snapshot) => {
+                    let lista = [] as idolosProps[]
+        
+                    snapshot.forEach((doc) => {
+                        const data = doc.data()
+        
+                        lista.push({
+                            nome: data.nome,
+                            numero: data.numero,
+                            imagem: data.foto,
+                            id: doc.id,
+                        })
+                    })
+        
+                    setIdolos(lista)
+                    console.log(lista)
+        
+                })
+
+                return () =>{ unsub()}
+    }, [])
+
+
     return(
         <div>
             <Header></Header>
@@ -92,24 +133,34 @@ export function Clube(){
 
                     <div>
 
-                    <h2 className="mt-2 text-xl sm:text-2xl font-bold">IDOLOS</h2>
+                    <h2 className="mt-2 text-xl sm:text-2xl font-bold mb-2">IDOLOS</h2>
 
-                    <div className="relative w-[300px]  ">
-                    <img
-                        src="https://i1.r7.com/data/files/2C92/94A4/286C/BB5E/0128/6DEA/2F36/0603/fernandao-goias-338-20100506.jpg"
-                        alt="Fernandão Goiás"
-                        className="object-cover rounded-lg"
-                    />
+                    {
+                        idolos.map((idolo) => (
+                            <div key={idolo.id}
+                            className="flex flex-col justify-center items-center gap-8"
+                            >
 
-                    <div className="absolute inset-0 rounded-lg bg-gradient-to-b from-green-950/0 via-black/50 to-black/100 flex justify-center items-end"> 
-                     <div className="flex justify-center items-center gap-4 text-white mb-10 text-2xl">
-                         <h2>09</h2>
-                         <div className="h-[20px] w-[1px] bg-green-300"></div>
-                         <h2>Fernandão</h2>
-                     </div>
-                    </div>
+                                <div className="relative w-[300px]  ">
+                                    <img
+                                    src={idolo.imagem}
+                                    alt={idolo.nome}
+                                    className="object-cover rounded-lg"
+                                />
+                                
+                                    <div className="absolute inset-0 rounded-lg bg-gradient-to-b from-green-950/0 via-black/50 to-black/100 flex justify-center items-end">
+                                    
+                                        <div className="flex justify-center items-center gap-4 text-white mb-10 text-2xl">
+                                            <h2>{idolo.numero}</h2>
+                                            <div className="w-[1px] h-[20px] bg-green-300/80 will-change-transform"></div>
+                                            <h2>{idolo.nome}</h2>
+                                        </div>
+                                    </div>
+                                </div>
 
-                    </div>
+                            </div>
+                        ))
+                    }
                         
                     </div>
 

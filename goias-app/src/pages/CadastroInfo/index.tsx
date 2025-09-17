@@ -99,6 +99,13 @@ const schemaSocio = z.object({
   informacao6: z.string().optional(),
 });
 
+const schemaIdolos = z.object({
+  id: z.coerce.number(),
+  nome: z.string().nonempty("Preencha esse campo"),
+  numero: z.string().nonempty("Preencha esse campo"),
+  foto: z.string().nonempty("Preencha esse campo").url("Insira um link válido"),
+});
+
 const schemaSocioImg = z.object({
     docId: z.enum(["1", "2", "3"]),
     img: z.string().nonempty("Preencha esse campo").url("Insira um link válido"),
@@ -112,6 +119,7 @@ type FormDataLoja = z.infer<typeof schemaLoja>
 type FormDataTabela = z.infer<typeof schemaTabela>
 type FormDataSocio = z.infer<typeof schemaSocio>
 type FormDataSocioImg = z.infer<typeof schemaSocioImg>
+type FormDataIdolos = z.infer<typeof schemaIdolos>
 
 
 export function CadastroInfo(){
@@ -125,6 +133,7 @@ export function CadastroInfo(){
     const [tabela, setTabela] = useState(false)
     const [socio, setSocio] = useState(false)
     const [socioImg, setSocioimg] = useState(false)
+    const [idolo, setIdolo] = useState(false)
 
     const {register, handleSubmit, formState: {errors}, reset} = useForm<FormDataImg>({
         resolver: zodResolver(schemaImg) as any,
@@ -353,6 +362,29 @@ export function CadastroInfo(){
         console.log(`ERRO: ${error}`);
         });
     }
+
+    const {register: registerIdolos, handleSubmit: handleSubmitIdolos, formState: {errors: errorsIdolos}, reset: resetIdolos} = useForm<FormDataIdolos>({
+            resolver: zodResolver(schemaIdolos) as any,
+            mode:"onChange"
+    })
+
+    async function onSubmitIdolos(data: FormDataIdolos) {
+    const idolosData = {
+        id: data.id,
+        nome: data.nome,
+        numero: data.numero,
+        foto: data.foto
+    };
+
+    await setDoc(doc(db, "Idolos", data.id.toString()), idolosData)
+        .then(() => {
+        resetIdolos();
+        console.log(`Idolos atualizado com sucesso!`);
+        })
+        .catch((error) => {
+        console.log(`ERRO: ${error}`);
+        });
+    }
     
 
     
@@ -368,7 +400,7 @@ export function CadastroInfo(){
                 
                 <div className="bg-white p-2 flex flex-col justify-center items-center w-[80%]">
                     {
-                        videos === false && img === false && partidas === false && capa === false && loja === false && tabela == false && socio === false && socioImg === false ? (
+                        videos === false && img === false && partidas === false && capa === false && loja === false && tabela == false && socio === false && socioImg === false && idolo === false ? (
                             <div className="text-xl font-semibold my-5">
                                 <h1>Escolha uma das opções</h1>
                             </div>
@@ -388,6 +420,7 @@ export function CadastroInfo(){
                             setTabela(false)
                             setSocio(false)
                             setSocioimg(false)
+                            setIdolo(false)
                             setEscolha("Imagens")
                         }}
                         className={`${img === true ? "text-green-600" : ""}`}
@@ -405,6 +438,7 @@ export function CadastroInfo(){
                             setTabela(false)
                             setSocio(false)
                             setSocioimg(false)
+                            setIdolo(false)
                             setEscolha("Videos")
                         }}
                         className={`${videos === true ? "text-green-600" : ""}`}
@@ -421,6 +455,7 @@ export function CadastroInfo(){
                             setTabela(false)
                             setSocio(false)
                             setSocioimg(false)
+                            setIdolo(false)
                             setEscolha("Partidas")
                         }}
                         className={`${partidas === true ? "text-green-600" : ""}`}
@@ -437,6 +472,7 @@ export function CadastroInfo(){
                             setTabela(false)
                             setSocio(false)
                             setSocioimg(false)
+                            setIdolo(false)
                             setEscolha("Capa")
                         }}
                         className={`${capa === true ? "text-green-600" : ""}`}
@@ -453,6 +489,7 @@ export function CadastroInfo(){
                             setTabela(false)
                             setSocio(false)
                             setSocioimg(false)
+                            setIdolo(false)
                             setEscolha("Loja")
                         }}
                         className={`${loja === true ? "text-green-600" : ""}`}
@@ -470,6 +507,7 @@ export function CadastroInfo(){
                             setTabela(true)
                             setSocio(false)
                             setSocioimg(false)
+                            setIdolo(false)
                             setEscolha("Tabela")
                         }}
                         className={`${tabela === true ? "text-green-600" : ""}`}
@@ -487,6 +525,7 @@ export function CadastroInfo(){
                             setTabela(false)
                             setSocio(true)
                             setSocioimg(false)
+                            setIdolo(false)
                             setEscolha("Socio")
                         }}
                         className={`${socio === true ? "text-green-600" : ""}`}
@@ -504,11 +543,31 @@ export function CadastroInfo(){
                             setTabela(false)
                             setSocio(false)
                             setSocioimg(true)
+                            setIdolo(false)
                             setEscolha("Imagens Socio")
                         }}
                         className={`${socioImg === true ? "text-green-600" : ""}`}
                         >
                             Imagens Socio
+                        </h2>
+
+                        <h2
+                        onClick={() => {
+                            setImg(false)
+                            setVideos(false)
+                            setPartidas(false)
+                            setCapa(false)
+                            setLoja(false)
+                            setTabela(false)
+                            setSocio(false)
+                            setSocioimg(false)
+                            setIdolo(true)
+                            setEscolha("Idolos")
+                        }}
+                        className={`${idolo === true ? "text-green-600" : ""}`}
+                        >                      
+                            Idolos
+
                         </h2>
                     </div>
                     {
@@ -860,6 +919,49 @@ export function CadastroInfo(){
                         
                         <button type="submit" className="flex justify-center bg-green-700 my-2 rounded text-green-50 mb-4 cursor-pointer py-1 w-full text-center  hover:bg-white hover:text-green-500 border border-green-500 transition duration-500">Cadastrar</button>
                     </form>
+                        )
+                    }
+                    {
+                        idolo && (
+                            <form onSubmit={handleSubmitIdolos(onSubmitIdolos)}
+                            className=" flex flex-col"
+                            >
+
+                                <Input
+                                type="text"
+                                {...registerIdolos("id")}
+                                placeholder="id"
+                                />
+                                {errorsIdolos.id && <p className="text-red-500 mt-0 mb-2">{errorsIdolos.id?.message}</p>}
+
+
+                                <Input
+                                type="text"
+                                {...registerIdolos("nome")}
+                                placeholder="nome do jogador"
+                                />
+                                {errorsIdolos.nome && <p className="text-red-500 mt-0 mb-2">{errorsIdolos.nome?.message}</p>}
+
+                                                                                        <Input
+                                type="text"
+                                {...registerIdolos("numero")}
+                                placeholder="numero do jogador"
+                                />
+                                {errorsIdolos.numero && <p className="text-red-500 mt-0 mb-2">{errorsIdolos.numero?.message}</p>}
+
+                                                                                        <Input
+                                type="text"
+                                {...registerIdolos("foto")}
+                                placeholder="imagem do jogador"
+                                />
+                                {errorsIdolos.foto && <p className="text-red-500 mt-0 mb-2">{errorsIdolos.foto?.message}</p>}
+
+                                <button type="submit" className="flex justify-center bg-green-700 my-2 rounded text-green-50 mb-4 cursor-pointer py-1 w-full text-center  hover:bg-white hover:text-green-500 border border-green-500 transition duration-500">Cadastrar</button>
+
+
+
+
+                            </form>
                         )
                     }
             
