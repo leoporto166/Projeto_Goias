@@ -15,7 +15,7 @@ export function Clube(){
     const [idolos, setIdolos] = useState<idolosProps[]>([])
 
     useEffect(() => {
-                const idolosRef  = collection(db, "Socio")
+                const idolosRef  = collection(db, "Idolos")
                 const queryRef = query(idolosRef, orderBy("id", "asc"))
         
                 const unsub = onSnapshot(queryRef, (snapshot) => {
@@ -135,32 +135,32 @@ export function Clube(){
 
                     <h2 className="mt-2 text-xl sm:text-2xl font-bold mb-2">IDOLOS</h2>
 
-                    {
-                        idolos.map((idolo) => (
-                            <div key={idolo.id}
-                            className="flex flex-col justify-center items-center gap-8"
-                            >
-
-                                <div className="relative w-[300px]  ">
-                                    <img
-                                    src={idolo.imagem}
-                                    alt={idolo.nome}
-                                    className="object-cover rounded-lg"
-                                />
-                                
-                                    <div className="absolute inset-0 rounded-lg bg-gradient-to-b from-green-950/0 via-black/50 to-black/100 flex justify-center items-end">
-                                    
-                                        <div className="flex justify-center items-center gap-4 text-white mb-10 text-2xl">
-                                            <h2>{idolo.numero}</h2>
-                                            <div className="w-[1px] h-[20px] bg-green-300/80 will-change-transform"></div>
-                                            <h2>{idolo.nome}</h2>
+                    <div className="flex flex-col sm:flex-row sm:gap-4 sm:flex-wrap max-w-[1000px] ">
+                        {
+                            idolos.map((idolo) => (
+                                <div key={idolo.id}
+                                className="flex flex-col justify-center items-center gap-8 mb-10 "
+                                >
+                                    <div className="relative ">
+                                        <img
+                                        src={idolo.imagem}
+                                        alt={idolo.nome}
+                                        className="object-cover rounded-lg w-[300px] h-[250px]"
+                                    />
+                        
+                                        <div className="absolute inset-0 rounded-lg bg-gradient-to-b from-green-950/0 via-black/50 to-black/100 flex justify-center items-end">
+                        
+                                            <div className="flex justify-center items-center gap-4 text-white mb-10 text-2xl">
+                                                <h2>{idolo.numero}</h2>
+                                                <div className="w-[1px] h-[20px] bg-green-300/80 will-change-transform"></div>
+                                                <h2>{idolo.nome}</h2>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-
-                            </div>
-                        ))
-                    }
+                            ))
+                        }
+                    </div>
                         
                     </div>
 
