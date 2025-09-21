@@ -111,6 +111,14 @@ const schemaSocioImg = z.object({
     img: z.string().nonempty("Preencha esse campo").url("Insira um link válido"),
 });
 
+const schemaTitulos = z.object({
+    id: z.coerce.number(),
+    img: z.string().nonempty("Preencha esse campo").url("Insira um link válido"),
+    titulo: z.string().nonempty("Preencha esse campo"),
+    ano: z.string().nonempty("Preencha esse campo"),
+    descricao: z.string().nonempty("Preencha esse campo").min(50, "Esse campo deve conter no minimo 50 caracteres" ),
+});
+
 type FormDataImg = z.infer<typeof schemaImg>
 type FormDataVideos = z.infer<typeof schemaVideos>
 type FormDataPartidas = z.infer<typeof schemaPartidas>
@@ -120,7 +128,7 @@ type FormDataTabela = z.infer<typeof schemaTabela>
 type FormDataSocio = z.infer<typeof schemaSocio>
 type FormDataSocioImg = z.infer<typeof schemaSocioImg>
 type FormDataIdolos = z.infer<typeof schemaIdolos>
-
+type FormdataTitulos = z.infer<typeof schemaTitulos>
 
 export function CadastroInfo(){
 
@@ -134,6 +142,7 @@ export function CadastroInfo(){
     const [socio, setSocio] = useState(false)
     const [socioImg, setSocioimg] = useState(false)
     const [idolo, setIdolo] = useState(false)
+    const [titulos, setTitulos] = useState(false)
 
     const {register, handleSubmit, formState: {errors}, reset} = useForm<FormDataImg>({
         resolver: zodResolver(schemaImg) as any,
@@ -385,6 +394,30 @@ export function CadastroInfo(){
         console.log(`ERRO: ${error}`);
         });
     }
+
+    const {register: registerTitulos, handleSubmit: handleSubmitTitulos, formState: {errors: errorsTitulos}, reset: resetTitulos} = useForm<FormdataTitulos>({
+            resolver: zodResolver(schemaTitulos) as any,
+            mode:"onChange"
+    })
+
+    async function onSubmitTitulos(data: FormdataTitulos) {
+        const titulosData = {
+            id: data.id,
+            img: data.img,
+            titulo: data.titulo,
+            descricao: data.descricao,
+            ano: data.ano
+        }
+
+        await setDoc(doc(db, "Titulos", data.id.toString()), titulosData)
+            .then(() => {
+                resetTitulos()
+                console.log("Titulos atualizado com sucesso!")
+            })
+            .catch((error) => {
+                console.log(`ERRO: ${error}`)
+            })
+    }
     
 
     
@@ -400,7 +433,7 @@ export function CadastroInfo(){
                 
                 <div className="bg-white p-2 flex flex-col justify-center items-center w-[80%]">
                     {
-                        videos === false && img === false && partidas === false && capa === false && loja === false && tabela == false && socio === false && socioImg === false && idolo === false ? (
+                        videos === false && img === false && partidas === false && capa === false && loja === false && tabela == false && socio === false && socioImg === false && idolo === false &&titulos === false ? (
                             <div className="text-xl font-semibold my-5">
                                 <h1>Escolha uma das opções</h1>
                             </div>
@@ -421,6 +454,7 @@ export function CadastroInfo(){
                             setSocio(false)
                             setSocioimg(false)
                             setIdolo(false)
+                            setTitulos(false)
                             setEscolha("Imagens")
                         }}
                         className={`${img === true ? "text-green-600" : ""}`}
@@ -439,6 +473,7 @@ export function CadastroInfo(){
                             setSocio(false)
                             setSocioimg(false)
                             setIdolo(false)
+                            setTitulos(false)
                             setEscolha("Videos")
                         }}
                         className={`${videos === true ? "text-green-600" : ""}`}
@@ -456,6 +491,7 @@ export function CadastroInfo(){
                             setSocio(false)
                             setSocioimg(false)
                             setIdolo(false)
+                            setTitulos(false)
                             setEscolha("Partidas")
                         }}
                         className={`${partidas === true ? "text-green-600" : ""}`}
@@ -473,6 +509,7 @@ export function CadastroInfo(){
                             setSocio(false)
                             setSocioimg(false)
                             setIdolo(false)
+                            setTitulos(false)
                             setEscolha("Capa")
                         }}
                         className={`${capa === true ? "text-green-600" : ""}`}
@@ -490,6 +527,7 @@ export function CadastroInfo(){
                             setSocio(false)
                             setSocioimg(false)
                             setIdolo(false)
+                            setTitulos(false)
                             setEscolha("Loja")
                         }}
                         className={`${loja === true ? "text-green-600" : ""}`}
@@ -508,6 +546,7 @@ export function CadastroInfo(){
                             setSocio(false)
                             setSocioimg(false)
                             setIdolo(false)
+                            setTitulos(false)
                             setEscolha("Tabela")
                         }}
                         className={`${tabela === true ? "text-green-600" : ""}`}
@@ -526,6 +565,7 @@ export function CadastroInfo(){
                             setSocio(true)
                             setSocioimg(false)
                             setIdolo(false)
+                            setTitulos(false)
                             setEscolha("Socio")
                         }}
                         className={`${socio === true ? "text-green-600" : ""}`}
@@ -544,6 +584,7 @@ export function CadastroInfo(){
                             setSocio(false)
                             setSocioimg(true)
                             setIdolo(false)
+                            setTitulos(false)
                             setEscolha("Imagens Socio")
                         }}
                         className={`${socioImg === true ? "text-green-600" : ""}`}
@@ -562,11 +603,32 @@ export function CadastroInfo(){
                             setSocio(false)
                             setSocioimg(false)
                             setIdolo(true)
+                            setTitulos(false)
                             setEscolha("Idolos")
                         }}
                         className={`${idolo === true ? "text-green-600" : ""}`}
                         >                      
                             Idolos
+
+                        </h2>
+
+                        <h2
+                        onClick={() => {
+                            setImg(false)
+                            setVideos(false)
+                            setPartidas(false)
+                            setCapa(false)
+                            setLoja(false)
+                            setTabela(false)
+                            setSocio(false)
+                            setSocioimg(false)
+                            setIdolo(false)
+                            setTitulos(true)
+                            setEscolha("Titulos")
+                        }}
+                        className={`${idolo === true ? "text-green-600" : ""}`}
+                        >                      
+                            Titulos
 
                         </h2>
                     </div>
@@ -960,6 +1022,53 @@ export function CadastroInfo(){
 
 
 
+
+                            </form>
+                        )
+                    }
+                    {
+                        titulos && (
+                            <form onSubmit={handleSubmitTitulos(onSubmitTitulos)}
+                            className=" flex flex-col"
+                            >
+
+                                <Input
+                                type="text"
+                                {...registerTitulos("id")}
+                                placeholder="id"
+                                />
+                                {errorsTitulos.id && <p className="text-red-500 mt-0 mb-2">{errorsTitulos.id?.message}</p>}
+
+
+                                <Input
+                                type="text"
+                                {...registerTitulos("titulo")}
+                                placeholder="titulo"
+                                />
+                                {errorsTitulos.titulo && <p className="text-red-500 mt-0 mb-2">{errorsTitulos.titulo?.message}</p>}
+
+                                                                                        <Input
+                                type="text"
+                                {...registerTitulos("ano")}
+                                placeholder="anos do titulo"
+                                />
+                                {errorsTitulos.ano && <p className="text-red-500 mt-0 mb-2">{errorsTitulos.ano?.message}</p>}
+
+                                                                                        <Input
+                                type="text"
+                                {...registerTitulos("img")}
+                                placeholder="imagem do titulo"
+                                />
+                                {errorsTitulos.img && <p className="text-red-500 mt-0 mb-2">{errorsTitulos.img?.message}</p>}
+
+                                <Input
+                                type="text"
+                                {...registerTitulos("descricao")}
+                                placeholder="descricao do titulo"
+                                />
+                                {errorsTitulos.descricao && <p className="text-red-500 mt-0 mb-2">{errorsTitulos.descricao?.message}</p>}
+
+                                <button type="submit" className="flex justify-center bg-green-700 my-2 rounded text-green-50 mb-4 cursor-pointer py-1 w-full text-center  hover:bg-white hover:text-green-500 border border-green-500 transition duration-500">Cadastrar</button>
 
                             </form>
                         )

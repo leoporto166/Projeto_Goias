@@ -10,9 +10,18 @@ interface idolosProps {
         imagem: string;
 }
 
+interface titulosProps {
+        titulo: string;
+        id: string;
+        ano: string;
+        imagem: string;
+        descicao: string
+}
+
 export function Clube(){
 
     const [idolos, setIdolos] = useState<idolosProps[]>([])
+    const [titulos, setTitulos] = useState<titulosProps[]>([])
 
     useEffect(() => {
                 const idolosRef  = collection(db, "Idolos")
@@ -36,8 +45,32 @@ export function Clube(){
                     console.log(lista)
         
                 })
+                
+                const titulosRef = collection(db, "Titulos")
+                const queryRefTitulos = query(titulosRef, orderBy("id", "asc"))
 
-                return () =>{ unsub()}
+                const unsubTitulos = onSnapshot(queryRefTitulos, (snapshot) => {
+                    let lista = [] as titulosProps[]
+
+                    snapshot.forEach((doc) => {
+                        const data = doc.data()
+
+                        lista.push({
+                            id: doc.id,
+                            titulo: data.titulo,
+                            ano: data.ano,
+                            imagem: data.img,
+                            descicao: data.descricao,
+                        })
+                    })
+
+                    setTitulos(lista)
+                    console.log(lista)
+                })
+                return () =>{ 
+                    unsub() 
+                    unsubTitulos()
+                }
     }, [])
 
 
@@ -46,9 +79,11 @@ export function Clube(){
             <Header></Header>
             <div className="px-2">    
                 
-                <h1 className="py-2 text-2xl sm:text-4xl font-semibold"
-                style={{color: "#165953"}}
-                >Clube dos 33</h1>
+                <div className="w-full flex justify-center">
+                    <h1 className="py-2 text-2xl sm:text-4xl font-semibold xl:pt-8"
+                    style={{color: "#165953"}}
+                    >CLUBE DOS 33</h1>
+                </div>
 
                 <div className="gap-4">
                     <h2 className="mt-2 text-xl sm:text-2xl font-semibold">
@@ -133,39 +168,88 @@ export function Clube(){
 
                     <div>
 
-                    <h2 className="mt-2 text-xl sm:text-2xl font-bold mb-2">IDOLOS</h2>
+                    <div className="w-full flex justify-center">
+                    <h1 className="py-2 text-2xl sm:text-4xl font-semibold xl:pt-8"
+                    style={{color: "#165953"}}
+                    >IDOLOS</h1>
+                    </div>
 
-                    <div className="flex flex-col sm:flex-row sm:gap-4 sm:flex-wrap max-w-[1000px] ">
-                        {
-                            idolos.map((idolo) => (
-                                <div key={idolo.id}
-                                className="flex flex-col justify-center items-center gap-8 mb-10 "
-                                >
-                                    <div className="relative ">
-                                        <img
-                                        src={idolo.imagem}
-                                        alt={idolo.nome}
-                                        className="object-cover rounded-lg w-[300px] h-[250px]"
-                                    />
+                    <div className="w-full flex justify-center ">
+                        <div className="flex flex-col sm:flex-row sm:gap-4 sm:flex-wrap max-w-[1000px]">
+                            {
+                                idolos.map((idolo) => (
+                                    <div key={idolo.id}
+                                    className="flex flex-col justify-center items-center gap-8 mb-10 "
+                                    >
+                                        <div className="relative ">
+                                            <img
+                                            src={idolo.imagem}
+                                            alt={idolo.nome}
+                                            className="object-cover rounded-lg w-[300px] h-[250px]"
+                                        />
                         
-                                        <div className="absolute inset-0 rounded-lg bg-gradient-to-b from-green-950/0 via-black/50 to-black/100 flex justify-center items-end">
+                                            <div className="absolute inset-0 rounded-lg bg-gradient-to-b from-green-950/0 via-black/50 to-black/100 flex justify-center items-end">
                         
-                                            <div className="flex justify-center items-center gap-4 text-white mb-10 text-2xl">
-                                                <h2>{idolo.numero}</h2>
-                                                <div className="w-[1px] h-[20px] bg-green-300/80 will-change-transform"></div>
-                                                <h2>{idolo.nome}</h2>
+                                                <div className="flex justify-center items-center gap-4 text-white mb-10 text-2xl">
+                                                    <h2>{idolo.numero}</h2>
+                                                    <div className="w-[1px] h-[20px] bg-green-300/80 will-change-transform"></div>
+                                                    <h2>{idolo.nome}</h2>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            ))
-                        }
+                                ))
+                            }
+                        </div>
                     </div>
                         
                     </div>
 
                     
+                    <div className="bg-green-950 w-full h-[1px] mt-1">
+
+                    </div>
+
+                    <div>
+                    <div className="w-full flex justify-center">
+                    <h1 className="py-2 text-2xl sm:text-4xl font-semibold xl:pt-8"
+                    style={{color: "#165953"}}
+                    >TITULOS</h1>
+                    </div>
+
+                <div className="flex justify-center flex-col items-center md:flex-row md:flex-wrap" >
+                    {
+                    titulos.map((titulo) => (
                     
+                                
+                            <div className="shadow-lg w-[90%] flex justify-center flex-col items-center mb-2 md:m-4 md:h-[400px] md:w-[340px]" key={titulo.id}>
+
+                                <div>
+                                    <img src={titulo.imagem} className="h-[220px]"></img>
+                                </div>
+                                <div className="flex flex-col justify-center items-center text-center gap-2 p-2">
+                                    <h2 className="text-2xl font-bold">{titulo.titulo}</h2>
+
+                                    <p className="text-gray-500">{titulo.descicao}</p>
+
+                                    <div className="bg-green-700 text-white py-1 mb-2 rounded w-[200px] text-center cursor-pointer hover:bg-white hover:text-green-500 border border-green-500 transition duration-500">
+                                        Descubra mais
+                                    </div>
+                                </div>
+                            </div>
+
+                         
+                        ))
+                    }
+
+                    </div> 
+
+
+
+                    </div>
+
+
+
                 </div>
 
             </div>
