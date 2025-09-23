@@ -119,6 +119,7 @@ const schemaTitulos = z.object({
     descricao: z.string().nonempty("Preencha esse campo").min(50, "Esse campo deve conter no minimo 50 caracteres" ),
 });
 
+
 type FormDataImg = z.infer<typeof schemaImg>
 type FormDataVideos = z.infer<typeof schemaVideos>
 type FormDataPartidas = z.infer<typeof schemaPartidas>

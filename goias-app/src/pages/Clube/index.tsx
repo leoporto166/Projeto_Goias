@@ -222,7 +222,7 @@ export function Clube(){
                     titulos.map((titulo) => (
                     
                                 
-                            <div className="shadow-lg w-[90%] flex justify-center flex-col items-center mb-2 md:m-4 md:h-[400px] md:w-[340px]" key={titulo.id}>
+                            <div className="shadow-lg w-[80%] flex justify-center flex-col items-center mb-2 md:m-4 md:h-[400px] md:w-[340px]" key={titulo.id}>
 
                                 <div>
                                     <img src={titulo.imagem} className="h-[220px]"></img>
