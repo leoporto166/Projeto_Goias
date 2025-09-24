@@ -119,6 +119,14 @@ const schemaTitulos = z.object({
     descricao: z.string().nonempty("Preencha esse campo").min(50, "Esse campo deve conter no minimo 50 caracteres" ),
 });
 
+const schemaTitulosDef= z.object({
+    docId: z.enum(["SERIE B", "GOIANAO", "COPA VERDE", "COPA CENTRO OESTE"]),
+    ano: z.string().nonempty("Preencha esse campo"),
+    descricao: z.string().nonempty("Preencha esse campo").min(150, "Esse campo deve conter no minimo 150 caracteres" ),
+});
+
+
+
 
 type FormDataImg = z.infer<typeof schemaImg>
 type FormDataVideos = z.infer<typeof schemaVideos>
@@ -130,6 +138,7 @@ type FormDataSocio = z.infer<typeof schemaSocio>
 type FormDataSocioImg = z.infer<typeof schemaSocioImg>
 type FormDataIdolos = z.infer<typeof schemaIdolos>
 type FormdataTitulos = z.infer<typeof schemaTitulos>
+type FormDataTitulosDef = z.infer<typeof schemaTitulosDef>
 
 export function CadastroInfo(){
 
@@ -144,6 +153,7 @@ export function CadastroInfo(){
     const [socioImg, setSocioimg] = useState(false)
     const [idolo, setIdolo] = useState(false)
     const [titulos, setTitulos] = useState(false)
+    const [titulosDef, setTitulosDef] = useState(false)
 
     const {register, handleSubmit, formState: {errors}, reset} = useForm<FormDataImg>({
         resolver: zodResolver(schemaImg) as any,
@@ -420,6 +430,27 @@ export function CadastroInfo(){
             })
     }
     
+    const {register: registerTitulosDef, handleSubmit: handleSubmitTitulosDef, formState: {errors: errorsTitulosDef}, reset: resetTitulosDef} = useForm<FormDataTitulosDef>({
+            resolver: zodResolver(schemaTitulosDef) as any,
+            mode:"onChange"
+    })
+
+    async function onSubmitTitulosDef(data: FormDataTitulosDef) {
+        const titulosDefData = {
+            id: data.docId,
+            ano: data.ano,
+            descricao: data.descricao
+    };
+
+    await setDoc(doc(db, data.docId, data.ano), titulosDefData)
+        .then(() => {
+        resetTitulosDef();
+        console.log(`titulos ${data.docId} atualizado com sucesso!`);
+        })
+        .catch((error) => {
+        console.log(`ERRO: ${error}`);
+        });
+    }
 
     
 
@@ -434,7 +465,7 @@ export function CadastroInfo(){
                 
                 <div className="bg-white p-2 flex flex-col justify-center items-center w-[80%]">
                     {
-                        videos === false && img === false && partidas === false && capa === false && loja === false && tabela == false && socio === false && socioImg === false && idolo === false &&titulos === false ? (
+                        videos === false && img === false && partidas === false && capa === false && loja === false && tabela == false && socio === false && socioImg === false && idolo === false &&titulos === false && titulosDef == false ? (
                             <div className="text-xl font-semibold my-5">
                                 <h1>Escolha uma das opções</h1>
                             </div>
@@ -456,6 +487,7 @@ export function CadastroInfo(){
                             setSocioimg(false)
                             setIdolo(false)
                             setTitulos(false)
+                            setTitulosDef(false)
                             setEscolha("Imagens")
                         }}
                         className={`${img === true ? "text-green-600" : ""}`}
@@ -475,6 +507,7 @@ export function CadastroInfo(){
                             setSocioimg(false)
                             setIdolo(false)
                             setTitulos(false)
+                            setTitulosDef(false)
                             setEscolha("Videos")
                         }}
                         className={`${videos === true ? "text-green-600" : ""}`}
@@ -493,6 +526,7 @@ export function CadastroInfo(){
                             setSocioimg(false)
                             setIdolo(false)
                             setTitulos(false)
+                            setTitulosDef(false)
                             setEscolha("Partidas")
                         }}
                         className={`${partidas === true ? "text-green-600" : ""}`}
@@ -511,6 +545,7 @@ export function CadastroInfo(){
                             setSocioimg(false)
                             setIdolo(false)
                             setTitulos(false)
+                            setTitulosDef(false)
                             setEscolha("Capa")
                         }}
                         className={`${capa === true ? "text-green-600" : ""}`}
@@ -529,6 +564,7 @@ export function CadastroInfo(){
                             setSocioimg(false)
                             setIdolo(false)
                             setTitulos(false)
+                            setTitulosDef(false)
                             setEscolha("Loja")
                         }}
                         className={`${loja === true ? "text-green-600" : ""}`}
@@ -548,6 +584,7 @@ export function CadastroInfo(){
                             setSocioimg(false)
                             setIdolo(false)
                             setTitulos(false)
+                            setTitulosDef(false)
                             setEscolha("Tabela")
                         }}
                         className={`${tabela === true ? "text-green-600" : ""}`}
@@ -567,6 +604,7 @@ export function CadastroInfo(){
                             setSocioimg(false)
                             setIdolo(false)
                             setTitulos(false)
+                            setTitulosDef(false)
                             setEscolha("Socio")
                         }}
                         className={`${socio === true ? "text-green-600" : ""}`}
@@ -586,6 +624,7 @@ export function CadastroInfo(){
                             setSocioimg(true)
                             setIdolo(false)
                             setTitulos(false)
+                            setTitulosDef(false)
                             setEscolha("Imagens Socio")
                         }}
                         className={`${socioImg === true ? "text-green-600" : ""}`}
@@ -605,6 +644,7 @@ export function CadastroInfo(){
                             setSocioimg(false)
                             setIdolo(true)
                             setTitulos(false)
+                            setTitulosDef(false)
                             setEscolha("Idolos")
                         }}
                         className={`${idolo === true ? "text-green-600" : ""}`}
@@ -625,11 +665,33 @@ export function CadastroInfo(){
                             setSocioimg(false)
                             setIdolo(false)
                             setTitulos(true)
+                            setTitulosDef(false)
                             setEscolha("Titulos")
                         }}
-                        className={`${idolo === true ? "text-green-600" : ""}`}
+                        className={`${titulos=== true ? "text-green-600" : ""}`}
                         >                      
                             Titulos
+
+                        </h2>
+
+                        <h2
+                        onClick={() => {
+                            setImg(false)
+                            setVideos(false)
+                            setPartidas(false)
+                            setCapa(false)
+                            setLoja(false)
+                            setTabela(false)
+                            setSocio(false)
+                            setSocioimg(false)
+                            setIdolo(false)
+                            setTitulos(false)
+                            setTitulosDef(true)
+                            setEscolha("Titulos seleção")
+                        }}
+                        className={`${titulosDef === true ? "text-green-600" : ""}`}
+                        >                      
+                            Titulos seleção
 
                         </h2>
                     </div>
@@ -1068,6 +1130,41 @@ export function CadastroInfo(){
                                 placeholder="descricao do titulo"
                                 />
                                 {errorsTitulos.descricao && <p className="text-red-500 mt-0 mb-2">{errorsTitulos.descricao?.message}</p>}
+
+                                <button type="submit" className="flex justify-center bg-green-700 my-2 rounded text-green-50 mb-4 cursor-pointer py-1 w-full text-center  hover:bg-white hover:text-green-500 border border-green-500 transition duration-500">Cadastrar</button>
+
+                            </form>
+                        )
+                    }
+
+                    {
+                        titulosDef && (
+                            <form onSubmit={handleSubmitTitulosDef(onSubmitTitulosDef)}
+                            className=" flex flex-col"
+                            >
+
+                                <select {...registerTitulosDef("docId")}>
+                                    <option value="SERIE B">Serie B</option>
+                                    <option value="GOIANAO">Goianao</option>
+                                    <option value="COPA VERDE">Copa Verde</option>
+                                    <option value="COPA CENTRO OESTE">Copa Centro Oeste</option>
+                                </select>
+
+
+                                                                                        <Input
+                                type="text"
+                                {...registerTitulosDef("ano")}
+                                placeholder="anos do titulo"
+                                />
+                                {errorsTitulosDef.ano && <p className="text-red-500 mt-0 mb-2">{errorsTitulosDef.ano?.message}</p>}
+                                         
+
+                                <Input
+                                type="text"
+                                {...registerTitulosDef("descricao")}
+                                placeholder="descricao do titulo"
+                                />
+                                {errorsTitulosDef.descricao && <p className="text-red-500 mt-0 mb-2">{errorsTitulosDef.descricao?.message}</p>}
 
                                 <button type="submit" className="flex justify-center bg-green-700 my-2 rounded text-green-50 mb-4 cursor-pointer py-1 w-full text-center  hover:bg-white hover:text-green-500 border border-green-500 transition duration-500">Cadastrar</button>
 

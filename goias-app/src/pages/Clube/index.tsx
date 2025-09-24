@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Header } from "../../Components/Header/header"
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { db } from "../../services/firebaseconnection";
+import { Link } from "react-router-dom";
 
 interface idolosProps {
         nome: string;
@@ -232,9 +233,11 @@ export function Clube(){
 
                                     <p className="text-gray-500">{titulo.descicao}</p>
 
-                                    <div className="bg-green-700 text-white py-1 mb-2 rounded w-[200px] text-center cursor-pointer hover:bg-white hover:text-green-500 border border-green-500 transition duration-500">
-                                        Descubra mais
-                                    </div>
+                                    <Link to={`/Projeto_Goias/Clube/${titulo.titulo}`}>
+                                        <div className="bg-green-700 text-white py-1 mb-2 rounded w-[200px] text-center cursor-pointer hover:bg-white hover:text-green-500 border border-green-500 transition duration-500">
+                                            Descubra mais
+                                        </div>
+                                    </Link>
                                 </div>
                             </div>
 

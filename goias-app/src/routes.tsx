@@ -13,6 +13,7 @@ import { Videos } from "./pages/NotVideos";
 import { Imagens } from "./pages/NotImg";
 import { Private } from "./Components/RotaPrivada";
 import { Esmeralda } from "./pages/Esmeralda";
+import { Titulos } from "./pages/Titulos";
 const router = createBrowserRouter([
     {
         path:"/Projeto_Goias",
@@ -82,6 +83,11 @@ const router = createBrowserRouter([
     {
         path: "/Projeto_Goias/Clube",
         element: <Clube />
+    },
+
+    {
+        path: "/Projeto_Goias/Clube/:id",
+        element: <Titulos />
     },
 
     {
