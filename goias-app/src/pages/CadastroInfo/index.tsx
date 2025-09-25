@@ -420,7 +420,7 @@ export function CadastroInfo(){
             ano: data.ano
         }
 
-        await setDoc(doc(db, "Titulos", data.id.toString()), titulosData)
+        await setDoc(doc(db, "Titulos", data.titulo), titulosData)
             .then(() => {
                 resetTitulos()
                 console.log("Titulos atualizado com sucesso!")

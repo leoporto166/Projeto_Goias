@@ -1,4 +1,4 @@
-import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
+import { collection, doc, onSnapshot, orderBy, query } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom"
 import { db } from "../../services/firebaseconnection";
@@ -10,10 +10,19 @@ interface titulosDefProps {
         descricao: string
 }
 
+interface tituloProps {
+        titulo: string;
+        id: string;
+        ano: string;
+        imagem: string;
+        descricao: string
+}
+
 export function Titulos(){
 
     const {id} = useParams();
     const [titulosDef, setTitulosDef] = useState<titulosDefProps[]>([])
+    const [titulo, setTitulo] = useState<tituloProps>()
 
     useEffect(() => {
         if(!id){
@@ -42,7 +51,25 @@ export function Titulos(){
 
         })
 
-        return () => {unsub()}
+        const docRef = doc(db, "Titulos", id);
+
+        const unsubTitulo = onSnapshot(docRef, (docSnap) => {
+            if (docSnap.exists()) {
+            const data = docSnap.data();
+            setTitulo({
+                titulo: data.titulo,
+                id: docSnap.id,
+                ano: data.ano,
+                imagem: data.img,
+                descricao: data.descricao,
+            });
+            }
+
+            console.log(titulo)
+        });
+
+
+        return () => {unsub(), unsubTitulo()}
     }, [id])
 
     return(
@@ -50,6 +77,18 @@ export function Titulos(){
         <main>
             <Header></Header>
             <div>
+
+                {
+                    titulo && (
+                
+                        <div key={titulo?.id}>
+
+                            <img src={titulo?.imagem}></img>
+
+                        </div>
+                    )
+
+                }
                 {
                     titulosDef.map((titulo) => (
                         <div key={titulo.ano}>
