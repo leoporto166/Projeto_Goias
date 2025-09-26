@@ -1,6 +1,6 @@
 import { collection, doc, onSnapshot, orderBy, query } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import { db } from "../../services/firebaseconnection";
 import { Header } from "../../Components/Header/header";
 
@@ -76,23 +76,25 @@ export function Titulos(){
 
         <main>
             <Header></Header>
-            <div>
 
-                {
-                    titulo && (
-                
-                        <div key={titulo?.id}>
+            <div className="w-full h-[50px] flex justify-center items-center my-3">
+                <h1 className="text-3xl font-extrabold">
+                    {id}    
+                </h1>
+            </div>
+            
+            <div className="flex gap-4 p-2 justify-center flex-wrap">
 
-                            <img src={titulo?.imagem}></img>
-
-                        </div>
-                    )
-
-                }
                 {
                     titulosDef.map((titulo) => (
-                        <div key={titulo.ano}>
-                            {titulo.ano}
+                        <div key={titulo.ano}  className="">
+                            <Link to={`/Projeto_Goias/Clube/${id}/${titulo.ano}`}>
+                                <div className="flex flex-col border border-green-600 justify-center items-center h-[130px] w-[160px] sm:w-[250px] sm:h-[150px] bg-green-200/40 cursor-pointer hover:bg-green-800 hover:border-green-200/70 transition-all duration-300 hover:text-white">
+                                    <div className="">
+                                        <h1 className="text-2xl font-bold">{titulo.ano}</h1>
+                                    </div>
+                                </div>
+                            </Link>
                         </div>
                     ))
                 }
