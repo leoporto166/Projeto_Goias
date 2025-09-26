@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom"
 import { db } from "../../services/firebaseconnection";
 import { Header } from "../../Components/Header/header";
+import { FaArrowLeft } from "react-icons/fa";
 
 
 interface titulosDefProps {
@@ -76,6 +77,12 @@ export function Titulos(){
 
         <main>
             <Header></Header>
+
+            <div className="flex w-full px-2 mt-4">
+                <Link to={`/Projeto_Goias/Clube/`} className="text-xl">
+                    <FaArrowLeft />
+                </Link>
+            </div>
 
             <div className="w-full h-[50px] flex justify-center items-center my-3">
                 <h1 className="text-3xl font-extrabold">

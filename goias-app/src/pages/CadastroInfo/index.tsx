@@ -120,7 +120,7 @@ const schemaTitulos = z.object({
 });
 
 const schemaTitulosDef= z.object({
-    docId: z.enum(["SERIE B", "GOIANAO", "COPA VERDE", "COPA CENTRO OESTE"]),
+    docId: z.enum(["SERIE B", "GOIANAO", "COPA VERDE", "COPA CENTRO-OESTE"]),
     ano: z.string().nonempty("Preencha esse campo"),
     descricao: z.string().nonempty("Preencha esse campo").min(150, "Esse campo deve conter no minimo 150 caracteres" ),
 });
@@ -1147,7 +1147,7 @@ export function CadastroInfo(){
                                     <option value="SERIE B">Serie B</option>
                                     <option value="GOIANAO">Goianao</option>
                                     <option value="COPA VERDE">Copa Verde</option>
-                                    <option value="COPA CENTRO OESTE">Copa Centro Oeste</option>
+                                    <option value="COPA CENTRO-OESTE">Copa Centro Oeste</option>
                                 </select>
 
 
