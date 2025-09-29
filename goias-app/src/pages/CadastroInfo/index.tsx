@@ -125,6 +125,13 @@ const schemaTitulosDef= z.object({
     descricao: z.string().nonempty("Preencha esse campo").min(150, "Esse campo deve conter no minimo 150 caracteres" ),
 });
 
+const schemaBase = z.object({
+    data: z.string().nonempty("Preencha o campo"),
+    img: z.string().nonempty("Preencha esse campo").url("Insira um link válido"),
+    legenda: z.string().nonempty("Preencha essa campo").max(35, "O campo deve ter no maximo 35 caracteres"),
+    id: z.coerce.number(),
+})
+
 
 
 
@@ -139,6 +146,7 @@ type FormDataSocioImg = z.infer<typeof schemaSocioImg>
 type FormDataIdolos = z.infer<typeof schemaIdolos>
 type FormdataTitulos = z.infer<typeof schemaTitulos>
 type FormDataTitulosDef = z.infer<typeof schemaTitulosDef>
+type FormDataBase = z.infer<typeof schemaBase>
 
 export function CadastroInfo(){
 
@@ -154,6 +162,7 @@ export function CadastroInfo(){
     const [idolo, setIdolo] = useState(false)
     const [titulos, setTitulos] = useState(false)
     const [titulosDef, setTitulosDef] = useState(false)
+    const [base, setBase] = useState(false)
 
     const {register, handleSubmit, formState: {errors}, reset} = useForm<FormDataImg>({
         resolver: zodResolver(schemaImg) as any,
@@ -452,6 +461,40 @@ export function CadastroInfo(){
         });
     }
 
+       const {register: registerBase, handleSubmit: handleSubmitBase, formState: {errors: errorsBase}, reset: resetBase} = useForm<FormDataBase>({
+            resolver: zodResolver(schemaBase) as any,
+            mode:"onChange"
+    })
+
+    async function onSubmitBase(data: FormDataBase) {
+
+        const docRef = doc(db, "Base", data.id.toString());
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+            console.log("ERRO: ID já existe");
+            alert("Erro: ID já existe no banco");
+            return;
+        }
+
+        await setDoc(docRef, {
+            data: data.data,
+            img: data.img,
+            legenda: data.legenda.toUpperCase(),
+            id: data.id
+        })
+
+        .then(() => {
+            resetBase()
+            console.log("Noticia img cadastrada")
+        })
+
+        .catch((error) => {
+            console.log(`ERRO: ${error}`)
+        })
+        
+    }
+
     
 
         
@@ -465,7 +508,7 @@ export function CadastroInfo(){
                 
                 <div className="bg-white p-2 flex flex-col justify-center items-center w-[80%]">
                     {
-                        videos === false && img === false && partidas === false && capa === false && loja === false && tabela == false && socio === false && socioImg === false && idolo === false &&titulos === false && titulosDef == false ? (
+                        videos === false && img === false && partidas === false && capa === false && loja === false && tabela == false && socio === false && socioImg === false && idolo === false &&titulos === false && titulosDef == false && base == false ? (
                             <div className="text-xl font-semibold my-5">
                                 <h1>Escolha uma das opções</h1>
                             </div>
@@ -488,6 +531,7 @@ export function CadastroInfo(){
                             setIdolo(false)
                             setTitulos(false)
                             setTitulosDef(false)
+                            setBase(false)
                             setEscolha("Imagens")
                         }}
                         className={`${img === true ? "text-green-600" : ""}`}
@@ -508,6 +552,7 @@ export function CadastroInfo(){
                             setIdolo(false)
                             setTitulos(false)
                             setTitulosDef(false)
+                            setBase(false)
                             setEscolha("Videos")
                         }}
                         className={`${videos === true ? "text-green-600" : ""}`}
@@ -527,6 +572,7 @@ export function CadastroInfo(){
                             setIdolo(false)
                             setTitulos(false)
                             setTitulosDef(false)
+                            setBase(false)
                             setEscolha("Partidas")
                         }}
                         className={`${partidas === true ? "text-green-600" : ""}`}
@@ -546,6 +592,7 @@ export function CadastroInfo(){
                             setIdolo(false)
                             setTitulos(false)
                             setTitulosDef(false)
+                            setBase(false)
                             setEscolha("Capa")
                         }}
                         className={`${capa === true ? "text-green-600" : ""}`}
@@ -565,6 +612,7 @@ export function CadastroInfo(){
                             setIdolo(false)
                             setTitulos(false)
                             setTitulosDef(false)
+                            setBase(false)
                             setEscolha("Loja")
                         }}
                         className={`${loja === true ? "text-green-600" : ""}`}
@@ -585,6 +633,7 @@ export function CadastroInfo(){
                             setIdolo(false)
                             setTitulos(false)
                             setTitulosDef(false)
+                            setBase(false)
                             setEscolha("Tabela")
                         }}
                         className={`${tabela === true ? "text-green-600" : ""}`}
@@ -605,6 +654,7 @@ export function CadastroInfo(){
                             setIdolo(false)
                             setTitulos(false)
                             setTitulosDef(false)
+                            setBase(false)
                             setEscolha("Socio")
                         }}
                         className={`${socio === true ? "text-green-600" : ""}`}
@@ -625,6 +675,7 @@ export function CadastroInfo(){
                             setIdolo(false)
                             setTitulos(false)
                             setTitulosDef(false)
+                            setBase(false)
                             setEscolha("Imagens Socio")
                         }}
                         className={`${socioImg === true ? "text-green-600" : ""}`}
@@ -645,6 +696,7 @@ export function CadastroInfo(){
                             setIdolo(true)
                             setTitulos(false)
                             setTitulosDef(false)
+                            setBase(false)
                             setEscolha("Idolos")
                         }}
                         className={`${idolo === true ? "text-green-600" : ""}`}
@@ -666,6 +718,7 @@ export function CadastroInfo(){
                             setIdolo(false)
                             setTitulos(true)
                             setTitulosDef(false)
+                            setBase(false)
                             setEscolha("Titulos")
                         }}
                         className={`${titulos=== true ? "text-green-600" : ""}`}
@@ -687,11 +740,34 @@ export function CadastroInfo(){
                             setIdolo(false)
                             setTitulos(false)
                             setTitulosDef(true)
+                            setBase(false)
                             setEscolha("Titulos seleção")
                         }}
                         className={`${titulosDef === true ? "text-green-600" : ""}`}
                         >                      
                             Titulos seleção
+
+                        </h2>
+
+                        <h2
+                        onClick={() => {
+                            setImg(false)
+                            setVideos(false)
+                            setPartidas(false)
+                            setCapa(false)
+                            setLoja(false)
+                            setTabela(false)
+                            setSocio(false)
+                            setSocioimg(false)
+                            setIdolo(false)
+                            setTitulos(false)
+                            setTitulosDef(false)
+                            setBase(true)
+                            setEscolha("Base")
+                        }}
+                        className={`${base === true ? "text-green-600" : ""}`}
+                        >                      
+                            Base
 
                         </h2>
                     </div>
@@ -1169,6 +1245,39 @@ export function CadastroInfo(){
                                 <button type="submit" className="flex justify-center bg-green-700 my-2 rounded text-green-50 mb-4 cursor-pointer py-1 w-full text-center  hover:bg-white hover:text-green-500 border border-green-500 transition duration-500">Cadastrar</button>
 
                             </form>
+                        )
+                    }
+                    {
+                        base && (
+                        <form onSubmit={handleSubmitBase(onSubmitBase) } className=" flex flex-col">
+            
+                        <Input
+                            type="text"
+                            placeholder="link da imagem"
+                            {...registerBase("img")}
+            
+                        />
+                        {errorsBase.img && <p className="text-red-500 mt-0 mb-2">{errorsBase.img?.message}</p>}
+                        <Input
+                            type="text"
+                            placeholder="Legenda da noticia"
+                            {...registerBase("legenda")}
+                        />
+                        {errorsBase.legenda && <p className="text-red-500 mt-0 mb-2">{errorsBase.legenda?.message}</p>}
+                        <Input
+                            type="text"
+                            {...registerBase("data")}
+                            placeholder="data da postagem"
+                        />
+                        {errorsBase.data && <p className="text-red-500 mt-0 mb-2">{errorsBase.data?.message}</p>}
+                        <Input
+                            type="number"
+                            {...registerBase("id")}
+                            placeholder="id da postagem"
+                        />
+                        {errorsBase.id && <p className="text-red-500 mt-0 mb-2">{errorsBase.id?.message}</p>}
+                        <button type="submit" className="flex justify-center bg-green-700 my-2 rounded text-green-50 mb-4 cursor-pointer py-1 w-full text-center  hover:bg-white hover:text-green-500 border border-green-500 transition duration-500">Cadastrar</button>
+                    </form>
                         )
                     }
             

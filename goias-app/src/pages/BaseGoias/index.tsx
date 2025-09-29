@@ -12,13 +12,14 @@ interface NoticiasProps{
 }
 
 
-export function Imagens(){
+export function Base(){
 
+    
     const [img, setImg] = useState<NoticiasProps[]>([])
 
     useEffect(() => {
 
-        const imgRef = collection(db, "Noticias")
+        const imgRef = collection(db, "Base")
         const queryRef = query(imgRef, orderBy("data", "desc"))
 
         const unsub = onSnapshot(queryRef, (snapshot) => {
@@ -55,7 +56,7 @@ export function Imagens(){
 
                     <div className="w-full text-lg font-bold mb-2 px-1.5 justify-center items-center sm:justify-start sm:items-start">
 
-                        <h1 className='text-black text-4xl sm:text-6xl mt-2'>Noticias</h1>
+                        <h1 className='text-black text-4xl sm:text-6xl mt-2 '>Noticias Base</h1>
 
                     </div>
 
@@ -66,8 +67,8 @@ export function Imagens(){
                                     <div key={not.id} className='w-full'>
                                         <div className="">
                                         <img src={not.img} alt={not.legenda} className='cursor-pointer
-                                        w-full aspect-video h-[220px] sm:h-[340px] md:h-[240px] lg:h-[240px]
-                                                xl:h-[240px]
+                                        w-full aspect-video h-[220px] sm:h-[300px] md:h-[200px] lg:h-[200px]
+                                                xl:h-[200px]
                                         
                                         '/>
                                         </div>
@@ -94,5 +95,7 @@ export function Imagens(){
 
             <Footer></Footer>
         </div>
+    
     )
+
 }

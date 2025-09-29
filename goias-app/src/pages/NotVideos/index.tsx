@@ -57,7 +57,7 @@ export function Videos(){
                 <div className="w-full text-lg font-bold mb-2 px-1.5 justify-center items-center sm:justify-start sm:items-start">
                     
                     <div className='w-full text-lg font-bold mb-2 px-1.5 justify-center items-center sm:justify-start sm:items-start'>
-                                <h1 className='text-black text-xl sm:text-2xl mt-2'>Videos</h1>
+                                <h1 className='text-black text-4xl sm:text-6xl mt-2'>Videos</h1>
                     </div>
 
                     <div className="flex flex-wrap md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 justify-center items-center sm:justify-start sm:items-start px-1.5">

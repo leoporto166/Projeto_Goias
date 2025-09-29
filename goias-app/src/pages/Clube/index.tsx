@@ -182,7 +182,7 @@ export function Clube(){
                                     <div key={idolo.id}
                                     className="flex flex-col justify-center items-center gap-8 mb-10 "
                                     >
-                                        <div className="relative ">
+                                        <div className="hover:-translate-y-2 transition-transform duration-300 hover:shadow relative">
                                             <img
                                             src={idolo.imagem}
                                             alt={idolo.nome}
