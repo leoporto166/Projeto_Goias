@@ -115,7 +115,7 @@ useEffect(() => {
     ]
 
     const menuB: HeaderProps[] = [
-      {txt: "Base"}
+      {txt: "Noticias Base"}
     ]
 
     const menuEl: HeaderProps[] = [
@@ -150,7 +150,7 @@ useEffect(() => {
         {largura >= 1300 ? (<div className="flex flex-col justify-center items-center">
           <header className="w-full h-[120px] relative flex items-center px-2 gap-4 justify-center">
         
-              <div className="relative w-[140px] h-[110px] sm:w-[135px]  md:w-[130px] lg:w-[120px]">
+              <div className="relative mb-[10px] w-[140px] h-[110px] sm:w-[135px]  md:w-[130px] lg:w-[120px]">
                 <Link to={"/Projeto_Goias"}>
                   <img
                     src={logo}
@@ -238,11 +238,13 @@ useEffect(() => {
           </div>
 
               {selectedIndex === 0 && (
-                      <ul className={`nav-list ${selectedIndex === 0 ? "zero" : ""} z-50`}>
+                      <ul className={` nav-list ${selectedIndex === 0 ? "zero" : ""} z-50`}>
                         {menuN.map((noticia, subIndex) => (
-                          <Link to={`/Projeto_Goias/${noticia.txt}`}>
-                            <li key={`noticia-${subIndex}`}>{noticia.txt}</li>
-                          </Link>
+                           <li key={`noticia-${subIndex}`}>
+                            <Link to={`/Projeto_Goias/${noticia.txt}`}>
+                              {noticia.txt}
+                            </Link>
+                          </li>
                         ))}
                       </ul>
                     )}

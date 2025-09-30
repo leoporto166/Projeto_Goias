@@ -78,7 +78,7 @@ export function Titulos(){
         <main>
             <Header></Header>
 
-            <div className="flex w-full px-2 mt-4">
+            <div className="flex w-full px-2 mt-4 xl:mt-[30px]">
                 <Link to={`/Projeto_Goias/Clube/`} className="text-xl">
                     <FaArrowLeft />
                 </Link>

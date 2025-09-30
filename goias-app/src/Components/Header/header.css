@@ -844,7 +844,7 @@
     .fundo{
       background-color: #0118167a;
       width: 100%;
-      height: 20vh; /* ou 100vh se quiser cobrir a tela inteira */
+      height: 25vh; /* ou 100vh se quiser cobrir a tela inteira */
       position: fixed; /* ou absolute se for relativo a um container */
       top: 0;
       left: 0;
@@ -865,6 +865,18 @@
       font-size: 15px;
       color: white;
 
+    }
+
+    @media (max-height: 720px) {
+      .nav-list li:first-child  {
+        margin-top: 4%;
+      }
+    }
+
+    @media (min-height: 720px) and (max-height: 850px) {
+      .nav-list li:first-child  {
+        margin-top: 3%;
+      }
     }
 
 
