@@ -1,0 +1,21 @@
+{
+  "name": "projeto_goias",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leoporto166/Projeto_Goias.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/leoporto166/Projeto_Goias/issues"
+  },
+  "homepage": "https://github.com/leoporto166/Projeto_Goias#readme"
+}
