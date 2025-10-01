@@ -63,27 +63,24 @@ export function Imagens(){
 
                         {
                                     img.map((not) => (
-                                    <div key={not.id} className='w-full'>
-                                        <div className="">
-                                        <img src={not.img} alt={not.legenda} className='cursor-pointer
-                                        w-full aspect-video h-[220px] sm:h-[340px] md:h-[240px] lg:h-[240px]
-                                                xl:h-[240px]
-                                        
-                                        '/>
-                                        </div>
-                                        <div className='bg-black text-white z-11'>
-                                        <h1 className="break-words whitespace-pre-line text-lg ml-3 font-semibold">
-                                            {not.legenda.toLocaleUpperCase()}
-                                        </h1>
-                                        <div className='ml-3 text-gray-300 text-center flex items-center'>
-                                            <div className='w-[50%] h-[1px] bg-green-200'></div>
-                                            <h2 className='px-1'
-                                            style={{ fontVariantLigatures: "none" }}>{not.data}</h2>
-                                            <div className='w-[50%] h-[1px] bg-green-200 mr-1'></div>
-                                        </div>
-                                        </div>
-                                    </div>
-                                    ))
+                                            <div key={not.id} className='flex flex-col items-center'>
+
+                                                <div>
+                                                <img src={not.img} alt={not.legenda} className='w-full cursor-pointer transition-transform duration-2000 hover:scale-103 sm:w-[650px] lg:w-[850px] xl:w-[1024px]'/>
+                                                </div>
+                                                <div className="text-white bg-black mt-[-20px] w-full mb-10 z-11 relative">
+                                                <h1 className="break-words whitespace-pre-line text-lg ml-3 font-semibold">
+                                                    {not.legenda.toLocaleUpperCase()}
+                                                </h1>
+                                                <div className='ml-3 text-gray-300 text-center flex items-center'>
+                                                    <div className='w-[50%] h-[1px] bg-green-200'></div>
+                                                    <h2 className='px-1'
+                                                    style={{ fontVariantLigatures: "none" }}>{not.data}</h2>
+                                                    <div className='w-[50%] h-[1px] bg-green-200 mr-1'></div>
+                                                </div>
+                                                </div>
+                                            </div>
+                                            ))
                                 }
 
                     </div>

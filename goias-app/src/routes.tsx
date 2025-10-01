@@ -16,6 +16,7 @@ import { Esmeralda } from "./pages/Esmeralda";
 import { Titulos } from "./pages/Titulos";
 import { Titulos_Detalhes } from "./pages/TitulosDetalhes";
 import { Base } from "./pages/BaseGoias";
+import { NotDel } from "./pages/NoticiasDel";
 const router = createBrowserRouter([
     {
         path:"/Projeto_Goias",
@@ -95,6 +96,11 @@ const router = createBrowserRouter([
     {
         path: "/Projeto_Goias/Clube/:categoria/:ano",
         element: <Titulos_Detalhes />
+    },
+
+    {
+        path: "/Projeto_Goias/Noticias/:id",
+        element: <NotDel />
     },
 
     {

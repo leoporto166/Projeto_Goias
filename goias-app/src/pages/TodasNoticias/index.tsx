@@ -107,7 +107,7 @@ export function TodasNoticias(){
         <main>
             <Header></Header>
 
-            <section>
+            <section className="mb-10">
                 <div className='flex flex-col justify-center items-center mt-5'>
                     <div className='w-[90%] md:w-full flex-col justify-center items-center'>
                         <div className='w-full text-lg font-bold mb-2 px-1.5 justify-center items-center sm:justify-start sm:items-start'>
@@ -117,53 +117,51 @@ export function TodasNoticias(){
                             <div className='flex flex-wrap md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 justify-center items-center sm:justify-start sm:items-start px-1.5'>
                                 {
                                     noticias.map((not) => (
-                                    <div key={not.id} className='w-full'>
-                                        <div className="">
-                                        <img src={not.img} alt={not.legenda} className='cursor-pointer
-                                        w-full aspect-video h-[180px] sm:h-[300px] md:h-[200px] lg:h-[200px]
-                                                xl:h-[200px]
-                                        
-                                        '/>
-                                        </div>
-                                        <div className='bg-black text-white z-11'>
-                                        <h1 className="break-words whitespace-pre-line text-lg ml-3 font-semibold">
-                                            {not.legenda.toLocaleUpperCase()}
-                                        </h1>
-                                        <div className='ml-3 text-gray-300 text-center flex items-center'>
-                                            <div className='w-[50%] h-[1px] bg-green-200'></div>
-                                            <h2 className='px-1'
-                                            style={{ fontVariantLigatures: "none" }}>{not.data}</h2>
-                                            <div className='w-[50%] h-[1px] bg-green-200 mr-1'></div>
-                                        </div>
-                                        </div>
-                                    </div>
-                                    ))
+                                            <div key={not.id} className='flex flex-col items-center'>
+
+                                                <div>
+                                                <img src={not.img} alt={not.legenda} className='w-full cursor-pointer sm:w-[650px] lg:w-[850px] xl:w-[1024px]'/>
+                                                </div>
+                                                <div className="text-white shadow  bg-black mt-[-20px] w-full mb-10 z-11 relative">
+                                                <h1 className="break-words whitespace-pre-line text-lg ml-3 font-semibold">
+                                                    {not.legenda.toLocaleUpperCase()}
+                                                </h1>
+                                                <div className='ml-3 text-gray-300 text-center flex items-center'>
+                                                    <div className='w-[50%] h-[1px] bg-green-200'></div>
+                                                    <h2 className='px-1'
+                                                    style={{ fontVariantLigatures: "none" }}>{not.data}</h2>
+                                                    <div className='w-[50%] h-[1px] bg-green-200 mr-1'></div>
+                                                </div>
+                                                </div>
+                                            </div>
+                                            ))
                                 }
                                 {
                                     videos.map((video) => (
-                                        <div key={video.id} className='w-full flex flex-col items-center justify-center'>
-                                            <iframe
-                                                className="w-full aspect-video h-[180px] sm:h-[300px] md:h-[200px] lg:h-[200px]
-                                                xl:h-[200px]"
-                                                src={`https://www.youtube.com/embed/${video.link}`}
-                                                title={video.legenda}
-                                                frameBorder="0"
-                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                                allowFullScreen
-                                            ></iframe>
-                                            <div className=' bg-black text-white w-full z-11 relative'>
-                                                <h1 className="break-words whitespace-pre-line text-lg ml-3 font-semibold">
-                                                    {video.legenda.toLocaleUpperCase()}
-                                                </h1>
-                                                <div className='ml-3  text-center flex items-center'>
-                                                    <div className='w-[50%] h-[1px] bg-green-200 '></div>
-                                                    <h2 className='px-1 text-gray-300'
-                                                    style={{ fontVariantLigatures: "none" }}>{video.data}</h2>
-                                                    <div className='w-[50%] h-[1px] bg-green-200 mr-1'></div>
-                                                </div>
+                                   <div key={video.id} className='w-full flex flex-col justify-center items-center' >
+                                        <iframe
+                                            className="aspect-video w-full"
+                                            src={`https://www.youtube.com/embed/${video.link}`}
+                                            title={video.legenda}
+                                            frameBorder="0"
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                            allowFullScreen
+                                        ></iframe>
+
+                                        <div className=' bg-green-50 shadow w-full z-11 relative mt-[-36px]'>
+                                            <h1 className="break-words whitespace-pre-line text-lg ml-3 font-semibold">
+                                                {video.legenda.toLocaleUpperCase()}
+                                            </h1>
+
+                                            <div className='ml-3  text-center flex items-center'>
+                                                <div className='w-[50%] h-[1px] bg-green-200'></div>
+                                                <h2 className='px-1'
+                                                style={{ fontVariantLigatures: "none" }}>{video.data}</h2>
+                                                <div className='w-[50%] h-[1px] bg-green-200 mr-1'></div>
                                             </div>
                                         </div>
-                                    ))
+                                    </div>
+                                ))
                                 }
                         </div>
     

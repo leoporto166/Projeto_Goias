@@ -844,7 +844,7 @@
     .fundo{
       background-color: #0118167a;
       width: 100%;
-      height: 25vh; /* ou 100vh se quiser cobrir a tela inteira */
+      height: 20vh; /* ou 100vh se quiser cobrir a tela inteira */
       position: fixed; /* ou absolute se for relativo a um container */
       top: 0;
       left: 0;
@@ -921,24 +921,28 @@
       opacity: 1;
       animation: navLinkFade 0.5s ease forwards;transition: all 1s;
       margin-left: 145px;
+      font-size: 20px;
     }
 
     .nav-list.um li {
       opacity: 1;
       animation: navLinkFade 0.5s ease forwards;transition: all 1s;
       margin-left: 248px;
+      font-size: 20px;
     }
 
     .nav-list.dois li {
       opacity: 1;
       animation: navLinkFade 0.5s ease forwards;transition: all 1s;
-      margin-left: 374px;
+      margin-left: 372px;
+      font-size: 20px;
     }
 
     .nav-list.tres li {
       opacity: 1;
       animation: navLinkFade 0.5s ease forwards;transition: all 1s;
       margin-left: 438px;
+      font-size: 20px;
     }
 
 
@@ -946,6 +950,7 @@
       opacity: 1;
       animation: navLinkFade 0.5s ease forwards;transition: all 1s;
       margin-left: 517px;
+      font-size: 20px;
     }
 
 
@@ -953,12 +958,14 @@
       opacity: 1;
       animation: navLinkFade 0.5s ease forwards;transition: all 1s;
       margin-left: 582px;
+      font-size: 20px;
     }
 
     .nav-list.seis li {
       opacity: 1;
       animation: navLinkFade 0.5s ease forwards;transition: all 1s;
       margin-left: 670px;
+      font-size: 20px;
     }
 
     .nav-list.active{
@@ -1090,6 +1097,7 @@
       opacity: 1;
       animation: navLinkFade 0.5s ease forwards;transition: all 1s;
       margin-left: 148px;
+      
     }
 
     .nav-list.um li {

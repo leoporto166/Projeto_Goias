@@ -102,16 +102,16 @@ useEffect(() => {
     ]
 
     const menuE: HeaderProps[] = [
-      {txt: "Esmeralda"},
+      {txt: "Socio Torcedor"},
       
     ]
 
     const menuL: HeaderProps[] = [
-      {txt: "Loja"},
+      {txt: "Loja Green"},
     ]
 
     const menuC: HeaderProps[] = [
-      {txt: "Clube"}
+      {txt: "Os 33"}
     ]
 
     const menuB: HeaderProps[] = [
@@ -119,7 +119,7 @@ useEffect(() => {
     ]
 
     const menuEl: HeaderProps[] = [
-      {txt: "Elenco"}
+      {txt: "Elenco Principal"}
     ]
 
     const menuR: HeaderProps[] = [
@@ -251,45 +251,52 @@ useEffect(() => {
                     {selectedIndex === 1 && (
                       <ul className={`nav-list ${selectedIndex === 1 ? "um" : ""}`}>
                         {menuE.map((esmeralda, subIndex) => (
-                          <Link to={`/Projeto_Goias/${esmeralda.txt}`}>
-                            <li key={`noticia-${subIndex}`}>{esmeralda.txt}</li>
-                          </Link>
+                          <li key={`noticia-${subIndex}`}>
+                            <Link to={`/Projeto_Goias/${esmeralda.txt}`}>
+                              {esmeralda.txt}
+                            </Link>
+                          </li>
                         ))}
                       </ul>
                     )}
                     {selectedIndex === 2 && (
                       <ul className={`nav-list ${selectedIndex === 2? "dois" : ""}`}>
-                        {menuL.map((loja, subIndex) => (
-                          <Link to={`/Projeto_Goias/${loja.txt}`} >
-                            <li key={`noticia-${subIndex}`}>{loja.txt}</li>
-                          </Link>
+                        {menuL.map((loja, subIndex) => (<li key={`noticia-${subIndex}`}>
+                            <Link to={`/Projeto_Goias/${loja.txt}`} >
+                              {loja.txt}
+                            </Link>
+                          </li>
                         ))}
                       </ul>
                     )}
                     {selectedIndex === 3 && (
                       <ul className={`nav-list ${selectedIndex === 3 ? "tres" : ""}`}>
-                        {menuC.map((clube, subIndex) => (
-                          <Link to={`/Projeto_Goias/${clube.txt}`}>
-                            <li key={`noticia-${subIndex}`}>{clube.txt}</li>
-                          </Link>
+                        {menuC.map((clube, subIndex) => (<li key={`noticia-${subIndex}`}>
+                            <Link to={`/Projeto_Goias/${clube.txt}`}>
+                              {clube.txt}
+                            </Link>
+                          </li>
                         ))}
                       </ul>
                     )}
                     {selectedIndex === 4 && (
                       <ul className={`nav-list ${selectedIndex === 4 ? "quatro" : ""}`}>
-                        {menuB.map((base, subIndex) => (
-                          <Link to={`/Projeto_Goias/${base.txt}`}>
-                            <li key={`noticia-${subIndex}`}>{base.txt}</li>
-                          </Link>
+                        {menuB.map((base, subIndex) => (<li key={`noticia-${subIndex}`}>
+                            <Link to={`/Projeto_Goias/${base.txt}`}>
+                              {base.txt}
+                            </Link>
+                          </li>
                         ))}
                       </ul>
                     )}
                     {selectedIndex === 5 && (
                       <ul className={`nav-list ${selectedIndex === 5 ? "cinco" : ""}`}>
                         {menuEl.map((elenco, subIndex) => (
-                          <Link to={`/Projeto_Goias/${elenco.txt}`}>
-                            <li key={`noticia-${subIndex}`}>{elenco.txt}</li>
-                          </Link>
+                          <li key={`noticia-${subIndex}`}>
+                            <Link to={`/Projeto_Goias/${elenco.txt}`}>
+                              {elenco.txt}
+                            </Link>
+                          </li>
                         ))}
                       </ul>
                     )}
@@ -297,10 +304,11 @@ useEffect(() => {
                     { acesso && (
                     selectedIndex === 6 && (
                       <ul className={`nav-list ${selectedIndex === 6 ? "seis" : ""}`}>
-                        {menuR.map((res, subIndex) => (
-                          <Link to={`/Projeto_Goias/${res.txt}`}>
-                            <li key={`noticia-${subIndex}`}>{res.txt}</li>
-                          </Link>
+                        {menuR.map((res, subIndex) => (<li key={`noticia-${subIndex}`}>
+                            <Link to={`/Projeto_Goias/${res.txt}`}>
+                              {res.txt}
+                            </Link>
+                          </li>
                         ))}
                       </ul>
                     )

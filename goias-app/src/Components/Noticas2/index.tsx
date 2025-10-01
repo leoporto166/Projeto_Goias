@@ -84,10 +84,10 @@ export function Noticias2(){
             const queryRef = query(notRef, orderBy("data", "desc"))
     
             const unsub = onSnapshot(queryRef, (snapshot) => {
-                const lista: NoticiasProps[] = snapshot.docs.map((doc, index) => {
+                const lista: NoticiasProps[] = snapshot.docs.map((doc) => {
                     const data = doc.data();
                     return {
-                        id: index.toString(), // id baseado na posição
+                        id: data.id,
                         img: data.img,
                         legenda: data.legenda,
                         data: data.data,
@@ -405,7 +405,7 @@ export function Noticias2(){
                                         noticias.slice(0, 2).map((not) => (
                                         <div key={not.id} className='flex flex-col items-center'>
                                             <div>
-                                            <Link to={`/Projeto_Goias/${not.legenda}`}><img src={not.img} alt={not.legenda} className='w-full cursor-pointer transition-transform duration-2000 hover:scale-103' /></Link>
+                                            <Link to={`/Projeto_Goias/Noticias/${not.id}`}><img src={not.img} alt={not.legenda} className='w-full cursor-pointer transition-transform duration-2000 hover:scale-103' /></Link>
                                             </div>
 
                                             <div className='bg-black text-white mt-[-20px] w-[320px] sm:w-[550px] mb-10 z-11 relative'>

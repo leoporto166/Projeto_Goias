@@ -64,31 +64,30 @@ export function Videos(){
 
                         {
                             videos.map((video) => (
+                                   <div key={video.id} className='w-full flex flex-col justify-center items-center'>
+                                        <iframe
+                                            className="aspect-video"
+                                            src={`https://www.youtube.com/embed/${video.link}`}
+                                            title={video.legenda}
+                                            frameBorder="0"
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                            allowFullScreen
+                                        ></iframe>
 
-                                <div key={video.id} className='w-full flex flex-col items-center justify-center'>
-                                            <iframe
-                                                className="w-full aspect-video h-[180px] sm:h-[300px] md:h-[200px] lg:h-[200px]
-                                                xl:h-[200px]"
-                                                src={`https://www.youtube.com/embed/${video.link}`}
-                                                title={video.legenda}
-                                                frameBorder="0"
-                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                                allowFullScreen
-                                            ></iframe>
-                                            <div className=' bg-black text-white w-full z-11 relative'>
-                                                <h1 className="break-words whitespace-pre-line text-lg ml-3 font-semibold">
-                                                    {video.legenda.toLocaleUpperCase()}
-                                                </h1>
-                                                <div className='ml-3  text-center flex items-center'>
-                                                    <div className='w-[50%] h-[1px] bg-green-200 '></div>
-                                                    <h2 className='px-1 text-gray-300'
-                                                    style={{ fontVariantLigatures: "none" }}>{video.data}</h2>
-                                                    <div className='w-[50%] h-[1px] bg-green-200 mr-1'></div>
-                                                </div>
+                                        <div className=' bg-green-50 shadow w-full mb-10 z-11 relative'>
+                                            <h1 className="break-words whitespace-pre-line text-lg ml-3 font-semibold">
+                                                {video.legenda.toLocaleUpperCase()}
+                                            </h1>
+
+                                            <div className='ml-3  text-center flex items-center'>
+                                                <div className='w-[50%] h-[1px] bg-green-200'></div>
+                                                <h2 className='px-1'
+                                                style={{ fontVariantLigatures: "none" }}>{video.data}</h2>
+                                                <div className='w-[50%] h-[1px] bg-green-200 mr-1'></div>
                                             </div>
                                         </div>
-
-                            ))
+                                    </div>
+                                ))
                         }
                         
                     </div>
