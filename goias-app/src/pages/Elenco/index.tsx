@@ -1,7 +1,7 @@
 
 import { Header } from "../../Components/Header/header"
 
-import jogador1 from "../../Assets/TR-G-2.png"
+/*import jogador1 from "../../Assets/TR-G-2.png"
 import jogador2 from "../../Assets/TD-G-2.png"
 import jogador3 from "../../Assets/EZ-G-2.png"
 import jogador4 from "../../Assets//JV-G-2.png"
@@ -36,9 +36,12 @@ import jogador27 from "../../Assets/JJ-A-2.png"
 import jogador28 from "../../Assets/FB-A-2.png"
 import jogador29 from "../../Assets/EG-A-2.png"
 
-import jogador31 from "../../Assets/PD-A-2.png"
+import jogador31 from "../../Assets/PD-A-2.png"*/
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { useEffect, useState } from "react"
+import { collection, onSnapshot, orderBy, query } from "firebase/firestore"
+import { db } from "../../services/firebaseconnection"
 
 interface Jogador{
   nome: string;
@@ -59,8 +62,35 @@ const posicoes = [
 
 export function ElencoTela(){
 
+  const [jogadores, setJogadores] = useState<Jogador[]>([])
+
+  useEffect(() => {
+    const elencoRef = collection(db, "Elenco");
+    const queryRef = query(elencoRef, orderBy("numero", "asc"));
+
+    const unsub = onSnapshot(queryRef, (snapshot) => {
+      let lista: Jogador[] = [];
+
+      snapshot.forEach((doc) => {
+        const data = doc.data();
+
+        lista.push({
+          nome: data.nome,
+          posicao: data.posicao,
+          imagem: data.imagem,
+          numero: data.numero, // cuidado com "mumero" de antes!
+        });
+      });
+
+      setJogadores(lista);
+      console.log(lista);
+    });
+
+    return () => unsub();
+  }, []);
+
   
-const jogadores: Jogador[] = [
+/*const jogadoress: Jogador[] = [
   { nome: "Thiago R.", posicao: "Goleiros", imagem: jogador1, numero: 1 },
   { nome: "Tadeu", posicao: "Goleiros", imagem: jogador2, numero: 23 },
   { nome: "Ezequiel", posicao: "Goleiros", imagem: jogador3, numero: 12 },
@@ -95,7 +125,7 @@ const jogadores: Jogador[] = [
   { nome: "Facundo Barceló", posicao: "Atacantes", imagem: jogador28, numero: 31 },
   { nome: "Esli Garcia", posicao: "Atacantes", imagem: jogador29, numero: 15 },
   { nome: "Pedrinho", posicao: "Atacantes", imagem: jogador31, numero: 17 },
-];
+];*/
 
 
     return(
@@ -163,7 +193,7 @@ const jogadores: Jogador[] = [
                         
                               <div
                               style={{ backgroundImage: "linear-gradient(to top, #012623, #5E8C6E, #F2F2F2)"}}
-                              className=" flex flex-col items-center w-[300px] rounded-xl hover:-translate-y-2 transition-transform duration-300 hover:shadow relative"
+                              className=" flex flex-col items-center w-[280px] rounded-xl hover:-translate-y-2 transition-transform duration-300 hover:shadow relative"
                               
                               >
 
@@ -172,7 +202,7 @@ const jogadores: Jogador[] = [
                                 <img
                                   src={jogador.imagem}
                                   alt={jogador.nome}
-                                  className="w-71 h-92"
+                                  className="w-71 h-95"
                                 />
                               
                                 <div className="absolute mt-78 sm:mt-74 ml-3 w-12/12">

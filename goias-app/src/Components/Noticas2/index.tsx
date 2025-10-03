@@ -431,7 +431,7 @@ export function Noticias2(){
                                             noticias.slice(0,1).map((not) => (
                                             <div key={not.id} className='flex flex-col items-center sm:w-[650px] lg:w-[850px] xl:w-[1024px]'>
                                                 <div>
-                                                <Link to={`/Projeto_Goias/${not.legenda}`}><img src={not.img} alt={not.legenda} className='w-full cursor-pointer transition-transform duration-2000 hover:scale-103 sm:w-[650px] lg:w-[850px] xl:w-[1024px]' /></Link>
+                                                <Link to={`/Projeto_Goias/Noticias/${not.id}`}><img src={not.img} alt={not.legenda} className='w-full cursor-pointer transition-transform duration-2000 hover:scale-103 sm:w-[650px] lg:w-[850px] xl:w-[1024px]' /></Link>
                                                 </div>
                                                 <div className='bg-black text-white mt-[-20px] w-[320px] sm:w-[550px] mb-10 z-11 relative lg:w-[800px] xl:w-[980px]'>
                                                 <h1 className="break-words whitespace-pre-line text-lg ml-3 font-semibold">
@@ -453,23 +453,26 @@ export function Noticias2(){
                                         <div className='flex flex-row justify-center items-center w-full py-2 px-1.5 gap-4 sm:w-[650px] lg:w-[850px] xl:w-[1024px]'>
                                         {
                                             noticias.slice(1,3).map((not) => (
-                                            <div key={not.id} className='flex flex-col items-center'>
-
-                                                <div>
-                                                <img src={not.img} alt={not.legenda} className='w-full cursor-pointer transition-transform duration-2000 hover:scale-103 sm:w-[650px] lg:w-[850px] xl:w-[1024px]'/>
+                                            
+                                                <div key={not.legenda}>
+                                                    <div>
+                                                    <Link className='flex flex-col items-center' to={`/Projeto_Goias/Noticias/${not.id}`}>
+                                                        <img src={not.img} alt={not.legenda} className='w-full cursor-pointer transition-transform duration-2000 hover:scale-103 sm:w-[650px] lg:w-[850px] xl:w-[1024px]'/>
+                                                    </Link>
+                                                    </div>
+                                                    <div className="text-white bg-black mt-[-20px] w-[300px] lg:w-[400px] xl:w-[480px] mb-10 z-11 relative">
+                                                    <h1 className="break-words whitespace-pre-line text-lg ml-3 font-semibold">
+                                                        {not.legenda.toLocaleUpperCase()}
+                                                    </h1>
+                                                    <div className='ml-3 text-gray-300 text-center flex items-center'>
+                                                        <div className='w-[50%] h-[1px] bg-green-200'></div>
+                                                        <h2 className='px-1'
+                                                        style={{ fontVariantLigatures: "none" }}>{not.data}</h2>
+                                                        <div className='w-[50%] h-[1px] bg-green-200 mr-1'></div>
+                                                    </div>
+                                                    </div>
                                                 </div>
-                                                <div className="text-white bg-black mt-[-20px] w-[300px] lg:w-[400px] xl:w-[480px] mb-10 z-11 relative">
-                                                <h1 className="break-words whitespace-pre-line text-lg ml-3 font-semibold">
-                                                    {not.legenda.toLocaleUpperCase()}
-                                                </h1>
-                                                <div className='ml-3 text-gray-300 text-center flex items-center'>
-                                                    <div className='w-[50%] h-[1px] bg-green-200'></div>
-                                                    <h2 className='px-1'
-                                                    style={{ fontVariantLigatures: "none" }}>{not.data}</h2>
-                                                    <div className='w-[50%] h-[1px] bg-green-200 mr-1'></div>
-                                                </div>
-                                                </div>
-                                            </div>
+                                            
                                             ))
                                         }
                                         </div>

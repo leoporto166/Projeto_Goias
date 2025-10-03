@@ -17,6 +17,7 @@ const schemaImg = z.object({
     img: z.string().nonempty("Preencha esse campo").url("Insira um link válido"),
     legenda: z.string().nonempty("Preencha essa campo").max(35, "O campo deve ter no maximo 35 caracteres"),
     id: z.coerce.number(),
+    descricao: z.string().nonempty("Preencha esse campo").min(150, "Esse campo deve conter no minimo 150 caracteres" ),
 })
 
 const schemaVideos = z.object({
@@ -132,6 +133,13 @@ const schemaBase = z.object({
     id: z.coerce.number(),
 })
 
+const schemaElenco = z.object({
+    nome: z.string().nonempty("Preencha o campo"),
+    posicao: z.string().nonempty("Preencha o campo"),
+    imagem: z.string().nonempty("Preencha o campo"),
+    numero: z.string().nonempty("Preencha o campo"),
+})
+
 
 
 
@@ -147,6 +155,7 @@ type FormDataIdolos = z.infer<typeof schemaIdolos>
 type FormdataTitulos = z.infer<typeof schemaTitulos>
 type FormDataTitulosDef = z.infer<typeof schemaTitulosDef>
 type FormDataBase = z.infer<typeof schemaBase>
+type FormDataElenco = z.infer<typeof schemaElenco>
 
 export function CadastroInfo(){
 
@@ -163,6 +172,7 @@ export function CadastroInfo(){
     const [titulos, setTitulos] = useState(false)
     const [titulosDef, setTitulosDef] = useState(false)
     const [base, setBase] = useState(false)
+    const [jogador, setJogador] = useState(false)
 
     const {register, handleSubmit, formState: {errors}, reset} = useForm<FormDataImg>({
         resolver: zodResolver(schemaImg) as any,
@@ -184,7 +194,9 @@ export function CadastroInfo(){
             data: data.data,
             img: data.img,
             legenda: data.legenda.toUpperCase(),
-            id: data.id
+            id: data.id,
+            descricao: data.descricao
+
         })
 
         .then(() => {
@@ -495,6 +507,44 @@ export function CadastroInfo(){
         
     }
 
+    const {register: registerElenco, handleSubmit: handleSubmitElenco, formState: {errors: errorsElenco}, reset: resetElenco} = useForm<FormDataElenco>({
+        resolver: zodResolver(schemaElenco) as any,
+        mode: "onChange"
+    })
+
+    async function onSubmitElenco(data: FormDataElenco) {
+
+        const docRef = doc(db, "Elenco", data.numero)
+        const docSnap = await getDoc(docRef)
+
+        if(docSnap.exists()) {
+
+            console.log("ERRO: Numero JA EXISTENTE")
+            alert("ERRO: Numero JA EXISTENTE")
+            return
+
+        }
+
+        await setDoc(docRef, {
+            
+        nome: data.nome,
+        posicao: data.posicao,
+        imagem: data.imagem,
+        numero: data.numero,
+
+        })
+
+        .then(() => {
+            resetElenco()
+            console.log("Jogador cadastrado")
+        })
+
+        .catch((error) => {
+            console.log(`ERRO: ${error}`)
+        })
+
+    }
+
     
 
         
@@ -508,7 +558,7 @@ export function CadastroInfo(){
                 
                 <div className="bg-white p-2 flex flex-col justify-center items-center w-[80%]">
                     {
-                        videos === false && img === false && partidas === false && capa === false && loja === false && tabela == false && socio === false && socioImg === false && idolo === false &&titulos === false && titulosDef == false && base == false ? (
+                        videos === false && img === false && partidas === false && capa === false && loja === false && tabela == false && socio === false && socioImg === false && idolo === false &&titulos === false && titulosDef == false && base == false && jogador == false ? (
                             <div className="text-xl font-semibold my-5">
                                 <h1>Escolha uma das opções</h1>
                             </div>
@@ -532,11 +582,12 @@ export function CadastroInfo(){
                             setTitulos(false)
                             setTitulosDef(false)
                             setBase(false)
+                            setJogador(false)
                             setEscolha("Imagens")
                         }}
                         className={`${img === true ? "text-green-600" : ""}`}
                         >
-                            Imagens
+                            Noticias
                         </h2>
             
                         <h2
@@ -553,6 +604,7 @@ export function CadastroInfo(){
                             setTitulos(false)
                             setTitulosDef(false)
                             setBase(false)
+                            setJogador(false)
                             setEscolha("Videos")
                         }}
                         className={`${videos === true ? "text-green-600" : ""}`}
@@ -573,6 +625,7 @@ export function CadastroInfo(){
                             setTitulos(false)
                             setTitulosDef(false)
                             setBase(false)
+                            setJogador(false)
                             setEscolha("Partidas")
                         }}
                         className={`${partidas === true ? "text-green-600" : ""}`}
@@ -593,6 +646,7 @@ export function CadastroInfo(){
                             setTitulos(false)
                             setTitulosDef(false)
                             setBase(false)
+                            setJogador(false)
                             setEscolha("Capa")
                         }}
                         className={`${capa === true ? "text-green-600" : ""}`}
@@ -613,6 +667,7 @@ export function CadastroInfo(){
                             setTitulos(false)
                             setTitulosDef(false)
                             setBase(false)
+                            setJogador(false)
                             setEscolha("Loja")
                         }}
                         className={`${loja === true ? "text-green-600" : ""}`}
@@ -633,7 +688,7 @@ export function CadastroInfo(){
                             setIdolo(false)
                             setTitulos(false)
                             setTitulosDef(false)
-                            setBase(false)
+                            setJogador(false)
                             setEscolha("Tabela")
                         }}
                         className={`${tabela === true ? "text-green-600" : ""}`}
@@ -655,6 +710,7 @@ export function CadastroInfo(){
                             setTitulos(false)
                             setTitulosDef(false)
                             setBase(false)
+                            setJogador(false)
                             setEscolha("Socio")
                         }}
                         className={`${socio === true ? "text-green-600" : ""}`}
@@ -676,6 +732,7 @@ export function CadastroInfo(){
                             setTitulos(false)
                             setTitulosDef(false)
                             setBase(false)
+                            setJogador(false)
                             setEscolha("Imagens Socio")
                         }}
                         className={`${socioImg === true ? "text-green-600" : ""}`}
@@ -697,6 +754,7 @@ export function CadastroInfo(){
                             setTitulos(false)
                             setTitulosDef(false)
                             setBase(false)
+                            setJogador(false)
                             setEscolha("Idolos")
                         }}
                         className={`${idolo === true ? "text-green-600" : ""}`}
@@ -719,6 +777,7 @@ export function CadastroInfo(){
                             setTitulos(true)
                             setTitulosDef(false)
                             setBase(false)
+                            setJogador(false)
                             setEscolha("Titulos")
                         }}
                         className={`${titulos=== true ? "text-green-600" : ""}`}
@@ -741,6 +800,7 @@ export function CadastroInfo(){
                             setTitulos(false)
                             setTitulosDef(true)
                             setBase(false)
+                            setJogador(false)
                             setEscolha("Titulos seleção")
                         }}
                         className={`${titulosDef === true ? "text-green-600" : ""}`}
@@ -763,11 +823,35 @@ export function CadastroInfo(){
                             setTitulos(false)
                             setTitulosDef(false)
                             setBase(true)
+                            setJogador(false)
                             setEscolha("Base")
                         }}
                         className={`${base === true ? "text-green-600" : ""}`}
                         >                      
                             Base
+
+                        </h2>
+
+                        <h2
+                        onClick={() => {
+                            setImg(false)
+                            setVideos(false)
+                            setPartidas(false)
+                            setCapa(false)
+                            setLoja(false)
+                            setTabela(false)
+                            setSocio(false)
+                            setSocioimg(false)
+                            setIdolo(false)
+                            setTitulos(false)
+                            setTitulosDef(false)
+                            setBase(false)
+                            setJogador(true)
+                            setEscolha("Elenco Jogador")
+                        }}
+                        className={`${jogador === true ? "text-green-600" : ""}`}
+                        >                      
+                            Elenco Jogador
 
                         </h2>
                     </div>
@@ -799,6 +883,14 @@ export function CadastroInfo(){
                             {...register("id")}
                             placeholder="id da postagem"
                         />
+
+                        <Input
+                            type="text"
+                            {...register("descricao")}
+                            placeholder="descricao da noticia"
+                            />
+                            {errors.descricao && <p className="text-red-500 mt-0 mb-2">{errors.descricao?.message}</p>}
+
                         {errors.id && <p className="text-red-500 mt-0 mb-2">{errors.id?.message}</p>}
                         <button type="submit" className="flex justify-center bg-green-700 my-2 rounded text-green-50 mb-4 cursor-pointer py-1 w-full text-center  hover:bg-white hover:text-green-500 border border-green-500 transition duration-500">Cadastrar</button>
                     </form>
@@ -1278,6 +1370,47 @@ export function CadastroInfo(){
                         {errorsBase.id && <p className="text-red-500 mt-0 mb-2">{errorsBase.id?.message}</p>}
                         <button type="submit" className="flex justify-center bg-green-700 my-2 rounded text-green-50 mb-4 cursor-pointer py-1 w-full text-center  hover:bg-white hover:text-green-500 border border-green-500 transition duration-500">Cadastrar</button>
                     </form>
+                        )
+                    }
+
+                    {
+                        jogador && (
+                            <form onSubmit={handleSubmitElenco(onSubmitElenco)}
+                            className=" flex flex-col"
+                            >
+
+                                <Input
+                                type="text"
+                                {...registerElenco("nome")}
+                                placeholder="Nome do jogador"
+                                />
+                                {errorsElenco.nome && <p className="text-red-500 mt-0 mb-2">{errorsElenco.nome?.message}</p>}
+
+
+                                <Input
+                                type="text"
+                                {...registerElenco("numero")}
+                                placeholder="Numero do Jogador"
+                                />
+                                {errorsElenco.numero && <p className="text-red-500 mt-0 mb-2">{errorsElenco.numero?.message}</p>}
+
+                                                                                        <Input
+                                type="text"
+                                {...registerElenco("posicao")}
+                                placeholder="Posicao do Jogador"
+                                />
+                                {errorsElenco.posicao && <p className="text-red-500 mt-0 mb-2">{errorsElenco.posicao?.message}</p>}
+
+                                                                                        <Input
+                                type="text"
+                                {...registerElenco("imagem")}
+                                placeholder="Imagem do jogador"
+                                />
+                                {errorsElenco.imagem && <p className="text-red-500 mt-0 mb-2">{errorsElenco.imagem?.message}</p>}
+
+                                <button type="submit" className="flex justify-center bg-green-700 my-2 rounded text-green-50 mb-4 cursor-pointer py-1 w-full text-center  hover:bg-white hover:text-green-500 border border-green-500 transition duration-500">Cadastrar</button>
+
+                            </form>
                         )
                     }
             

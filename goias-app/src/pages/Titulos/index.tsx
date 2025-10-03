@@ -95,7 +95,7 @@ export function Titulos(){
                 {
                     titulosDef.map((titulo) => (
                         <div key={titulo.ano}  className="">
-                            <Link to={`/Projeto_Goias/Clube/${id}/${titulo.ano}`}>
+                            <Link to={`/Projeto_Goias/Os 33/${id}/${titulo.ano}`}>
                                 <div className="flex flex-col border border-green-600 justify-center items-center h-[130px] w-[160px] sm:w-[250px] sm:h-[150px] bg-green-200/40 cursor-pointer hover:bg-green-800 hover:border-green-200/70 transition-all duration-300 hover:text-white">
                                     <div className="">
                                         <h1 className="text-2xl font-bold">{titulo.ano}</h1>

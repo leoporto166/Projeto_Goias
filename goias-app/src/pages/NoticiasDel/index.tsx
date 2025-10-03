@@ -11,6 +11,7 @@ interface NoticiasProps{
     button?: string
     id: string;
     data: string;
+    descricao: string;
 }
 
 export function NotDel(){
@@ -31,7 +32,8 @@ export function NotDel(){
                 img: data.img,
                 legenda: data.legenda,
                 id: data.id,
-                data: data.data
+                data: data.data,
+                descricao: data.descricao
             });
             }
 
@@ -49,7 +51,19 @@ export function NotDel(){
 
             {
                 notDet && (
-                    <img src={notDet.img}></img>
+                    <div>
+                        <h1 className="text-3xl p-2 my-2 xl:mt-6 font-bold">{notDet.legenda}</h1>
+                        <div className="w-full flex justify-center items-center">
+                            <img src={notDet.img} className="p-2"></img>
+                        </div>
+                        <div className="xl:flex xl:flex-col xl:items-center xl:justify-center xl:w-full">
+                        <p className="text-[16px] text-gray-700 p-2 whitespace-pre-line xl:w-[895px]">
+                            {notDet.descricao
+                            .replace(/\\n/g, "\n")
+                            .replace(/:contentReference\[.*?\]\{.*?\}/g, "")}
+                        </p>
+                        </div>
+                    </div>
                 )
             }
 

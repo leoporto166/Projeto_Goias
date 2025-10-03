@@ -34,7 +34,7 @@ const router = createBrowserRouter([
     },
 
     {
-        path: "/Projeto_Goias/Elenco",
+        path: "/Projeto_Goias/Elenco Principal",
         element: <ElencoTela />
     },
 
@@ -69,7 +69,7 @@ const router = createBrowserRouter([
     },
 
     {
-        path: "/Projeto_Goias/Esmeralda",
+        path: "/Projeto_Goias/Socio Torcedor",
         element: <Esmeralda />
     },
 
@@ -84,17 +84,17 @@ const router = createBrowserRouter([
     },
 
     {
-        path: "/Projeto_Goias/Clube",
+        path: "/Projeto_Goias/Os 33",
         element: <Clube />
     },
 
     {
-        path: "/Projeto_Goias/Clube/:id",
+        path: "/Projeto_Goias/Os 33/:id",
         element: <Titulos />
     },
 
     {
-        path: "/Projeto_Goias/Clube/:categoria/:ano",
+        path: "/Projeto_Goias/Os 33/:categoria/:ano",
         element: <Titulos_Detalhes />
     },
 
@@ -104,7 +104,7 @@ const router = createBrowserRouter([
     },
 
     {
-        path: "/Projeto_Goias/Base",
+        path: "/Projeto_Goias/Noticias Base",
         element: <Base />
     },
 
