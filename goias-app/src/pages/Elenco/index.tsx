@@ -78,7 +78,7 @@ export function ElencoTela(){
           nome: data.nome,
           posicao: data.posicao,
           imagem: data.imagem,
-          numero: data.numero, // cuidado com "mumero" de antes!
+          numero: data.numero,
         });
       });
 
