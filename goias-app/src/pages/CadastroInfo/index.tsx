@@ -138,7 +138,18 @@ const schemaElenco = z.object({
     posicao: z.string().nonempty("Preencha o campo"),
     imagem: z.string().nonempty("Preencha o campo"),
     numero: z.string().nonempty("Preencha o campo"),
+    imagem2: z.string().nonempty("Preencha o campo").url("Insira um link válido"),
+    biografia: z.string().nonempty("Preencha o campo"),
+    nomeCompleto: z.string().nonempty("Preencha o campo"),
+    aniversario: z.string().nonempty("Preencha o campo"),
+    altura: z.string().nonempty("Preencha o campo"),
+    naturalidade: z.string().nonempty("Preencha o campo"),
+    Clubes: z.string().nonempty("Preencha o campo"),
+    Jogos:z.string().nonempty("Preencha o campo"),
+    Gols: z.string().nonempty("Preencha o campo"),
+    Assistencias: z.string().nonempty("Preencha o campo"),
 })
+
 
 
 
@@ -531,6 +542,16 @@ export function CadastroInfo(){
         posicao: data.posicao,
         imagem: data.imagem,
         numero: data.numero,
+        imagem2: data.imagem2,
+        biografia: data.imagem2,
+        nomeCompleto:data.nomeCompleto,
+        aniversario: data.aniversario,
+        altura: data.altura,
+        naturalidade: data.naturalidade,
+        Clubes: data.Clubes,
+        Jogos: data.Jogos,
+        Gols: data.Gols,
+        Assistencias: data.Assistencias,
 
         })
 
@@ -1407,6 +1428,78 @@ export function CadastroInfo(){
                                 placeholder="Imagem do jogador"
                                 />
                                 {errorsElenco.imagem && <p className="text-red-500 mt-0 mb-2">{errorsElenco.imagem?.message}</p>}
+
+                                <Input
+                                type="text"
+                                {...registerElenco("imagem2")}
+                                placeholder="Imagem 2 do jogador"
+                                />
+                                {errorsElenco.imagem2 && <p className="text-red-500 mt-0 mb-2">{errorsElenco.imagem2?.message}</p>}
+
+                                <Input
+                                type="text"
+                                {...registerElenco("biografia")}
+                                placeholder="biografia do jogador"
+                                />
+                                {errorsElenco.biografia && <p className="text-red-500 mt-0 mb-2">{errorsElenco.biografia?.message}</p>}
+
+                                <Input
+                                type="text"
+                                {...registerElenco("nomeCompleto")}
+                                placeholder="nome Completo do jogador"
+                                />
+                                {errorsElenco.nomeCompleto && <p className="text-red-500 mt-0 mb-2">{errorsElenco.nomeCompleto?.message}</p>}
+
+                                <Input
+                                type="text"
+                                {...registerElenco("naturalidade")}
+                                placeholder="Naturalidade do jogador"
+                                />
+                                {errorsElenco.naturalidade && <p className="text-red-500 mt-0 mb-2">{errorsElenco.naturalidade?.message}</p>}
+
+                                <Input
+                                type="text"
+                                {...registerElenco("aniversario")}
+                                placeholder="Aniversario jogador"
+                                />
+                                {errorsElenco.aniversario && <p className="text-red-500 mt-0 mb-2">{errorsElenco.aniversario?.message}</p>}
+
+                                <Input
+                                type="text"
+                                {...registerElenco("altura")}
+                                placeholder="Altura jogador"
+                                />
+                                {errorsElenco.altura && <p className="text-red-500 mt-0 mb-2">{errorsElenco.altura?.message}</p>}
+
+                                <Input
+                                type="text"
+                                {...registerElenco("Jogos")}
+                                placeholder="Jogos do jogador"
+                                />
+                                {errorsElenco.Jogos && <p className="text-red-500 mt-0 mb-2">{errorsElenco.Jogos?.message}</p>}
+
+                                <Input
+                                type="text"
+                                {...registerElenco("Gols")}
+                                placeholder="Gols do jogador"
+                                />
+                                {errorsElenco.Gols && <p className="text-red-500 mt-0 mb-2">{errorsElenco.Gols?.message}</p>}
+
+                                <Input
+                                type="text"
+                                {...registerElenco("Assistencias")}
+                                placeholder="Assistencias do jogador"
+                                />
+                                {errorsElenco.Assistencias && <p className="text-red-500 mt-0 mb-2">{errorsElenco.Assistencias?.message}</p>}
+
+                                <Input
+                                type="text"
+                                {...registerElenco("Clubes")}
+                                placeholder="Clubes do jogador"
+                                />
+                                {errorsElenco.Clubes && <p className="text-red-500 mt-0 mb-2">{errorsElenco.Clubes?.message}</p>}
+
+                                
 
                                 <button type="submit" className="flex justify-center bg-green-700 my-2 rounded text-green-50 mb-4 cursor-pointer py-1 w-full text-center  hover:bg-white hover:text-green-500 border border-green-500 transition duration-500">Cadastrar</button>
 

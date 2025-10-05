@@ -4,7 +4,6 @@ import NotFound from "./pages/Erro/erro"
 import  Cadastro  from "./pages/Cadastro";
 import { Login } from "./pages/Login"
 import { ElencoTela } from "./pages/Elenco"
-import { DetalhesElenco } from "./pages/DetelhesElenco"
 import { Clube } from "./pages/Clube";
 import { RaizVerde } from "./pages/Raiz Verde";
 import { TodasNoticias } from "./pages/TodasNoticias";
@@ -17,6 +16,7 @@ import { Titulos } from "./pages/Titulos";
 import { Titulos_Detalhes } from "./pages/TitulosDetalhes";
 import { Base } from "./pages/BaseGoias";
 import { NotDel } from "./pages/NoticiasDel";
+import { ElencoDetalhes } from "./pages/ElencoDetalhes";
 const router = createBrowserRouter([
     {
         path:"/Projeto_Goias",
@@ -39,8 +39,8 @@ const router = createBrowserRouter([
     },
 
     {
-        path: "/Projeto_Goias/detalhesElenco/:id",
-        element: <DetalhesElenco />
+        path: "/Projeto_Goias/Elenco Principal/:id",
+        element: <ElencoDetalhes />
     },
     
     {

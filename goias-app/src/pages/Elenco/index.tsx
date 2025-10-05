@@ -42,12 +42,23 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { useEffect, useState } from "react"
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore"
 import { db } from "../../services/firebaseconnection"
+import { Link } from "react-router-dom";
 
 interface Jogador{
   nome: string;
   posicao: string;
   imagem: string;
   numero: number;
+  imagem2: string,
+  biografia: string,
+  nomeCompleto: string,
+  aniversario: string,
+  altura: string,
+  naturalidade: string,
+  Clubes: string,
+  Jogos: string,
+  Gols: string,
+  Assistencias: string,
 }
 
 
@@ -79,6 +90,16 @@ export function ElencoTela(){
           posicao: data.posicao,
           imagem: data.imagem,
           numero: data.numero,
+          imagem2: data.imagem2,
+          biografia: data.imagem2,
+          nomeCompleto:data.nomeCompleto,
+          aniversario: data.aniversario,
+          altura: data.altura,
+          naturalidade: data.naturalidade,
+          Clubes: data.Clubes,
+          Jogos: data.Jogos,
+          Gols: data.Gols,
+          Assistencias: data.Assistencias,
         });
       });
 
@@ -199,11 +220,13 @@ export function ElencoTela(){
 
                                   <div className="absolute bottom-0 w-full h-[40%] bg-gradient-to-t from-black/80 to-transparent pointer-events-none rounded-xl"></div>
 
-                                <img
-                                  src={jogador.imagem}
-                                  alt={jogador.nome}
-                                  className="w-71 h-95"
-                                />
+                                <Link to={`/Projeto_Goias/Elenco Principal/${jogador.numero}`}>
+                                  <img
+                                    src={jogador.imagem}
+                                    alt={jogador.nome}
+                                    className="w-71 h-95"
+                                  />
+                                </Link>
                               
                                 <div className="absolute mt-78 sm:mt-74 ml-3 w-12/12">
                                   <strong className="text-4xl sm:text-6xl my-2 mr-2"
