@@ -577,7 +577,7 @@ export function CadastroInfo(){
 
             <div className="flex flex-col justify-center items-center w-full h-[89%]">
                 
-                <div className="bg-white p-2 flex flex-col justify-center items-center w-[80%]">
+                <div className="bg-white p-2 flex flex-col justify-center items-center w-[90%]">
                     {
                         videos === false && img === false && partidas === false && capa === false && loja === false && tabela == false && socio === false && socioImg === false && idolo === false &&titulos === false && titulosDef == false && base == false && jogador == false ? (
                             <div className="text-xl font-semibold my-5">
