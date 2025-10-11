@@ -19,7 +19,7 @@ export function Imagens(){
     useEffect(() => {
 
         const imgRef = collection(db, "Noticias")
-        const queryRef = query(imgRef, orderBy("data", "desc"))
+        const queryRef = query(imgRef, orderBy("data", "asc"))
 
         const unsub = onSnapshot(queryRef, (snapshot) => {
             const lista = [] as NoticiasProps[]

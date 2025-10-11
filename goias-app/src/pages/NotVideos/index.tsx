@@ -21,7 +21,7 @@ export function Videos(){
     useEffect(() => {
 
         const videosRef = collection(db, "NoticiasVideos")
-        const queryRef = query(videosRef, orderBy("data", "desc"))
+        const queryRef = query(videosRef, orderBy("data", "asc"))
 
         const unsub = onSnapshot(queryRef, (snapshot) => {
             let lista = [] as VideosProps[]

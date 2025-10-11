@@ -54,7 +54,7 @@ export function TodasNoticias(){
     useEffect(() => {
 
         const notRef = collection(db, "Noticias")
-        const queryRef = query(notRef, orderBy("data", "desc"))
+        const queryRef = query(notRef, orderBy("data", "asc"))
 
         const unsub = onSnapshot(queryRef, 
             (snapshot) => {
@@ -74,7 +74,7 @@ export function TodasNoticias(){
         })
 
         const notVideoRef = collection(db, "NoticiasVideos")
-        const queryRefVideos = query(notVideoRef, orderBy("data", "desc"))
+        const queryRefVideos = query(notVideoRef, orderBy("data", "asc"))
 
         const unsubVideo = onSnapshot(queryRefVideos, (snapshot) => {
             let lista = [] as VideosProps[]

@@ -61,15 +61,15 @@ export function ElencoDetalhes(){
     }, [id])
 
     return (
-        <div>
+        <div style={{ backgroundImage: "linear-gradient(to top, #5E8C6E, #F2F2F2)"}}>
             <Header />
 
 
             {
                 jogador && (
                     <div
-                    style={{ backgroundImage: "linear-gradient(to top, #012623, #5E8C6E, #F2F2F2)"}}
-                    className="h-screen min-h-[800px]"
+                    style={{ backgroundImage: "linear-gradient(to top, #5E8C6E, #F2F2F2)"}}
+                    className="h-screen min-h-[1000px]"
                     >
                         <div className="flex items-center justify-center h-[100px] ">
                                 <p className="text-5xl font-bold"
