@@ -117,7 +117,7 @@ export function Noticias2(){
             });
 
             const notPartidaRef = collection(db, "Partidas")
-            const queryRefPartidas = query(notPartidaRef, orderBy("data", "asc"))
+            const queryRefPartidas = query(notPartidaRef)
 
             const unsubPartidas = onSnapshot(queryRefPartidas, (snapshot) => {
                 const lista: PartidasProps[] = snapshot.docs.map((doc, index) => {
@@ -138,7 +138,7 @@ export function Noticias2(){
             });
 
             const notCapaRef = collection(db, "NoticiasCapa")
-            const queryCapa = query(notCapaRef, orderBy("data", "desc"))
+            const queryCapa = query(notCapaRef)
 
             const unsubCapa = onSnapshot(queryCapa, (snapshot) => {
             const lista: NoticiasProps[] = snapshot.docs.map((doc, index) => {
@@ -286,10 +286,7 @@ export function Noticias2(){
                         style={{ backgroundImage: `url(${not.img})` }}>
                             <div className='absolute inset-0 bg-gradient-to-t from-black/90'></div>
                             <div className='text-white text-2xl z-10'>{not.legenda.toUpperCase()}</div>
-                            <Link to={`/Projeto_Goias/${not.legenda}`} className='text-white z-10 bg-green-400 py-1 w-[150px] text-center rounded mt-4 cursor-pointer mb-20'>
-                                <div className="">{not
-                                .button?.toUpperCase()}</div>
-                            </Link>
+                            <div className='mb-20'></div>
                         </div>
                     </SwiperSlide>
             
@@ -398,208 +395,212 @@ export function Noticias2(){
                                     <h1 className='text-white text-xl sm:text-2xl'>UlTIMAS NOTICIAS</h1>
                             </div>
 
-                            {
-                                largura < 1024 ? (
-                                    <div className='flex flex-col justify-center items-center w-full py-2 px-1.5 lg:flex-row lg:flex-wrap'>
-                                    {
-                                        noticias.slice(0, 2).map((not) => (
-                                        <div key={not.id} className='flex flex-col items-center'>
-                                            <div>
-                                            <Link to={`/Projeto_Goias/Noticias/${not.id}`}><img src={not.img} alt={not.legenda} className='w-full cursor-pointer transition-transform duration-2000 hover:scale-103' /></Link>
-                                            </div>
+                {(() => {
+                    const noticiasRecentes = [...noticias]
+                    .sort((a, b) => Number(b.id) - Number(a.id))
+                    .slice(0, 3);
+                        return largura < 1024 ? (
+                            <div className="flex flex-col justify-center items-center w-full py-2 px-1.5 lg:flex-row lg:flex-wrap">
+                            {noticiasRecentes.slice(0, 2).map((not) => (
+                                <div key={not.id} className="flex flex-col items-center">
+                                <div>
+                                    <Link to={`/Projeto_Goias/Noticias/${not.id}`}>
+                                    <img
+                                        src={not.img}
+                                        alt={not.legenda}
+                                        className="w-full cursor-pointer transition-transform duration-2000 hover:scale-103"
+                                    />
+                                    </Link>
+                                </div>
 
-                                            <div className='bg-black text-white mt-[-20px] w-[320px] sm:w-[550px] mb-10 z-11 relative'>
-                                            <h1 className="break-words whitespace-pre-line text-lg ml-3 font-semibold">
-                                                {not.legenda.toLocaleUpperCase()}
-                                            </h1>
+                                <div className="bg-black text-white mt-[-20px] w-[320px] sm:w-[550px] mb-10 z-11 relative">
+                                    <h1 className="break-words whitespace-pre-line text-lg ml-3 font-semibold">
+                                    {not.legenda.toLocaleUpperCase()}
+                                    </h1>
 
-                                            <div className='ml-3 text-gray-300 text-center flex items-center'>
-                                                <div className='w-[50%] h-[1px] bg-green-200'></div>
-                                                <h2 className='px-1'
-                                                style={{ fontVariantLigatures: "none" }}>{not.data}</h2>
-                                                <div className='w-[50%] h-[1px] bg-green-200 mr-1'></div>
-                                            </div>
-                                            </div>
-                                        </div>
-                                        ))
-                                    }
+                                    <div className="ml-3 text-gray-300 text-center flex items-center">
+                                    <div className="w-[50%] h-[1px] bg-green-200"></div>
+                                    <h2 className="px-1" style={{ fontVariantLigatures: "none" }}>
+                                        {not.data}
+                                    </h2>
+                                    <div className="w-[50%] h-[1px] bg-green-200 mr-1"></div>
                                     </div>
-                                ) : (
+                                </div>
+                                </div>
+                            ))}
+                            </div>
+                        ) : (
+                            <div>
+                            <div className="flex flex-col justify-center items-center w-full py-2 px-1.5 sm:w-[650px] lg:w-[850px] xl:w-[1024px]">
+                                {noticiasRecentes.slice(0, 1).map((not) => (
+                                <div
+                                    key={not.id}
+                                    className="flex flex-col items-center sm:w-[650px] lg:w-[850px] xl:w-[1024px]"
+                                >
                                     <div>
-                                        <div className='flex flex-col justify-center items-center w-full py-2 px-1.5 sm:w-[650px] lg:w-[850px] xl:w-[1024px]'>
-                                        {
-                                            noticias.slice(0,1).map((not) => (
-                                            <div key={not.id} className='flex flex-col items-center sm:w-[650px] lg:w-[850px] xl:w-[1024px]'>
-                                                <div>
-                                                <Link to={`/Projeto_Goias/Noticias/${not.id}`}><img src={not.img} alt={not.legenda} className='w-full cursor-pointer transition-transform duration-2000 hover:scale-103 sm:w-[650px] lg:w-[850px] xl:w-[1024px]' /></Link>
-                                                </div>
-                                                <div className='bg-black text-white mt-[-20px] w-[320px] sm:w-[550px] mb-10 z-11 relative lg:w-[800px] xl:w-[980px]'>
-                                                <h1 className="break-words whitespace-pre-line text-lg ml-3 font-semibold">
-                                                    {not.legenda.toLocaleUpperCase()}
-                                                </h1>
-                                                <div className='ml-3 text-gray-300 text-center flex items-center'>
-                                                    <div className='w-[50%] h-[1px] bg-green-200'></div>
-                                                    <h2 className='px-1'
-                                                    style={{ fontVariantLigatures: "none" }}>{not.data}</h2>
-                                                    <div className='w-[50%] h-[1px] bg-green-200 mr-1'></div>
-                                                </div>
-                                                </div>
-                                            </div>
-                                            ))
-                                        }
-                                        </div>
-
-
-                                        <div className='flex flex-row justify-center items-center w-full py-2 px-1.5 gap-4 sm:w-[650px] lg:w-[850px] xl:w-[1024px]'>
-                                        {
-                                            noticias.slice(1,3).map((not) => (
-                                            
-                                                <div key={not.legenda}>
-                                                    <div>
-                                                    <Link className='flex flex-col items-center' to={`/Projeto_Goias/Noticias/${not.id}`}>
-                                                        <img src={not.img} alt={not.legenda} className='w-full cursor-pointer transition-transform duration-2000 hover:scale-103 sm:w-[650px] lg:w-[850px] xl:w-[1024px]'/>
-                                                    </Link>
-                                                    </div>
-                                                    <div className="text-white bg-black mt-[-20px] w-[300px] lg:w-[400px] xl:w-[480px] mb-10 z-11 relative">
-                                                    <h1 className="break-words whitespace-pre-line text-lg ml-3 font-semibold">
-                                                        {not.legenda.toLocaleUpperCase()}
-                                                    </h1>
-                                                    <div className='ml-3 text-gray-300 text-center flex items-center'>
-                                                        <div className='w-[50%] h-[1px] bg-green-200'></div>
-                                                        <h2 className='px-1'
-                                                        style={{ fontVariantLigatures: "none" }}>{not.data}</h2>
-                                                        <div className='w-[50%] h-[1px] bg-green-200 mr-1'></div>
-                                                    </div>
-                                                    </div>
-                                                </div>
-                                            
-                                            ))
-                                        }
-                                        </div>
+                                    <Link to={`/Projeto_Goias/Noticias/${not.id}`}>
+                                        <img
+                                        src={not.img}
+                                        alt={not.legenda}
+                                        className="w-full cursor-pointer transition-transform duration-2000 hover:scale-103 sm:w-[650px] lg:w-[850px] xl:w-[1024px]"
+                                        />
+                                    </Link>
                                     </div>
-                                )
-                                }
+                                    <div className="bg-black text-white mt-[-20px] w-[320px] sm:w-[550px] mb-10 z-11 relative lg:w-[800px] xl:w-[980px]">
+                                    <h1 className="break-words whitespace-pre-line text-lg ml-3 font-semibold">
+                                        {not.legenda.toLocaleUpperCase()}
+                                    </h1>
+                                    <div className="ml-3 text-gray-300 text-center flex items-center">
+                                        <div className="w-[50%] h-[1px] bg-green-200"></div>
+                                        <h2 className="px-1" style={{ fontVariantLigatures: "none" }}>
+                                        {not.data}
+                                        </h2>
+                                        <div className="w-[50%] h-[1px] bg-green-200 mr-1"></div>
+                                    </div>
+                                    </div>
+                                </div>
+                        ))}
+          </div>
+
+          <div className="flex flex-row justify-center items-center w-full py-2 px-1.5 gap-4 sm:w-[650px] lg:w-[850px] xl:w-[1024px]">
+            {noticiasRecentes.slice(1, 3).map((not) => (
+              <div key={not.id}>
+                <div>
+                  <Link className="flex flex-col items-center" to={`/Projeto_Goias/Noticias/${not.id}`}>
+                    <img
+                      src={not.img}
+                      alt={not.legenda}
+                      className="w-full cursor-pointer transition-transform duration-2000 hover:scale-103 sm:w-[650px] lg:w-[850px] xl:w-[1024px]"
+                    />
+                  </Link>
+                </div>
+                <div className="text-white bg-black mt-[-20px] w-[300px] lg:w-[400px] xl:w-[480px] mb-10 z-11 relative">
+                  <h1 className="break-words whitespace-pre-line text-lg ml-3 font-semibold">
+                    {not.legenda.toLocaleUpperCase()}
+                  </h1>
+                  <div className="ml-3 text-gray-300 text-center flex items-center">
+                    <div className="w-[50%] h-[1px] bg-green-200"></div>
+                    <h2 className="px-1" style={{ fontVariantLigatures: "none" }}>
+                      {not.data}
+                    </h2>
+                    <div className="w-[50%] h-[1px] bg-green-200 mr-1"></div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      );
+    })()}
+
 
                         </div>
                         </div>
             </section>
 
             <section className='flex flex-col justify-center items-center my-2'> 
-                <div className='w-[380px] flex sm:w-[650px] lg:w-[850px]  xl:w-[1024px] gap-2 py-2 items-center '>
-                    <h1 className='font-bold text-xl sm:text-2xl'>VIDEOS</h1>
-                    <div className='w-[1px] h-[25px] bg-green-400'></div>
-                    <div className='font-light text-[15px]'><a href='https://www.youtube.com/@TVGoias' target='_blank'>Acessar Canal</a></div>
+            <div className='w-[380px] flex sm:w-[650px] lg:w-[850px] xl:w-[1024px] gap-2 py-2 items-center'>
+                <h1 className='font-bold text-xl sm:text-2xl'>VIDEOS</h1>
+                <div className='w-[1px] h-[25px] bg-green-400'></div>
+                <div className='font-light text-[15px]'>
+                <a href='https://www.youtube.com/@TVGoias' target='_blank'>Acessar Canal</a>
                 </div>
+            </div>
 
-                {
-                    largura < 1024 ? (
-                        <div>
-                            {
-                                videos.slice(0, 2).map((video) => (
-                                    <div key={video.id} className='w-[380px] flex flex-col sm:w-[650px]  justify-center items-center cursor-pointer'>
-                                        <iframe
-                                            className="w-full aspect-video"
-                                            src={`https://www.youtube.com/embed/${video.link}`}
-                                            title={video.legenda}
-                                            frameBorder="0"
-                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                            allowFullScreen
-                                        ></iframe>
+            {(() => {
+                const videosRecentes = [...videos]
+                .map(v => ({ ...v, id: Number(v.id) }))
+                .sort((a, b) => b.id - a.id)
+                .slice(0, 3); 
 
-                                        <div className=' bg-green-50 shadow w-full mb-10 z-11 relative'>
-                                            <h1 className="break-words whitespace-pre-line text-lg ml-3 font-semibold">
-                                                {video.legenda.toLocaleUpperCase()}
-                                            </h1>
+                return largura < 1024 ? (
+                <div>
+                    {videosRecentes.map((video) => (
+                    <div key={video.id} className='w-[380px] flex flex-col sm:w-[650px] justify-center items-center cursor-pointer'>
+                        <iframe
+                        className="w-full aspect-video"
+                        src={`https://www.youtube.com/embed/${video.link}`}
+                        title={video.legenda}
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        ></iframe>
 
-                                            <div className='ml-3  text-center flex items-center'>
-                                                <div className='w-[50%] h-[1px] bg-green-200'></div>
-                                                <h2 className='px-1'
-                                                style={{ fontVariantLigatures: "none" }}>{video.data}</h2>
-                                                <div className='w-[50%] h-[1px] bg-green-200 mr-1'></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                ))
-                            }
+                        <div className='bg-green-50 shadow w-full mb-10 z-11 relative'>
+                        <h1 className="break-words whitespace-pre-line text-lg ml-3 font-semibold">
+                            {video.legenda.toLocaleUpperCase()}
+                        </h1>
+
+                        <div className='ml-3 text-center flex items-center'>
+                            <div className='w-[50%] h-[1px] bg-green-200'></div>
+                            <h2 className='px-1' style={{ fontVariantLigatures: "none" }}>{video.data}</h2>
+                            <div className='w-[50%] h-[1px] bg-green-200 mr-1'></div>
                         </div>
-                    ) : (
-                        <div>
-                            {
-                                videos.slice(0,1).map((video) => (
-                                    <div key={video.id} className='w-full flex flex-col justify-center items-center lg:w-[850px] xl:w-[1024px]'>
-                                        <iframe
-                                            className="lg:w-[850px] xl:w-[1024px] aspect-video"
-                                            src={`https://www.youtube.com/embed/${video.link}`}
-                                            title={video.legenda}
-                                            frameBorder="0"
-                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                            allowFullScreen
-                                        ></iframe>
+                        </div>
+                    </div>
+                    ))}
+                </div>
+                ) : (
+                <div>
+                    {videosRecentes.slice(0, 1).map((video) => (
+                    <div key={video.id} className='w-full flex flex-col justify-center items-center lg:w-[850px] xl:w-[1024px]'>
+                        <iframe
+                        className="lg:w-[850px] xl:w-[1024px] aspect-video"
+                        src={`https://www.youtube.com/embed/${video.link}`}
+                        title={video.legenda}
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        ></iframe>
 
-                                        <div className=' bg-green-50 shadow w-full mb-10 z-11 relative'>
-                                            <h1 className="break-words whitespace-pre-line text-lg ml-3 font-semibold">
-                                                {video.legenda.toLocaleUpperCase()}
-                                            </h1>
+                        <div className='bg-green-50 shadow w-full mb-10 z-11 relative'>
+                        <h1 className="break-words whitespace-pre-line text-lg ml-3 font-semibold">
+                            {video.legenda.toLocaleUpperCase()}
+                        </h1>
 
-                                            <div className='ml-3  text-center flex items-center'>
-                                                <div className='w-[50%] h-[1px] bg-green-200'></div>
-                                                <h2 className='px-1'
-                                                style={{ fontVariantLigatures: "none" }}>{video.data}</h2>
-                                                <div className='w-[50%] h-[1px] bg-green-200 mr-1'></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                ))
-                            }
+                        <div className='ml-3 text-center flex items-center'>
+                            <div className='w-[50%] h-[1px] bg-green-200'></div>
+                            <h2 className='px-1' style={{ fontVariantLigatures: "none" }}>{video.data}</h2>
+                            <div className='w-[50%] h-[1px] bg-green-200 mr-1'></div>
+                        </div>
+                        </div>
+                    </div>
+                    ))}
+                    <div className="flex flex-col py-2 gap-4 w-[650px] xl:w-[1024px]">
+                    {videosRecentes.slice(1, 3).map((video) => (
+                        <div key={video.id} className='flex flex-row items-center lg:w-[850px] xl:w-[1024px]'>
+                        <iframe
+                            className="w-[550px] lg:w-[650px] aspect-video m-0"
+                            src={`https://www.youtube.com/embed/${video.link}`}
+                            title={video.legenda}
+                            frameBorder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                        ></iframe>
 
-                            <div className="flex flex-col py-2 gap-4 w-[650px] xl:w-[1024px]">
-                                {
-                                    videos.slice(1,3).map((video) => (
-                                        <div key={video.id} className='flex flex-row items-center lg:w-[850px] xl:w-[1024px] '>
+                        <div className='bg-green-50 mt-0 shadow w-[300px] z-11 relative h-[307px] flex flex-col lg:w-[100%] lg:h-[365px]'>
+                            <h1 className="break-words whitespace-pre-line text-lg ml-3 font-semibold">
+                            {video.legenda.toLocaleUpperCase()}
+                            </h1>
 
-                                            <iframe
-                                                className="w-[550px] lg:w-[650px] aspect-video m-0"
-                                                src={`https://www.youtube.com/embed/${video.link}`}
-                                                title={video.legenda}
-                                                frameBorder="0"
-                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                                allowFullScreen
-                                            ></iframe>
+                            <div className='flex justify-center bg-green-700 m-1 rounded text-green-50 mb-4 cursor-pointer py-1 w-full text-center hover:bg-white hover:text-green-500 border border-green-500 transition duration-500 mt-auto'>
+                            <a href={`https://www.youtube.com/watch?v=${video.link}`} target='_blank'>
+                                {video.button.toLocaleUpperCase()}
+                            </a>
+                            </div>
 
-                                            <div className=' bg-green-50 mt-
-                                             shadow w-[300px] z-11 relative h-[307px] flex flex-col lg:w-[100%] lg:h-[365px]'>
-
-                                                <h1 className="break-words whitespace-pre-line text-lg ml-3 font-semibold">
-                                                    {video.legenda.toLocaleUpperCase()}
-                                                </h1>
-                                                
-                                            
-                                                
-                                                    <div className='flex justify-center bg-green-700 m-1 rounded text-green-50 mb-4 cursor-pointer py-1 w-full text-center  hover:bg-white hover:text-green-500 border border-green-500 transition duration-500 mt-[230px]'>
-                                                        <a href={`https://www.youtube.com/watch?v=${video.link}`} target='_blank'
-                                                         >
-                                                        {video.button.toLocaleUpperCase()}
-                                                        </a>
-                                                    </div>
-                                                
-                                                
-                                                <div className='ml-3 text-center flex h-screen justify-center items-center'>
-                                                    <div className='w-[50%] h-[1px] bg-green-200'></div>
-                                                    <h2 className='px-1'
-                                                    style={{ fontVariantLigatures: "none" }}>{video.data}</h2>
-                                                    <div className='w-[50%] h-[1px] bg-green-200 mr-1 '></div>
-                                                </div>
-                                            </div>
-
-                                            
-
-                                        </div>
-                                    ))
-                                }
+                            <div className='ml-3 text-center flex justify-center items-center'>
+                            <div className='w-[50%] h-[1px] bg-green-200'></div>
+                            <h2 className='px-1' style={{ fontVariantLigatures: "none" }}>{video.data}</h2>
+                            <div className='w-[50%] h-[1px] bg-green-200 mr-1'></div>
                             </div>
                         </div>
-                    )
-                }
+                        </div>
+                    ))}
+                    </div>
+                </div>
+                );
+            })()}
             </section>
 
             <section className='flex justify-center items-center flex-col w-full'>

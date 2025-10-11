@@ -42,7 +42,6 @@ const schemaPartidas = z.object({
 const schemaNoticiasCapa = z.object({
     docId: z.enum(["noticia1", "noticia2", "noticia3"]),
     data: z.string().nonempty("Preencha o campo"),
-    id: z.coerce.number(),
     img: z.string().nonempty("Preencha esse campo").url("Insira um link válido"),
     legenda: z.string().nonempty("Preencha essa campo").max(35, "O campo deve ter no maximo 35 caracteres"),
     button: z.string().default("VER MAIS"),
@@ -292,7 +291,6 @@ export function CadastroInfo(){
             
             await setDoc(doc(db, "NoticiasCapa", data.docId), {
             data: data.data,
-            id: data.id,
             img: data.img,
             legenda: data.legenda.toUpperCase(),
             });
