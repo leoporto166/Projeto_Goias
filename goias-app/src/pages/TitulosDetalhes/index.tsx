@@ -43,7 +43,7 @@ export function Titulos_Detalhes(){
             <Header />
 
             <div className="flex w-full px-2 mt-4 xl:mt-[30px]">
-                <Link to={`/Projeto_Goias/Clube/${categoria}`} className="text-xl">
+                <Link to={`/Projeto_Goias/Os 33/${categoria}`} className="text-xl">
                     <FaArrowLeft />
                 </Link>
             </div>

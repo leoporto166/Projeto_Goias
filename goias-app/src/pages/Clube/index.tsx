@@ -3,6 +3,7 @@ import { Header } from "../../Components/Header/header"
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { db } from "../../services/firebaseconnection";
 import { Link } from "react-router-dom";
+import { FaArrowLeft } from "react-icons/fa";
 
 interface idolosProps {
         nome: string;
@@ -78,7 +79,13 @@ export function Clube(){
     return(
         <div>
             <Header></Header>
-            <div className="px-2">    
+            <div className="px-2">   
+
+                <div className="flex w-full px-2 mt-4 xl:mt-[30px]">
+                                <Link to={`/Projeto_Goias/`} className="text-xl">
+                                    <FaArrowLeft />
+                                </Link>
+                            </div> 
                 
                 <div className="w-full flex justify-center">
                     <h1 className="py-2 text-2xl sm:text-4xl font-semibold xl:pt-8"

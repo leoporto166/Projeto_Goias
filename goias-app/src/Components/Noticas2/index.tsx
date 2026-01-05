@@ -695,7 +695,7 @@ export function Noticias2(){
                 <div className='w-[380px] flex gap-2 items-center sm:w-[650px] lg:w-[850px] xl:w-[1024px] '>
                     <h1 className='text-xl font-bold py-2'>CLUBE</h1>
                     <div className='w-[1px] h-[25px] bg-green-400'></div>
-                    <div className='font-light text-[15px]'><Link to={`/Projeto_Goias/Clube`}>Acessar Página</Link></div>
+                    <div className='font-light text-[15px]'><Link to={`/Projeto_Goias/Os 33`}>Acessar Página</Link></div>
                 </div>
 
                 <div className='w-[380px] flex gap-2 items-center sm:w-[650px] lg:w-[850px] xl:w-[1024px] flex-col sm:flex-row'>
@@ -705,7 +705,7 @@ export function Noticias2(){
                         <h1 className='text-xl font-semibold'>TÍTULOS</h1>
                         <p className='text-[15px] mb-2'>Saiba mais sobre nossa vitoriosa caminhada</p>
                         <div className='bg-green-700 text-white py-1 mb-4 rounded w-[120px] text-center cursor-pointer hover:bg-white hover:text-green-500 border border-green-500 transition duration-500'>
-                            <Link to={`/Projeto_Goias/Clube`}>Descubra</Link>
+                            <Link to={`/Projeto_Goias/Clube dos 33`}>Descubra</Link>
                         </div>
                         
                     </div>
@@ -715,7 +715,7 @@ export function Noticias2(){
                         <h1 className='text-xl font-semibold'>LENDAS</h1>
                         <p className='text-[15px] mb-2'>Saiba mais sobre os ídolos do GOIÁS</p>
                         <div className='bg-green-700 text-white py-1 mb-4 rounded w-[120px] text-center cursor-pointer hover:bg-white hover:text-green-500 border border-green-500 transition duration-500'>
-                            <Link to={`/Projeto_Goias/Clube`}>Descubra</Link>
+                            <Link to={`/Projeto_Goias/Os 33`}>Descubra</Link>
                         </div>
                         
                     </div>
@@ -727,7 +727,7 @@ export function Noticias2(){
                         <h1 className='text-xl font-semibold'>Sócios</h1>
                         <p className='text-[15px] mb-2'>Saiba mais sobre o programa de sócios</p>
                         <div className='bg-green-700 text-white py-1 mb-4 rounded w-[120px] text-center cursor-pointer hover:bg-white hover:text-green-500 border border-green-500 transition duration-500'>
-                            <Link to={`/Projeto_Goias/Esmeralda`}>Descubra</Link>
+                            <Link to={`/Projeto_Goias/Socio Torcedor`}>Descubra</Link>
                         </div>
                 </div>
 
