@@ -38,6 +38,7 @@ export default function Cadastro(){
 
         .catch((error) => {
             console.log(`Erro ${error}`)
+            
         })
 
     }
